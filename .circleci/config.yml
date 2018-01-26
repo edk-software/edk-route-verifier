@@ -27,8 +27,6 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: npm install -g browserify
-      - run: npm install -g uglify-js
       - run: npm install
       - run: cd server && npm install
 
