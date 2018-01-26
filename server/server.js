@@ -47,7 +47,7 @@ app.use('/static', express.static(__dirname + '/static'));
 app.get('/:routeId', function(req, res) {
     var id = req.params.routeId;
     res.render('pages/index', {
-        googleMapsApiUrl: configuration.googleMapsApiUrl,
+        googleMapsApiKey: configuration.googleMapsApiKey,
         routeId: id,
         serverPort: port
     });
