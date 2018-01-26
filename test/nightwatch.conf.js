@@ -1,4 +1,8 @@
+
+
 module.exports = (function(settings) {
+    console.log(`Starting test server...`);
+    require('./../server/server.js');
     console.log(`Running nightwatch on ${process.platform} platform.`);
     if (process.platform === 'win32') {
         settings.selenium.cli_args['webdriver.chrome.driver']  = './node_modules/chrome-driver-standalone/binaries/chromedriver_win32.exe';
