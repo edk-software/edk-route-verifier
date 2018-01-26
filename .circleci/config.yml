@@ -40,7 +40,7 @@ jobs:
 
       # run tests!
       - run: cp server/config.json.template server/config.json && sed -i "s/GOOGLE_MAPS_API_KEY/$GOOGLE_MAPS_API_KEY/i" server/config.json
-      - run: npm run bundle
-      - run: npm test
+      - run: npm run bundle && cd server && npm start &
+      - run: sleep 5 & npm test
 
 
