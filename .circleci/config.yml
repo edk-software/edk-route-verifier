@@ -48,6 +48,13 @@ jobs:
           name: Create application bundle file
           command: npm run bundle
 
+  test:
+    docker:
+      - image: circleci/node:8-browsers
+
+    working_directory: ~/repo
+
+    steps:
       - run:
           name: Start test server
           working-directory: ~/repo/server
@@ -58,9 +65,18 @@ jobs:
           name: Wait for test server to be running
           shell: /bin/sh
           command: |
-            wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 http://localhost:7777
+            wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 http://localhost:$PORT
             :
 
       - run:
           name: Run tests
           command: npm test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
