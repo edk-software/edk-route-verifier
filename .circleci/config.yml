@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  build_and_test:
     docker:
       - image: circleci/node:8-browsers
 
@@ -49,13 +49,6 @@ jobs:
           name: Create application bundle file
           command: npm run bundle
 
-  test:
-    docker:
-      - image: circleci/node:8-browsers
-
-    working_directory: ~/repo
-
-    steps:
       - run:
           name: Start test server
           command: |
@@ -73,12 +66,3 @@ jobs:
       - run:
           name: Run tests
           command: npm test
-
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
