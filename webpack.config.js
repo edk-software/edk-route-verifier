@@ -3,15 +3,18 @@
  */
 const p = require('path');
 
-module.exports = (env = {}, args) => {
+module.exports = (env = {}, args = {}) => {
     /*
-     * Establish dynamic file names and path based on env vars and mode
+     * Establish dynamic file names and path based on env DIST var and mode
      * Which are set from package.json
     */
     const inDevelopment = (args.mode === 'development');
     const distribution = env.DIST;
     const filename = inDevelopment ? 'edk-route-verifier.js' : 'edk-route-verifier.min.js';
     const path     = p.resolve(__dirname, getPath(distribution, inDevelopment));
+    //console.log(`DIST: ${distribution}`);
+    //console.log(`DEV: ${inDevelopment}`);
+    //console.log(`PATH: ${path}`);
 
     return {
         entry: './src/routeVerifier.js',
@@ -43,7 +46,7 @@ module.exports = (env = {}, args) => {
  * @param dev
  * @returns {*}
  */
-function getPath (dist, dev) {
+const getPath = (dist, dev) => {
     let path;
     if(dist && dev) {
         path = 'dist/dev';
