@@ -4,8 +4,6 @@
   "description": "Extreme Way of the Cross project route verifier",
   "main": "edk-route-verifier.js",
   "scripts": {
-    "bundle:test": "cross-var browserify src/routeVerifier.js -o server/static/js/\"$npm_package_name\".js && cross-var uglifyjs server/static/js/\"$npm_package_name\".js -o server/static/js/\"$npm_package_name\".min.js",
-    "bundle:dist": "mkdir dist && cross-var browserify src/routeVerifier.js -o dist/\"$npm_package_name\".js && cross-var uglifyjs dist/\"$npm_package_name\".js -o dist/\"$npm_package_name\".min.js",
     "start": "cd server && npm run start",
     "test": "nightwatch -c test/nightwatch.conf.js",
     "version:patch": "npm version patch",
@@ -13,10 +11,11 @@
     "git:commit": "git add dist/* && git commit -m \"Added artifacts for new version\"",
     "git:push": "cross-var git push --tags origin HEAD:$npm_package_version",
     "deploy:clean": "git checkout master && cross-var git branch -D $npm_package_version",
-    "deploy:current": "npm run bundle:test && npm test && npm run git:branch && npm run bundle:dist && npm run git:commit && cross-var git tag v$npm_package_version && npm run git:push",
-    "deploy:next": "npm run bundle:test && npm test && npm run git:branch && npm run bundle:dist && npm run git:commit && npm run version:patch && npm run git:push",
-    "build:dev": "webpack --config webpack.config.js --mode development",
-    "build:prod": "webpack --config webpack.config.js --mode production"
+    "deploy:current": "npm run build:prod && npm test && npm run git:branch && npm run build:dist && npm run git:commit && cross-var git tag v$npm_package_version && npm run git:push",
+    "deploy:next": "npm run build:prod && npm test && npm run git:branch && npm run build:dist && npm run git:commit && npm run version:patch && npm run git:push",
+    "build:dev" : "webpack --config webpack.config.js --mode development",
+    "build:prod": "webpack --config webpack.config.js --mode production",
+    "build:dist": "concurrently  \"webpack --config webpack.config-dist.js --mode production\" \"webpack --config webpack.config-dist.js --mode development\""
   },
   "author": "Jakub Niezgoda (qooban)",
   "license": "MIT",
@@ -29,6 +28,7 @@
     "@turf/flatten": "^5.1.5",
     "@turf/point-on-line": "^5.0.3",
     "chart.js": "^2.7.1",
+    "concurrently": "^3.5.1",
     "lodash": "^4.17.4",
     "loglevel": "^1.5.1",
     "togeojson": "^0.16.0"

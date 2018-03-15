@@ -13,31 +13,23 @@ const MAXIMUM_DISTANCE_FROM_STATION_TO_PATH = 100; // meters
 export default class Route {
 
     constructor (geoJson) {
-
         this.geoJson = geoJson;
         this.lineString = helpers.getLineString(this.geoJson);
         this.points = helpers.getPoints(this.geoJson);
         this.isRouteVerifiable = true;
-        this.numberOfPaths = helpers.getNumberOfFeatures('LineString', this.geoJson);
-        this.stations = new Stations(this.points, this.lineString);
-        this.path = this.stations.isPathReversed() ? helpers.reverseLineString(this.lineString) : this.lineString;
-        this.pathElevation;
 
-        /**
-         * I'm not sure if this is the right way to implement these checks
-         * As I understand, the return statement in the last one will make no effect on further code,
-         * While it should somehow stop execution of code with the constructor function implementation
-         */
+
         if(_.isEmpty(this.lineString)) {
             logger.error('No line string in route.');
             this.isRouteVerifiable = false;
-        }
-        if(_.isEmpty(this.points)) {
             logger.error('No points in route.');
             this.isRouteVerifiable = false;
         }
-        if(!this.isRouteVerifiable) {
-            return;
+
+        if(this.isRouteVerifiable) {
+            this.stations = new Stations(this.points, this.lineString);
+            this.path = this.stations.isPathReversed() ? helpers.reverseLineString(this.lineString) : this.lineString;
+            this.numberOfPaths = helpers.getNumberOfFeatures('LineString', this.geoJson);
         }
     }
 
