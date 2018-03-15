@@ -13,7 +13,7 @@
     "deploy:clean": "git checkout master && cross-var git branch -D $npm_package_version",
     "deploy:current": "npm run build:prod && npm test && npm run git:branch && npm run build:dist && npm run git:commit && cross-var git tag v$npm_package_version && npm run git:push",
     "deploy:next": "npm run build:prod && npm test && npm run git:branch && npm run build:dist && npm run git:commit && npm run version:patch && npm run git:push",
-    "build:dev" : "webpack --config webpack.config.js --mode development",
+    "build:dev": "webpack --config webpack.config.js --mode development",
     "build:prod": "webpack --config webpack.config.js --mode production",
     "build:dist": "concurrently  \"webpack --config webpack.config.js --mode production --env.DIST\" \"webpack --config webpack.config.js --mode development --env.DIST\""
   },
@@ -27,7 +27,7 @@
     "@turf/distance": "^5.1.5",
     "@turf/flatten": "^5.1.5",
     "@turf/point-on-line": "^5.0.3",
-    "chart.js": "^2.7.1",
+    "chart.js": "^2.7.2",
     "concurrently": "^3.5.1",
     "lodash": "^4.17.4",
     "loglevel": "^1.5.1",
