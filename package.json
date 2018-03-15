@@ -15,7 +15,8 @@
     "deploy:next": "npm run build:prod && npm test && npm run git:branch && npm run build:dist && npm run git:commit && npm run version:patch && npm run git:push",
     "build:dev": "webpack --config webpack.config.js --mode development",
     "build:prod": "webpack --config webpack.config.js --mode production",
-    "build:dist": "concurrently  \"webpack --config webpack.config.js --mode production --env.DIST\" \"webpack --config webpack.config.js --mode development --env.DIST\""
+    "build:dist": "concurrently  \"webpack --config webpack.config.js --mode production --env.DIST\" \"webpack --config webpack.config.js --mode development --env.DIST\"",
+    "check": "concurrently \"eslint src/**\" \"eslint server/**\" --cache --fix --max-warnings 10"
   },
   "author": "Jakub Niezgoda (qooban)",
   "license": "MIT",
@@ -43,6 +44,9 @@
     "brfs": "^1.4.3",
     "chrome-driver-standalone": "^2.33.0",
     "cross-var": "^1.1.0",
+    "eslint": "^4.18.2",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
     "nightwatch": "^0.9.19",
     "selenium-server-standalone-jar": "^3.8.1",
     "webpack": "^4.1.1",
