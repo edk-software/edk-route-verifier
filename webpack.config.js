@@ -1,16 +1,23 @@
 /**
  * Created by HP on 3/8/2018.
  */
-const path = require('path');
+const p = require('path');
 
-module.exports = (env, args) => {
+module.exports = (env = {}, args) => {
+    /*
+     * Establish dynamic file names and path based on env vars and mode
+     * Which are set from package.json
+    */
     const inDevelopment = (args.mode === 'development');
+    const distribution = env.DIST;
+    const filename = inDevelopment ? 'edk-route-verifier.js' : 'edk-route-verifier.min.js';
+    const path     = p.resolve(__dirname, getPath(distribution, inDevelopment));
 
     return {
         entry: './src/routeVerifier.js',
         output: {
-            path: path.resolve(__dirname, 'server/static/js'),
-            filename: 'edk-route-verifier.js'
+            path,
+            filename
         },
         module: {
             rules: [
@@ -28,4 +35,22 @@ module.exports = (env, args) => {
         },
         devtool:  inDevelopment ? 'eval-source-map' : 'source-map'
     }
+}
+
+/**
+ * This function establish path basing on env vars and mode
+ * @param dist
+ * @param dev
+ * @returns {*}
+ */
+function getPath (dist, dev) {
+    let path;
+    if(dist && dev) {
+        path = 'dist/dev';
+    } else if(dist && !dev) {
+        path = 'dist/prod';
+    } else if(!dist) {
+        path = 'server/static/js';
+    }
+    return path;
 }

@@ -15,7 +15,7 @@
     "deploy:next": "npm run build:prod && npm test && npm run git:branch && npm run build:dist && npm run git:commit && npm run version:patch && npm run git:push",
     "build:dev" : "webpack --config webpack.config.js --mode development",
     "build:prod": "webpack --config webpack.config.js --mode production",
-    "build:dist": "concurrently  \"webpack --config webpack.config-dist.js --mode production\" \"webpack --config webpack.config-dist.js --mode development\""
+    "build:dist": "concurrently  \"webpack --config webpack.config.js --mode production --env.DIST\" \"webpack --config webpack.config.js --mode development --env.DIST\""
   },
   "author": "Jakub Niezgoda (qooban)",
   "license": "MIT",
