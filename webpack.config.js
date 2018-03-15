@@ -10,11 +10,8 @@ module.exports = (env = {}, args = {}) => {
     */
     const inDevelopment = (args.mode === 'development');
     const distribution = env.DIST;
-    const filename = inDevelopment ? 'edk-route-verifier.js' : 'edk-route-verifier.min.js';
+    const filename = 'edk-route-verifier.js'; // the problem was here, tests does not work (properly) if output file has min.js extension
     const path     = p.resolve(__dirname, getPath(distribution, inDevelopment));
-    //console.log(`DIST: ${distribution}`);
-    //console.log(`DEV: ${inDevelopment}`);
-    //console.log(`PATH: ${path}`);
 
     return {
         entry: './src/routeVerifier.js',
