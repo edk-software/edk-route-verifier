@@ -221,6 +221,17 @@ module.exports = {
             .assertDataConsistency(true);
     },
 
+    'Negative test - no lineString tag in KML file': function (client) {
+        client.page.page()
+            .navigate('no_lineString')
+            .verifyRoute()
+            .assertSinglePath(false)
+            .assertNumberOfStations(false)
+            .assertStationsOrder(false)
+            .assertStationsOnPath(false)
+            .assertDataConsistency(false);
+    },
+
     'Negative test - no points in KML file': function (client) {
         client.page.page()
             .navigate('no_points')
