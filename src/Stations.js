@@ -1,69 +1,96 @@
-var logger = require('loglevel');
-var _ = require('./lodash');
-var turf = {
-    pointOnLine: require('@turf/point-on-line'),
-    distance: require('@turf/distance'),
-    helpers: require('@turf/helpers')
+import logger from 'loglevel';
+import * as _ from './lodash';
+import pointOnLine from '@turf/point-on-line';
+import distance from '@turf/distance';
+import helpers from '@turf/helpers'
+const turf = {
+    pointOnLine,
+    distance,
+    helpers
 };
 
-var CONSTS = {
+
+const CONSTS = {
     START_INDEX: 0,
     FIRST_STATION_INDEX: 1,
     LAST_STATION_INDEX: 14,
     END_INDEX: 15
 }
 
-module.exports = function (points, lineString) {
-    this._sortPoints = function() {
-        var path = this.path;
-        var enhancedPoints = _.map(this.points, function (point) {
+
+export default class Stations {
+
+    constructor(points, lineString) {
+        this.points = points;
+        this.path = lineString;
+        this.pathReversed = false;
+        this.pathCircular = false;
+        this.pathStart = turf.helpers.point(this.path.geometry.coordinates[0]);
+        this.pathEnd = turf.helpers.point(this.path.geometry.coordinates[this.path.geometry.coordinates.length-1]);
+
+        this._sortPoints();
+        this._addIndexes();
+        this._updateCircularity();
+        if (!this.pathCircular) {
+            this._updateDirection();
+        }
+    }
+
+
+    _sortPoints () {
+        const path = this.path;
+        const enhancedPoints = _.map(this.points, point => {
             point.properties.nearestOnLine = turf.pointOnLine(path, point, 'meters');
             return point;
         });
 
-        var sortedPoints = _.sortBy(enhancedPoints, function (point) {
+        const sortedPoints = _.sortBy(enhancedPoints, point => {
             return point.properties.nearestOnLine.properties.location;
         })
 
         this.points = sortedPoints;
     }
 
-    this._addIndexes = function() {
-        var getIndex = function(str) {
-            var START_NAMES_REGEX = /^(wstęp|wprowadzenie|początek|start)$/ig;
-            var END_NAMES_REGEX = /^(zakończenie|koniec|podsumowanie)$/ig;
-            var ROMAN_NUMBERS_REGEX = /^(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV)$/g;
-            var EUROPEAN_NUMBERS_REGEX = /^\d+$/g;
-            var SPLITTER_REGEX = /[ ,\._\-:;]+/;
-            var ROMAN_EUROPEAN_MAP = {
+    _addIndexes () {
+        const getIndex = str => {
+            /** Regular expressions for extracting station number
+             *  from a given string (which might be represented by different types
+             *  of numbers and different delimiters)
+             */
+            const START_NAMES_REGEX = /^(wstęp|wprowadzenie|początek|start)$/ig;
+            const END_NAMES_REGEX = /^(zakończenie|koniec|podsumowanie)$/ig;
+            const ROMAN_NUMBERS_REGEX = /^(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV)$/g;
+            const EUROPEAN_NUMBERS_REGEX = /^\d+$/g;
+            const SPLITTER_REGEX = /[ ,\._\-:;]+/;
+            const ROMAN_EUROPEAN_MAP = {
                 'I': 1, 'II': 2, 'III': 3, 'IV': 4, 'V': 5, 'VI': 6, 'VII': 7,
                 'VIII': 8, 'IX': 9, 'X': 10, 'XI': 11, 'XII': 12, 'XIII': 13, 'XIV': 14
             };
 
-            var index = null;
+            let index = null;
 
             logger.debug('Checking station index for string: ' + str);
-            
+
             // noname station
             if (!str) {
                 return index;
             }
 
             // split
-            var parts = str.trim().split(SPLITTER_REGEX);
+            const parts = str.trim().split(SPLITTER_REGEX);
 
-            _.forEach(parts, function (part) {
+            _.forEach(parts, part => {
                 // try roman numbers
-                var matches = part.match(ROMAN_NUMBERS_REGEX);
+                let matches = part.match(ROMAN_NUMBERS_REGEX); // it isn't clear why there are for matches declaration
                 if (!_.isNull(matches)) {
                     index = ROMAN_EUROPEAN_MAP[matches[0]];
                     return false;
                 }
 
                 // try european numbers
-                var matches = part.match(EUROPEAN_NUMBERS_REGEX);
+                matches = part.match(EUROPEAN_NUMBERS_REGEX);
                 if (!_.isNull(matches)) {
-                    var stationNumber = parseInt(matches[0]);
+                    const stationNumber = parseInt(matches[0]);
                     if (stationNumber >= CONSTS.FIRST_STATION_INDEX && stationNumber <= CONSTS.LAST_STATION_INDEX) {
                         index = stationNumber;
                         return false;
@@ -73,55 +100,55 @@ module.exports = function (points, lineString) {
                 }
 
                 // try start names
-                var matches = part.match(START_NAMES_REGEX);
+                matches = part.match(START_NAMES_REGEX);
                 if (!_.isNull(matches)) {
                     index = CONSTS.START_INDEX;
                     return false;
                 }
 
                 // try end names
-                var matches = part.match(END_NAMES_REGEX);
+                matches = part.match(END_NAMES_REGEX);
                 if (!_.isNull(matches)) {
                     index = CONSTS.END_INDEX;
                     return false;
                 }
             });
-            
+
             return index;
         }
 
         this.points = _.map(this.points, function (point) {
-            var name = point.properties.name;
-            var number = getIndex(name);
+            const name = point.properties.name;
+            const number = getIndex(name);
 
             point.properties.index = number;
             return point;
         });
     }
 
-    this._updateDirection = function() {
-        var pathReversed = false;
-        
-        var startPoint = _.filter(this.points, function (point) {
+    _updateDirection () {
+        const pathReversed = false;
+
+        const startPoint = _.filter(this.points, point => {
             return point.properties.index === CONSTS.START_INDEX;
         })
-        var endPoint = _.filter(this.points, function (point) {
+        const endPoint = _.filter(this.points, point => {
             return point.properties.index === CONSTS.END_INDEX;
         })
-        var options = {units: 'kilometers'};
+        const options = {units: 'kilometers'};
 
         if (!_.isEmpty(startPoint)) {
             logger.debug('Start point detected. Checking if it is closer to path start or path end...');
-            var startPointToPathStartDistance = turf.distance(this.pathStart, startPoint[0], options);
-            var startPointToPathEndDistance = turf.distance(this.pathEnd, startPoint[0], options);
+            const startPointToPathStartDistance = turf.distance(this.pathStart, startPoint[0], options);
+            const startPointToPathEndDistance = turf.distance(this.pathEnd, startPoint[0], options);
             if (startPointToPathStartDistance > startPointToPathEndDistance) {
                 logger.debug('Reversed path detected. Start point is closer to path end.');
                 this.pathReversed = true;
             }
         } else if (!_.isEmpty(endPoint)) {
             logger.debug('End point detected. Checking if it is closer to path start or path end...');
-            var endPointToPathStartDistance = turf.distance(this.pathStart, endPoint[0], options);
-            var endPointToPathEndDistance = turf.distance(this.pathEnd, endPoint[0], options);
+            const endPointToPathStartDistance = turf.distance(this.pathStart, endPoint[0], options);
+            const endPointToPathEndDistance = turf.distance(this.pathEnd, endPoint[0], options);
             if (endPointToPathEndDistance > endPointToPathStartDistance) {
                 logger.debug('Reversed path detected. Start point is closer to path end.');
                 this.pathReversed = true;
@@ -133,11 +160,11 @@ module.exports = function (points, lineString) {
         }
     }
 
-    this._updateCircularity = function() {
-        var MAXIMUM_DISTANCE_START_END_IN_CIRCULAR_PATH = 500; // meters
-        var options = {units: 'kilometers'};
+    _updateCircularity () {
+        const MAXIMUM_DISTANCE_START_END_IN_CIRCULAR_PATH = 500; // meters
+        const options = {units: 'kilometers'};
 
-        var distance = turf.distance(this.pathStart, this.pathEnd, options);
+        let distance = turf.distance(this.pathStart, this.pathEnd, options);
         distance = distance*1000;
 
         if (distance <= MAXIMUM_DISTANCE_START_END_IN_CIRCULAR_PATH) {
@@ -146,11 +173,11 @@ module.exports = function (points, lineString) {
         }
     }
 
-    this.getCount = function () {
-        var numberOfStations = 0;
-        for (var stationNumber = CONSTS.FIRST_STATION_INDEX; stationNumber <= CONSTS.LAST_STATION_INDEX; stationNumber++) {
-            var firstStationName = '';
-            var stationsOfNumber = _.filter(this.points, function (station) {
+    getCount () {
+        let numberOfStations = 0;
+        for (let stationNumber = CONSTS.FIRST_STATION_INDEX; stationNumber <= CONSTS.LAST_STATION_INDEX; stationNumber++) {
+            let firstStationName = '';
+            let stationsOfNumber = _.filter(this.points, function (station) {
                 if (station.properties.index === stationNumber) {
                     firstStationName = station.properties.name;
                     return true;
@@ -168,22 +195,22 @@ module.exports = function (points, lineString) {
         return numberOfStations;
     }
 
-    this.isOrderCorrect = function () {
-        var result = true;
-        for(var i = 1; i < this.points.length; i++) {
-            var currentStationNumber = this.points[i].properties.index;
-            var previousStationNumber = this.points[i-1].properties.index;
+    isOrderCorrect () {
+        let result = true;
+        for(let i = 1; i < this.points.length; i++) {
+            const currentStationNumber = this.points[i].properties.index;
+            const previousStationNumber = this.points[i-1].properties.index;
             logger.debug('Point ' + (i-1));
             if (currentStationNumber === null) {
                 logger.debug('Not checking order for unrecognized point: ' + this.points[i].properties.name);
             } else if (previousStationNumber === null) {
                 logger.debug('Not checking order for unrecognized point: ' + this.points[i-1].properties.name);
             } else if (this.pathCircular &&
-                       (
-                        (previousStationNumber === CONSTS.FIRST_STATION_INDEX && currentStationNumber === CONSTS.LAST_STATION_INDEX) ||
-                        (currentStationNumber === CONSTS.FIRST_STATION_INDEX && previousStationNumber === CONSTS.LAST_STATION_INDEX)
-                       )
-                      )
+                (
+                    (previousStationNumber === CONSTS.FIRST_STATION_INDEX && currentStationNumber === CONSTS.LAST_STATION_INDEX) ||
+                    (currentStationNumber === CONSTS.FIRST_STATION_INDEX && previousStationNumber === CONSTS.LAST_STATION_INDEX)
+                )
+            )
             {
                 logger.debug('Not checking order for station', CONSTS.FIRST_STATION_INDEX, 'and', CONSTS.LAST_STATION_INDEX, 'when route is circular.');
             } else if (currentStationNumber <= previousStationNumber) {
@@ -196,12 +223,12 @@ module.exports = function (points, lineString) {
         return result
     }
 
-    this.areAllOnThePath = function(maximumDistanceFromPath) {
-        var result = true;
+    areAllOnThePath (maximumDistanceFromPath) {
+        let result = true;
 
-        _.forEach(this.points, function (station, index) {
-            var stationNumber = station.properties.index;
-            var distanceFromStationToPath = station.properties.nearestOnLine.properties.dist;
+        _.forEach(this.points, (station, index) => {
+            const stationNumber = station.properties.index;
+            const distanceFromStationToPath = station.properties.nearestOnLine.properties.dist;
             logger.debug('Point ' + index);
             if (stationNumber === null) {
                 logger.debug('Not checking distance for: ' + station.properties.name);
@@ -216,22 +243,9 @@ module.exports = function (points, lineString) {
         return result;
     }
 
-    this.isPathReversed = function() {
+    isPathReversed () {
         return this.pathReversed;
     }
 
-    // Constructor
-    this.points = points;
-    this.path = lineString;
-    this.pathReversed = false;
-    this.pathCircular = false;
-    this.pathStart = turf.helpers.point(this.path.geometry.coordinates[0]);
-    this.pathEnd = turf.helpers.point(this.path.geometry.coordinates[this.path.geometry.coordinates.length-1]);
-
-    this._sortPoints();
-    this._addIndexes();
-    this._updateCircularity();
-    if (!this.pathCircular) {
-        this._updateDirection();
-    }
 }
+

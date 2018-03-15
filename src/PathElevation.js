@@ -1,33 +1,40 @@
-module.exports = function(elevations, length) {
-    var getGain = function(elevations) {
-        var elevationGain = 0.0;
-        for(var i = 1; i < elevations.length; i++) {
-            var elevationDifference = elevations[i].elevation - elevations[i-1].elevation;
-            elevationGain += (elevationDifference > 0) ? elevationDifference : 0.0;
-        }
-        return Number(elevationGain);
+const getGain = elevations => {
+    let elevationGain = 0.0;
+    for(let i = 1; i < elevations.length; i++) {
+        const elevationDifference = elevations[i].elevation - elevations[i-1].elevation;
+        elevationGain += (elevationDifference > 0) ? elevationDifference : 0.0;
     }
-    var getLoss = function(elevations) {
-        var elevationLoss = 0.0;
-        for(var i = 1; i < elevations.length; i++) {
-            var elevationDifference = elevations[i-1].elevation - elevations[i].elevation;
-            elevationLoss += (elevationDifference > 0) ? elevationDifference : 0.0;
-        }
-        return Number(elevationLoss);
+    return Number(elevationGain);
+}
+
+const getLoss = elevations => {
+    let elevationLoss = 0.0;
+    for(let i = 1; i < elevations.length; i++) {
+        const elevationDifference = elevations[i-1].elevation - elevations[i].elevation;
+        elevationLoss += (elevationDifference > 0) ? elevationDifference : 0.0;
+    }
+    return Number(elevationLoss);
+}
+
+
+
+export default class PathElevation {
+    constructor(elevations, length) {
+        this.gain = getGain(elevations);
+        this.loss = getLoss(elevations);
+        this.totalChange = this.loss + this.gain;
+        this.data = elevations;
     }
 
-    this.gain = getGain(elevations);
-    this.loss = getLoss(elevations);
-    this.totalChange = this.loss + this.gain;
-    this.data = elevations;
-
-    this.enrichData = function(length) {
-        var elevationsWithDistance = [];
-        var resolution = length / this.data.length;
-        for(var i = 0; i < this.data.length; i++) {
+    enrichData (length) {
+        const elevationsWithDistance = [];
+        const resolution = length / this.data.length;
+        for(let i = 0; i < this.data.length; i++) {
             elevationsWithDistance.push({elevation: this.data[i].elevation, distance: i * resolution});
         }
         this.data = elevationsWithDistance;
     }
 }
+
+
 

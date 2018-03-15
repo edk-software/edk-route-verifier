@@ -1,11 +1,13 @@
 // Require this file instead of whole lodash library to optimize size of the bundle
 
-exports.isEmpty = require('lodash/isEmpty');
-exports.isEqual = require('lodash/isEqual');
-exports.isNull = require('lodash/isNull');
-exports.filter = require('lodash/filter');
-exports.find = require('lodash/find');
-exports.forEach = require('lodash/forEach');
-exports.map = require('lodash/map');
-exports.min = require('lodash/min');
-exports.sortBy = require('lodash/sortBy');
+const isEmpty = require('lodash/isEmpty');
+const isEqual = require('lodash/isEqual');
+const isNull = require('lodash/isNull');
+const filter = require('lodash/filter');
+const find = require('lodash/find');
+const forEach = require('lodash/forEach');
+const map = require('lodash/map');
+const min = require('lodash/min');
+const sortBy = require('lodash/sortBy');
+
+export {isEmpty, isEqual, isNull, filter, find, forEach, map, min, sortBy};
