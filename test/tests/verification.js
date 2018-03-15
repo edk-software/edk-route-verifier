@@ -220,7 +220,19 @@ module.exports = {
             .assertElevationTotalChange(570, 40)
             .assertDataConsistency(true);
     },
-	
+
+    'Negative test - no points in KML file': function (client) {
+        client.page.page()
+            .navigate('no_points')
+            .verifyRoute()
+            .assertSinglePath(false)
+            .assertNumberOfStations(false)
+            .assertStationsOrder(false)
+            .assertStationsOnPath(false)
+            .assertDataConsistency(false);
+    },
+
+
 	
     after: function(client) {
         client.end();

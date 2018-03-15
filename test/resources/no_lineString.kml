@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>EDK Pabianice-Rossoszyca 2017</name>
+    <Placemark>
+      <name>Początek szlaku edk rossoszyca 2017r</name>
+      <styleUrl>#icon-61-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          19.34772,51.66514,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Koniec szlaku edk rossoszyca 2017r</name>
+      <styleUrl>#icon-123-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          18.78966,51.70244,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Stacja I
+</name>
+      <description>1.2km</description>
+      <styleUrl>#icon-1899-A52714</styleUrl>
+      <Point>
+        <coordinates>
+          19.3311395,51.6668308,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Stacja II
+</name>
+      <description>2.5km</description>
+      <styleUrl>#icon-1899-A52714</styleUrl>
+      <Point>
+        <coordinates>
+          19.3135561,51.6688276,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Stacja III
+</name>
+      <description>7.3km</description>
+      <styleUrl>#icon-1899-A52714</styleUrl>
+      <Point>
+        <coordinates>
+          19.2625714,51.6766936,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Stacja IV
+</name>
+      <description>15.2km</description>
+      <styleUrl>#icon-1899-A52714</styleUrl>
+      <Point>
+        <coordinates>
+          19.1694794,51.6523395,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Stacja V
+</name>
+      <description>27.5km</description>
+      <styleUrl>#icon-1899-A52714</styleUrl>
+      <Point>
+        <coordinates>
+          19.020336,51.6715638,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Stacja VI
+</name>
+      <description>29km</description>
+      <styleUrl>#icon-1899-A52714</styleUrl>
+      <Point>
+        <coordinates>
+          19.0053354,51.6729852,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Stacja VII
+</name>
+      <description>37.7km</description>
+      <styleUrl>#icon-1899-A52714</styleUrl>
+      <Point>
+        <coordinates>
+          18.9252829,51.6539319,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Stacja VIII
+</name>
+      <description>39.4km</description>
+      <styleUrl>#icon-1899-A52714</styleUrl>
+      <Point>
+        <coordinates>
+          18.9174082,51.6518692,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Stacja IX
+</name>
+      <description>41.4</description>
+      <styleUrl>#icon-1899-A52714</styleUrl>
+      <Point>
+        <coordinates>
+          18.8740581,51.6466431,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Stacja X
+</name>
+      <description>44.4km</description>
+      <styleUrl>#icon-1899-A52714</styleUrl>
+      <Point>
+        <coordinates>
+          18.822637,51.6625977,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Stacja XI
+</name>
+      <description>46.8km</description>
+      <styleUrl>#icon-1899-A52714</styleUrl>
+      <Point>
+        <coordinates>
+          18.826638,51.6727147,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Stacja XII
+</name>
+      <description>47.7km</description>
+      <styleUrl>#icon-1899-A52714</styleUrl>
+      <Point>
+        <coordinates>
+          18.8322017,51.679565,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Stacja XIII
+</name>
+      <description>49.2km</description>
+      <styleUrl>#icon-1899-A52714</styleUrl>
+      <Point>
+        <coordinates>
+          18.8150912,51.6883597,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Stacja XIV
+</name>
+      <description>52.2km</description>
+      <styleUrl>#icon-1899-A52714</styleUrl>
+      <Point>
+        <coordinates>
+          18.78728,51.70194,0
+        </coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>

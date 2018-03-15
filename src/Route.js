@@ -18,14 +18,14 @@ export default class Route {
         this.points = helpers.getPoints(this.geoJson);
         this.isRouteVerifiable = true;
 
-
         if(_.isEmpty(this.lineString)) {
             logger.error('No line string in route.');
             this.isRouteVerifiable = false;
+        }
+        if(_.isEmpty(this.points)) {
             logger.error('No points in route.');
             this.isRouteVerifiable = false;
         }
-
         if(this.isRouteVerifiable) {
             this.stations = new Stations(this.points, this.lineString);
             this.path = this.stations.isPathReversed() ? helpers.reverseLineString(this.lineString) : this.lineString;
