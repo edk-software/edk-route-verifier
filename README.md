@@ -17,10 +17,9 @@ You can use a service like [RawGit](https://rawgit.com/), [JsDelivr](https://www
 * [Google Chrome](https://www.google.com/chrome/) (necessary only for testing)
 
 #### Dependencies
-1. Install the following packages globally:
+1. Install `webpack` globally:
 ```
-npm install -g browserify
-npm install -g uglify-js
+npm install --global webpack 
 ```
 2. Fetch dependencies for application:
 ```
@@ -32,11 +31,13 @@ cd server && npm install
 ```
 
 ### Bundle
-To create output Javascript bundle file - `edk-route-verifier.js` you need to issue:
+To create output Javascript bundle file - `edk-route-verifier.js` you need to issue on of the following commands:
 ```
-npm run bundle:test
+npm run build:prod
+npm run build:dev
 ```
-That command takes all code from `src` directory and with use of [browserify](http://browserify.org/) and [uglify-js](http://lisperator.net/uglifyjs/) libraries creates `edk-route-verifier.js` and `edk-route-verifier.js.min` in `server/static/js` directory.
+That commands takes all code from `src` directory and with use of `webpack` and create `edk-route-verifier.min.js` with
+`edk-route-verifier.js.map` or `edk-route-verifier.js` respectively in `server/static/js` directory.
 
 ### Test 
 
