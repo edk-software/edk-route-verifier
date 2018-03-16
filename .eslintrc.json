@@ -5,6 +5,25 @@
     },
     "extends": "airbnb-base",
     "rules" : {
-        "indent" : ["error", 4]
+        "indent" : ["error", 4],
+        "no-unused-vars" : 0,
+        "class-methods-use-this" : 0,
+        "no-used-expressions" : [2, {
+            "allowShortCircuit": false,
+            "allowTernary": true,
+            "allowTaggedTemplates": false
+        }],
+        "radix" : 0,
+        "no-plusplus" : 0,
+        "no-new" : 0,
+        "function-paren-newline" : ["error", "never"],
+        "prefer-promise-reject-errors" : 0
+    },
+    "env" : {
+        "jquery" : true
+    },
+    "globals" : {
+        "Chart" : true,
+        "google" : true
     }
 }

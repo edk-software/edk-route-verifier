@@ -19,7 +19,7 @@ function verifyRoute() {
     controls.addLoaderToButton();
 
     helpers.getRoute(context.routeUrl)
-        .done(data => {
+        .done((data) => {
             const geoJson = helpers.getGeoJSON(data);
             const route = new Route(geoJson);
 
@@ -68,56 +68,57 @@ function verifyRoute() {
                     controls.drawElevationChart(pathElevation);
 
                     helpers.getRouteParameters(context.routeParamsUrl)
-                        .then(parameters => {
-                            const ACCEPTED_ROUTE_LENGTH_DIFF = 1; //km
-                            const ACCEPTED_ELEVATION_GAIN_DIFF = 50; //m
+                        .then((parameters) => {
+                            const ACCEPTED_ROUTE_LENGTH_DIFF = 1; // km
+                            const ACCEPTED_ELEVATION_GAIN_DIFF = 50; // m
                             const NORMAL_ROUTE_TYPE = 0;
                             const INSPIRED_ROUTE_TYPE = 1;
-                            
+
                             const isLengthConsistent = (routeLength - ACCEPTED_ROUTE_LENGTH_DIFF <= parameters.length &&
                                                       parameters.length <= routeLength + ACCEPTED_ROUTE_LENGTH_DIFF);
                             const isElevationGainConsistent = (pathElevation.gain - ACCEPTED_ELEVATION_GAIN_DIFF <= parameters.ascent &&
                                                              parameters.ascent <= pathElevation.gain + ACCEPTED_ELEVATION_GAIN_DIFF);
                             const isRouteTypeConsistent = parameters.type === (isNormalRoute ? NORMAL_ROUTE_TYPE : INSPIRED_ROUTE_TYPE);
                             const isDataConsistent = isLengthConsistent && isElevationGainConsistent && isRouteTypeConsistent;
-                            
-                            logger.debug('isLengthConsistent:', isLengthConsistent,
-                                         ', isElevationGainConsistent:', isElevationGainConsistent,
-                                         ', isRouteTypeConsistent:', isRouteTypeConsistent); 
+
+                            logger.debug(
+                                'isLengthConsistent:', isLengthConsistent,
+                                ', isElevationGainConsistent:', isElevationGainConsistent,
+                                ', isRouteTypeConsistent:', isRouteTypeConsistent,
+                            );
                             controls.updateDataConsistency(isDataConsistent);
 
                             const canRouteBeAutomaticallyApproved =
-                                isPathLengthValid && isPathLengthValid && 
-                                areAllStationsPresent && isStationOrderCorrect && areStationsOnThePath && 
+                                isPathLengthValid && isPathLengthValid &&
+                                areAllStationsPresent && isStationOrderCorrect && areStationsOnThePath &&
                                 isPathElevationGainValid && isPathElevationLossValid && isPathElevationTotalChangeValid &&
                                 isDataConsistent;
-                            
+
                             if (canRouteBeAutomaticallyApproved) {
                                 logger.info('Route verification success. Approving...');
                                 helpers.approveRoute(context.routeApproveUrl)
                                     .then(() => {
                                         logger.info('Route approved.');
-                                        const reloadTimeout = setTimeout( () => {
+                                        const reloadTimeout = setTimeout(() => {
                                             window.location.reload(1);
                                         }, 5000);
-                                        $('div#pageReloadModal').on('hide.bs.modal', e => {
+                                        $('div#pageReloadModal').on('hide.bs.modal', (e) => {
                                             clearTimeout(reloadTimeout);
                                         });
                                         $('div#pageReloadModal').modal();
-
                                     })
-                                    .catch(error => {
+                                    .catch((error) => {
                                         logger.error('Route approval error.', error);
-                                    })
+                                    });
                             } else {
                                 logger.info('Route verification failed. Cannot be approved.');
                             }
                         })
-                        .catch(error => {
+                        .catch((error) => {
                             logger.error('Route parameters data fetching error.', error);
-                        })
+                        });
                 })
-                .catch(error => {
+                .catch((error) => {
                     logger.error('Path elevation data fetching error.', error);
                     controls.updateElevationGain(false, 0);
                     controls.updateElevationLoss(false, 0);
@@ -135,4 +136,4 @@ logger.setLevel('warn');
 // Uncomment to set maximum loglevel
 logger.enableAll();
 
-$("button#verifyRoute").bind("click", verifyRoute);
+$('button#verifyRoute').bind('click', verifyRoute);

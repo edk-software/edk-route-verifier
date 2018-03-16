@@ -10,4 +10,4 @@ const map = require('lodash/map');
 const min = require('lodash/min');
 const sortBy = require('lodash/sortBy');
 
-export {isEmpty, isEqual, isNull, filter, find, forEach, map, min, sortBy};
+export { isEmpty, isEqual, isNull, filter, find, forEach, map, min, sortBy };
