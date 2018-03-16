@@ -29,7 +29,9 @@ export default class PathElevation {
         const elevationsWithDistance = [];
         const resolution = length / this.data.length;
         for (let i = 0; i < this.data.length; i++) {
-            elevationsWithDistance.push({ elevation: this.data[i].elevation, distance: i * resolution });
+            elevationsWithDistance.push({
+                elevation: this.data[i].elevation, distance: i * resolution,
+            });
         }
         this.data = elevationsWithDistance;
     }

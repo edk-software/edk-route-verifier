@@ -17,13 +17,15 @@
         "no-plusplus" : 0,
         "no-new" : 0,
         "function-paren-newline" : ["error", "never"],
-        "prefer-promise-reject-errors" : 0
+        "prefer-promise-reject-errors" : 0,
+        "no-mixed-operators" : 0
     },
     "env" : {
-        "jquery" : true
+        "jquery"  : true,
+        "browser" : true
     },
     "globals" : {
-        "Chart" : true,
+        "Chart"  : true,
         "google" : true
     }
 }

@@ -56,14 +56,16 @@ function verifyRoute() {
                     controls.updateElevationGain(isPathElevationGainValid, pathElevation.gain);
 
                     const isNormalRoute = routeLength >= NORMAL_ROUTE_MIN_LENGTH ||
-                        pathElevation.gain > SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN && routeLength >= SHORT_NORMAL_ROUTE_MIN_LENGTH;
+                        pathElevation.gain > SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN
+                        && routeLength >= SHORT_NORMAL_ROUTE_MIN_LENGTH;
                     controls.updateRouteType(isNormalRoute);
 
                     const isPathElevationLossValid = true;
                     controls.updateElevationLoss(isPathElevationLossValid, pathElevation.loss);
 
                     const isPathElevationTotalChangeValid = true;
-                    controls.updateElevationTotalChange(isPathElevationTotalChangeValid, pathElevation.totalChange);
+                    controls.updateElevationTotalChange(isPathElevationTotalChangeValid,
+                        pathElevation.totalChange);
 
                     controls.drawElevationChart(pathElevation);
 
@@ -74,24 +76,32 @@ function verifyRoute() {
                             const NORMAL_ROUTE_TYPE = 0;
                             const INSPIRED_ROUTE_TYPE = 1;
 
-                            const isLengthConsistent = (routeLength - ACCEPTED_ROUTE_LENGTH_DIFF <= parameters.length &&
-                                                      parameters.length <= routeLength + ACCEPTED_ROUTE_LENGTH_DIFF);
-                            const isElevationGainConsistent = (pathElevation.gain - ACCEPTED_ELEVATION_GAIN_DIFF <= parameters.ascent &&
-                                                             parameters.ascent <= pathElevation.gain + ACCEPTED_ELEVATION_GAIN_DIFF);
-                            const isRouteTypeConsistent = parameters.type === (isNormalRoute ? NORMAL_ROUTE_TYPE : INSPIRED_ROUTE_TYPE);
-                            const isDataConsistent = isLengthConsistent && isElevationGainConsistent && isRouteTypeConsistent;
+                            const isLengthConsistent =
+                                (routeLength - ACCEPTED_ROUTE_LENGTH_DIFF <= parameters.length &&
+                                parameters.length <= routeLength + ACCEPTED_ROUTE_LENGTH_DIFF);
+                            const isElevationGainConsistent =
+                                (pathElevation.gain - ACCEPTED_ELEVATION_GAIN_DIFF <=
+                                parameters.ascent &&
+                                parameters.ascent <=
+                                pathElevation.gain + ACCEPTED_ELEVATION_GAIN_DIFF);
+                            const isRouteTypeConsistent =
+                                parameters.type ===
+                                (isNormalRoute ? NORMAL_ROUTE_TYPE : INSPIRED_ROUTE_TYPE);
+                            const isDataConsistent =
+                                isLengthConsistent &&
+                                isElevationGainConsistent &&
+                                isRouteTypeConsistent;
 
-                            logger.debug(
-                                'isLengthConsistent:', isLengthConsistent,
+                            logger.debug('isLengthConsistent:', isLengthConsistent,
                                 ', isElevationGainConsistent:', isElevationGainConsistent,
-                                ', isRouteTypeConsistent:', isRouteTypeConsistent,
-                            );
+                                ', isRouteTypeConsistent:', isRouteTypeConsistent);
                             controls.updateDataConsistency(isDataConsistent);
 
                             const canRouteBeAutomaticallyApproved =
                                 isPathLengthValid && isPathLengthValid &&
-                                areAllStationsPresent && isStationOrderCorrect && areStationsOnThePath &&
-                                isPathElevationGainValid && isPathElevationLossValid && isPathElevationTotalChangeValid &&
+                                areAllStationsPresent && isStationOrderCorrect &&
+                                areStationsOnThePath && isPathElevationGainValid &&
+                                isPathElevationLossValid && isPathElevationTotalChangeValid &&
                                 isDataConsistent;
 
                             if (canRouteBeAutomaticallyApproved) {
