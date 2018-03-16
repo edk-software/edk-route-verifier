@@ -4,7 +4,10 @@
   "description": "Extreme Way of the Cross project route verifier",
   "main": "edk-route-verifier.js",
   "scripts": {
+    "clean": "rm -rf server/static/js/edk-route-verifier.* dist/edk-route-verifier.*",
     "start": "cd server && npm run start",
+    "start:dev": "cross-env NODE_ENV=development npm run start",
+    "start:prod": "cross-env NODE_ENV=production npm run start",
     "test": "nightwatch -c test/nightwatch.conf.js",
     "version:patch": "npm version patch",
     "git:branch": "cross-var git branch $npm_package_version && cross-var git checkout $npm_package_version",
@@ -42,6 +45,7 @@
     "babel-preset-minify": "^0.3.0",
     "brfs": "^1.4.3",
     "chrome-driver-standalone": "^2.33.0",
+    "cross-env": "^5.1.4",
     "cross-var": "^1.1.0",
     "nightwatch": "^0.9.19",
     "selenium-server-standalone-jar": "^3.8.1",

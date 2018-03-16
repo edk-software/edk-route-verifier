@@ -6,6 +6,7 @@ var cors = require('cors');
 
 var app = express();
 var port = process.env.PORT || 7777;
+var isProduction = process.env.NODE_ENV === 'production';
 var configuration = null;
 
 var displayUsage = () => {
@@ -63,7 +64,7 @@ app.get('/:routeId', function(req, res) {
         googleMapsApiKey: configuration.googleMapsApiKey,
         routeId: id,
         serverPort: port,
-        jsFilename: 'edk-route-verifier.js'
+        jsFilename: isProduction ? 'edk-route-verifier.min.js' : 'edk-route-verifier.js'
     });
 });
 

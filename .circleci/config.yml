@@ -47,13 +47,11 @@ jobs:
 
       - run:
           name: Create application bundle file
-          command: npm run bundle:test
+          command: npm run build:prod
 
       - run:
           name: Start test server
-          command: |
-            cd server
-            npm start
+          command: npm run start:prod
           background: true
 
       - run:
