@@ -12,6 +12,12 @@ const SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN = 500; // meters
 
 
 function verifyRoute() {
+
+    if (!window.google || !window.google.maps) {
+        logger.error('Google Maps API is not loaded.');
+        return;
+    }
+    
     const context = new Context();
     const controls = new Controls();
 
@@ -24,7 +30,7 @@ function verifyRoute() {
             const route = new Route(geoJson);
 
             if (!route.isVerifiable()) {
-                logger.error('Critical error. Route is unverifiable.');
+                logger.error('Route is unverifiable.');
                 controls.resetAll(false);
                 return;
             }
