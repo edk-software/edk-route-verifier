@@ -93,7 +93,7 @@ function verifyRoute() {
                             controls.updateDataConsistency(isDataConsistent);
 
                             const canRouteBeAutomaticallyApproved =
-                                isPathLengthValid && isPathLengthValid && 
+                                isSinglePath && isPathLengthValid && 
                                 areAllStationsPresent && isStationOrderCorrect && areStationsOnThePath && 
                                 isPathElevationGainValid && isPathElevationLossValid && isPathElevationTotalChangeValid &&
                                 isDataConsistent;
@@ -137,8 +137,11 @@ function verifyRoute() {
         });
 }
 
-logger.setLevel('warn');
-// Uncomment to set maximum loglevel
-logger.enableAll();
+if (process.env.NODE_ENV === 'production') {
+    logger.setLevel('warn');
+} else {
+    logger.setLevel('debug');
+}
+window.setLogLevel = (logLevel = 'debug') => logger.setLevel(logLevel);
 
 $("button#verifyRoute").bind("click", verifyRoute);

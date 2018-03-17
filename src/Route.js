@@ -40,6 +40,9 @@ export default class Route {
 
     isSinglePath () {
         const result = _.isEqual(this.numberOfPaths, EXPECTED_NUMBER_OF_PATHS);
+        if (!result) {
+            logger.warn('No single path defined.');
+        }
         logger.debug('isSinglePath:', result, ', numberOfPaths:', this.numberOfPaths);
         return result;
     }

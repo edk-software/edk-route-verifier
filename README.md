@@ -48,9 +48,13 @@ The following steps shall be done to run test server:
 ```
 npm start
 ```
-3. Open in browser: `http://localhost:7777/<route_id>`, where `<route_id>` is name of KML file without extension. 
+3. Open in browser:
+- `http://localhost:7777/resources`, to show page listing all KML files available in test server. 
+- `http://localhost:7777/<route_id>`, where `<route_id>` is name of KML file without extension. 
 
 **NOTE**: For the page to be displayed correctly `<route_id>.kml` must be present in resources path (defined in configuration file).
+
+**DEBUG**: For debugging you can change log level in browser console: `window.setLogLevel(<log_level>)`, where `<log_level>` is one of the log levels are numbers from 0 (trace) to 5 (silent). See [loglevel](https://github.com/pimterry/loglevel) for details. 
  
 #### Execution
 1. Start server: 
