@@ -1,8 +1,9 @@
 import logger from 'loglevel';
-import * as _ from './lodash';
 import pointOnLine from '@turf/point-on-line';
 import distance from '@turf/distance';
 import helpers from '@turf/helpers';
+import * as _ from './lodash';
+
 
 const turf = {
     pointOnLine,
@@ -26,7 +27,8 @@ export default class Stations {
         this.pathReversed = false;
         this.pathCircular = false;
         this.pathStart = turf.helpers.point(this.path.geometry.coordinates[0]);
-        this.pathEnd = turf.helpers.point(this.path.geometry.coordinates[this.path.geometry.coordinates.length - 1]);
+        this.pathEnd = turf.helpers
+            .point(this.path.geometry.coordinates[this.path.geometry.coordinates.length - 1]);
 
         this._sortPoints();
         this._addIndexes();
@@ -39,18 +41,19 @@ export default class Stations {
 
     _sortPoints() {
         const path = this.path;
-        const enhancedPoints = _.map(this.points, (point) => {
+        const enhancedPoints = _.map(this.points, point => {
             point.properties.nearestOnLine = turf.pointOnLine(path, point, 'meters');
             return point;
         });
 
-        const sortedPoints = _.sortBy(enhancedPoints, point => point.properties.nearestOnLine.properties.location);
+        const sortedPoints = _.sortBy(enhancedPoints,
+            point => point.properties.nearestOnLine.properties.location);
 
         this.points = sortedPoints;
     }
 
     _addIndexes() {
-        const getIndex = (str) => {
+        const getIndex = str => {
             /** Regular expressions for extracting station number
              *  from a given string (which might be represented by different types
              *  of numbers and different delimiters)
@@ -89,9 +92,10 @@ export default class Stations {
             // split
             const parts = str.trim().split(SPLITTER_REGEX);
 
-            _.forEach(parts, (part) => {
+            _.forEach(parts, part => {
                 // try roman numbers
-                let matches = part.match(ROMAN_NUMBERS_REGEX); // it isn't clear why there are for matches declaration
+                // it isn't clear why there are for matches declaration
+                let matches = part.match(ROMAN_NUMBERS_REGEX);
                 if (!_.isNull(matches)) {
                     index = ROMAN_EUROPEAN_MAP[matches[0]];
                     return false;
@@ -101,7 +105,8 @@ export default class Stations {
                 matches = part.match(EUROPEAN_NUMBERS_REGEX);
                 if (!_.isNull(matches)) {
                     const stationNumber = parseInt(matches[0]);
-                    if (stationNumber >= CONSTS.FIRST_STATION_INDEX && stationNumber <= CONSTS.LAST_STATION_INDEX) {
+                    if (stationNumber >= CONSTS.FIRST_STATION_INDEX &&
+                        stationNumber <= CONSTS.LAST_STATION_INDEX) {
                         index = stationNumber;
                         return false;
                     }
@@ -126,7 +131,7 @@ export default class Stations {
             return index;
         };
 
-        this.points = _.map(this.points, (point) => {
+        this.points = _.map(this.points, point => {
             const name = point.properties.name;
             const number = getIndex(name);
 
@@ -138,13 +143,16 @@ export default class Stations {
     _updateDirection() {
         const pathReversed = false;
 
-        const startPoint = _.filter(this.points, point => point.properties.index === CONSTS.START_INDEX);
-        const endPoint = _.filter(this.points, point => point.properties.index === CONSTS.END_INDEX);
+        const startPoint = _.filter(this.points,
+            point => point.properties.index === CONSTS.START_INDEX);
+        const endPoint = _.filter(this.points,
+            point => point.properties.index === CONSTS.END_INDEX);
         const options = { units: 'kilometers' };
 
         if (!_.isEmpty(startPoint)) {
             logger.debug('Start point detected. Checking if it is closer to path start or path end...');
-            const startPointToPathStartDistance = turf.distance(this.pathStart, startPoint[0], options);
+            const startPointToPathStartDistance = turf.distance(this.pathStart,
+                startPoint[0], options);
             const startPointToPathEndDistance = turf.distance(this.pathEnd, startPoint[0], options);
             if (startPointToPathStartDistance > startPointToPathEndDistance) {
                 logger.debug('Reversed path detected. Start point is closer to path end.');
@@ -180,9 +188,10 @@ export default class Stations {
 
     getCount() {
         let numberOfStations = 0;
-        for (let stationNumber = CONSTS.FIRST_STATION_INDEX; stationNumber <= CONSTS.LAST_STATION_INDEX; stationNumber++) {
+        for (let stationNumber = CONSTS.FIRST_STATION_INDEX;
+            stationNumber <= CONSTS.LAST_STATION_INDEX; stationNumber++) {
             let firstStationName = '';
-            const stationsOfNumber = _.filter(this.points, (station) => {
+            const stationsOfNumber = _.filter(this.points, station => {
                 if (station.properties.index === stationNumber) {
                     firstStationName = station.properties.name;
                     return true;
@@ -211,8 +220,10 @@ export default class Stations {
                 logger.debug(`Not checking order for unrecognized point: ${this.points[i - 1].properties.name}`);
             } else if (this.pathCircular &&
                 (
-                    (previousStationNumber === CONSTS.FIRST_STATION_INDEX && currentStationNumber === CONSTS.LAST_STATION_INDEX) ||
-                    (currentStationNumber === CONSTS.FIRST_STATION_INDEX && previousStationNumber === CONSTS.LAST_STATION_INDEX)
+                    (previousStationNumber === CONSTS.FIRST_STATION_INDEX &&
+                    currentStationNumber === CONSTS.LAST_STATION_INDEX) ||
+                    (currentStationNumber === CONSTS.FIRST_STATION_INDEX &&
+                    previousStationNumber === CONSTS.LAST_STATION_INDEX)
                 )
             ) {
                 logger.debug('Not checking order for station', CONSTS.FIRST_STATION_INDEX, 'and', CONSTS.LAST_STATION_INDEX, 'when route is circular.');

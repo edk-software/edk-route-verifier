@@ -20,7 +20,7 @@ export default class Helpers {
     }
 
     static getNumberOfFeatures(featureName, geoJson) {
-        const features = _.filter(geoJson.features, (feature) => {
+        const features = _.filter(geoJson.features, feature => {
             _.isEqual(feature.geometry.type, featureName);
         });
         return features.length;
@@ -48,7 +48,7 @@ export default class Helpers {
     }
 
     static getGoogleMapsPath(lineString) {
-        const path = _.map(lineString.geometry.coordinates, (element) => {
+        const path = _.map(lineString.geometry.coordinates, element => {
             new google.maps.LatLng(element[1], element[0]);
         });
         return path;
@@ -105,7 +105,7 @@ export default class Helpers {
     static getRouteParameters(routeParamsUrl) {
         return new Promise((resolve, reject) => {
             $.ajax(routeParamsUrl)
-                .done((data) => {
+                .done(data => {
                     logger.debug('Route parameters:', data);
                     if (data.success === 1) {
                         resolve(data);
@@ -122,7 +122,7 @@ export default class Helpers {
     static approveRoute(routeApproveUrl) {
         return new Promise((resolve, reject) => {
             $.ajax(routeApproveUrl)
-                .done((data) => {
+                .done(data => {
                     resolve({ success: true });
                 })
                 .fail((xhr, status) => {

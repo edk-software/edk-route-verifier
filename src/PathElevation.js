@@ -1,4 +1,4 @@
-const getGain = (elevations) => {
+const getGain = elevations => {
     let elevationGain = 0.0;
     for (let i = 1; i < elevations.length; i++) {
         const elevationDifference = elevations[i].elevation - elevations[i - 1].elevation;
@@ -7,7 +7,7 @@ const getGain = (elevations) => {
     return Number(elevationGain);
 };
 
-const getLoss = (elevations) => {
+const getLoss = elevations => {
     let elevationLoss = 0.0;
     for (let i = 1; i < elevations.length; i++) {
         const elevationDifference = elevations[i - 1].elevation - elevations[i].elevation;

@@ -77,12 +77,12 @@ export default class Route {
 
     fetchPathElevationData() {
         return helpers.getPathElevations(this.path)
-            .then((elevations) => {
+            .then(elevations => {
                 logger.debug('Path elevations:', elevations);
                 this.pathElevation = new PathElevation(elevations);
                 return this.pathElevation;
             })
-            .catch((error) => {
+            .catch(error => {
                 throw new Error(error);
             });
     }

@@ -27,7 +27,7 @@ const updateControlColor = (element, isValid) => {
     if (_.isNull(isValid)) {
         $(`${element} ${INFO_BOX_ICON}`).removeClass([INVALID_COLOR_CLASS, VALID_COLOR_CLASS].join(' '));
     } else {
-        isValid
+        (isValid)
             ? $(`${element} ${INFO_BOX_ICON}`).removeClass(INVALID_COLOR_CLASS).addClass(VALID_COLOR_CLASS)
             : $(`${element} ${INFO_BOX_ICON}`).removeClass(VALID_COLOR_CLASS).addClass(INVALID_COLOR_CLASS);
     }
@@ -40,7 +40,7 @@ const updateControlValue = (element, value, unit) => {
     $(`${element} ${INFO_BOX_NUMBER}`).html(`${value} ${unit ? `<small>${unit}</small>` : ''}`);
 };
 
-const removeControlChildren = (element) => {
+const removeControlChildren = element => {
     $(ELEVATION_CHART_ID).empty();
 };
 
@@ -127,8 +127,10 @@ export default class Controls {
                             labelString: X_AXIS_LABEL_STRING,
                         },
                         ticks: {
+                            /* eslint no-unused-expressions:0 */
                             callback: (dataLabel, index) => {
-                                ((index % labelWidth === 0) ||
+                                (index % labelWidth === 0
+                                ||
                                 (index === pathElevation.data.length - 1) ? dataLabel : null);
                             },
                         },

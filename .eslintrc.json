@@ -8,17 +8,33 @@
         "indent" : ["error", 4],
         "no-unused-vars" : 0,
         "class-methods-use-this" : 0,
-        "no-used-expressions" : [2, {
-            "allowShortCircuit": false,
+        "no-unused-expressions" : [2, {
+            "allowShortCircuit": true,
             "allowTernary": true,
-            "allowTaggedTemplates": false
+            "allowTaggedTemplates": true
         }],
         "radix" : 0,
         "no-plusplus" : 0,
         "no-new" : 0,
         "function-paren-newline" : ["error", "never"],
         "prefer-promise-reject-errors" : 0,
-        "no-mixed-operators" : 0
+        "no-mixed-operators" : 0,
+        "import/no-extraneous-dependencies": 0,
+        "no-underscore-dangle" : ["error", {
+            "allow" : [
+                "_",
+                "_sortPoints",
+                "_addIndexes",
+                "_updateCircularity",
+                "_updateDirection"
+            ]
+        }],
+        "prefer-destructuring": 0,
+        "no-param-reassign" : 0,
+        "no-useless-escape" : 0,
+        "consistent-return" : 0,
+        "arrow-parens"      : ["error", "as-needed"],
+        "no-shadow"         : 0
     },
     "env" : {
         "jquery"  : true,
