@@ -12,6 +12,12 @@ const SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN = 500; // meters
 
 
 function verifyRoute() {
+
+    if (!window.google || !window.google.maps) {
+        logger.error('Google Maps API is not loaded.');
+        return;
+    }
+    
     const context = new Context();
     const controls = new Controls();
 
@@ -24,7 +30,7 @@ function verifyRoute() {
             const route = new Route(geoJson);
 
             if (!route.isVerifiable()) {
-                logger.error('Critical error. Route is unverifiable.');
+                logger.error('Route is unverifiable.');
                 controls.resetAll(false);
                 return;
             }
@@ -98,10 +104,9 @@ function verifyRoute() {
                             controls.updateDataConsistency(isDataConsistent);
 
                             const canRouteBeAutomaticallyApproved =
-                                isPathLengthValid && isPathLengthValid &&
-                                areAllStationsPresent && isStationOrderCorrect &&
-                                areStationsOnThePath && isPathElevationGainValid &&
-                                isPathElevationLossValid && isPathElevationTotalChangeValid &&
+                                isSinglePath && isPathLengthValid && 
+                                areAllStationsPresent && isStationOrderCorrect && areStationsOnThePath && 
+                                isPathElevationGainValid && isPathElevationLossValid && isPathElevationTotalChangeValid &&
                                 isDataConsistent;
 
                             if (canRouteBeAutomaticallyApproved) {
@@ -142,8 +147,11 @@ function verifyRoute() {
         });
 }
 
-logger.setLevel('warn');
-// Uncomment to set maximum loglevel
-logger.enableAll();
+if (process.env.NODE_ENV === 'production') {
+    logger.setLevel('warn');
+} else {
+    logger.setLevel('debug');
+}
+window.setLogLevel = (logLevel = 'debug') => logger.setLevel(logLevel);
 
 $('button#verifyRoute').bind('click', verifyRoute);

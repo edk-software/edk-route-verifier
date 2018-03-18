@@ -17,15 +17,11 @@ You can use a service like [RawGit](https://rawgit.com/), [JsDelivr](https://www
 * [Google Chrome](https://www.google.com/chrome/) (necessary only for testing)
 
 #### Dependencies
-1. Install `webpack` globally:
-```
-npm install --global webpack 
-```
-2. Fetch dependencies for application:
+1. Fetch dependencies for application:
 ```
 npm install
 ```
-3. Fetch dependencies for test server:
+2. Fetch dependencies for test server:
 ```
 cd server && npm install
 ```
@@ -36,7 +32,7 @@ To create output Javascript bundle file - `edk-route-verifier.js` you need to is
 npm run build:prod
 npm run build:dev
 ```
-That commands takes all code from `src` directory and with use of `webpack` and create `edk-route-verifier.min.js` with
+That commands takes all code from `src` directory and with use of `webpack` create `edk-route-verifier.min.js` with
 `edk-route-verifier.js.map` or `edk-route-verifier.js` respectively in `server/static/js` directory.
 
 ### Test 
@@ -52,9 +48,13 @@ The following steps shall be done to run test server:
 ```
 npm start
 ```
-3. Open in browser: `http://localhost:7777/<route_id>`, where `<route_id>` is name of KML file without extension. 
+3. Open in browser:
+- `http://localhost:7777/resources`, to show page listing all KML files available in test server. 
+- `http://localhost:7777/<route_id>`, where `<route_id>` is name of KML file without extension. 
 
 **NOTE**: For the page to be displayed correctly `<route_id>.kml` must be present in resources path (defined in configuration file).
+
+**DEBUG**: For debugging you can change log level in browser console: `window.setLogLevel(<log_level>)`, where `<log_level>` is one of the log levels are numbers from 0 (trace) to 5 (silent). See [loglevel](https://github.com/pimterry/loglevel) for details. 
  
 #### Execution
 1. Start server: 
@@ -96,4 +96,4 @@ You can create your own branch, push it remote and CI will start automatically. 
 2. Push all the changes to remote
 3. [Start test server](#server)
 4. Execute `npm run deploy:current`
-5. If exeuction was successful, then check [GitHub releases](https://github.com/edk-software/edk-route-verifier/tags) and create release and update release notes
+5. If execution was successful, then check [GitHub releases](https://github.com/edk-software/edk-route-verifier/tags) and create release and update release notes

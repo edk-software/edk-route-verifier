@@ -6,8 +6,9 @@ node_modules/
 
 /server/config.json
 /server/static/js/edk-route-verifier.min.js
-/server/static/js/edk-route-verifier.js.map
+/server/static/js/edk-route-verifier.min.js.map
 /server/static/js/edk-route-verifier.js
+/server/static/js/edk-route-verifier.js.map
 /test/screenshots/
 /test/reports/
 
