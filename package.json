@@ -19,8 +19,7 @@
     "build:dev": "webpack --config webpack.config.js --mode development",
     "build:prod": "webpack --config webpack.config.js --mode production",
     "build:dist": "concurrently  \"webpack --config webpack.config.js --mode production --env.DIST\" \"webpack --config webpack.config.js --mode development --env.DIST\"",
-    "check": "concurrently \"eslint src/**\" \"eslint server/**\" --cache --fix --max-warnings 10",
-    "c" : "eslint src/** --cache  --max-warnings 10"
+    "check:source" : "eslint src/** --cache  --max-warnings 10"
   },
   "author": "Jakub Niezgoda (qooban)",
   "license": "MIT",

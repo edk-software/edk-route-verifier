@@ -27,7 +27,8 @@ export default class Helpers {
     }
 
     static getLineString(geoJson) {
-        const lineString = _.find(geoJson.features, feature => _.isEqual(feature.geometry.type, 'LineString'));
+        const lineString = _.find(geoJson.features,
+            feature => _.isEqual(feature.geometry.type, 'LineString'));
         return lineString;
     }
 

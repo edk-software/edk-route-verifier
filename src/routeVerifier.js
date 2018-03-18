@@ -12,12 +12,10 @@ const SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN = 500; // meters
 
 
 function verifyRoute() {
-
     if (!window.google || !window.google.maps) {
         logger.error('Google Maps API is not loaded.');
         return;
     }
-    
     const context = new Context();
     const controls = new Controls();
 
@@ -81,32 +79,24 @@ function verifyRoute() {
                             const ACCEPTED_ELEVATION_GAIN_DIFF = 50; // m
                             const NORMAL_ROUTE_TYPE = 0;
                             const INSPIRED_ROUTE_TYPE = 1;
-
-                            const isLengthConsistent =
-                                (routeLength - ACCEPTED_ROUTE_LENGTH_DIFF <= parameters.length &&
+                            /* eslint-disable max-len */
+                            const isLengthConsistent = (routeLength - ACCEPTED_ROUTE_LENGTH_DIFF <= parameters.length &&
                                 parameters.length <= routeLength + ACCEPTED_ROUTE_LENGTH_DIFF);
-                            const isElevationGainConsistent =
-                                (pathElevation.gain - ACCEPTED_ELEVATION_GAIN_DIFF <=
-                                parameters.ascent &&
-                                parameters.ascent <=
-                                pathElevation.gain + ACCEPTED_ELEVATION_GAIN_DIFF);
-                            const isRouteTypeConsistent =
-                                parameters.type ===
-                                (isNormalRoute ? NORMAL_ROUTE_TYPE : INSPIRED_ROUTE_TYPE);
-                            const isDataConsistent =
-                                isLengthConsistent &&
-                                isElevationGainConsistent &&
-                                isRouteTypeConsistent;
-
+                            const isElevationGainConsistent = (pathElevation.gain - ACCEPTED_ELEVATION_GAIN_DIFF <= parameters.ascent &&
+                                parameters.ascent <= pathElevation.gain + ACCEPTED_ELEVATION_GAIN_DIFF);
+                            const isRouteTypeConsistent = parameters.type === (isNormalRoute ? NORMAL_ROUTE_TYPE : INSPIRED_ROUTE_TYPE);
+                            const isDataConsistent = isLengthConsistent && isElevationGainConsistent && isRouteTypeConsistent;
+                            /* eslint-enable max-len */
                             logger.debug('isLengthConsistent:', isLengthConsistent,
                                 ', isElevationGainConsistent:', isElevationGainConsistent,
                                 ', isRouteTypeConsistent:', isRouteTypeConsistent);
                             controls.updateDataConsistency(isDataConsistent);
 
                             const canRouteBeAutomaticallyApproved =
-                                isSinglePath && isPathLengthValid && 
-                                areAllStationsPresent && isStationOrderCorrect && areStationsOnThePath && 
-                                isPathElevationGainValid && isPathElevationLossValid && isPathElevationTotalChangeValid &&
+                                isSinglePath && isPathLengthValid &&
+                                areAllStationsPresent && isStationOrderCorrect &&
+                                areStationsOnThePath && isPathElevationGainValid &&
+                                isPathElevationLossValid && isPathElevationTotalChangeValid &&
                                 isDataConsistent;
 
                             if (canRouteBeAutomaticallyApproved) {

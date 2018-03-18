@@ -66,5 +66,5 @@ jobs:
           command: npm test
 
       - run:
-          name: Run JSLint code style checker
+          name: Run ESLint code style checker
           command: npm run check:source
