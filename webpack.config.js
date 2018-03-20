@@ -10,7 +10,7 @@ module.exports = (env = {}, args = {}) => {
     */
     const inDevelopment = (args.mode === 'development');
     const distribution  = env.DIST;
-    const filename      = 'edk-route-verifier.js';
+    const filename      = inDevelopment ? 'edk-route-verifier.js' : 'edk-route-verifier.min.js';
     const path          = p.resolve(__dirname, getPath(distribution, inDevelopment));
 
     return {
