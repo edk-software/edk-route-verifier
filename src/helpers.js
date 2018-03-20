@@ -20,9 +20,8 @@ export default class Helpers {
     }
 
     static getNumberOfFeatures(featureName, geoJson) {
-        const features = _.filter(geoJson.features, feature => {
-            _.isEqual(feature.geometry.type, featureName);
-        });
+        const features = _.filter(geoJson.features,
+            feature => _.isEqual(feature.geometry.type, featureName));
         return features.length;
     }
 
@@ -39,7 +38,8 @@ export default class Helpers {
     }
 
     static getPoints(geoJson) {
-        const points = _.filter(geoJson.features, feature => _.isEqual(feature.geometry.type, 'Point'));
+        const points = _.filter(geoJson.features,
+            feature => _.isEqual(feature.geometry.type, 'Point'));
         return points;
     }
 
@@ -49,9 +49,8 @@ export default class Helpers {
     }
 
     static getGoogleMapsPath(lineString) {
-        const path = _.map(lineString.geometry.coordinates, element => {
-            new google.maps.LatLng(element[1], element[0]);
-        });
+        const path = _.map(lineString.geometry.coordinates,
+            element => new google.maps.LatLng(element[1], element[0]));
         return path;
     }
 
