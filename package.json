@@ -13,7 +13,7 @@
     "git:branch": "cross-var git branch $npm_package_version && cross-var git checkout $npm_package_version",
     "git:commit": "git add dist/* && git commit -m \"Added artifacts for new version\"",
     "git:push": "cross-var git push --tags origin HEAD:$npm_package_version",
-    "deploy:clean": "git checkout master && cross-var git branch -D $npm_package_version",
+    "deploy:clean": "git checkout master && cross-var git branch -D $npm_package_version && cross-var git tag -d v$npm_package_version",
     "deploy:current": "npm run build:prod && npm test && npm run git:branch && npm run build:dist && npm run git:commit && cross-var git tag v$npm_package_version && npm run git:push",
     "deploy:next": "npm run build:prod && npm test && npm run git:branch && npm run build:dist && npm run git:commit && npm run version:patch && npm run git:push",
     "build:dev": "webpack --config webpack.config.js --mode development",
