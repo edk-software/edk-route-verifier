@@ -7,6 +7,7 @@ var cors = require('cors');
 var app = express();
 var port = process.env.PORT || 7777;
 var isProduction = process.env.NODE_ENV === 'production';
+var jsFilename = isProduction ? 'edk-route-verifier.min.js' : 'edk-route-verifier.js';
 var configuration = null;
 
 var displayUsage = () => {
@@ -64,7 +65,7 @@ app.get('/:routeId', function(req, res) {
         googleMapsApiKey: configuration.googleMapsApiKey,
         routeId: id,
         serverPort: port,
-        jsFilename: isProduction ? 'edk-route-verifier.min.js' : 'edk-route-verifier.js'
+        jsFilename: jsFilename
     });
 });
 
@@ -87,5 +88,11 @@ app.get('/kml/:routeId', cors(), function(req, res) {
     res.sendFile(path.resolve(path.join(configuration.resourcesPath, `${id}.kml`)));
 });
 
-console.log('Starting proxy server at: http://localhost:' + port);
-app.listen(port);
+var bundlePath = path.resolve(__dirname + '/static/js/' + jsFilename);
+if (fs.existsSync(bundlePath)) {
+    console.log(`Starting proxy server in ${isProduction ? 'production' : 'development'} mode at: http://localhost:${port}`);
+    console.log(`Using testing bundle file: ${bundlePath}.`);
+    app.listen(port);
+} else {
+    console.error(`Testing bundle not present. Expecting: ${bundlePath} to be present.`);
+}

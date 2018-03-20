@@ -12,12 +12,10 @@ const SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN = 500; // meters
 
 
 function verifyRoute() {
-
     if (!window.google || !window.google.maps) {
         logger.error('Google Maps API is not loaded.');
         return;
     }
-    
     const context = new Context();
     const controls = new Controls();
 
@@ -62,66 +60,68 @@ function verifyRoute() {
                     controls.updateElevationGain(isPathElevationGainValid, pathElevation.gain);
 
                     const isNormalRoute = routeLength >= NORMAL_ROUTE_MIN_LENGTH ||
-                        pathElevation.gain > SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN && routeLength >= SHORT_NORMAL_ROUTE_MIN_LENGTH;
+                        pathElevation.gain > SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN
+                        && routeLength >= SHORT_NORMAL_ROUTE_MIN_LENGTH;
                     controls.updateRouteType(isNormalRoute);
 
                     const isPathElevationLossValid = true;
                     controls.updateElevationLoss(isPathElevationLossValid, pathElevation.loss);
 
                     const isPathElevationTotalChangeValid = true;
-                    controls.updateElevationTotalChange(isPathElevationTotalChangeValid, pathElevation.totalChange);
+                    controls.updateElevationTotalChange(isPathElevationTotalChangeValid,
+                        pathElevation.totalChange);
 
                     controls.drawElevationChart(pathElevation);
 
                     helpers.getRouteParameters(context.routeParamsUrl)
                         .then(parameters => {
-                            const ACCEPTED_ROUTE_LENGTH_DIFF = 1; //km
-                            const ACCEPTED_ELEVATION_GAIN_DIFF = 50; //m
+                            const ACCEPTED_ROUTE_LENGTH_DIFF = 1; // km
+                            const ACCEPTED_ELEVATION_GAIN_DIFF = 50; // m
                             const NORMAL_ROUTE_TYPE = 0;
                             const INSPIRED_ROUTE_TYPE = 1;
-                            
+                            /* eslint-disable max-len */
                             const isLengthConsistent = (routeLength - ACCEPTED_ROUTE_LENGTH_DIFF <= parameters.length &&
-                                                      parameters.length <= routeLength + ACCEPTED_ROUTE_LENGTH_DIFF);
+                                parameters.length <= routeLength + ACCEPTED_ROUTE_LENGTH_DIFF);
                             const isElevationGainConsistent = (pathElevation.gain - ACCEPTED_ELEVATION_GAIN_DIFF <= parameters.ascent &&
-                                                             parameters.ascent <= pathElevation.gain + ACCEPTED_ELEVATION_GAIN_DIFF);
+                                parameters.ascent <= pathElevation.gain + ACCEPTED_ELEVATION_GAIN_DIFF);
                             const isRouteTypeConsistent = parameters.type === (isNormalRoute ? NORMAL_ROUTE_TYPE : INSPIRED_ROUTE_TYPE);
                             const isDataConsistent = isLengthConsistent && isElevationGainConsistent && isRouteTypeConsistent;
-                            
+                            /* eslint-enable max-len */
                             logger.debug('isLengthConsistent:', isLengthConsistent,
-                                         ', isElevationGainConsistent:', isElevationGainConsistent,
-                                         ', isRouteTypeConsistent:', isRouteTypeConsistent); 
+                                ', isElevationGainConsistent:', isElevationGainConsistent,
+                                ', isRouteTypeConsistent:', isRouteTypeConsistent);
                             controls.updateDataConsistency(isDataConsistent);
 
                             const canRouteBeAutomaticallyApproved =
-                                isSinglePath && isPathLengthValid && 
-                                areAllStationsPresent && isStationOrderCorrect && areStationsOnThePath && 
-                                isPathElevationGainValid && isPathElevationLossValid && isPathElevationTotalChangeValid &&
+                                isSinglePath && isPathLengthValid &&
+                                areAllStationsPresent && isStationOrderCorrect &&
+                                areStationsOnThePath && isPathElevationGainValid &&
+                                isPathElevationLossValid && isPathElevationTotalChangeValid &&
                                 isDataConsistent;
-                            
+
                             if (canRouteBeAutomaticallyApproved) {
                                 logger.info('Route verification success. Approving...');
                                 helpers.approveRoute(context.routeApproveUrl)
                                     .then(() => {
                                         logger.info('Route approved.');
-                                        const reloadTimeout = setTimeout( () => {
+                                        const reloadTimeout = setTimeout(() => {
                                             window.location.reload(1);
                                         }, 5000);
                                         $('div#pageReloadModal').on('hide.bs.modal', e => {
                                             clearTimeout(reloadTimeout);
                                         });
                                         $('div#pageReloadModal').modal();
-
                                     })
                                     .catch(error => {
                                         logger.error('Route approval error.', error);
-                                    })
+                                    });
                             } else {
                                 logger.info('Route verification failed. Cannot be approved.');
                             }
                         })
                         .catch(error => {
                             logger.error('Route parameters data fetching error.', error);
-                        })
+                        });
                 })
                 .catch(error => {
                     logger.error('Path elevation data fetching error.', error);
@@ -144,4 +144,4 @@ if (process.env.NODE_ENV === 'production') {
 }
 window.setLogLevel = (logLevel = 'debug') => logger.setLevel(logLevel);
 
-$("button#verifyRoute").bind("click", verifyRoute);
+$('button#verifyRoute').bind('click', verifyRoute);

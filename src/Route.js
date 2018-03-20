@@ -11,34 +11,35 @@ const MAXIMUM_DISTANCE_FROM_STATION_TO_PATH = 100; // meters
 
 
 export default class Route {
-
-    constructor (geoJson) {
+    constructor(geoJson) {
         this.geoJson = geoJson;
         this.lineString = helpers.getLineString(this.geoJson);
         this.points = helpers.getPoints(this.geoJson);
         this.isRouteVerifiable = true;
 
-        if(_.isEmpty(this.lineString)) {
+        if (_.isEmpty(this.lineString)) {
             logger.error('No line string in route.');
             this.isRouteVerifiable = false;
         }
-        if(_.isEmpty(this.points)) {
+        if (_.isEmpty(this.points)) {
             logger.error('No points in route.');
             this.isRouteVerifiable = false;
         }
-        if(this.isRouteVerifiable) {
+        if (this.isRouteVerifiable) {
             this.stations = new Stations(this.points, this.lineString);
-            this.path = this.stations.isPathReversed() ? helpers.reverseLineString(this.lineString) : this.lineString;
+            this.path = this.stations.isPathReversed()
+                ? helpers.reverseLineString(this.lineString)
+                : this.lineString;
             this.numberOfPaths = helpers.getNumberOfFeatures('LineString', this.geoJson);
         }
     }
 
 
-    isVerifiable () {
+    isVerifiable() {
         return this.isRouteVerifiable;
     }
 
-    isSinglePath () {
+    isSinglePath() {
         const result = _.isEqual(this.numberOfPaths, EXPECTED_NUMBER_OF_PATHS);
         if (!result) {
             logger.warn('No single path defined.');
@@ -47,37 +48,37 @@ export default class Route {
         return result;
     }
 
-    areAllStationsPresent () {
+    areAllStationsPresent() {
         const numberOfStations = this.stations.getCount();
         const result = _.isEqual(numberOfStations, EXPECTED_NUMBER_OF_STATIONS);
-        logger.debug('areAllStationsPresent:', result,', numberOfStations:', numberOfStations);
+        logger.debug('areAllStationsPresent:', result, ', numberOfStations:', numberOfStations);
         return result;
     }
 
-    areStationsOnThePath () {
+    areStationsOnThePath() {
         const result = this.stations.areAllOnThePath(MAXIMUM_DISTANCE_FROM_STATION_TO_PATH);
         logger.debug('areStationsOnThePath:', result);
         return result;
     }
 
-    isStationOrderCorrect () {
+    isStationOrderCorrect() {
         const result = this.stations.isOrderCorrect();
         logger.debug('isStationOrderCorrect:', result);
         return result;
     }
 
-    getPathLength () {
+    getPathLength() {
         let result = 0;
 
         const googleMapsPath = helpers.getGoogleMapsPath(this.path);
         result = google.maps.geometry.spherical.computeLength(googleMapsPath);
-        result = result / 1000;
+        result /= 1000;
 
         logger.debug('getPathLength [km]:', result);
         return result;
     }
 
-    fetchPathElevationData () {
+    fetchPathElevationData() {
         return helpers.getPathElevations(this.path)
             .then(elevations => {
                 logger.debug('Path elevations:', elevations);
@@ -90,10 +91,9 @@ export default class Route {
     }
 
 
-    getPathElevation () {
+    getPathElevation() {
         logger.debug('getPathElevation:', this.pathElevation);
         return this.pathElevation;
     }
 }
-
 
