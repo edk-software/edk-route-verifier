@@ -1,6 +1,6 @@
 {
   "name": "edk-route-verifier",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Extreme Way of the Cross project route verifier",
   "main": "edk-route-verifier.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "start": "cd server && npm run start",
     "start:dev": "cross-env NODE_ENV=development npm run start",
     "start:prod": "cross-env NODE_ENV=production npm run start",
-    "test": "nightwatch -c test/nightwatch.conf.js",
+    "test": "npm run check:source && nightwatch -c test/nightwatch.conf.js",
     "version:patch": "npm version patch",
     "git:branch": "cross-var git branch $npm_package_version && cross-var git checkout $npm_package_version",
     "git:commit": "git add dist/* && git commit -m \"Added artifacts for new version\"",
@@ -19,7 +19,7 @@
     "build:dev": "webpack --config webpack.config.js --mode development",
     "build:prod": "webpack --config webpack.config.js --mode production",
     "build:dist": "concurrently  \"webpack --config webpack.config.js --mode production --env.DIST\" \"webpack --config webpack.config.js --mode development --env.DIST\"",
-    "check:source" : "eslint src/** --cache  --max-warnings 10"
+    "check:source": "eslint src/** --cache --max-warnings 10"
   },
   "author": "Jakub Niezgoda (qooban)",
   "license": "MIT",
