@@ -13,6 +13,8 @@ module.exports = (env = {}, args = {}) => {
     const filename      = inDevelopment ? 'edk-route-verifier.js' : 'edk-route-verifier.min.js';
     const path          = p.resolve(__dirname, getPath(distribution, inDevelopment));
 
+    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
     return {
         entry: './src/routeVerifier.js',
         output: {
@@ -23,12 +25,9 @@ module.exports = (env = {}, args = {}) => {
             rules: [
                 {
                     test: /\.js$/,
-                    exclude: /(node_modules|tests)/,
+                    exclude: /node_modules/,
                     use: {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['@babel/preset-env']
-                        }
+                        loader: 'babel-loader'
                     }
                 }
             ]

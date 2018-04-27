@@ -1,14 +1,14 @@
 import logger from 'loglevel';
 import pointOnLine from '@turf/point-on-line';
-import distance from '@turf/distance';
-import helpers from '@turf/helpers';
+import distance from '@turf/distance/';
+import { point } from '@turf/helpers';
 import * as _ from './lodash';
 
 
 const turf = {
     pointOnLine,
     distance,
-    helpers,
+    point,
 };
 
 
@@ -26,8 +26,8 @@ export default class Stations {
         this.path = lineString;
         this.pathReversed = false;
         this.pathCircular = false;
-        this.pathStart = turf.helpers.point(this.path.geometry.coordinates[0]);
-        this.pathEnd = turf.helpers
+        this.pathStart = turf.point(this.path.geometry.coordinates[0]);
+        this.pathEnd = turf
             .point(this.path.geometry.coordinates[this.path.geometry.coordinates.length - 1]);
 
         this._sortPoints();
