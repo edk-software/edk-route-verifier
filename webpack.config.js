@@ -13,8 +13,6 @@ module.exports = (env = {}, args = {}) => {
     const filename      = inDevelopment ? 'edk-route-verifier.js' : 'edk-route-verifier.min.js';
     const path          = p.resolve(__dirname, getPath(distribution, inDevelopment));
 
-    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
     return {
         entry: './src/routeVerifier.js',
         output: {
