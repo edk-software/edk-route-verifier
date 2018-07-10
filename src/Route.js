@@ -90,10 +90,8 @@ export default class Route {
             });
     }
 
-
     getPathElevation() {
         logger.debug('getPathElevation:', this.pathElevation);
         return this.pathElevation;
     }
 }
-

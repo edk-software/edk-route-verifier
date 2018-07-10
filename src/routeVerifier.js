@@ -59,8 +59,8 @@ function verifyRoute() {
                     const isPathElevationGainValid = true;
                     controls.updateElevationGain(isPathElevationGainValid, pathElevation.gain);
 
-                    const isNormalRoute = routeLength >= NORMAL_ROUTE_MIN_LENGTH ||
-                        pathElevation.gain > SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN
+                    const isNormalRoute = routeLength >= NORMAL_ROUTE_MIN_LENGTH
+                        || pathElevation.gain > SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN
                         && routeLength >= SHORT_NORMAL_ROUTE_MIN_LENGTH;
                     controls.updateRouteType(isNormalRoute);
 
@@ -80,37 +80,35 @@ function verifyRoute() {
                             const NORMAL_ROUTE_TYPE = 0;
                             const INSPIRED_ROUTE_TYPE = 1;
                             /* eslint-disable max-len */
-                            const isLengthConsistent = (routeLength - ACCEPTED_ROUTE_LENGTH_DIFF <= parameters.length &&
-                                parameters.length <= routeLength + ACCEPTED_ROUTE_LENGTH_DIFF);
-                            const isElevationGainConsistent = (pathElevation.gain - ACCEPTED_ELEVATION_GAIN_DIFF <= parameters.ascent &&
-                                parameters.ascent <= pathElevation.gain + ACCEPTED_ELEVATION_GAIN_DIFF);
+                            const isLengthConsistent = (routeLength - ACCEPTED_ROUTE_LENGTH_DIFF <= parameters.length
+                                && parameters.length <= routeLength + ACCEPTED_ROUTE_LENGTH_DIFF);
+                            const isElevationGainConsistent = (pathElevation.gain - ACCEPTED_ELEVATION_GAIN_DIFF <= parameters.ascent
+                                && parameters.ascent <= pathElevation.gain + ACCEPTED_ELEVATION_GAIN_DIFF);
                             const isRouteTypeConsistent = parameters.type === (isNormalRoute ? NORMAL_ROUTE_TYPE : INSPIRED_ROUTE_TYPE);
                             const isDataConsistent = isLengthConsistent && isElevationGainConsistent && isRouteTypeConsistent;
-                            /* eslint-enable max-len */
+
                             logger.debug('isLengthConsistent:', isLengthConsistent,
                                 ', isElevationGainConsistent:', isElevationGainConsistent,
                                 ', isRouteTypeConsistent:', isRouteTypeConsistent);
                             controls.updateDataConsistency(isDataConsistent);
 
-                            const canRouteBeAutomaticallyApproved =
-                                isSinglePath && isPathLengthValid &&
-                                areAllStationsPresent && isStationOrderCorrect &&
-                                areStationsOnThePath && isPathElevationGainValid &&
-                                isPathElevationLossValid && isPathElevationTotalChangeValid &&
-                                isDataConsistent;
+                            const canRouteBeAutomaticallyApproved = isSinglePath && isPathLengthValid
+                                && areAllStationsPresent && isStationOrderCorrect
+                                && areStationsOnThePath && isPathElevationGainValid
+                                && isPathElevationLossValid && isPathElevationTotalChangeValid
+                                && isDataConsistent;
 
                             if (canRouteBeAutomaticallyApproved) {
                                 logger.info('Route verification success. Approving...');
                                 helpers.approveRoute(context.routeApproveUrl)
                                     .then(() => {
                                         logger.info('Route approved.');
+                                        const pageReloadModalElement = $('div#pageReloadModal');
                                         const reloadTimeout = setTimeout(() => {
                                             window.location.reload(1);
                                         }, 5000);
-                                        $('div#pageReloadModal').on('hide.bs.modal', e => {
-                                            clearTimeout(reloadTimeout);
-                                        });
-                                        $('div#pageReloadModal').modal();
+                                        pageReloadModalElement.on('hide.bs.modal', e => clearTimeout(reloadTimeout));
+                                        pageReloadModalElement.modal();
                                     })
                                     .catch(error => {
                                         logger.error('Route approval error.', error);

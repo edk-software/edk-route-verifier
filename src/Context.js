@@ -1,7 +1,7 @@
-
 export default function () {
-    this.routeUrl = $('div#map-canvas').attr('data-what');
-    this.routeParamsUrl = $('div#map-canvas').attr('data-route-params');
-    this.routeApproveUrl = $('div#map-canvas').attr('data-route-approve');
-}
+    const mapCanvasElement = $('div#map-canvas');
 
+    this.routeUrl = mapCanvasElement.attr('data-what');
+    this.routeParamsUrl = mapCanvasElement.attr('data-route-params');
+    this.routeApproveUrl = mapCanvasElement.attr('data-route-approve');
+}

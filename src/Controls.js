@@ -127,12 +127,11 @@ export default class Controls {
                             labelString: X_AXIS_LABEL_STRING,
                         },
                         ticks: {
-                            /* eslint no-unused-expressions:0 */
-                            callback: (dataLabel, index) => {
-                                (index % labelWidth === 0
-                                ||
-                                (index === pathElevation.data.length - 1) ? dataLabel : null);
-                            },
+                            callback: (dataLabel, index) => (index % labelWidth === 0
+                                || (index === pathElevation.data.length - 1)
+                                ? dataLabel
+                                : null)
+                            ,
                         },
                     }],
                     yAxes: [{
@@ -187,4 +186,3 @@ export default class Controls {
         this.resetElevationChart();
     }
 }
-

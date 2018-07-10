@@ -55,8 +55,7 @@ export default class Helpers {
     }
 
     static getPathElevations(lineString, useLocalElevations) {
-        if (useLocalElevations &&
-            lineString.geometry.coordinates[0].length === 3) {
+        if (useLocalElevations && lineString.geometry.coordinates[0].length === 3) {
             // Elevation present in line string
 
             logger.debug('Getting path elevations from line string...');
