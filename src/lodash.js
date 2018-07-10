@@ -10,4 +10,14 @@ import map from 'lodash/map';
 import min from 'lodash/min';
 import sortBy from 'lodash/sortBy';
 
-export { isEmpty, isEqual, isNull, filter, find, forEach, map, min, sortBy };
+export {
+    isEmpty,
+    isEqual,
+    isNull,
+    filter,
+    find,
+    forEach,
+    map,
+    min,
+    sortBy,
+};

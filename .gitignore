@@ -17,3 +17,5 @@ selenium-debug.log
 
 # Dist directory
 dist/
+
+.eslintcache

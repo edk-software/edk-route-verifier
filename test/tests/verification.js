@@ -15,9 +15,9 @@ module.exports = {
             .assertNumberOfStations(true)
             .assertStationsOrder(true)
             .assertStationsOnPath(true)
-            .assertElevationGain(300, 20)
-            .assertElevationLoss(340, 20)
-            .assertElevationTotalChange(650, 20)
+            .assertElevationGain(350, 50)
+            .assertElevationLoss(390, 50)
+            .assertElevationTotalChange(750, 50)
             .assertDataConsistency(true);
     },
 
@@ -32,9 +32,9 @@ module.exports = {
             .assertNumberOfStations(true)
             .assertStationsOrder(true)
             .assertStationsOnPath(true)
-            .assertElevationGain(1580, 20)
-            .assertElevationLoss(1580, 20)
-            .assertElevationTotalChange(3160, 20)
+            .assertElevationGain(1580, 50)
+            .assertElevationLoss(1580, 50)
+            .assertElevationTotalChange(3160, 50)
             .assertDataConsistency(true);
     },
 
@@ -48,9 +48,9 @@ module.exports = {
             .assertNumberOfStations(true)
             .assertStationsOrder(true)
             .assertStationsOnPath(false)
-            .assertElevationGain(1600, 20)
-            .assertElevationLoss(1360, 20)
-            .assertElevationTotalChange(2970, 20)
+            .assertElevationGain(1675, 100)
+            .assertElevationLoss(1425, 100)
+            .assertElevationTotalChange(3100, 100)
             .assertDataConsistency(true);
     },
 
@@ -67,9 +67,9 @@ module.exports = {
             .assertNumberOfStations(false)
             .assertStationsOrder(false)
             .assertStationsOnPath(true)
-            .assertElevationGain(190, 20)
-            .assertElevationLoss(145, 20)
-            .assertElevationTotalChange(335, 20)
+            .assertElevationGain(190, 50)
+            .assertElevationLoss(145, 50)
+            .assertElevationTotalChange(335, 50)
             .assertDataConsistency(true);
     },
 
@@ -84,9 +84,9 @@ module.exports = {
             .assertNumberOfStations(true)
             .assertStationsOrder(true)
             .assertStationsOnPath(false)
-            .assertElevationGain(220, 20)
-            .assertElevationLoss(270, 20)
-            .assertElevationTotalChange(490, 20)
+            .assertElevationGain(320, 50)
+            .assertElevationLoss(380, 50)
+            .assertElevationTotalChange(700, 50)
             .assertDataConsistency(true);
     },
 
@@ -102,9 +102,9 @@ module.exports = {
             .assertNumberOfStations(true)
             .assertStationsOrder(true)
             .assertStationsOnPath(true)
-            .assertElevationGain(1600, 20)
-            .assertElevationLoss(1600, 20)
-            .assertElevationTotalChange(3200, 40)
+            .assertElevationGain(1600, 100)
+            .assertElevationLoss(1600, 100)
+            .assertElevationTotalChange(3200, 100)
             .assertDataConsistency(true);
     },
 
@@ -118,9 +118,9 @@ module.exports = {
             .assertNumberOfStations(true)
             .assertStationsOrder(false)
             .assertStationsOnPath(true)
-            .assertElevationGain(920, 20)
-            .assertElevationLoss(880, 20)
-            .assertElevationTotalChange(1800, 40)
+            .assertElevationGain(920, 100)
+            .assertElevationLoss(880, 100)
+            .assertElevationTotalChange(1800, 100)
             .assertDataConsistency(true);
     },
 
@@ -134,9 +134,9 @@ module.exports = {
             .assertNumberOfStations(true)
             .assertStationsOrder(true)
             .assertStationsOnPath(true)
-            .assertElevationGain(304, 20)
-            .assertElevationLoss(342, 20)
-            .assertElevationTotalChange(646, 40)
+            .assertElevationGain(350, 50)
+            .assertElevationLoss(390, 50)
+            .assertElevationTotalChange(740, 50)
             .assertDataConsistency(true);
     },
 	
@@ -150,9 +150,9 @@ module.exports = {
             .assertNumberOfStations(true)
             .assertStationsOrder(false)
             .assertStationsOnPath(false)
-            .assertElevationGain(157, 20)
-            .assertElevationLoss(163, 20)
-            .assertElevationTotalChange(320, 40)
+            .assertElevationGain(250, 50)
+            .assertElevationLoss(260, 50)
+            .assertElevationTotalChange(520, 50)
             .assertDataConsistency(false);
     },
 
@@ -166,9 +166,9 @@ module.exports = {
             .assertNumberOfStations(true)
             .assertStationsOrder(true)
             .assertStationsOnPath(true)
-            .assertElevationGain(313, 20)
-            .assertElevationLoss(314, 20)
-            .assertElevationTotalChange(627, 40)
+            .assertElevationGain(313, 50)
+            .assertElevationLoss(314, 50)
+            .assertElevationTotalChange(627, 50)
             .assertDataConsistency(true);
     },
 	 'Negative test - 23-13_stations': function (client) {
@@ -181,9 +181,9 @@ module.exports = {
             .assertNumberOfStations(false)
             .assertStationsOrder(true)
             .assertStationsOnPath(true)
-            .assertElevationGain(313, 20)
-            .assertElevationLoss(314, 20)
-            .assertElevationTotalChange(627, 40)
+            .assertElevationGain(313, 50)
+            .assertElevationLoss(314, 50)
+            .assertElevationTotalChange(627, 50)
             .assertDataConsistency(true);
     },
 
@@ -198,9 +198,9 @@ module.exports = {
             .assertNumberOfStations(true)
             .assertStationsOrder(true)
             .assertStationsOnPath(true)
-            .assertElevationGain(327, 20)
-            .assertElevationLoss(328, 20)
-            .assertElevationTotalChange(650, 40)
+            .assertElevationGain(327, 50)
+            .assertElevationLoss(328, 50)
+            .assertElevationTotalChange(650, 50)
             .assertDataConsistency(true);
     },
 	
@@ -215,9 +215,9 @@ module.exports = {
             .assertNumberOfStations(true)
             .assertStationsOrder(true)
             .assertStationsOnPath(true)
-            .assertElevationGain(285, 20)
-            .assertElevationLoss(285, 20)
-            .assertElevationTotalChange(570, 40)
+            .assertElevationGain(385, 50)
+            .assertElevationLoss(385, 50)
+            .assertElevationTotalChange(750, 50)
             .assertDataConsistency(true);
     },
 
@@ -243,8 +243,6 @@ module.exports = {
             .assertDataConsistency(false);
     },
 
-
-	
     after: function(client) {
         client.end();
     }

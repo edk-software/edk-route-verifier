@@ -105,8 +105,8 @@ export default class Stations {
                 matches = part.match(EUROPEAN_NUMBERS_REGEX);
                 if (!_.isNull(matches)) {
                     const stationNumber = parseInt(matches[0]);
-                    if (stationNumber >= CONSTS.FIRST_STATION_INDEX &&
-                        stationNumber <= CONSTS.LAST_STATION_INDEX) {
+                    if (stationNumber >= CONSTS.FIRST_STATION_INDEX
+                        && stationNumber <= CONSTS.LAST_STATION_INDEX) {
                         index = stationNumber;
                         return false;
                     }
@@ -218,12 +218,12 @@ export default class Stations {
                 logger.debug(`Not checking order for unrecognized point: ${this.points[i].properties.name}`);
             } else if (previousStationNumber === null) {
                 logger.debug(`Not checking order for unrecognized point: ${this.points[i - 1].properties.name}`);
-            } else if (this.pathCircular &&
-                (
-                    (previousStationNumber === CONSTS.FIRST_STATION_INDEX &&
-                    currentStationNumber === CONSTS.LAST_STATION_INDEX) ||
-                    (currentStationNumber === CONSTS.FIRST_STATION_INDEX &&
-                    previousStationNumber === CONSTS.LAST_STATION_INDEX)
+            } else if (this.pathCircular
+                && (
+                    (previousStationNumber === CONSTS.FIRST_STATION_INDEX
+                    && currentStationNumber === CONSTS.LAST_STATION_INDEX)
+                    || (currentStationNumber === CONSTS.FIRST_STATION_INDEX
+                    && previousStationNumber === CONSTS.LAST_STATION_INDEX)
                 )
             ) {
                 logger.debug('Not checking order for station', CONSTS.FIRST_STATION_INDEX, 'and', CONSTS.LAST_STATION_INDEX, 'when route is circular.');
@@ -261,4 +261,3 @@ export default class Stations {
         return this.pathReversed;
     }
 }
-

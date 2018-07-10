@@ -1,4 +1,4 @@
-var _ = require('lodash');
+let _ = require('lodash');
 
 function navigateToRoute(routeId) {
     this.api
@@ -43,7 +43,7 @@ module.exports = {
                 return this
                     .log(`Path length verification. Expecting path length: ${expectedPathLength}km +/- ${acceptedDifference}km`)
                     .getText(this.elements.pathLengthNumber.selector, function(result) {
-                        var actualPathLength = parseFloat(result.value);
+                        let actualPathLength = parseFloat(result.value);
                         return this.assert.ok(actualPathLength - acceptedDifference < expectedPathLength &&
                                               expectedPathLength < actualPathLength + acceptedDifference,
                                               `Actual path length: ${actualPathLength}`);
@@ -53,7 +53,7 @@ module.exports = {
                 return this
                     .log(`Route type verification. Expecting route type: ${expectedRouteType}`)
                     .getText(this.elements.routeTypeText.selector, function(result) {
-                        var actualRouteType = _.trim(result.value);
+                        let actualRouteType = _.trim(result.value);
                         return this.assert.equal(actualRouteType, expectedRouteType,
                                                  `Actual route type: ${actualRouteType}`);
                     })
@@ -80,7 +80,7 @@ module.exports = {
                 return this
                     .log(`Elevation gain verification. Expecting: ${expectedElevationGain}m +/- ${acceptedDifference}m`)
                     .getText(this.elements.elevationGainNumber.selector, function(result) {
-                        var actualElevationGain = parseFloat(result.value);
+                        let actualElevationGain = parseFloat(result.value);
                         return this.assert.ok(actualElevationGain - acceptedDifference < expectedElevationGain &&
                             expectedElevationGain < actualElevationGain + acceptedDifference,
                             `Actual elevation gain: ${actualElevationGain}`);
@@ -90,7 +90,7 @@ module.exports = {
                 return this
                     .log(`Elevation loss verification. Expecting: ${expectedElevationLoss}m +/- ${acceptedDifference}m`)
                     .getText(this.elements.elevationLossNumber.selector, function(result) {
-                        var actualElevationLoss = parseFloat(result.value);
+                        let actualElevationLoss = parseFloat(result.value);
                         return this.assert.ok(actualElevationLoss - acceptedDifference < expectedElevationLoss &&
                             expectedElevationLoss < actualElevationLoss + acceptedDifference,
                             `Actual elevation loss: ${actualElevationLoss}`);
@@ -100,7 +100,7 @@ module.exports = {
                 return this
                     .log(`Elevation total change verification. Expecting: ${expectedElevationTotalChange}m +/- ${acceptedDifference}m`)
                     .getText(this.elements.elevationTotalChangeNumber.selector, function(result) {
-                        var actualElevationTotalChange = parseFloat(result.value);
+                        let actualElevationTotalChange = parseFloat(result.value);
                         return this.assert.ok(actualElevationTotalChange - acceptedDifference < expectedElevationTotalChange &&
                             expectedElevationTotalChange < actualElevationTotalChange + acceptedDifference,
                             `Actual elevation total change: ${actualElevationTotalChange}`);
