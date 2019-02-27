@@ -58,6 +58,10 @@ app.get('/resources', function(req, res) {
     });
 });
 
+app.get('/', function(req, res) {
+    res.redirect('/resources');
+});
+
 // index page
 app.get('/:routeId', function(req, res) {
     var id = req.params.routeId;
