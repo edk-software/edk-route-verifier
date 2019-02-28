@@ -6,7 +6,7 @@ module.exports = {
 
     'Positive test - short path': function (client) {
         client.page.page()
-            .navigate(1)
+            .navigateToRoute(1)
             .verifyRoute()
             .closePageReloadModal()
             .assertSinglePath(true)
@@ -23,7 +23,7 @@ module.exports = {
 
     'Positive test - circular route': function (client) {
         client.page.page()
-            .navigate('2-circular')
+            .navigateToRoute('2-circular')
             .verifyRoute()
             .closePageReloadModal()
             .assertSinglePath(true)
@@ -40,7 +40,7 @@ module.exports = {
 
     'Positive test - zero-leading station numbers': function (client) {
         client.page.page()
-            .navigate('3-zero_leading')
+            .navigateToRoute('3-zero_leading')
             .verifyRoute()
             .assertSinglePath(true)
             .assertPathLength(80, 1)
@@ -59,7 +59,7 @@ module.exports = {
 
     'Negative test - duplicated station point': function (client) {
         client.page.page()
-            .navigate('10-duplicated_station_point')
+            .navigateToRoute('10-duplicated_station_point')
             .verifyRoute()
             .assertSinglePath(true)
             .assertPathLength(29, 1)
@@ -76,7 +76,7 @@ module.exports = {
 
     'Negative test - station out of path': function (client) {
         client.page.page()
-            .navigate('11-station_out_of_path')
+            .navigateToRoute('11-station_out_of_path')
             .verifyRoute()
             .assertSinglePath(true)
             .assertPathLength(44, 1)
@@ -93,7 +93,7 @@ module.exports = {
 
     'Positive test - circular path': function (client) {
         client.page.page()
-            .navigate('12-circular_path')
+            .navigateToRoute('12-circular_path')
             .verifyRoute()
             .closePageReloadModal()
             .assertSinglePath(true)
@@ -110,7 +110,7 @@ module.exports = {
 
     'Negative test - stations in reversed order comparing to path direction': function (client) {
         client.page.page()
-            .navigate('13-reversed_path')
+            .navigateToRoute('13-reversed_path')
             .verifyRoute()
             .assertSinglePath(true)
             .assertPathLength(46, 1)
@@ -126,7 +126,7 @@ module.exports = {
 
 	 'Negative test - 20-duplicated path': function (client) {
         client.page.page()
-            .navigate('20-duplicated_path')
+            .navigateToRoute('20-duplicated_path')
             .verifyRoute()
             .assertSinglePath(false)
             .assertPathLength(52, 1)
@@ -142,7 +142,7 @@ module.exports = {
 	
 	 'Negative test - 21-two path': function (client) {
         client.page.page()
-            .navigate('21-two_path')
+            .navigateToRoute('21-two_path')
             .verifyRoute()
             .assertSinglePath(false)
             .assertPathLength(24, 1)
@@ -158,7 +158,7 @@ module.exports = {
 
 	 'Negative test - 22-15_stations': function (client) { // Currently it is positive, unrecognized points are not counted as stations
         client.page.page()
-            .navigate('22-15_stations')
+            .navigateToRoute('22-15_stations')
             .verifyRoute()
             .assertSinglePath(true)
             .assertPathLength(40, 1)
@@ -173,7 +173,7 @@ module.exports = {
     },
 	 'Negative test - 23-13_stations': function (client) {
         client.page.page()
-            .navigate('23-13_stations')
+            .navigateToRoute('23-13_stations')
             .verifyRoute()
             .assertSinglePath(true)
             .assertPathLength(40, 1)
@@ -189,7 +189,7 @@ module.exports = {
 
 	 'Positive test - 24-Short_distance_between_1_14': function (client) {
         client.page.page()
-            .navigate('24-Short_distance_between_1_14')
+            .navigateToRoute('24-Short_distance_between_1_14')
             .verifyRoute()
             .closePageReloadModal()
             .assertSinglePath(true)
@@ -206,7 +206,7 @@ module.exports = {
 	
 	 'Positive test - 25-eight_shaped_route': function (client) {
         client.page.page()
-            .navigate('25-eight_shaped_route')
+            .navigateToRoute('25-eight_shaped_route')
             .verifyRoute()
             .closePageReloadModal()
             .assertSinglePath(true)
@@ -223,7 +223,7 @@ module.exports = {
 
     'Negative test - no lineString tag in KML file': function (client) {
         client.page.page()
-            .navigate('no_lineString')
+            .navigateToRoute('no_lineString')
             .verifyRoute()
             .assertSinglePath(false)
             .assertNumberOfStations(false)
@@ -234,7 +234,7 @@ module.exports = {
 
     'Negative test - no points in KML file': function (client) {
         client.page.page()
-            .navigate('no_points')
+            .navigateToRoute('no_points')
             .verifyRoute()
             .assertSinglePath(false)
             .assertNumberOfStations(false)

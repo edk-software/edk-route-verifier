@@ -9,10 +9,10 @@
   "author": "Jakub Niezgoda",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3",
-    "request": "^2.87.0",
-    "cors": "^2.8.4",
+    "express": "^4.16.4",
+    "request": "^2.88.0",
+    "cors": "^2.8.5",
     "ejs": "^2.6.1",
-    "hoek": "^5.0.3"
+    "hoek": "^6.1.2"
   }
 }

@@ -1,14 +1,5 @@
 let _ = require('lodash');
 
-function navigateToRoute(routeId) {
-    this.api
-        .url(`${this.api.launchUrl}/${routeId}`)
-        .waitForElementVisible('body')
-        .pause(2000); // FIXME: Wait for JS/CSS loaded instead of using pause
-
-    return this;
-}
-
 module.exports = {
     props: {
         successClass: 'bg-green'
@@ -16,7 +7,14 @@ module.exports = {
 
     commands: [
         {
-            navigate: navigateToRoute,
+            navigateToRoute: function(routeId) {
+                this.api
+                    .url(`${this.api.launchUrl}/${routeId}`)
+                    .waitForElementVisible('body')
+                    .pause(2000); // FIXME: Wait for JS/CSS loaded instead of using pause
+
+                return this;
+            },
             verifyRoute: function() {
                 this.waitForElementNotPresent('@verifyRouteButtonLoader')
                     .click('@verifyRouteButton')
