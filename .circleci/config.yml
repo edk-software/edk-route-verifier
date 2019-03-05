@@ -104,14 +104,16 @@ jobs:
 
       - run:
           name: Run tests
-          command: npm run check:test
+          command: npm run check:e2e
 
 workflows:
   version: 2
   build-test-check:
     jobs:
       - build
-      - code
+      - code:
+          requires:
+            - build
       - size:
           requires:
             - build
