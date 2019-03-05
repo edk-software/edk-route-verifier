@@ -2,6 +2,8 @@
  * Created by HP on 3/8/2018.
  */
 const p = require('path');
+const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = (env = {}, args = {}) => {
     /*
@@ -30,9 +32,15 @@ module.exports = (env = {}, args = {}) => {
                 }
             ]
         },
-        devtool:  inDevelopment ? 'eval-source-map' : 'source-map'
+        devtool:  inDevelopment ? 'eval-source-map' : 'source-map',
+
+        plugins:  env.BUNDLE_ANALYSIS
+            ? [ new BundleAnalyzerPlugin() ]
+            : [ ],
+
+        watch: inDevelopment
     }
-}
+};
 
 /**
  * This function establish path basing on env vars and mode
@@ -48,4 +56,4 @@ const getPath = (dist, dev) => {
         path = 'server/static/js';
     }
     return path;
-}
+};
