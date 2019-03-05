@@ -7,7 +7,7 @@ import Stations from './Stations';
 // Constants
 const EXPECTED_NUMBER_OF_PATHS = 1;
 const EXPECTED_NUMBER_OF_STATIONS = 14;
-const MAXIMUM_DISTANCE_FROM_STATION_TO_PATH = 100; // meters
+const MAXIMUM_DISTANCE_FROM_STATION_TO_PATH = 50; // meters
 
 
 export default class Route {
