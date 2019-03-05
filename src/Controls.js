@@ -53,6 +53,7 @@ export default class Controls {
         const normalRouteString = $('input#normalRouteString').attr('value');
         const inspiredRouteString = $('input#inspiredRouteString').attr('value');
         updateControlValue(ROUTE_TYPE_ID, isNormalRoute ? normalRouteString : inspiredRouteString);
+        updateControlColor(ROUTE_TYPE_ID, true);
     }
 
     updatePathLength(isLengthValid, length) {
@@ -170,6 +171,7 @@ export default class Controls {
         const isValid = value === undefined ? null : value;
 
         updateControlValue(ROUTE_TYPE_ID, text);
+        updateControlColor(ROUTE_TYPE_ID, isValid);
         updateControlValue(PATH_LENGTH_ID, text);
         updateControlColor(PATH_LENGTH_ID, isValid);
         updateControlValue(ELEVATION_GAIN_ID, text);
