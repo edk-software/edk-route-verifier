@@ -8,7 +8,7 @@
     "start": "cd server && npm run start",
     "start:dev": "cross-env NODE_ENV=development npm run start",
     "start:prod": "cross-env NODE_ENV=production npm run start",
-    "test": "npm run check:source && nightwatch -c test/nightwatch.conf.js",
+    "test": "npm run check:source && npm run check:size && npm run check:e2e",
     "version:patch": "npm version patch",
     "git:branch": "cross-var git branch $npm_package_version && cross-var git checkout $npm_package_version",
     "git:commit": "git add -f dist/* && git commit -m \"Added artifacts for new version\"",
@@ -19,6 +19,9 @@
     "build:dev": "webpack --config webpack.config.js --mode development",
     "build:prod": "webpack --config webpack.config.js --mode production",
     "build:dist": "concurrently  \"webpack --config webpack.config.js --mode production --env.DIST\" \"webpack --config webpack.config.js --mode development --env.DIST\"",
+    "check:e2e": "nightwatch -c test/nightwatch.conf.js",
+    "check:size": "size-limit",
+    "check:bundle": "npm run build:dev -- --env.BUNDLE_ANALYSIS",
     "check:source": "eslint src/** --cache --max-warnings 10"
   },
   "author": "Jakub Niezgoda (qooban)",
@@ -53,7 +56,17 @@
     "eslint-plugin-import": "^2.16.0",
     "nightwatch": "^1.0.19",
     "selenium-server-standalone-jar": "^3.141.5",
+    "size-limit": "^0.21.1",
     "webpack": "^4.29.5",
+    "webpack-bundle-analyzer": "^3.1.0",
     "webpack-cli": "^3.2.3"
-  }
+  },
+  "size-limit": [
+    {
+      "limit": "85 KB",
+      "webpack": false,
+      "gzip": false,
+      "path": "./server/static/js/edk-route-verifier.min.js"
+    }
+  ]
 }

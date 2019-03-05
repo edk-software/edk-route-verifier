@@ -28,26 +28,67 @@ jobs:
           name: Install application dependencies
           command: npm install
 
-      - run:
-          name: Install server dependencies
-          command: |
-            cd server
-            npm install
-
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "server/package.json" }}
 
       - run:
-          name: Create configuration file
+          name: Create application bundle file
+          command: npm run build:prod
+
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - repo
+
+  size:
+    docker:
+      - image: circleci/node:8.15-browsers
+
+    working_directory: ~/repo
+
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Check bundle size
+          command: npm run check:size
+
+  code:
+    docker:
+      - image: circleci/node:8.15-browsers
+
+    working_directory: ~/repo
+
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Check code style
+          command: npm run check:code
+
+  test:
+    docker:
+      - image: circleci/node:8.15-browsers
+
+    working_directory: ~/repo
+
+    steps:
+      - attach_workspace:
+          at: ~/
+
+      - run:
+          name: Install test server dependencies
+          command: |
+            cd server
+            npm install
+
+      - run:
+          name: Create test configuration file
           command: |
             cp server/config.json.template server/config.json
             sed -i "s/GOOGLE_MAPS_API_KEY/$GOOGLE_MAPS_API_KEY/i" server/config.json
-
-      - run:
-          name: Create application bundle file
-          command: npm run build:prod
 
       - run:
           name: Start test server
@@ -63,8 +104,17 @@ jobs:
 
       - run:
           name: Run tests
-          command: npm test
+          command: npm run check:test
 
-      - run:
-          name: Run ESLint code style checker
-          command: npm run check:source
+workflows:
+  version: 2
+  build-test-check:
+    jobs:
+      - build
+      - code
+      - size:
+          requires:
+            - build
+      - test:
+          requires:
+            - build
