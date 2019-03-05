@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  setup:
+  build:
     docker:
       - image: circleci/node:8.15-browsers
 
@@ -32,21 +32,6 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "server/package.json" }}
-
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - repo
-
-  build:
-    docker:
-      - image: circleci/node:8.15-browsers
-
-    working_directory: ~/repo
-
-    steps:
-      - attach_workspace:
-          at: ~/
 
       - run:
           name: Create application bundle file
@@ -123,15 +108,12 @@ jobs:
 
 workflows:
   version: 2
-  build-test-check:
+  build-and-test:
     jobs:
-      - setup
       - build
-          requires:
-            - setup
       - code:
           requires:
-            - setup
+            - build
       - size:
           requires:
             - build
