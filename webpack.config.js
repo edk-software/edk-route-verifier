@@ -38,7 +38,7 @@ module.exports = (env = {}, args = {}) => {
             ? [ new BundleAnalyzerPlugin() ]
             : [ ],
 
-        watch: inDevelopment
+        watch: inDevelopment && !distribution
     }
 };
 
