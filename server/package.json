@@ -4,15 +4,16 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js -c ./config.json"
+    "start": "nodemon server.js -c ./config.json"
   },
   "author": "Jakub Niezgoda",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4",
-    "request": "^2.88.0",
     "cors": "^2.8.5",
     "ejs": "^2.6.1",
-    "hoek": "^6.1.2"
+    "express": "^4.16.4",
+    "hoek": "^6.1.2",
+    "nodemon": "^1.18.10",
+    "request": "^2.88.0"
   }
 }
