@@ -132,7 +132,7 @@ module.exports = {
             .assertPathLength(44, 1)
             .assertRouteType('Trasa EDK')
             .assertNumberOfStations(false)
-            .assertStationsOrder(false)
+            .assertStationsOrder(true)
             .assertStationsOnPath(true)
             .assertElevationGain(220, 100)
             .assertElevationLoss(200, 100)
