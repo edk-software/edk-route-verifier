@@ -23,7 +23,6 @@ export default class Route {
         }
         if (_.isEmpty(this.points)) {
             logger.error('No points in route.');
-            this.isRouteVerifiable = false;
         }
         if (this.isRouteVerifiable) {
             this.stations = new Stations(this.points, this.lineString);
