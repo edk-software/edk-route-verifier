@@ -124,6 +124,22 @@ module.exports = {
             .assertDataConsistency(true);
     },
 
+    'Negative test - one path and no stations': function (client) {
+        client.page.page()
+            .navigateToRoute('14-one_path_no_stations')
+            .verifyRoute()
+            .assertSinglePath(true)
+            .assertPathLength(44, 1)
+            .assertRouteType('Trasa EDK')
+            .assertNumberOfStations(false)
+            .assertStationsOrder(false)
+            .assertStationsOnPath(true)
+            .assertElevationGain(220, 100)
+            .assertElevationLoss(200, 100)
+            .assertElevationTotalChange(420, 100)
+            .assertDataConsistency(true);
+    },
+
 	 'Negative test - 20-duplicated path': function (client) {
         client.page.page()
             .navigateToRoute('20-duplicated_path')
