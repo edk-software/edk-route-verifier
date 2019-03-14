@@ -4,9 +4,9 @@ module.exports = {
 
     },
 
-    'Positive test - short path': function (client) {
+    'Positive test - regular path': function (client) {
         client.page.page()
-            .navigateToRoute(1)
+            .navigateToRoute('01-regular')
             .verifyRoute()
             .closePageReloadModal()
             .assertSinglePath(true)
@@ -23,7 +23,7 @@ module.exports = {
 
     'Positive test - circular route': function (client) {
         client.page.page()
-            .navigateToRoute('2-circular')
+            .navigateToRoute('02-circular')
             .verifyRoute()
             .closePageReloadModal()
             .assertSinglePath(true)
@@ -40,7 +40,7 @@ module.exports = {
 
     'Positive test - zero-leading station numbers': function (client) {
         client.page.page()
-            .navigateToRoute('3-zero_leading')
+            .navigateToRoute('03-zero_leading')
             .verifyRoute()
             .assertSinglePath(true)
             .assertPathLength(80, 1)
@@ -51,6 +51,54 @@ module.exports = {
             .assertElevationGain(1675, 100)
             .assertElevationLoss(1425, 100)
             .assertElevationTotalChange(3100, 100)
+            .assertDataConsistency(true);
+    },
+
+    'Positive test - route with shared parts #1': function (client) {
+        client.page.page()
+            .navigateToRoute('04-shared_parts')
+            .verifyRoute()
+            .assertSinglePath(true)
+            .assertPathLength(51, 1)
+            .assertRouteType('Trasa EDK')
+            .assertNumberOfStations(true)
+            .assertStationsOrder(true)
+            .assertStationsOnPath(true)
+            .assertElevationGain(405, 100)
+            .assertElevationLoss(405, 100)
+            .assertElevationTotalChange(810, 100)
+            .assertDataConsistency(true);
+    },
+
+    'Positive test - route with shared parts #2': function (client) {
+        client.page.page()
+            .navigateToRoute('05-shared_parts')
+            .verifyRoute()
+            .assertSinglePath(true)
+            .assertPathLength(53, 1)
+            .assertRouteType('Trasa EDK')
+            .assertNumberOfStations(true)
+            .assertStationsOrder(true)
+            .assertStationsOnPath(true)
+            .assertElevationGain(410, 100)
+            .assertElevationLoss(410, 100)
+            .assertElevationTotalChange(820, 100)
+            .assertDataConsistency(true);
+    },
+
+    'Positive test - stations in reversed order comparing to path direction': function (client) {
+        client.page.page()
+            .navigateToRoute('06-reversed_path')
+            .verifyRoute()
+            .assertSinglePath(true)
+            .assertPathLength(46, 1)
+            .assertRouteType('Trasa EDK')
+            .assertNumberOfStations(true)
+            .assertStationsOrder(true)
+            .assertStationsOnPath(true)
+            .assertElevationGain(920, 100)
+            .assertElevationLoss(880, 100)
+            .assertElevationTotalChange(1800, 100)
             .assertDataConsistency(true);
     },
 
@@ -108,22 +156,6 @@ module.exports = {
             .assertDataConsistency(true);
     },
 
-    'Negative test - stations in reversed order comparing to path direction': function (client) {
-        client.page.page()
-            .navigateToRoute('13-reversed_path')
-            .verifyRoute()
-            .assertSinglePath(true)
-            .assertPathLength(46, 1)
-            .assertRouteType('Trasa EDK')
-            .assertNumberOfStations(true)
-            .assertStationsOrder(false)
-            .assertStationsOnPath(true)
-            .assertElevationGain(920, 100)
-            .assertElevationLoss(880, 100)
-            .assertElevationTotalChange(1800, 100)
-            .assertDataConsistency(true);
-    },
-
     'Negative test - one path and no stations': function (client) {
         client.page.page()
             .navigateToRoute('14-one_path_no_stations')
@@ -138,6 +170,17 @@ module.exports = {
             .assertElevationLoss(200, 100)
             .assertElevationTotalChange(420, 100)
             .assertDataConsistency(true);
+    },
+
+    'Negative test - no lineString tag in KML file': function (client) {
+        client.page.page()
+            .navigateToRoute('15_no_path')
+            .verifyRoute()
+            .assertSinglePath(false)
+            .assertNumberOfStations(false)
+            .assertStationsOrder(false)
+            .assertStationsOnPath(false)
+            .assertDataConsistency(false);
     },
 
 	 'Negative test - 20-duplicated path': function (client) {
@@ -237,27 +280,6 @@ module.exports = {
             .assertDataConsistency(true);
     },
 
-    'Negative test - no lineString tag in KML file': function (client) {
-        client.page.page()
-            .navigateToRoute('no_lineString')
-            .verifyRoute()
-            .assertSinglePath(false)
-            .assertNumberOfStations(false)
-            .assertStationsOrder(false)
-            .assertStationsOnPath(false)
-            .assertDataConsistency(false);
-    },
-
-    'Negative test - no points in KML file': function (client) {
-        client.page.page()
-            .navigateToRoute('no_points')
-            .verifyRoute()
-            .assertSinglePath(false)
-            .assertNumberOfStations(false)
-            .assertStationsOrder(false)
-            .assertStationsOnPath(false)
-            .assertDataConsistency(false);
-    },
 
     after: function(client) {
         client.end();
