@@ -207,7 +207,7 @@ module.exports = {
             .assertPathLength(24, 1)
             .assertRouteType('Droga na wzór EDK')
             .assertNumberOfStations(true)
-            .assertStationsOrder(false)
+            .assertStationsOrder(true)
             .assertStationsOnPath(false)
             .assertElevationGain(250, 50)
             .assertElevationLoss(260, 50)
