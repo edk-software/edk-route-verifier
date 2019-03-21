@@ -31,6 +31,10 @@ export default class Helpers {
         return lineString;
     }
 
+    static getDistanceToNearestPointOnLine(point) {
+        return _.get(point, 'properties.nearestOnLine.properties.dist', Number.MAX_VALUE);
+    }
+
     static reverseLineString(lineString) {
         const newLineString = { ...lineString };
         newLineString.geometry.coordinates = lineString.geometry.coordinates.reverse();
@@ -48,9 +52,13 @@ export default class Helpers {
         return $.ajax(routeUrl);
     }
 
+    static getGoogleMapsLatLng(coordinates) {
+        return new google.maps.LatLng(coordinates[1], coordinates[0]);
+    }
+
     static getGoogleMapsPath(lineString) {
         const path = _.map(lineString.geometry.coordinates,
-            element => new google.maps.LatLng(element[1], element[0]));
+            element => Helpers.getGoogleMapsLatLng(element));
         return path;
     }
 

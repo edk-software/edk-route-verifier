@@ -33,8 +33,11 @@
   "dependencies": {
     "@turf/distance": "^6.0.1",
     "@turf/flatten": "^5.1.5",
-    "@turf/point-on-line": "^5.0.3",
-    "chart.js": "^2.7.2",
+    "@turf/length": "^6.0.2",
+    "@turf/line-slice-along": "^5.1.5",
+    "@turf/nearest-point-on-line": "^6.0.2",
+    "@turf/point-to-line-distance": "^6.0.0",
+    "chart.js": "^2.8.0",
     "lodash": "^4.17.11",
     "loglevel": "^1.6.1",
     "togeojson": "^0.16.0"
@@ -63,7 +66,7 @@
   },
   "size-limit": [
     {
-      "limit": "85 KB",
+      "limit": "130 KB",
       "webpack": false,
       "gzip": false,
       "path": "./server/static/js/edk-route-verifier.min.js"

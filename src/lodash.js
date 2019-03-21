@@ -6,6 +6,7 @@ import isNull from 'lodash/isNull';
 import filter from 'lodash/filter';
 import find from 'lodash/find';
 import forEach from 'lodash/forEach';
+import get from 'lodash/get';
 import map from 'lodash/map';
 import min from 'lodash/min';
 import sortBy from 'lodash/sortBy';
@@ -16,6 +17,7 @@ export {
     isNull,
     filter,
     find,
+    get,
     forEach,
     map,
     min,
