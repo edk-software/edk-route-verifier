@@ -16,7 +16,9 @@ const turf = {
     lineSliceAlong,
     point,
     pointToLineDistance,
-    nearestPointOnLine
+    nearestPointOnLine,
+
+    options: { units: 'meters' },
 };
 
 
@@ -36,55 +38,56 @@ export default class Stations {
         this.pathCircular = false;
 
         // Map points to stations and sort
-        this._addIndexes();
-        this._sortByIndex();
+        this.addIndexes();
+        this.sortByIndex();
 
         // Path circular check
         this.pathStart = turf.point(this.path.geometry.coordinates[0]);
         this.pathEnd = turf.point(this.path.geometry.coordinates[this.path.geometry.coordinates.length - 1]);
-        this._updateCircularity();
+        this.updateCircularity();
 
         // Path reverse check
-        this._updateDirection();
+        this.updateDirection();
 
         // Stations to path mapping
-        this._findNearestPointsOnPath();
-        this._sortByLocationOnPath();
+        this.findNearestPointsOnPath();
+        this.sortByLocationOnPath();
     }
 
-    _findNearestPointsOnPath() {
-        let startPointDistance = 0;
-        let nearestPointOnSlicedPath = null;
-        const stepDistance = turf.length(this.path, {units: 'meters'}) / 10;
+    findNearestPointsOnPath() {
+        const stepDistance = turf.length(this.path, turf.options) / 10;
         const sampleDistance = stepDistance / 10;
 
-        _.forEach(this.points, (point) => {
+        let nearestPointOnSlicedPath = null;
+        _.forEach(this.points, point => {
             // Filter out point if it is too far from path
-            const distanceToPath = turf.pointToLineDistance(point.geometry.coordinates, this.path, {units: 'meters'});
+            const coordinates = point.geometry.coordinates;
+            const distanceToPath = turf.pointToLineDistance(coordinates, this.path, turf.options);
             const maximumDistanceFromPath = 200; // meters
             if (distanceToPath > maximumDistanceFromPath) {
-                logger.debug(`Point ${point.properties.name} too far from the path. Not looking for nearest point on line for it.`);
-                point.properties.nearestOnLine = turf.nearestPointOnLine(this.path, point, {units: 'meters'});
+                logger.debug(`Point ${point.properties.name} too far from the path. 
+                              Not looking for nearest point on line for it.`);
+                point.properties.nearestOnLine = turf.nearestPointOnLine(this.path, point, turf.options);
                 return true;
             }
 
             // Find nearest point on line for the specific station
             logger.debug(`Looking for nearest point on line for ${point.properties.name}`);
 
-            // Set start point of the sliced path traversal
-            startPointDistance = _.get(nearestPointOnSlicedPath, 'properties.location', 0);
+            // Set start and stop point of the sliced path traversal
+            const startPointDistance = _.get(nearestPointOnSlicedPath, 'properties.location', 0);
+            let stopPointDistance = startPointDistance + stepDistance;
+
             // Reset nearest point on sliced path
             nearestPointOnSlicedPath = null;
-            for (let oldDistanceToPath = 0,
-                     newDistanceToPath = Number.MAX_VALUE,
-                     stopPointDistance = startPointDistance + stepDistance;
-                 newDistanceToPath !== oldDistanceToPath || newDistanceToPath > maximumDistanceFromPath;
-                 stopPointDistance += sampleDistance)
-            {
-                const slicedPath = turf.lineSliceAlong(this.path, startPointDistance, stopPointDistance, {units: 'meters'});
-                nearestPointOnSlicedPath = turf.nearestPointOnLine(slicedPath, point, {units: 'meters'});
+
+            for (let oldDistanceToPath = 0, newDistanceToPath = Number.MAX_VALUE;
+                newDistanceToPath !== oldDistanceToPath || newDistanceToPath > maximumDistanceFromPath;
+                stopPointDistance += sampleDistance) {
+                const slicedPath = turf.lineSliceAlong(this.path, startPointDistance, stopPointDistance, turf.options);
+                nearestPointOnSlicedPath = turf.nearestPointOnLine(slicedPath, point, turf.options);
                 oldDistanceToPath = newDistanceToPath;
-                newDistanceToPath = turf.pointToLineDistance(point.geometry.coordinates, slicedPath, {units: 'meters'});
+                newDistanceToPath = turf.pointToLineDistance(coordinates, slicedPath, turf.options);
             }
 
             // Save nearest point on line for the specific station
@@ -93,45 +96,51 @@ export default class Stations {
             // Update location on line (starting from the path beginning)
             point.properties.nearestOnLine.properties.location += startPointDistance;
 
-            logger.debug(`Distance from path: ${point.properties.nearestOnLine.properties.dist.toFixed(2)} meter(s).`);
-            logger.debug(`Location on path: ${point.properties.nearestOnLine.properties.location.toFixed(2)} meter(s).`);
+            logger.debug(`Distance from path: 
+                ${point.properties.nearestOnLine.properties.dist.toFixed(2)} meter(s).`);
+            logger.debug(`Location on path: 
+                ${point.properties.nearestOnLine.properties.location.toFixed(2)} meter(s).`);
 
-            // Add debug information to map
-            if (logger.getLevel() <= logger.levels.DEBUG && !!window.map) {
-                // Show nearest point on line on map
-                new google.maps.Marker({
-                    position: helpers.getGoogleMapsLatLng(nearestPointOnSlicedPath.geometry.coordinates),
-                    map: map,
-                    label: {
-                        fontWeight: 'bold',
-                        text: `${point.properties.index}`,
-                    },
-                    title: `${point.properties.index}`,
-                    icon: 'https://maps.google.com/mapfiles/ms/icons/yellow.png'
-                });
-                new google.maps.Marker({
-                    position: helpers.getGoogleMapsLatLng(point.geometry.coordinates),
-                    map: map,
-                    label: {
-                        fontWeight: 'bold',
-                        text: `${point.properties.index}`,
-                    },
-                    title: `${point.properties.index}`,
-                    icon: 'https://maps.google.com/mapfiles/ms/icons/blue.png'
-                });
-            }
-        })
+            this.addDebugInformationToMap(point, nearestPointOnSlicedPath);
+        });
     }
 
-    _sortByIndex() {
-        this.points = _.sortBy(this.points, point => _.get(point, 'properties.index', Number.MAX_VALUE));
+    addDebugInformationToMap(originalPoint, nearestPoint) {
+        if (logger.getLevel() <= logger.levels.DEBUG && !!window.map) {
+            new google.maps.Marker({
+                position: helpers.getGoogleMapsLatLng(nearestPoint.geometry.coordinates),
+                map: window.map,
+                label: {
+                    fontWeight: 'bold',
+                    text: `${originalPoint.properties.index}`,
+                },
+                title: `${originalPoint.properties.index}`,
+                icon: 'https://maps.google.com/mapfiles/ms/icons/yellow.png',
+            });
+            new google.maps.Marker({
+                position: helpers.getGoogleMapsLatLng(originalPoint.geometry.coordinates),
+                map: window.map,
+                label: {
+                    fontWeight: 'bold',
+                    text: `${originalPoint.properties.index}`,
+                },
+                title: `${originalPoint.properties.index}`,
+                icon: 'https://maps.google.com/mapfiles/ms/icons/blue.png',
+            });
+        }
     }
 
-    _sortByLocationOnPath() {
-        this.points = _.sortBy(this.points, point => _.get(point, 'properties.nearestOnLine.properties.location', Number.MAX_VALUE));
+    sortByIndex() {
+        const getIndex = point => _.get(point, 'properties.index', Number.MAX_VALUE);
+        this.points = _.sortBy(this.points, point => getIndex(point));
     }
 
-    _addIndexes() {
+    sortByLocationOnPath() {
+        const getLocation = point => _.get(point, 'properties.nearestOnLine.properties.location', Number.MAX_VALUE);
+        this.points = _.sortBy(this.points, point => getLocation(point));
+    }
+
+    addIndexes() {
         const getIndex = str => {
             /** Regular expressions for extracting station number
              *  from a given string (which might be represented by different types
@@ -218,26 +227,26 @@ export default class Stations {
         });
     }
 
-    _updateDirection() {
+    updateDirection() {
+        const isIndexEqual = (point, index) => point.properties.index === index;
         const startPoint = _.filter(this.points,
-            point => point.properties.index === CONSTS.START_INDEX || point.properties.index === CONSTS.FIRST_STATION_INDEX);
+            point => isIndexEqual(point, CONSTS.START_INDEX) || isIndexEqual(point, CONSTS.FIRST_STATION_INDEX));
         const endPoint = _.filter(this.points,
-            point => point.properties.index === CONSTS.END_INDEX || point.properties.index === CONSTS.LAST_STATION_INDEX);
-        const options = { units: 'meters' };
+            point => isIndexEqual(point, CONSTS.END_INDEX) || isIndexEqual(point, CONSTS.LAST_STATION_INDEX));
 
         if (!_.isEmpty(startPoint)) {
             logger.debug('Start point detected. Checking if it is closer to path start or path end...');
             const startPointToPathStartDistance = turf.distance(this.pathStart,
-                startPoint[0], options);
-            const startPointToPathEndDistance = turf.distance(this.pathEnd, startPoint[0], options);
+                startPoint[0], turf.options);
+            const startPointToPathEndDistance = turf.distance(this.pathEnd, startPoint[0], turf.options);
             if (startPointToPathStartDistance > startPointToPathEndDistance) {
                 logger.debug('Reversed path detected. Start point is closer to path end.');
                 this.pathReversed = true;
             }
         } else if (!_.isEmpty(endPoint)) {
             logger.debug('End point detected. Checking if it is closer to path start or path end...');
-            const endPointToPathStartDistance = turf.distance(this.pathStart, endPoint[0], options);
-            const endPointToPathEndDistance = turf.distance(this.pathEnd, endPoint[0], options);
+            const endPointToPathStartDistance = turf.distance(this.pathStart, endPoint[0], turf.options);
+            const endPointToPathEndDistance = turf.distance(this.pathEnd, endPoint[0], turf.options);
             if (endPointToPathEndDistance > endPointToPathStartDistance) {
                 logger.debug('Reversed path detected. Start point is closer to path end.');
                 this.pathReversed = true;
@@ -250,14 +259,12 @@ export default class Stations {
         }
     }
 
-    _updateCircularity() {
-        const MAXIMUM_DISTANCE_START_END_IN_CIRCULAR_PATH = 1000; // meters
-        const options = { units: 'meters' };
-
-        let distance = turf.distance(this.pathStart, this.pathEnd, options);
+    updateCircularity() {
+        const maxDistanceBetweenPathEnds = 1000; // meters
+        const distance = turf.distance(this.pathStart, this.pathEnd, turf.options);
 
         logger.debug('Distance between path start and end points:', distance.toFixed(2), 'meters.');
-        if (distance <= MAXIMUM_DISTANCE_START_END_IN_CIRCULAR_PATH) {
+        if (distance <= maxDistanceBetweenPathEnds) {
             logger.debug('Circular path detected.');
             this.pathCircular = true;
         } else {
@@ -306,9 +313,12 @@ export default class Stations {
                     && previousStationNumber === CONSTS.LAST_STATION_INDEX)
                 )
             ) {
-                logger.debug('Not checking order for station', CONSTS.FIRST_STATION_INDEX, 'and', CONSTS.LAST_STATION_INDEX, 'when route is circular.');
+                logger.debug('Not checking order for station',
+                    CONSTS.FIRST_STATION_INDEX, 'and', CONSTS.LAST_STATION_INDEX,
+                    'when route is circular.');
             } else if (currentStationNumber <= previousStationNumber) {
-                logger.warn(`Detected invalid order of stations. Station ${currentStationNumber} is after station ${previousStationNumber}.`);
+                logger.warn(`Detected invalid order of stations. 
+                    Station ${currentStationNumber} is after station ${previousStationNumber}.`);
                 result = false;
             } else {
                 logger.debug(`Station ${currentStationNumber} is after station ${previousStationNumber}.`);
@@ -328,9 +338,11 @@ export default class Stations {
                 logger.debug(`Not checking distance for: ${station.properties.name}`);
             } else {
                 const distanceFromStationToPath = helpers.getDistanceToNearestPointOnLine(station);
-                logger.debug(`Station ${stationNumber} distance from path: ${distanceFromStationToPath.toFixed(2)} meter(s).`);
+                logger.debug(`Station ${stationNumber} distance from path: 
+                    ${distanceFromStationToPath.toFixed(2)} meter(s).`);
                 if (distanceFromStationToPath > maximumDistanceFromPath) {
-                    logger.warn(`Station ${stationNumber} is too far from path. Expected maximum distance from path: ${maximumDistanceFromPath} meter(s).`);
+                    logger.warn(`Station ${stationNumber} is too far from path. 
+                        Expected maximum distance from path: ${maximumDistanceFromPath} meter(s).`);
                     result = false;
                 } else {
                     logger.debug(`Station ${stationNumber} is on the path.`);

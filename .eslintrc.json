@@ -23,11 +23,7 @@
         "import/no-extraneous-dependencies": 0,
         "no-underscore-dangle" : ["error", {
             "allow" : [
-                "_",
-                "_sortPoints",
-                "_addIndexes",
-                "_updateCircularity",
-                "_updateDirection"
+                "_"
             ]
         }],
         "prefer-destructuring": 0,
@@ -35,7 +31,10 @@
         "no-useless-escape" : 0,
         "consistent-return" : 0,
         "arrow-parens"      : ["error", "as-needed"],
-        "no-shadow"         : 0
+        "no-shadow"         : 0,
+        "max-len"           : ["error", {
+            "code": 120
+        }]
     },
     "env" : {
         "jquery"  : true,
