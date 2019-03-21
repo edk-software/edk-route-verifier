@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Trasa</title>
+    <title>Trasa - <%= routeId %></title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -275,9 +275,9 @@
 
 <script type="text/javascript" src="https://raw.githack.com/geocodezip/geoxml3/master/polys/geoxml3.js"></script>
 <script src="/static/js/loadMap.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= googleMapsApiKey %>&libraries=geometry&callback=initMap"></script>
-
 <script src="/static/js/<%= jsFilename %>"></script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= googleMapsApiKey %>&libraries=geometry&callback=initMap"></script>
 
 </body>
 </html>

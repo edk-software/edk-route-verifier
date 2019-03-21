@@ -10,11 +10,14 @@ const NORMAL_ROUTE_MIN_LENGTH = 40; // kilometers
 const SHORT_NORMAL_ROUTE_MIN_LENGTH = 30; // kilometers
 const SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN = 500; // meters
 
+// Google Maps API loading and key validation
+window.GOOGLE_MAPS_API_LOADED = true;
+window.gm_authFailure = () => { window.GOOGLE_MAPS_API_LOADED = false; };
 
 function verifyRoute() {
-    if (!window.google || !window.google.maps) {
-        logger.error('Google Maps API is not loaded.');
-        return;
+    if (!window.GOOGLE_MAPS_API_LOADED || !window.google || !window.google.maps) {
+        window.GOOGLE_MAPS_API_LOADED = false;
+        logger.error('Google Maps API is not loaded. Verification cannot be done.');
     }
     const context = new Context();
     const controls = new Controls();
