@@ -26,9 +26,7 @@ export default class Route {
         }
         if (this.isRouteVerifiable) {
             this.stations = new Stations(this.points, this.lineString);
-            this.path = this.stations.isPathReversed()
-                ? helpers.reverseLineString(this.lineString)
-                : this.lineString;
+            this.path = this.stations.getUpdatedPath();
             this.numberOfPaths = helpers.getNumberOfFeatures('LineString', this.geoJson);
         }
     }

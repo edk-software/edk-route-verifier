@@ -353,7 +353,19 @@ export default class Stations {
         return result;
     }
 
-    isPathReversed() {
-        return this.pathReversed;
+    getUpdatedPath() {
+        const lastStationPoint = _.find(this.points, point => point.properties.index === CONSTS.LAST_STATION_INDEX);
+
+        if (lastStationPoint !== null) {
+            const lastStationLocation = helpers.getLocationOfNearestPointOnLine(lastStationPoint);
+            if (lastStationLocation > 0) {
+                logger.debug('getPathEndingOnLastStation: Returning sliced path. '
+                    + `Last station location: ${lastStationLocation.toFixed(2)}`);
+                return turf.lineSliceAlong(this.path, 0, lastStationLocation, turf.options);
+            }
+        }
+
+        logger.debug('getPathEndingOnLastStation: Returning original path. Last station not found.');
+        return this.path;
     }
 }

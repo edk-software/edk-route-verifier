@@ -35,6 +35,10 @@ export default class Helpers {
         return _.get(point, 'properties.nearestOnLine.properties.dist', Number.MAX_VALUE);
     }
 
+    static getLocationOfNearestPointOnLine(point) {
+        return _.get(point, 'properties.nearestOnLine.properties.location', 0);
+    }
+
     static reverseLineString(lineString) {
         const newLineString = { ...lineString };
         newLineString.geometry.coordinates = lineString.geometry.coordinates.reverse();
