@@ -43,14 +43,14 @@ module.exports = {
             .navigateToRoute('03-zero_leading')
             .verifyRoute()
             .assertSinglePath(true)
-            .assertPathLength(80, 1)
+            .assertPathLength(76, 1)
             .assertRouteType('Trasa EDK')
             .assertNumberOfStations(true)
             .assertStationsOrder(true)
             .assertStationsOnPath(false)
-            .assertElevationGain(1675, 100)
-            .assertElevationLoss(1425, 100)
-            .assertElevationTotalChange(3100, 100)
+            .assertElevationGain(1610, 100)
+            .assertElevationLoss(1380, 100)
+            .assertElevationTotalChange(3000, 100)
             .assertDataConsistency(true);
     },
 
@@ -59,14 +59,14 @@ module.exports = {
             .navigateToRoute('04-shared_parts')
             .verifyRoute()
             .assertSinglePath(true)
-            .assertPathLength(51, 1)
+            .assertPathLength(49, 1)
             .assertRouteType('Trasa EDK')
             .assertNumberOfStations(true)
             .assertStationsOrder(true)
             .assertStationsOnPath(true)
-            .assertElevationGain(405, 100)
-            .assertElevationLoss(405, 100)
-            .assertElevationTotalChange(810, 100)
+            .assertElevationGain(390, 100)
+            .assertElevationLoss(395, 100)
+            .assertElevationTotalChange(785, 100)
             .assertDataConsistency(true);
     },
 
@@ -91,7 +91,7 @@ module.exports = {
             .navigateToRoute('06-reversed_path')
             .verifyRoute()
             .assertSinglePath(true)
-            .assertPathLength(46, 1)
+            .assertPathLength(44, 1)
             .assertRouteType('Trasa EDK')
             .assertNumberOfStations(true)
             .assertStationsOrder(true)
