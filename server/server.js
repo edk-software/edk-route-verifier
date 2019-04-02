@@ -1,16 +1,19 @@
-var express = require('express');
-var request = require('request');
-var path = require('path');
-var fs = require('fs');
-var cors = require('cors');
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+const cors = require('cors');
 
-var app = express();
-var port = process.env.PORT || 7777;
-var isProduction = process.env.NODE_ENV === 'production';
-var jsFilename = isProduction ? 'edk-route-verifier.min.js' : 'edk-route-verifier.js';
-var configuration = null;
+const app = express();
+const port = process.env.PORT || 7777;
+const isProduction = process.env.NODE_ENV === 'production';
+const jsFilename = isProduction ? 'edk-route-verifier.min.js' : 'edk-route-verifier.js';
+const languagesPath = path.resolve('../src/lang');
+const languages = fs.readdirSync(languagesPath)
+    .filter((file) => file.endsWith('.json'))
+    .map((file) => file.replace('.json', ''));
+let configuration = null;
 
-var displayUsage = () => {
+const displayUsage = () => {
     console.info("Usage: node server.js -c <config.json file path>");
     process.exit(0);
 };
@@ -64,35 +67,38 @@ app.get('/', function(req, res) {
 
 // index page
 app.get('/:routeId', function(req, res) {
-    var id = req.params.routeId;
+    const id = req.params.routeId;
+    const lang = req.query.lang;
     res.render('pages/index', {
         googleMapsApiKey: configuration.googleMapsApiKey,
         routeId: id,
         serverPort: port,
-        jsFilename: jsFilename
+        jsFilename: jsFilename,
+        language: lang,
+        languages
     });
 });
 
 app.get('/route-params/:routeId', cors(), function(req, res) {
-    var id = req.params.routeId;
-    var routeParams = JSON.parse(fs.readFileSync(path.resolve(path.join(configuration.resourcesPath, `${id}_route-params.json`)), 'utf8'));
+    const id = req.params.routeId;
+    const routeParams = JSON.parse(fs.readFileSync(path.resolve(path.join(configuration.resourcesPath, `${id}_route-params.json`)), 'utf8'));
     console.log(`Sending route ${id} parameters: `, routeParams);
     res.json(routeParams);
 });
 
 app.get('/route-approve/:routeId', cors(), function(req, res) {
-    var id = req.params.routeId;
+    const id = req.params.routeId;
     console.log(`Route ${id} approved.`);
     res.send({});
 });
 
 app.get('/kml/:routeId', cors(), function(req, res) {
-    var id = req.params.routeId;
+    const id = req.params.routeId;
     console.log(`Sending KML for route ${id}.`);
     res.sendFile(path.resolve(path.join(configuration.resourcesPath, `${id}.kml`)));
 });
 
-var bundlePath = path.resolve(__dirname + '/static/js/' + jsFilename);
+const bundlePath = path.resolve(__dirname + '/static/js/' + jsFilename);
 if (fs.existsSync(bundlePath)) {
     console.log(`Starting proxy server in ${isProduction ? 'production' : 'development'} mode at: http://localhost:${port}`);
     console.log(`Using testing bundle file: ${bundlePath}.`);
