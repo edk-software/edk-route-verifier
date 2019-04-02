@@ -1,6 +1,6 @@
-import logger from 'loglevel';
 import toGeoJSON from 'togeojson';
 import flatten from '@turf/flatten';
+import logger from './loglevel';
 import * as _ from './lodash';
 
 
