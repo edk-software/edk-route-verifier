@@ -1,13 +1,13 @@
-import logger from 'loglevel';
 import length from '@turf/length';
 import lineSliceAlong from '@turf/line-slice-along';
 import nearestPointOnLine from '@turf/nearest-point-on-line';
 import pointToLineDistance from '@turf/point-to-line-distance';
 import distance from '@turf/distance';
 import { point } from '@turf/helpers';
-
-import * as _ from './lodash';
-import helpers from './helpers';
+import * as _ from './utils/lodash';
+import helpers from './utils/helpers';
+import logger from './utils/loglevel';
+import Lang from './lang/Lang';
 
 
 const turf = {
@@ -274,7 +274,9 @@ export default class Stations {
     }
 
     getCount() {
+        const L = Lang.getInstance();
         let numberOfStations = 0;
+
         for (let stationNumber = CONSTS.FIRST_STATION_INDEX;
             stationNumber <= CONSTS.LAST_STATION_INDEX; stationNumber++) {
             let firstStationName = '';
@@ -286,7 +288,8 @@ export default class Stations {
                 return false;
             });
             if (stationsOfNumber.length !== 1) {
-                logger.warn(`Station ${stationNumber} found ${stationsOfNumber.length} times.`);
+                logger.warn(L.getString('Station found multiple times',
+                    { number: stationNumber, times: stationsOfNumber.length }));
             } else {
                 logger.debug(`Station ${stationNumber} found. Station name: ${firstStationName}`);
                 numberOfStations++;
@@ -296,7 +299,9 @@ export default class Stations {
     }
 
     isOrderCorrect() {
+        const L = Lang.getInstance();
         let result = true;
+
         for (let i = 1; i < this.points.length; i++) {
             const currentStationNumber = this.points[i].properties.index;
             const previousStationNumber = this.points[i - 1].properties.index;
@@ -317,8 +322,7 @@ export default class Stations {
                     CONSTS.FIRST_STATION_INDEX, 'and', CONSTS.LAST_STATION_INDEX,
                     'when route is circular.');
             } else if (currentStationNumber <= previousStationNumber) {
-                logger.warn(`Detected invalid order of stations. 
-                    Station ${currentStationNumber} is after station ${previousStationNumber}.`);
+                logger.warn(L.getString('Invalid stations order', { currentStationNumber, previousStationNumber }));
                 result = false;
             } else {
                 logger.debug(`Station ${currentStationNumber} is after station ${previousStationNumber}.`);
@@ -328,6 +332,7 @@ export default class Stations {
     }
 
     areAllOnThePath(maximumDistanceFromPath) {
+        const L = Lang.getInstance();
         let result = true;
 
         _.forEach(this.points, (station, index) => {
@@ -341,8 +346,8 @@ export default class Stations {
                 logger.debug(`Station ${stationNumber} distance from path: 
                     ${distanceFromStationToPath.toFixed(2)} meter(s).`);
                 if (distanceFromStationToPath > maximumDistanceFromPath) {
-                    logger.warn(`Station ${stationNumber} is too far from path. 
-                        Expected maximum distance from path: ${maximumDistanceFromPath} meter(s).`);
+                    logger.warn(L.getString('Station too far from path',
+                        { number: stationNumber, maximumDistance: maximumDistanceFromPath }));
                     result = false;
                 } else {
                     logger.debug(`Station ${stationNumber} is on the path.`);

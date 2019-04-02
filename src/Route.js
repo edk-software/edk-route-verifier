@@ -1,14 +1,14 @@
-import logger from 'loglevel';
-import * as _ from './lodash';
-import helpers from './helpers';
+import logger from './utils/loglevel';
+import * as _ from './utils/lodash';
+import helpers from './utils/helpers';
 import PathElevation from './PathElevation';
 import Stations from './Stations';
+import Lang from './lang/Lang';
 
 // Constants
 const EXPECTED_NUMBER_OF_PATHS = 1;
 const EXPECTED_NUMBER_OF_STATIONS = 14;
 const MAXIMUM_DISTANCE_FROM_STATION_TO_PATH = 50; // meters
-
 
 export default class Route {
     constructor(geoJson) {
@@ -31,15 +31,15 @@ export default class Route {
         }
     }
 
-
     isVerifiable() {
         return this.isRouteVerifiable;
     }
 
     isSinglePath() {
+        const L = Lang.getInstance();
         const result = _.isEqual(this.numberOfPaths, EXPECTED_NUMBER_OF_PATHS);
         if (!result) {
-            logger.warn('No single path defined.');
+            logger.warn(L.getString('No single path defined'));
         }
         logger.debug('isSinglePath:', result, ', numberOfPaths:', this.numberOfPaths);
         return result;

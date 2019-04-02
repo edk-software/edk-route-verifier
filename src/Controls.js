@@ -1,5 +1,5 @@
-import logger from 'loglevel';
-import * as _ from './lodash';
+import logger from './utils/loglevel';
+import * as _ from './utils/lodash';
 
 // Constants
 const ROUTE_TYPE_ID = 'div#routeType';
@@ -17,7 +17,9 @@ const VERIFY_BUTTON_ID = 'button#verifyRoute';
 const LOADER_ID = 'div#loader';
 const LOADER_ELEMENT = '<div id="loader" class="overlay"><i class="fa fa-refresh fa-spin"></i></div>';
 const ELEVATION_CHART_ELEMENT = '<canvas id="elevationChart"></canvas>';
-
+const SUCCESS_VERIFICATION_MODAL_ID = 'div#pageReloadModal';
+const FAILED_VERIFICATION_MODAL_ID = 'div#verificationFailedModal';
+const FAILED_VERIFICATION_MODAL_BODY = `${FAILED_VERIFICATION_MODAL_ID} div.modal-body`;
 
 const updateControlColor = (element, isValid) => {
     const VALID_COLOR_CLASS = 'bg-green';
@@ -158,6 +160,10 @@ export default class Controls {
         elevationChartParentElement.append(ELEVATION_CHART_ELEMENT);
     }
 
+    resetFailedVerificationModal() {
+        $(FAILED_VERIFICATION_MODAL_BODY).children().remove();
+    }
+
     addLoaderToButton() {
         $(VERIFY_BUTTON_ID).append(LOADER_ELEMENT);
     }
@@ -186,5 +192,24 @@ export default class Controls {
         updateControlColor(SINGLE_PATH_ID, isValid);
         updateControlColor(DATA_CONSISTENCY_ID, isValid);
         this.resetElevationChart();
+        this.resetFailedVerificationModal();
+    }
+
+    showVerificationSuccessModal(timeout) {
+        const reloadTimeout = setTimeout(() => {
+            window.location.reload(1);
+        }, timeout);
+        $(SUCCESS_VERIFICATION_MODAL_ID).on('hide.bs.modal', e => clearTimeout(reloadTimeout));
+        $(SUCCESS_VERIFICATION_MODAL_ID).modal();
+    }
+
+    showVerificationFailedModal(errors = []) {
+        let errorsListHtml = '';
+        errorsListHtml += '<div><ul>';
+        errors.forEach(error => { errorsListHtml += `<li>${error}</li>`; });
+        errorsListHtml += '</ul></div>';
+
+        $(FAILED_VERIFICATION_MODAL_BODY).append(errorsListHtml);
+        $(FAILED_VERIFICATION_MODAL_ID).modal();
     }
 }

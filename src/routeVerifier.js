@@ -1,9 +1,9 @@
-import logger from 'loglevel';
-import helpers from './helpers';
+import logger from './utils/loglevel';
+import helpers from './utils/helpers';
 import Route from './Route';
 import Context from './Context';
 import Controls from './Controls';
-
+import Lang from './lang/Lang';
 
 // Constants
 const NORMAL_ROUTE_MIN_LENGTH = 40; // kilometers
@@ -21,8 +21,10 @@ function verifyRoute() {
     }
     const context = new Context();
     const controls = new Controls();
+    const L = new Lang(context.language);
 
     controls.resetAll();
+    logger.cleanBufferedLogs();
     controls.addLoaderToButton();
 
     helpers.getRoute(context.routeUrl)
@@ -106,18 +108,14 @@ function verifyRoute() {
                                 helpers.approveRoute(context.routeApproveUrl)
                                     .then(() => {
                                         logger.info('Route approved.');
-                                        const pageReloadModalElement = $('div#pageReloadModal');
-                                        const reloadTimeout = setTimeout(() => {
-                                            window.location.reload(1);
-                                        }, 5000);
-                                        pageReloadModalElement.on('hide.bs.modal', e => clearTimeout(reloadTimeout));
-                                        pageReloadModalElement.modal();
+                                        controls.showVerificationSuccessModal(5000);
                                     })
                                     .catch(error => {
                                         logger.error('Route approval error.', error);
                                     });
                             } else {
                                 logger.info('Route verification failed. Cannot be approved.');
+                                controls.showVerificationFailedModal(logger.getBufferedLogs());
                             }
                         })
                         .catch(error => {
