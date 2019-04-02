@@ -1,0 +1,6 @@
+{
+  "No single path defined": "Ślad trasy zawiera więcej niż jedną ścieżkę.",
+  "Station found multiple times": "Stacja <%= number %> została znaleziona <%= times %> raz(y).",
+  "Invalid stations order": "Niewłaściwa kolejność stacji. Stacja <%= currentStationNumber %> jest za stacją <%= previousStationNumber %>.",
+  "Station too far from path": "Stacja <%= number %> jest za daleko od ścieżki. Maksymalny dopuszczalny dystans to <%= maximumDistance %> metrów."
+}
