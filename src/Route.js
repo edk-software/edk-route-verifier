@@ -1,13 +1,18 @@
 import logger from 'loglevel';
-import * as _ from './lodash';
-import helpers from './helpers';
+import * as _ from './utils/lodash';
+import helpers from './utils/helpers';
 import PathElevation from './PathElevation';
 import Stations from './Stations';
+import Lang from './lang/Lang';
+import LogBuffer from './utils/LogBuffer';
 
 // Constants
 const EXPECTED_NUMBER_OF_PATHS = 1;
 const EXPECTED_NUMBER_OF_STATIONS = 14;
 const MAXIMUM_DISTANCE_FROM_STATION_TO_PATH = 50; // meters
+
+let lang = null;
+let logBuffer = null;
 
 
 export default class Route {
@@ -17,12 +22,15 @@ export default class Route {
         this.points = helpers.getPoints(this.geoJson);
         this.isRouteVerifiable = true;
 
+        lang = Lang.getInstance();
+        logBuffer = LogBuffer.getInstance();
+
         if (_.isEmpty(this.lineString)) {
-            logger.error('No line string in route.');
+            logBuffer.add(lang.trans('No path in route'));
             this.isRouteVerifiable = false;
         }
         if (_.isEmpty(this.points)) {
-            logger.error('No points in route.');
+            logBuffer.add(lang.trans('No points in route'));
         }
         if (this.isRouteVerifiable) {
             this.stations = new Stations(this.points, this.lineString);
@@ -31,7 +39,6 @@ export default class Route {
         }
     }
 
-
     isVerifiable() {
         return this.isRouteVerifiable;
     }
@@ -39,7 +46,7 @@ export default class Route {
     isSinglePath() {
         const result = _.isEqual(this.numberOfPaths, EXPECTED_NUMBER_OF_PATHS);
         if (!result) {
-            logger.warn('No single path defined.');
+            logBuffer.add(lang.trans('No single path defined'));
         }
         logger.debug('isSinglePath:', result, ', numberOfPaths:', this.numberOfPaths);
         return result;
@@ -83,7 +90,8 @@ export default class Route {
                 return this.pathElevation;
             })
             .catch(error => {
-                throw new Error(error);
+                logger.error(`Path elevation data fetching error, Error: ${error}`);
+                return Promise.reject('Path elevation data fetching error');
             });
     }
 

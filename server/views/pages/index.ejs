@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= language %>">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,7 +46,18 @@
     <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-
+            <div class="box-body bg-gray">
+                <h4>
+                    Język błędów
+                </h4>
+                <% for(var i = 0; i < languages.length; i++) { %>
+                    <a href="?lang=<%= languages[i] %>">
+                        <button id="changeLanguage" type="button" class="btn btn-app <%= language === languages[i] ? 'bg-green' : '' %>">
+                            <i class="fa fa-language"></i> <%= languages[i].toUpperCase() %>
+                        </button>
+                    </a>
+                <% } %>
+            </div>
         </section>
         <!-- /.sidebar -->
     </aside>
@@ -263,6 +274,24 @@
                 </div>
                 <div class="modal-body">
                     <p>Strona zostanie odświeżona w ciągu 5 sekund...</p>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <!-- Modal -->
+    <div class="modal modal-danger fade" id="verificationFailedModal" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Weryfikacja zakończona błędem</h4>
+                </div>
+                <div class="modal-body">
+
                 </div>
             </div>
             <!-- /.modal-content -->

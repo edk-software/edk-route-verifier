@@ -1,3 +1,6 @@
 # All bundle files
 server/static/js/*
 
+# All JSON files
+**/*.json
+

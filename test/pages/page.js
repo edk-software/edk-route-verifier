@@ -23,11 +23,19 @@ module.exports = {
 
                 return this;
             },
-            closePageReloadModal: function() {
+            closeVerificationSucceededModal: function() {
                 this.waitForElementVisible('@pageReloadModal')
                     .waitForElementVisible('@pageReloadModalCloseIcon')
                     .click('@pageReloadModalCloseIcon')
                     .waitForElementNotVisible('@pageReloadModal');
+
+                return this;
+            },
+            closeVerificationFailedModal: function() {
+                this.waitForElementVisible('@verificationFailedModal')
+                    .waitForElementVisible('@verificationFailedModalCloseIcon')
+                    .click('@verificationFailedModalCloseIcon')
+                    .waitForElementNotVisible('@verificationFailedModal');
 
                 return this;
             },
@@ -119,6 +127,9 @@ module.exports = {
 
         pageReloadModal: 'div#pageReloadModal',
         pageReloadModalCloseIcon: 'div#pageReloadModal button.close',
+
+        verificationFailedModal: 'div#verificationFailedModal',
+        verificationFailedModalCloseIcon: 'div#verificationFailedModal button.close',
 
         singlePathBox: 'div#singlePath',
         singlePathIcon: 'div#singlePath span.info-box-icon',

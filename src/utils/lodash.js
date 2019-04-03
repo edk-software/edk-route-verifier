@@ -10,6 +10,7 @@ import get from 'lodash/get';
 import map from 'lodash/map';
 import min from 'lodash/min';
 import sortBy from 'lodash/sortBy';
+import template from 'lodash/template';
 
 export {
     isEmpty,
@@ -22,4 +23,5 @@ export {
     map,
     min,
     sortBy,
+    template,
 };
