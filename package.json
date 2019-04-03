@@ -1,6 +1,6 @@
 {
   "name": "edk-route-verifier",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Extreme Way of the Cross project route verifier",
   "main": "edk-route-verifier.js",
   "scripts": {
