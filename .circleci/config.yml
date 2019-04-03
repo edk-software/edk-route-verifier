@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:8.15-browsers
+      - image: circleci/node:10.15-browsers
 
     working_directory: ~/repo
 
@@ -44,7 +44,7 @@ jobs:
 
   size:
     docker:
-      - image: circleci/node:8.15-browsers
+      - image: circleci/node:10.15-browsers
 
     working_directory: ~/repo
 
@@ -57,7 +57,7 @@ jobs:
 
   code:
     docker:
-      - image: circleci/node:8.15-browsers
+      - image: circleci/node:10.15-browsers
 
     working_directory: ~/repo
 
@@ -70,7 +70,7 @@ jobs:
 
   test:
     docker:
-      - image: circleci/node:8.15-browsers
+      - image: circleci/node:10.15-browsers
 
     working_directory: ~/repo
 
