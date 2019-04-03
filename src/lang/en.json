@@ -1,5 +1,6 @@
 {
   "Route is unverifiable": "Route is unverifiable.",
+  "Route fetching error": "Route fetching error.",
   "Route parameters data fetching error": "Route parameters data fetching error.",
   "Path elevation data fetching error": "Path elevation data fetching error.",
 

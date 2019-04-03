@@ -1,5 +1,6 @@
 {
   "Route is unverifiable": "Nie jest możliwe zweryfikowanie trasy.",
+  "Route fetching error": "Błąd podczas pobierania pliku trasy.",
   "Route parameters data fetching error": "Błąd podczas pobierania parameterów trasy.",
   "Path elevation data fetching error": "Błąd poczas pobierania danych o wysokości terenu na śladzie.",
 
