@@ -1,6 +1,6 @@
 import toGeoJSON from 'togeojson';
 import flatten from '@turf/flatten';
-import logger from './loglevel';
+import logger from 'loglevel';
 import * as _ from './lodash';
 
 
@@ -53,7 +53,17 @@ export default class Helpers {
 
     static getRoute(routeUrl) {
         logger.debug('Fetching route from:', routeUrl);
-        return $.ajax(routeUrl);
+        return new Promise((resolve, reject) => {
+            $.ajax(routeUrl)
+                .done(data => {
+                    logger.debug('Route data:', data);
+                    resolve(data);
+                })
+                .fail((xhr, status) => {
+                    logger.error(`Route fetching error. Status: ${status}`);
+                    reject('Route fetching error');
+                });
+        });
     }
 
     static getGoogleMapsLatLng(coordinates) {
@@ -125,7 +135,8 @@ export default class Helpers {
                     }
                 })
                 .fail((xhr, status) => {
-                    reject(status);
+                    logger.error(`Route parameters data fetching error. Status: ${status}`);
+                    reject('Route parameters data fetching error');
                 });
         });
     }

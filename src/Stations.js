@@ -4,10 +4,12 @@ import nearestPointOnLine from '@turf/nearest-point-on-line';
 import pointToLineDistance from '@turf/point-to-line-distance';
 import distance from '@turf/distance';
 import { point } from '@turf/helpers';
+import logger from 'loglevel';
+
 import * as _ from './utils/lodash';
 import helpers from './utils/helpers';
-import logger from './utils/loglevel';
 import Lang from './lang/Lang';
+import LogBuffer from './utils/LogBuffer';
 
 
 const turf = {
@@ -21,7 +23,6 @@ const turf = {
     options: { units: 'meters' },
 };
 
-
 const CONSTS = {
     START_INDEX: 0,
     FIRST_STATION_INDEX: 1,
@@ -29,6 +30,8 @@ const CONSTS = {
     END_INDEX: 15,
 };
 
+let lang = null;
+let logBuffer = null;
 
 export default class Stations {
     constructor(points, lineString) {
@@ -52,6 +55,9 @@ export default class Stations {
         // Stations to path mapping
         this.findNearestPointsOnPath();
         this.sortByLocationOnPath();
+
+        lang = Lang.getInstance();
+        logBuffer = LogBuffer.getInstance();
     }
 
     findNearestPointsOnPath() {
@@ -65,8 +71,8 @@ export default class Stations {
             const distanceToPath = turf.pointToLineDistance(coordinates, this.path, turf.options);
             const maximumDistanceFromPath = 200; // meters
             if (distanceToPath > maximumDistanceFromPath) {
-                logger.debug(`Point ${point.properties.name} too far from the path. 
-                              Not looking for nearest point on line for it.`);
+                logger.debug(`Point ${point.properties.name} too far from the path. `
+                    + 'Not looking for nearest point on line for it.');
                 point.properties.nearestOnLine = turf.nearestPointOnLine(this.path, point, turf.options);
                 return true;
             }
@@ -96,10 +102,10 @@ export default class Stations {
             // Update location on line (starting from the path beginning)
             point.properties.nearestOnLine.properties.location += startPointDistance;
 
-            logger.debug(`Distance from path: 
-                ${point.properties.nearestOnLine.properties.dist.toFixed(2)} meter(s).`);
-            logger.debug(`Location on path: 
-                ${point.properties.nearestOnLine.properties.location.toFixed(2)} meter(s).`);
+            const dist = point.properties.nearestOnLine.properties.dist;
+            const location = point.properties.nearestOnLine.properties.location;
+            logger.debug(`Distance from path: ${dist.toFixed(2)} meter(s).`);
+            logger.debug(`Location on path: ${location.toFixed(2)} meter(s).`);
 
             this.addDebugInformationToMap(point, nearestPointOnSlicedPath);
         });
@@ -274,7 +280,6 @@ export default class Stations {
     }
 
     getCount() {
-        const L = Lang.getInstance();
         let numberOfStations = 0;
 
         for (let stationNumber = CONSTS.FIRST_STATION_INDEX;
@@ -287,9 +292,11 @@ export default class Stations {
                 }
                 return false;
             });
-            if (stationsOfNumber.length !== 1) {
-                logger.warn(L.getString('Station found multiple times',
+            if (stationsOfNumber.length > 1) {
+                logBuffer.add(lang.trans('Station found multiple times',
                     { number: stationNumber, times: stationsOfNumber.length }));
+            } else if (stationsOfNumber.length === 0) {
+                logBuffer.add(lang.trans('Station not found', { number: stationNumber }));
             } else {
                 logger.debug(`Station ${stationNumber} found. Station name: ${firstStationName}`);
                 numberOfStations++;
@@ -299,7 +306,6 @@ export default class Stations {
     }
 
     isOrderCorrect() {
-        const L = Lang.getInstance();
         let result = true;
 
         for (let i = 1; i < this.points.length; i++) {
@@ -322,7 +328,7 @@ export default class Stations {
                     CONSTS.FIRST_STATION_INDEX, 'and', CONSTS.LAST_STATION_INDEX,
                     'when route is circular.');
             } else if (currentStationNumber <= previousStationNumber) {
-                logger.warn(L.getString('Invalid stations order', { currentStationNumber, previousStationNumber }));
+                logBuffer.add(lang.trans('Invalid stations order', { currentStationNumber, previousStationNumber }));
                 result = false;
             } else {
                 logger.debug(`Station ${currentStationNumber} is after station ${previousStationNumber}.`);
@@ -332,7 +338,6 @@ export default class Stations {
     }
 
     areAllOnThePath(maximumDistanceFromPath) {
-        const L = Lang.getInstance();
         let result = true;
 
         _.forEach(this.points, (station, index) => {
@@ -343,10 +348,10 @@ export default class Stations {
                 logger.debug(`Not checking distance for: ${station.properties.name}`);
             } else {
                 const distanceFromStationToPath = helpers.getDistanceToNearestPointOnLine(station);
-                logger.debug(`Station ${stationNumber} distance from path: 
-                    ${distanceFromStationToPath.toFixed(2)} meter(s).`);
+                logger.debug(`Station ${stationNumber} distance from path: `
+                    + `${distanceFromStationToPath.toFixed(2)} meter(s).`);
                 if (distanceFromStationToPath > maximumDistanceFromPath) {
-                    logger.warn(L.getString('Station too far from path',
+                    logBuffer.add(lang.trans('Station too far from path',
                         { number: stationNumber, maximumDistance: maximumDistanceFromPath }));
                     result = false;
                 } else {

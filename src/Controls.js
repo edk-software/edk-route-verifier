@@ -1,4 +1,5 @@
-import logger from './utils/loglevel';
+import logger from 'loglevel';
+
 import * as _ from './utils/lodash';
 
 // Constants
