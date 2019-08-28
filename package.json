@@ -40,7 +40,6 @@
     "chart.js": "^2.8.0",
     "lodash": "^4.17.13",
     "loglevel": "^1.6.1",
-    "puppeteer": "^1.19.0",
     "togeojson": "^0.16.0"
   },
   "devDependencies": {
@@ -58,7 +57,7 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "nightwatch": "^1.2.1",
-    "selenium-server-standalone-jar": "^3.141.5",
+    "selenium-server-standalone-jar": "^3.141.59",
     "size-limit": "^0.21.1",
     "webpack": "^4.39.3",
     "webpack-bundle-analyzer": "^3.4.1",
