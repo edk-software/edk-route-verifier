@@ -1,16 +1,16 @@
 // Require this file instead of whole lodash library to optimize size of the bundle
 
-import isEmpty from 'lodash/isEmpty';
-import isEqual from 'lodash/isEqual';
-import isNull from 'lodash/isNull';
-import filter from 'lodash/filter';
-import find from 'lodash/find';
-import forEach from 'lodash/forEach';
-import get from 'lodash/get';
-import map from 'lodash/map';
-import min from 'lodash/min';
-import sortBy from 'lodash/sortBy';
-import template from 'lodash/template';
+import isEmpty from 'lodash/isEmpty.js';
+import isEqual from 'lodash/isEqual.js';
+import isNull from 'lodash/isNull.js';
+import filter from 'lodash/filter.js';
+import find from 'lodash/find.js';
+import forEach from 'lodash/forEach.js';
+import get from 'lodash/get.js';
+import map from 'lodash/map.js';
+import min from 'lodash/min.js';
+import sortBy from 'lodash/sortBy.js';
+import template from 'lodash/template.js';
 
 export {
     isEmpty,

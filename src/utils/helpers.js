@@ -1,11 +1,17 @@
+
+import fetch from 'node-fetch';
+import xmlDom from 'xmldom';
 import toGeoJSON from 'togeojson';
 import flatten from '@turf/flatten';
 import logger from 'loglevel';
-import * as _ from './lodash';
+import googleMapsClient from './googleMapsClient.mjs';
+import * as _ from './lodash.js';
 
 
 export default class Helpers {
-    static getGeoJSON(kml) {
+    static getGeoJSON(kmlString) {
+        const domParser = new xmlDom.DOMParser();
+        const kml = domParser.parseFromString(kmlString);
         const extendedData = kml.getElementsByTagName('ExtendedData');
         for (let index = extendedData.length - 1; index >= 0; index--) {
             extendedData[index].parentNode.removeChild(extendedData[index]);
@@ -54,12 +60,13 @@ export default class Helpers {
     static getRoute(routeUrl) {
         logger.debug('Fetching route from:', routeUrl);
         return new Promise((resolve, reject) => {
-            $.ajax(routeUrl)
-                .done(data => {
+            fetch(routeUrl)
+                .then(res => res.text())
+                .then(data => {
                     logger.debug('Route data:', data);
                     resolve(data);
                 })
-                .fail((xhr, status) => {
+                .catch(status => {
                     logger.error(`Route fetching error. Status: ${status}`);
                     reject('Route fetching error');
                 });
@@ -67,7 +74,7 @@ export default class Helpers {
     }
 
     static getGoogleMapsLatLng(coordinates) {
-        return new google.maps.LatLng(coordinates[1], coordinates[0]);
+        return [coordinates[1], coordinates[0]];
     }
 
     static getGoogleMapsPath(lineString) {
@@ -96,7 +103,7 @@ export default class Helpers {
         // MAXIMUM_NUMBER_OF_LATLNG_OBJECTS coordinates in KML path
         const MAXIMUM_NUMBER_OF_SAMPLES = 512;
         // Request to google.maps.ElevationService cannot be too long (2048 is too long)
-        const MAXIMUM_NUMBER_OF_LATLNG_OBJECTS = 1024;
+        const MAXIMUM_NUMBER_OF_LATLNG_OBJECTS = 256;
         logger.debug('Number of LatLng objects:', path.length);
         if (path.length > MAXIMUM_NUMBER_OF_LATLNG_OBJECTS) {
             const optimizedPath = [];
@@ -108,25 +115,16 @@ export default class Helpers {
             logger.debug('Number of LatLng objects after optimization:', path.length);
         }
 
-        return new Promise((resolve, reject) => {
-            const elevator = new google.maps.ElevationService();
-            elevator.getElevationAlongPath({
-                path,
-                samples: MAXIMUM_NUMBER_OF_SAMPLES,
-            }, (elevations, status) => {
-                if (status === google.maps.ElevationStatus.OK) {
-                    resolve(elevations);
-                } else {
-                    reject(status);
-                }
-            });
-        });
+        return googleMapsClient.elevationAlongPath({ path, samples: MAXIMUM_NUMBER_OF_SAMPLES })
+            .asPromise()
+            .then(response => response.json.results);
     }
 
     static getRouteParameters(routeParamsUrl) {
         return new Promise((resolve, reject) => {
-            $.ajax(routeParamsUrl)
-                .done(data => {
+            fetch(routeParamsUrl)
+                .then(res => res.json())
+                .then(data => {
                     logger.debug('Route parameters:', data);
                     if (data.success === 1) {
                         resolve(data);
@@ -134,8 +132,8 @@ export default class Helpers {
                         reject(`Server side error: ${data.error}`);
                     }
                 })
-                .fail((xhr, status) => {
-                    logger.error(`Route parameters data fetching error. Status: ${status}`);
+                .catch(error => {
+                    logger.error(`Route parameters data fetching error. Status: ${error}`);
                     reject('Route parameters data fetching error');
                 });
         });
