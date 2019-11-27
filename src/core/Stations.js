@@ -3,22 +3,21 @@ import lineSliceAlong from '@turf/line-slice-along';
 import nearestPointOnLine from '@turf/nearest-point-on-line';
 import pointToLineDistance from '@turf/point-to-line-distance';
 import distance from '@turf/distance';
-import { point } from '@turf/helpers';
+import turfHelpers from '@turf/helpers/index.js';
 import logger from 'loglevel';
 
-import * as _ from './utils/lodash';
-import helpers from './utils/helpers';
-import Lang from './lang/Lang';
-import LogBuffer from './utils/LogBuffer';
-
+import * as _ from './utils/lodash.js';
+import helpers from './utils/helpers.js';
+import Lang from './lang/Lang.js';
+import LogBuffer from './utils/LogBuffer.js';
 
 const turf = {
-    distance,
-    length,
-    lineSliceAlong,
-    point,
-    pointToLineDistance,
-    nearestPointOnLine,
+    distance: distance.default,
+    length: length.default,
+    lineSliceAlong: lineSliceAlong.default,
+    point: turfHelpers.point,
+    pointToLineDistance: pointToLineDistance.default,
+    nearestPointOnLine: nearestPointOnLine.default,
 
     options: { units: 'meters' },
 };
@@ -107,34 +106,34 @@ export default class Stations {
             logger.debug(`Distance from path: ${dist.toFixed(2)} meter(s).`);
             logger.debug(`Location on path: ${location.toFixed(2)} meter(s).`);
 
-            this.addDebugInformationToMap(point, nearestPointOnSlicedPath);
+            // this.addDebugInformationToMap(point, nearestPointOnSlicedPath);
         });
     }
 
-    addDebugInformationToMap(originalPoint, nearestPoint) {
-        if (logger.getLevel() <= logger.levels.DEBUG && !!window.map) {
-            new google.maps.Marker({
-                position: helpers.getGoogleMapsLatLng(nearestPoint.geometry.coordinates),
-                map: window.map,
-                label: {
-                    fontWeight: 'bold',
-                    text: `${originalPoint.properties.index}`,
-                },
-                title: `${originalPoint.properties.index}`,
-                icon: 'https://maps.google.com/mapfiles/ms/icons/yellow.png',
-            });
-            new google.maps.Marker({
-                position: helpers.getGoogleMapsLatLng(originalPoint.geometry.coordinates),
-                map: window.map,
-                label: {
-                    fontWeight: 'bold',
-                    text: `${originalPoint.properties.index}`,
-                },
-                title: `${originalPoint.properties.index}`,
-                icon: 'https://maps.google.com/mapfiles/ms/icons/blue.png',
-            });
-        }
-    }
+    // addDebugInformationToMap(originalPoint, nearestPoint) {
+    //     if (logger.getLevel() <= logger.levels.DEBUG && !!window.map) {
+    //         new google.maps.Marker({
+    //             position: helpers.getGoogleMapsLatLng(nearestPoint.geometry.coordinates),
+    //             map: window.map,
+    //             label: {
+    //                 fontWeight: 'bold',
+    //                 text: `${originalPoint.properties.index}`,
+    //             },
+    //             title: `${originalPoint.properties.index}`,
+    //             icon: 'https://maps.google.com/mapfiles/ms/icons/yellow.png',
+    //         });
+    //         new google.maps.Marker({
+    //             position: helpers.getGoogleMapsLatLng(originalPoint.geometry.coordinates),
+    //             map: window.map,
+    //             label: {
+    //                 fontWeight: 'bold',
+    //                 text: `${originalPoint.properties.index}`,
+    //             },
+    //             title: `${originalPoint.properties.index}`,
+    //             icon: 'https://maps.google.com/mapfiles/ms/icons/blue.png',
+    //         });
+    //     }
+    // }
 
     sortByIndex() {
         const getIndex = point => _.get(point, 'properties.index', Number.MAX_VALUE);

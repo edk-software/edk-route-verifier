@@ -1,8 +1,8 @@
 import logger from 'loglevel';
-import * as _ from '../utils/lodash';
+import * as _ from '../utils/lodash.js';
 
-const pl = require('./pl');
-const en = require('./en');
+import pl from './pl.json';
+import en from './en.json';
 
 const translations = { pl, en };
 
