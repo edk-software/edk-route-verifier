@@ -1,10 +1,12 @@
 import logger from 'loglevel';
-import * as _ from './utils/lodash';
-import helpers from './utils/helpers';
-import PathElevation from './PathElevation';
-import Stations from './Stations';
-import Lang from './lang/Lang';
-import LogBuffer from './utils/LogBuffer';
+import turfLength from '@turf/length';
+
+import * as _ from './utils/lodash.js';
+import helpers from './utils/helpers.js';
+import PathElevation from './PathElevation.js';
+import Stations from './Stations.js';
+import Lang from './lang/Lang.js';
+import LogBuffer from './utils/LogBuffer.js';
 
 // Constants
 const EXPECTED_NUMBER_OF_PATHS = 1;
@@ -72,11 +74,7 @@ export default class Route {
     }
 
     getPathLength() {
-        let result = 0;
-
-        const googleMapsPath = helpers.getGoogleMapsPath(this.path);
-        result = google.maps.geometry.spherical.computeLength(googleMapsPath);
-        result /= 1000;
+        const result = turfLength.default(this.path);
 
         logger.debug('getPathLength [km]:', result);
         return result;
@@ -90,7 +88,11 @@ export default class Route {
                 return this.pathElevation;
             })
             .catch(error => {
-                logger.error(`Path elevation data fetching error, Error: ${error}`);
+                logger.error('Path elevation data fetching error');
+                logger.error(Object.keys(error));
+                logger.error(error.statusMessage);
+                logger.error(error.statusCode);
+                logger.error(error.status);
                 return Promise.reject('Path elevation data fetching error');
             });
     }

@@ -35,4 +35,8 @@ export default class PathElevation {
         }
         this.data = elevationsWithDistance;
     }
+
+    getData() {
+        return this.data;
+    }
 }

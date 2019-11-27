@@ -1,6 +1,7 @@
+/*
 import logger from 'loglevel';
 
-import * as _ from './utils/lodash';
+import * as _ from './utils/lodash.js';
 
 // Constants
 const ROUTE_TYPE_ID = 'div#routeType';
@@ -214,3 +215,4 @@ export default class Controls {
         $(FAILED_VERIFICATION_MODAL_ID).modal();
     }
 }
+*/

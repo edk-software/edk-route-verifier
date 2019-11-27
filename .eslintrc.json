@@ -21,6 +21,7 @@
         "prefer-promise-reject-errors" : 0,
         "no-mixed-operators" : 0,
         "import/no-extraneous-dependencies": 0,
+        "import/extensions": 0,
         "no-underscore-dangle" : ["error", {
             "allow" : [
                 "_"
@@ -38,7 +39,7 @@
     },
     "env" : {
         "jquery"  : true,
-        "browser" : true
+        "node" : true
     },
     "globals" : {
         "Chart"  : true,
