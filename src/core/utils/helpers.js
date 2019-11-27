@@ -4,7 +4,7 @@ import xmlDom from 'xmldom';
 import toGeoJSON from 'togeojson';
 import flatten from '@turf/flatten';
 import logger from 'loglevel';
-import googleMapsClient from './googleMapsClient.mjs';
+import googleMapsClient from './googleMapsClient.js';
 import * as _ from './lodash.js';
 
 

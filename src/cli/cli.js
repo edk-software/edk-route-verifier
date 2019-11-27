@@ -1,8 +1,8 @@
 import fs from 'fs';
-import RouteParameters from './input/RouteParameters.mjs';
-import RouteVerificationInput from './input/RouteVerificationInput.mjs';
-import RouteVerificationOptions from './input/RouteVerificationOptions.mjs';
-import { verifyRoute } from './verifyRoute.mjs';
+import RouteParameters from '../data/input/RouteParameters.js';
+import RouteVerificationInput from '../data/input/RouteVerificationInput.js';
+import RouteVerificationOptions from '../data/input/RouteVerificationOptions.js';
+import verifyRoute from '../core/verifyRoute.js';
 
 const args = process.argv.slice(2);
 

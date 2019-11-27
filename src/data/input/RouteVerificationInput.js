@@ -1,4 +1,4 @@
-import RouteParameters from './RouteParameters.mjs';
+import RouteParameters from './RouteParameters.js';
 
 export default class RouteVerificationInput {
     constructor(kmlString, routeParams) {

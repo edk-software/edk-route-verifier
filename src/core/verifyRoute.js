@@ -5,9 +5,9 @@ import Lang from './lang/Lang.js';
 import helpers from './utils/helpers.js';
 import Route from './Route.js';
 
-import RouteVerificationOptions from './input/RouteVerificationOptions.mjs';
-import RouteVerificationInput from './input/RouteVerificationInput.mjs';
-import RouteVerificationOutput from './output/RouteVerificationOutput.mjs';
+import RouteVerificationOptions from '../data/input/RouteVerificationOptions.js';
+import RouteVerificationInput from '../data/input/RouteVerificationInput.js';
+import RouteVerificationOutput from '../data/output/RouteVerificationOutput.js';
 
 export default function verifyRoute(routeData, verificationOption) {
     if (!(routeData instanceof RouteVerificationInput)) {
