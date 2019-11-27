@@ -32,20 +32,15 @@ export default function verifyRoute(routeData, verificationOption) {
 
     // Path basic checks
     verificationOutput.setSinglePath(route.isSinglePath());
-    // logger.debug('isSinglePath:', isSinglePath);
     const routeLength = route.getPathLength();
     verificationOutput.setPathLength(true, routeLength);
-    // logger.debug('routeLength:', routeLength);
 
     // Station checks
     verificationOutput.setNumberOfStations(route.areAllStationsPresent());
-    // logger.debug('areAllStationsPresent:', areAllStationsPresent);
     verificationOutput.setStationsOrder(route.isStationOrderCorrect());
-    // logger.debug('isStationOrderCorrect:', isStationOrderCorrect);
     verificationOutput.setStationsOnPath(route.areStationsOnThePath());
-    // logger.debug('areStationsOnThePath:', areStationsOnThePath);
 
-    route.fetchPathElevationData()
+    return route.fetchPathElevationData()
         .then(() => {
             const pathElevation = route.getPathElevation();
             pathElevation.enrichData(routeLength);
@@ -63,7 +58,6 @@ export default function verifyRoute(routeData, verificationOption) {
             const isNormalRoute = routeLength >= NORMAL_ROUTE_MIN_LENGTH
             || pathElevation.gain > SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN
             && routeLength >= SHORT_NORMAL_ROUTE_MIN_LENGTH;
-            // logger.debug('isNormalRoute:', isNormalRoute);
             verificationOutput.setRouteType(isNormalRoute);
 
             // Calculate data consistency
@@ -76,26 +70,30 @@ export default function verifyRoute(routeData, verificationOption) {
             const isElevationGainConsistent = (pathElevation.gain - ACCEPTED_ELEVATION_GAIN_DIFF <= parameters.ascent
             && parameters.ascent <= pathElevation.gain + ACCEPTED_ELEVATION_GAIN_DIFF);
             const isRouteTypeConsistent = parameters.type === (isNormalRoute ? NORMAL_ROUTE_TYPE : INSPIRED_ROUTE_TYPE);
+            if (!isElevationGainConsistent) {
+                logBuffer.add(lang.trans("Route parameter 'ascent' not consistent", { expected: parameters.ascent, calculated: pathElevation.gain.toFixed(2) }));
+            }
+            if (!isLengthConsistent) {
+                logBuffer.add(lang.trans("Route parameter 'length' not consistent", { expected: parameters.length, calculated: routeLength.toFixed(2) }));
+            }
+            if (!isRouteTypeConsistent) {
+                logBuffer.add(lang.trans("Route parameter 'type' not consistent", { expected: parameters.type, calculated: isNormalRoute ? NORMAL_ROUTE_TYPE : INSPIRED_ROUTE_TYPE }));
+            }
             verificationOutput.setDataConsistency(isLengthConsistent && isElevationGainConsistent && isRouteTypeConsistent);
-            logger.debug('isLengthConsistent:', isLengthConsistent,
-                ', isElevationGainConsistent:', isElevationGainConsistent,
-                ', isRouteTypeConsistent:', isRouteTypeConsistent);
+
+            // Sending status
+            const routeSuccessfullyVerified = verificationOutput.getStatus();
+            if (routeSuccessfullyVerified) {
+                logger.info('Route verification succeeded.');
+                return verificationOutput.getObject();
+            }
+            return Promise.reject('Route verification failed');
         })
         .catch(error => {
             logBuffer.add(lang.trans(error));
+            verificationOutput.setLogs(logBuffer.getLogs());
+            return verificationOutput.getObject();
         })
-        .finally(() => {
-            const routeSuccessfullyVerified = verificationOutput.getStatus();
-
-            if (routeSuccessfullyVerified) {
-                logger.info('Route verification succeeded.');
-            } else {
-                logger.info('Route verification failed.');
-                console.log(logBuffer.getLogs());
-            }
-
-            console.log(verificationOutput.getObject());
-        });
 }
 
 if (process.env.NODE_ENV === 'production') {

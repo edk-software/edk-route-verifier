@@ -13,4 +13,5 @@ const routeParams = new RouteParameters(params.ascent, params.length, params.typ
 const routeInput = new RouteVerificationInput(kml, routeParams);
 const options = new RouteVerificationOptions('en', true);
 
-verifyRoute(routeInput, options);
+verifyRoute(routeInput, options)
+    .then(data => console.log(data));

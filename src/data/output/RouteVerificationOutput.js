@@ -18,6 +18,7 @@ export default class RouteVerificationOutput {
         this.elevationLoss = invalidObjectWithValue;
         this.elevationTotalChange = invalidObjectWithValue;
         this.dataConsistency = invalidObject;
+        this.logs = [];
     }
 
     setElevationCharacteristics(data) {
@@ -64,6 +65,10 @@ export default class RouteVerificationOutput {
         this.dataConsistency = getResultObject(valid);
     }
 
+    setLogs(logsArray) {
+        this.logs = logsArray;
+    }
+
     getObject() {
         return {
             elevationCharacteristics: this.elevationCharacteristics,
@@ -78,6 +83,7 @@ export default class RouteVerificationOutput {
                 elevationLoss: this.elevationLoss,
                 elevationTotalChange: this.elevationTotalChange,
                 dataConsistency: this.dataConsistency,
+                logs: this.logs
             },
         };
     }
