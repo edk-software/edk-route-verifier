@@ -1,10 +1,10 @@
 
 import fetch from 'node-fetch';
 import xmlDom from 'xmldom';
-import toGeoJSON from 'togeojson';
+import toGeoJSON from '@mapbox/togeojson';
 import flatten from '@turf/flatten';
 import logger from 'loglevel';
-import googleMapsClient from './googleMapsClient.js';
+import { getClient } from './googleMaps.js';
 import * as _ from './lodash.js';
 
 
@@ -115,7 +115,7 @@ export default class Helpers {
             logger.debug('Number of LatLng objects after optimization:', path.length);
         }
 
-        return googleMapsClient.elevationAlongPath({ path, samples: MAXIMUM_NUMBER_OF_SAMPLES })
+        return getClient().elevationAlongPath({ path, samples: MAXIMUM_NUMBER_OF_SAMPLES })
             .asPromise()
             .then(response => response.json.results);
     }
