@@ -26,6 +26,7 @@
   ],
   "dependencies": {
     "@google/maps": "^1.0.1",
+    "@mapbox/togeojson": "^0.16.0",
     "@turf/distance": "^6.0.1",
     "@turf/flatten": "^5.1.5",
     "@turf/helpers": "^6.1.4",
@@ -40,7 +41,6 @@
     "lodash": "^4.17.15",
     "loglevel": "^1.6.6",
     "node-fetch": "^2.6.0",
-    "togeojson": "^0.16.0",
     "xmldom": "^0.1.27"
   },
   "bundleDependencies": [
