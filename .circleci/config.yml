@@ -1,10 +1,13 @@
-version: 2
+version: 2.1
+
+defaults: &defaults
+  docker:
+    - image: circleci/node:12-stretch
+  working_directory: ~/repo
+
 jobs:
   build:
-    docker:
-      - image: circleci/node:10.15-browsers
-
-    working_directory: ~/repo
+    <<: *defaults
 
     steps:
       - checkout
@@ -12,18 +15,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}-{{ checksum "server/package.json" }}
+            - v1-dependencies-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-
-      - run:
-          name: Download and install Google Chrome (latest)
-          command: |
-            wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-            sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-            sudo apt-get update
-            sudo apt-get --fix-broken --only-upgrade install google-chrome-stable
-
       - run:
           name: Install application dependencies
           command: npm install
@@ -31,92 +25,97 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "server/package.json" }}
-
-      - run:
-          name: Create application bundle file
-          command: npm run build:prod
+          key: v1-dependencies-{{ checksum "package.json" }}
 
       - persist_to_workspace:
           root: ~/
           paths:
             - repo
 
-  size:
-    docker:
-      - image: circleci/node:10.15-browsers
-
-    working_directory: ~/repo
+  test:
+    <<: *defaults
 
     steps:
       - attach_workspace:
           at: ~/
-      - run:
-          name: Check bundle size
-          command: npm run check:size
+#
+#      - run:
+#          name: Install test server dependencies
+#          command: |
+#            cd server
+#            npm install
+#
+#      - run:
+#          name: Create test configuration file
+#          command: |
+#            cp server/config.json.template server/config.json
+#            sed -i "s/GOOGLE_MAPS_API_KEY/$GOOGLE_MAPS_API_KEY/i" server/config.json
+#
+#      - run:
+#          name: Start test server
+#          command: npm run start:prod
+#          background: true
+#
+#      - run:
+#          name: Wait for test server to be running
+#          shell: /bin/sh
+#          command: |
+#            wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 http://localhost:$PORT
+#            :
+#
+#      - run:
+#          name: Run tests
+#          command: npm run check:e2e
 
-  code:
-    docker:
-      - image: circleci/node:10.15-browsers
-
-    working_directory: ~/repo
-
-    steps:
-      - attach_workspace:
-          at: ~/
       - run:
           name: Check code style
           command: npm run check:source
 
-  test:
-    docker:
-      - image: circleci/node:10.15-browsers
-
-    working_directory: ~/repo
+  deploy:
+    <<: *defaults
 
     steps:
       - attach_workspace:
           at: ~/
 
       - run:
-          name: Install test server dependencies
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/repo/.npmrc
+
+      - run:
+          name: Publish package
+          command: npm publish
+
+      - run:
+          name: Setup git user
           command: |
-            cd server
-            npm install
+            git config user.email "jakub.niezgoda@nitarch.pl"
+            git config user.name "qooban"
 
       - run:
-          name: Create test configuration file
+          name: Update main branch
           command: |
-            cp server/config.json.template server/config.json
-            sed -i "s/GOOGLE_MAPS_API_KEY/$GOOGLE_MAPS_API_KEY/i" server/config.json
+            git checkout ${MAIN_BRANCH}
+            git merge --ff-only ${CIRCLE_BRANCH}
+            git push -q https://${GITHUB_TOKEN}@github.com/edk-software/edk-route-verifier.git ${MAIN_BRANCH}
 
       - run:
-          name: Start test server
-          command: npm run start:prod
-          background: true
-
-      - run:
-          name: Wait for test server to be running
-          shell: /bin/sh
+          name: Remove publish branch
           command: |
-            wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 http://localhost:$PORT
-            :
-
-      - run:
-          name: Run tests
-          command: npm run check:e2e
+            git push -q https://${GITHUB_TOKEN}@github.com/edk-software/edk-route-verifier.git --delete ${CIRCLE_BRANCH}
 
 workflows:
   version: 2
-  build-and-test:
+  build-test-deploy:
     jobs:
       - build
-      - code:
-          requires:
-            - build
-      - size:
-          requires:
-            - build
       - test:
           requires:
             - build
+      - deploy:
+          requires:
+            - build
+            - test
+          filters:
+            branches:
+              only: /^publish-v.*/

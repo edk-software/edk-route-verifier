@@ -71,15 +71,20 @@ export default function verifyRoute(routeData, verificationOption) {
             && parameters.ascent <= pathElevation.gain + ACCEPTED_ELEVATION_GAIN_DIFF);
             const isRouteTypeConsistent = parameters.type === (isNormalRoute ? NORMAL_ROUTE_TYPE : INSPIRED_ROUTE_TYPE);
             if (!isElevationGainConsistent) {
-                logBuffer.add(lang.trans("Route parameter 'ascent' not consistent", { expected: parameters.ascent, calculated: pathElevation.gain.toFixed(2) }));
+                logBuffer.add(lang.trans("Route parameter 'ascent' not consistent",
+                    { expected: parameters.ascent, calculated: pathElevation.gain.toFixed(2) }));
             }
             if (!isLengthConsistent) {
-                logBuffer.add(lang.trans("Route parameter 'length' not consistent", { expected: parameters.length, calculated: routeLength.toFixed(2) }));
+                logBuffer.add(lang.trans("Route parameter 'length' not consistent",
+                    { expected: parameters.length, calculated: routeLength.toFixed(2) }));
             }
             if (!isRouteTypeConsistent) {
-                logBuffer.add(lang.trans("Route parameter 'type' not consistent", { expected: parameters.type, calculated: isNormalRoute ? NORMAL_ROUTE_TYPE : INSPIRED_ROUTE_TYPE }));
+                const calculated = isNormalRoute ? NORMAL_ROUTE_TYPE : INSPIRED_ROUTE_TYPE;
+                logBuffer.add(lang.trans("Route parameter 'type' not consistent",
+                    { expected: parameters.type, calculated }));
             }
-            verificationOutput.setDataConsistency(isLengthConsistent && isElevationGainConsistent && isRouteTypeConsistent);
+            const dataConsistency = isLengthConsistent && isElevationGainConsistent && isRouteTypeConsistent;
+            verificationOutput.setDataConsistency(dataConsistency);
 
             // Sending status
             const routeSuccessfullyVerified = verificationOutput.getStatus();
@@ -93,7 +98,7 @@ export default function verifyRoute(routeData, verificationOption) {
             logBuffer.add(lang.trans(error));
             verificationOutput.setLogs(logBuffer.getLogs());
             return verificationOutput.getObject();
-        })
+        });
 }
 
 if (process.env.NODE_ENV === 'production') {
