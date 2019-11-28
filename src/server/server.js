@@ -10,15 +10,17 @@ import RouteVerificationOptions from '../data/input/RouteVerificationOptions.js'
 const app = express();
 const port = process.env.PORT || 9102;
 
-app.post('/api/verify', cors(), bodyParser.json(), function(req, res) {
-    const { ascent, kmlFile, length, type } = req.body;
+app.post('/api/verify', cors(), bodyParser.json(), (req, res) => {
+    const {
+        ascent, kmlFile, length, type,
+    } = req.body;
 
     const routeData = new RouteVerificationInput(kmlFile, new RouteParameters(ascent, length, type));
     const verificationOption = new RouteVerificationOptions('pl', false);
 
     verifyRoute(routeData, verificationOption)
         .then(verificationOutput => {
-            res.send(verificationOutput)
+            res.send(verificationOutput);
         })
         .catch(error => {
             // TODO handle errors
