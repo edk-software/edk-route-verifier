@@ -22,7 +22,7 @@
   },
   "files": [
     "src",
-    "conf"
+    "conf/config.json.template"
   ],
   "dependencies": {
     "@google/maps": "^1.0.1",
@@ -43,6 +43,25 @@
     "togeojson": "^0.16.0",
     "xmldom": "^0.1.27"
   },
+  "bundleDependencies": [
+    "@google/maps",
+    "@turf/distance",
+    "@turf/flatten",
+    "@turf/helpers",
+    "@turf/length",
+    "@turf/line-slice-along",
+    "@turf/nearest-point-on-line",
+    "@turf/point-to-line-distance",
+    "body-parser",
+    "chart.js",
+    "cors",
+    "express",
+    "lodash",
+    "loglevel",
+    "node-fetch",
+    "togeojson",
+    "xmldom"
+  ],
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
