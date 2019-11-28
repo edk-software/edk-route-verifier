@@ -1,5 +1,6 @@
 import logger from 'loglevel';
 
+import Configuration from './Configuration.js';
 import LogBuffer from './utils/LogBuffer.js';
 import Lang from './lang/Lang.js';
 import helpers from './utils/helpers.js';
@@ -17,6 +18,7 @@ export default function verifyRoute(routeData, verificationOption) {
         throw Error('Invalid type of second argument passed to verifyRoute function.');
     }
 
+    const config = new Configuration(verificationOption.config);
     const lang = new Lang(verificationOption.language);
     const logBuffer = new LogBuffer();
     logBuffer.cleanLogs();
