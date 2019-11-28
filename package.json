@@ -1,32 +1,32 @@
 {
   "name": "edk-route-verifier",
   "version": "2.0.0-alpha.2",
-  "type": "module",
   "description": "Extreme Way of the Cross project route verifier",
-  "main": "./src/core/verifyRoute.js",
-  "scripts": {
-    "start:server": "node --experimental-modules src/cli/cli.js server",
-    "test": "npm run check:source",
-    "publish:major": "sh scripts/publish-version.sh major",
-    "publish:minor": "sh scripts/publish-version.sh minor",
-    "publish:patch": "sh scripts/publish-version.sh patch",
-    "publish:prerelease": "sh scripts/publish-version.sh prerelease",
-    "check:e2e": "nightwatch -c test/nightwatch.conf.js",
-    "check:source": "eslint src/**/*.js --cache --max-warnings 10"
-  },
-  "author": "Jakub Niezgoda (qooban)",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/edk-software/edk-route-verifier.git"
   },
-  "bin" : {
-    "edk-route-verifier" : "./src/cli/cli.js"
-  },
+  "license": "MIT",
+  "author": "Jakub Niezgoda (qooban)",
   "files": [
     "src",
     "conf/config.json.template"
   ],
+  "type": "module",
+  "main": "./src/core/verifyRoute.js",
+  "bin": {
+    "edk-route-verifier": "./src/cli/cli.js"
+  },
+  "scripts": {
+    "check:e2e": "nightwatch -c test/nightwatch.conf.js",
+    "check:source": "eslint src/**/*.js --cache --max-warnings 10",
+    "publish:major": "sh scripts/publish-version.sh major",
+    "publish:minor": "sh scripts/publish-version.sh minor",
+    "publish:patch": "sh scripts/publish-version.sh patch",
+    "publish:prerelease": "sh scripts/publish-version.sh prerelease",
+    "start:server": "node --experimental-modules src/cli/cli.js server",
+    "test": "npm run check:source"
+  },
   "dependencies": {
     "@google/maps": "^1.0.1",
     "@mapbox/togeojson": "^0.16.0",
@@ -54,5 +54,8 @@
     "eslint": "^6.7.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2"
+  },
+  "engines": {
+    "node": ">=12.13.1"
   }
 }
