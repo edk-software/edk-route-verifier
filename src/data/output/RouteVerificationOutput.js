@@ -83,7 +83,7 @@ export default class RouteVerificationOutput {
                 elevationLoss: this.elevationLoss,
                 elevationTotalChange: this.elevationTotalChange,
                 dataConsistency: this.dataConsistency,
-                logs: this.logs
+                logs: this.logs,
             },
         };
     }

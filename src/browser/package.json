@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js -c ./config.json"
+    "start": "nodemon server.js -c ../../conf/config.json"
   },
   "author": "Jakub Niezgoda",
   "license": "ISC",
