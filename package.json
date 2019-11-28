@@ -5,7 +5,7 @@
   "description": "Extreme Way of the Cross project route verifier",
   "main": "./src/core/verifyRoute.js",
   "scripts": {
-    "start:server": "node --experimental-modules src/server/server.js",
+    "start:server": "node --experimental-modules src/cli/cli.js server",
     "test": "npm run check:source",
     "publish:major": "sh scripts/publish-version.sh major",
     "publish:minor": "sh scripts/publish-version.sh minor",
@@ -19,6 +19,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/edk-software/edk-route-verifier.git"
+  },
+  "bin" : {
+    "edk-route-verifier" : "./src/cli/cli.js"
   },
   "files": [
     "src",
@@ -41,7 +44,8 @@
     "lodash": "^4.17.15",
     "loglevel": "^1.6.6",
     "node-fetch": "^2.6.0",
-    "xmldom": "^0.1.27"
+    "xmldom": "^0.1.27",
+    "yargs": "^15.0.2"
   },
   "bundleDependencies": [
     "@google/maps",
