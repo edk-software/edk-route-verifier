@@ -24,7 +24,7 @@
     "publish:minor": "sh scripts/publish-version.sh minor",
     "publish:patch": "sh scripts/publish-version.sh patch",
     "publish:prerelease": "sh scripts/publish-version.sh prerelease",
-    "start:server": "node --experimental-modules --experimental-json-modules src/cli/cli.js server -c conf/config.json",
+    "server": "node --experimental-modules --experimental-json-modules src/cli/cli.js server -c conf/config.json",
     "test": "npm run lint && npm run apiTest"
   },
   "dependencies": {

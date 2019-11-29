@@ -47,7 +47,7 @@ jobs:
 
       - run:
           name: Start API server
-          command: npm run server:start
+          command: npm run server
           background: true
 
       - run:
