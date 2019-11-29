@@ -6,9 +6,11 @@
     "parser": "babel-eslint",
     "extends": [
         "airbnb-base",
-        "prettier"
+        "prettier",
+        "plugin:jest/recommended"
     ],
     "plugins": [
+        "jest",
         "prettier"
     ],
     "rules" : {

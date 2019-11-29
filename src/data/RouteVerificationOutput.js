@@ -10,7 +10,8 @@ export default class RouteVerificationOutput {
         this.elevationCharacteristics = [];
         this.singlePath = invalidObject;
         this.pathLength = invalidObjectWithValue;
-        this.routeType = invalidObject;
+        this.routeType = invalidObjectWithValue;
+        this.routeType.value = 2;
         this.numberOfStations = invalidObject;
         this.stationsOrder = invalidObject;
         this.stationsOnPath = invalidObject;
@@ -32,8 +33,8 @@ export default class RouteVerificationOutput {
         this.pathLength = getResultObjectWithValue(valid, length);
     }
 
-    setRouteType(valid) {
-        this.routeType = getResultObject(valid);
+    setRouteType(valid, type) {
+        this.routeType = getResultObjectWithValue(valid, type);
     }
 
     setNumberOfStations(valid) {
