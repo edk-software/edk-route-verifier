@@ -40,7 +40,8 @@ export default function verifyRoute(routeData, verificationOption) {
     verificationOutput.setStationsOrder(route.isStationOrderCorrect());
     verificationOutput.setStationsOnPath(route.areStationsOnThePath());
 
-    return route.fetchPathElevationData()
+    return route
+        .fetchPathElevationData()
         .then(pathElevation => {
             // Elevations calculation
             verificationOutput.setElevationCharacteristics(pathElevation.getData());

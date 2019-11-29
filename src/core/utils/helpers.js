@@ -6,7 +6,6 @@ import logger from 'loglevel';
 import { getClient } from './googleMaps.js';
 import * as _ from './lodash.js';
 
-
 export default class Helpers {
     static getGeoJSON(kmlString) {
         const domParser = new xmlDom.DOMParser();
@@ -25,14 +24,12 @@ export default class Helpers {
     }
 
     static getNumberOfFeatures(featureName, geoJson) {
-        const features = _.filter(geoJson.features,
-            feature => _.isEqual(feature.geometry.type, featureName));
+        const features = _.filter(geoJson.features, feature => _.isEqual(feature.geometry.type, featureName));
         return features.length;
     }
 
     static getLineString(geoJson) {
-        const lineString = _.find(geoJson.features,
-            feature => _.isEqual(feature.geometry.type, 'LineString'));
+        const lineString = _.find(geoJson.features, feature => _.isEqual(feature.geometry.type, 'LineString'));
         return lineString;
     }
 
@@ -51,8 +48,7 @@ export default class Helpers {
     }
 
     static getPoints(geoJson) {
-        const points = _.filter(geoJson.features,
-            feature => _.isEqual(feature.geometry.type, 'Point'));
+        const points = _.filter(geoJson.features, feature => _.isEqual(feature.geometry.type, 'Point'));
         return points;
     }
 
@@ -77,8 +73,7 @@ export default class Helpers {
     }
 
     static getGoogleMapsPath(lineString) {
-        const path = _.map(lineString.geometry.coordinates,
-            element => Helpers.getGoogleMapsLatLng(element));
+        const path = _.map(lineString.geometry.coordinates, element => Helpers.getGoogleMapsLatLng(element));
         return path;
     }
 
@@ -87,8 +82,7 @@ export default class Helpers {
             // Elevation present in line string
 
             logger.debug('Getting path elevations from line string...');
-            const elevations = _.map(lineString.geometry.coordinates,
-                element => ({ elevation: element[2] }));
+            const elevations = _.map(lineString.geometry.coordinates, element => ({ elevation: element[2] }));
             logger.debug('Elevations:', elevations);
             return new Promise((resolve, reject) => {
                 resolve(elevations);
@@ -114,7 +108,8 @@ export default class Helpers {
             logger.debug('Number of LatLng objects after optimization:', path.length);
         }
 
-        return getClient().elevationAlongPath({ path, samples: MAXIMUM_NUMBER_OF_SAMPLES })
+        return getClient()
+            .elevationAlongPath({ path, samples: MAXIMUM_NUMBER_OF_SAMPLES })
             .asPromise()
             .then(response => response.json.results);
     }

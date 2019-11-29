@@ -77,14 +77,22 @@ export default class RouteVerificationOutput {
                 elevationGain: this.elevationGain,
                 elevationLoss: this.elevationLoss,
                 elevationTotalChange: this.elevationTotalChange,
-                logs: this.logs,
-            },
+                logs: this.logs
+            }
         };
     }
 
     getStatus() {
-        return isValid(this.singlePath) && isValid(this.pathLength) && isValid(this.routeType)
-            && isValid(this.numberOfStations) && isValid(this.stationsOrder) && isValid(this.stationsOnPath)
-            && isValid(this.elevationGain) && isValid(this.elevationLoss) && isValid(this.elevationTotalChange);
+        return (
+            isValid(this.singlePath) &&
+            isValid(this.pathLength) &&
+            isValid(this.routeType) &&
+            isValid(this.numberOfStations) &&
+            isValid(this.stationsOrder) &&
+            isValid(this.stationsOnPath) &&
+            isValid(this.elevationGain) &&
+            isValid(this.elevationLoss) &&
+            isValid(this.elevationTotalChange)
+        );
     }
 }

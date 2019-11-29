@@ -19,14 +19,14 @@ const turf = {
     pointToLineDistance: pointToLineDistance.default,
     nearestPointOnLine: nearestPointOnLine.default,
 
-    options: { units: 'meters' },
+    options: { units: 'meters' }
 };
 
 const CONSTS = {
     START_INDEX: 0,
     FIRST_STATION_INDEX: 1,
     LAST_STATION_INDEX: 14,
-    END_INDEX: 15,
+    END_INDEX: 15
 };
 
 let lang = null;
@@ -70,8 +70,10 @@ export default class Stations {
             const distanceToPath = turf.pointToLineDistance(coordinates, this.path, turf.options);
             const maximumDistanceFromPath = 200; // meters
             if (distanceToPath > maximumDistanceFromPath) {
-                logger.debug(`Point ${point.properties.name} too far from the path. `
-                    + 'Not looking for nearest point on line for it.');
+                logger.debug(
+                    `Point ${point.properties.name} too far from the path. ` +
+                        'Not looking for nearest point on line for it.'
+                );
                 point.properties.nearestOnLine = turf.nearestPointOnLine(this.path, point, turf.options);
                 return true;
             }
@@ -86,9 +88,11 @@ export default class Stations {
             // Reset nearest point on sliced path
             nearestPointOnSlicedPath = null;
 
-            for (let oldDistanceToPath = 0, newDistanceToPath = Number.MAX_VALUE;
+            for (
+                let oldDistanceToPath = 0, newDistanceToPath = Number.MAX_VALUE;
                 newDistanceToPath !== oldDistanceToPath || newDistanceToPath > maximumDistanceFromPath;
-                stopPointDistance += sampleDistance) {
+                stopPointDistance += sampleDistance
+            ) {
                 const slicedPath = turf.lineSliceAlong(this.path, startPointDistance, stopPointDistance, turf.options);
                 nearestPointOnSlicedPath = turf.nearestPointOnLine(slicedPath, point, turf.options);
                 oldDistanceToPath = newDistanceToPath;
@@ -151,8 +155,8 @@ export default class Stations {
              *  from a given string (which might be represented by different types
              *  of numbers and different delimiters)
              */
-            const START_NAMES_REGEX = /^(wstęp|wprowadzenie|początek|start)$/ig;
-            const END_NAMES_REGEX = /^(zakończenie|koniec|podsumowanie)$/ig;
+            const START_NAMES_REGEX = /^(wstęp|wprowadzenie|początek|start)$/gi;
+            const END_NAMES_REGEX = /^(zakończenie|koniec|podsumowanie)$/gi;
             const ROMAN_NUMBERS_REGEX = /^(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV)$/g;
             const EUROPEAN_NUMBERS_REGEX = /^\d+$/g;
             const SPLITTER_REGEX = /[ ,\._\-:;]+/;
@@ -170,7 +174,7 @@ export default class Stations {
                 XI: 11,
                 XII: 12,
                 XIII: 13,
-                XIV: 14,
+                XIV: 14
             };
 
             let index = null;
@@ -198,8 +202,7 @@ export default class Stations {
                 matches = part.match(EUROPEAN_NUMBERS_REGEX);
                 if (!_.isNull(matches)) {
                     const stationNumber = parseInt(matches[0]);
-                    if (stationNumber >= CONSTS.FIRST_STATION_INDEX
-                        && stationNumber <= CONSTS.LAST_STATION_INDEX) {
+                    if (stationNumber >= CONSTS.FIRST_STATION_INDEX && stationNumber <= CONSTS.LAST_STATION_INDEX) {
                         index = stationNumber;
                         return false;
                     }
@@ -234,15 +237,18 @@ export default class Stations {
 
     updateDirection() {
         const isIndexEqual = (point, index) => point.properties.index === index;
-        const startPoint = _.filter(this.points,
-            point => isIndexEqual(point, CONSTS.START_INDEX) || isIndexEqual(point, CONSTS.FIRST_STATION_INDEX));
-        const endPoint = _.filter(this.points,
-            point => isIndexEqual(point, CONSTS.END_INDEX) || isIndexEqual(point, CONSTS.LAST_STATION_INDEX));
+        const startPoint = _.filter(
+            this.points,
+            point => isIndexEqual(point, CONSTS.START_INDEX) || isIndexEqual(point, CONSTS.FIRST_STATION_INDEX)
+        );
+        const endPoint = _.filter(
+            this.points,
+            point => isIndexEqual(point, CONSTS.END_INDEX) || isIndexEqual(point, CONSTS.LAST_STATION_INDEX)
+        );
 
         if (!_.isEmpty(startPoint)) {
             logger.debug('Start point detected. Checking if it is closer to path start or path end...');
-            const startPointToPathStartDistance = turf.distance(this.pathStart,
-                startPoint[0], turf.options);
+            const startPointToPathStartDistance = turf.distance(this.pathStart, startPoint[0], turf.options);
             const startPointToPathEndDistance = turf.distance(this.pathEnd, startPoint[0], turf.options);
             if (startPointToPathStartDistance > startPointToPathEndDistance) {
                 logger.debug('Reversed path detected. Start point is closer to path end.');
@@ -281,8 +287,11 @@ export default class Stations {
     getCount() {
         let numberOfStations = 0;
 
-        for (let stationNumber = CONSTS.FIRST_STATION_INDEX;
-            stationNumber <= CONSTS.LAST_STATION_INDEX; stationNumber++) {
+        for (
+            let stationNumber = CONSTS.FIRST_STATION_INDEX;
+            stationNumber <= CONSTS.LAST_STATION_INDEX;
+            stationNumber++
+        ) {
             let firstStationName = '';
             const stationsOfNumber = _.filter(this.points, station => {
                 if (station.properties.index === stationNumber) {
@@ -292,8 +301,12 @@ export default class Stations {
                 return false;
             });
             if (stationsOfNumber.length > 1) {
-                logBuffer.add(lang.trans('Station found multiple times',
-                    { number: stationNumber, times: stationsOfNumber.length }));
+                logBuffer.add(
+                    lang.trans('Station found multiple times', {
+                        number: stationNumber,
+                        times: stationsOfNumber.length
+                    })
+                );
             } else if (stationsOfNumber.length === 0) {
                 logBuffer.add(lang.trans('Station not found', { number: stationNumber }));
             } else {
@@ -315,17 +328,20 @@ export default class Stations {
                 logger.debug(`Not checking order for unrecognized point: ${this.points[i].properties.name}`);
             } else if (previousStationNumber === null) {
                 logger.debug(`Not checking order for unrecognized point: ${this.points[i - 1].properties.name}`);
-            } else if (this.pathCircular
-                && (
-                    (previousStationNumber === CONSTS.FIRST_STATION_INDEX
-                    && currentStationNumber === CONSTS.LAST_STATION_INDEX)
-                    || (currentStationNumber === CONSTS.FIRST_STATION_INDEX
-                    && previousStationNumber === CONSTS.LAST_STATION_INDEX)
-                )
+            } else if (
+                this.pathCircular &&
+                ((previousStationNumber === CONSTS.FIRST_STATION_INDEX &&
+                    currentStationNumber === CONSTS.LAST_STATION_INDEX) ||
+                    (currentStationNumber === CONSTS.FIRST_STATION_INDEX &&
+                        previousStationNumber === CONSTS.LAST_STATION_INDEX))
             ) {
-                logger.debug('Not checking order for station',
-                    CONSTS.FIRST_STATION_INDEX, 'and', CONSTS.LAST_STATION_INDEX,
-                    'when route is circular.');
+                logger.debug(
+                    'Not checking order for station',
+                    CONSTS.FIRST_STATION_INDEX,
+                    'and',
+                    CONSTS.LAST_STATION_INDEX,
+                    'when route is circular.'
+                );
             } else if (currentStationNumber <= previousStationNumber) {
                 logBuffer.add(lang.trans('Invalid stations order', { currentStationNumber, previousStationNumber }));
                 result = false;
@@ -347,11 +363,17 @@ export default class Stations {
                 logger.debug(`Not checking distance for: ${station.properties.name}`);
             } else {
                 const distanceFromStationToPath = helpers.getDistanceToNearestPointOnLine(station);
-                logger.debug(`Station ${stationNumber} distance from path: `
-                    + `${distanceFromStationToPath.toFixed(2)} meter(s).`);
+                logger.debug(
+                    `Station ${stationNumber} distance from path: ` +
+                        `${distanceFromStationToPath.toFixed(2)} meter(s).`
+                );
                 if (distanceFromStationToPath > maximumDistanceFromPath) {
-                    logBuffer.add(lang.trans('Station too far from path',
-                        { number: stationNumber, maximumDistance: maximumDistanceFromPath }));
+                    logBuffer.add(
+                        lang.trans('Station too far from path', {
+                            number: stationNumber,
+                            maximumDistance: maximumDistanceFromPath
+                        })
+                    );
                     result = false;
                 } else {
                     logger.debug(`Station ${stationNumber} is on the path.`);
@@ -368,8 +390,10 @@ export default class Stations {
         if (lastStationPoint !== null) {
             const lastStationLocation = helpers.getLocationOfNearestPointOnLine(lastStationPoint);
             if (lastStationLocation > 0) {
-                logger.debug('getPathEndingOnLastStation: Returning sliced path. '
-                    + `Last station location: ${lastStationLocation.toFixed(2)}`);
+                logger.debug(
+                    'getPathEndingOnLastStation: Returning sliced path. ' +
+                        `Last station location: ${lastStationLocation.toFixed(2)}`
+                );
                 return turf.lineSliceAlong(this.path, 0, lastStationLocation, turf.options);
             }
         }

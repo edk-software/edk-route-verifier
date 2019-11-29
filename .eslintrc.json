@@ -4,9 +4,14 @@
         "sourceType": "module"
     },
     "parser": "babel-eslint",
-    "extends": "airbnb-base",
+    "extends": [
+        "airbnb-base",
+        "prettier"
+    ],
+    "plugins": [
+        "prettier"
+    ],
     "rules" : {
-        "indent" : ["error", 4],
         "no-unused-vars" : 0,
         "class-methods-use-this" : 0,
         "no-unused-expressions" : [2, {
@@ -17,7 +22,6 @@
         "radix" : 0,
         "no-plusplus" : 0,
         "no-new" : 0,
-        "function-paren-newline" : ["error", "never"],
         "prefer-promise-reject-errors" : 0,
         "no-mixed-operators" : 0,
         "import/no-extraneous-dependencies": 0,
@@ -35,14 +39,11 @@
         "no-shadow"         : 0,
         "max-len"           : ["error", {
             "code": 120
-        }]
+        }],
+        "prettier/prettier": ["error"]
     },
     "env" : {
         "jquery"  : true,
         "node" : true
-    },
-    "globals" : {
-        "Chart"  : true,
-        "google" : true
     }
 }
