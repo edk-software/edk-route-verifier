@@ -13,9 +13,19 @@ const EXPECTED_NUMBER_OF_PATHS = 1;
 const EXPECTED_NUMBER_OF_STATIONS = 14;
 const MAXIMUM_DISTANCE_FROM_STATION_TO_PATH = 50; // meters
 
+const NORMAL_ROUTE_MIN_LENGTH = 40; // kilometers
+const SHORT_NORMAL_ROUTE_MIN_LENGTH = 30; // kilometers
+const SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN = 500; // meters
+const INSPIRED_ROUTE_MIN_LENGTH = 20; // kilometers
+
+const ROUTE_TYPE = {
+    NORMAL: 0,
+    INSPIRED: 1,
+    UNKNOWN: 2,
+};
+
 let lang = null;
 let logBuffer = null;
-
 
 export default class Route {
     constructor(geoJson) {
@@ -38,6 +48,16 @@ export default class Route {
             this.stations = new Stations(this.points, this.lineString);
             this.path = this.stations.getUpdatedPath();
             this.numberOfPaths = helpers.getNumberOfFeatures('LineString', this.geoJson);
+            this.length = turfLength.default(this.path);
+
+            this.type = ROUTE_TYPE.UNKNOWN;
+            if (this.length >= NORMAL_ROUTE_MIN_LENGTH
+                || this.pathElevation.gain > SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN
+                && this.length >= SHORT_NORMAL_ROUTE_MIN_LENGTH) {
+                this.type = ROUTE_TYPE.NORMAL;
+            } else if (this.length >= INSPIRED_ROUTE_MIN_LENGTH) {
+                this.type = ROUTE_TYPE.INSPIRED;
+            }
         }
     }
 
@@ -73,18 +93,11 @@ export default class Route {
         return result;
     }
 
-    getPathLength() {
-        const result = turfLength.default(this.path);
-
-        logger.debug('getPathLength [km]:', result);
-        return result;
-    }
-
     fetchPathElevationData() {
         return helpers.getPathElevations(this.path)
             .then(elevations => {
                 logger.debug('Path elevations:', elevations);
-                this.pathElevation = new PathElevation(elevations);
+                this.pathElevation = new PathElevation(elevations, this.length);
                 return this.pathElevation;
             })
             .catch(error => {
@@ -97,8 +110,15 @@ export default class Route {
             });
     }
 
-    getPathElevation() {
-        logger.debug('getPathElevation:', this.pathElevation);
-        return this.pathElevation;
+    getLength() {
+        return this.length;
+    }
+
+    getType() {
+        return this.type;
+    }
+
+    isTypeValid() {
+        return this.type === ROUTE_TYPE.NORMAL || this.type === ROUTE_TYPE.INSPIRED;
     }
 }

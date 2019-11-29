@@ -22,15 +22,12 @@ export default class PathElevation {
         this.gain = getGain(elevations);
         this.loss = getLoss(elevations);
         this.totalChange = this.loss + this.gain;
-        this.data = elevations;
-    }
 
-    enrichData(length) {
         const elevationsWithDistance = [];
-        const resolution = length / this.data.length;
-        for (let i = 0; i < this.data.length; i++) {
+        const resolution = length / elevations.length;
+        for (let i = 0; i < elevations.length; i++) {
             elevationsWithDistance.push({
-                elevation: this.data[i].elevation, distance: i * resolution,
+                elevation: elevations[i].elevation, distance: i * resolution,
             });
         }
         this.data = elevationsWithDistance;

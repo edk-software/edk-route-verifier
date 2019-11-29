@@ -80,22 +80,6 @@ app.get('/:routeId', (req, res) => {
     });
 });
 
-app.get('/route-params/:routeId', cors(), (req, res) => {
-    const id = req.params.routeId;
-    const routeParams = JSON.parse(
-        fs.readFileSync(
-            path.resolve(path.join(configuration.resourcesPath, `${id}_route-params.json`)
-        ), 'utf8'));
-    console.log(`Sending route ${id} parameters: `, routeParams);
-    res.json(routeParams);
-});
-
-app.get('/route-approve/:routeId', cors(), (req, res) => {
-    const id = req.params.routeId;
-    console.log(`Route ${id} approved.`);
-    res.send({});
-});
-
 app.get('/kml/:routeId', cors(), (req, res) => {
     const id = req.params.routeId;
     console.log(`Sending KML for route ${id}.`);

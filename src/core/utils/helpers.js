@@ -1,4 +1,3 @@
-
 import fetch from 'node-fetch';
 import xmlDom from 'xmldom';
 import toGeoJSON from '@mapbox/togeojson';
@@ -118,36 +117,5 @@ export default class Helpers {
         return getClient().elevationAlongPath({ path, samples: MAXIMUM_NUMBER_OF_SAMPLES })
             .asPromise()
             .then(response => response.json.results);
-    }
-
-    static getRouteParameters(routeParamsUrl) {
-        return new Promise((resolve, reject) => {
-            fetch(routeParamsUrl)
-                .then(res => res.json())
-                .then(data => {
-                    logger.debug('Route parameters:', data);
-                    if (data.success === 1) {
-                        resolve(data);
-                    } else {
-                        reject(`Server side error: ${data.error}`);
-                    }
-                })
-                .catch(error => {
-                    logger.error(`Route parameters data fetching error. Status: ${error}`);
-                    reject('Route parameters data fetching error');
-                });
-        });
-    }
-
-    static approveRoute(routeApproveUrl) {
-        return new Promise((resolve, reject) => {
-            $.ajax(routeApproveUrl)
-                .done(data => {
-                    resolve({ success: true });
-                })
-                .fail((xhr, status) => {
-                    reject(status);
-                });
-        });
     }
 }
