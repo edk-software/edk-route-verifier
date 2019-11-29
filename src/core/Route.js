@@ -91,33 +91,37 @@ export default class Route {
         return result;
     }
 
-    fetchPathElevationData() {
-        return helpers
-            .getPathElevations(this.path)
-            .then(elevations => {
-                logger.debug('Path elevations:', elevations);
-                this.pathElevation = new PathElevation(elevations, this.length);
-                // Update route type
-                if (this.type !== ROUTE_TYPE.NORMAL) {
-                    if (
-                        this.pathElevation.gain > SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN &&
-                        this.length >= SHORT_NORMAL_ROUTE_MIN_LENGTH
-                    ) {
-                        this.type = ROUTE_TYPE.NORMAL;
-                    } else if (this.length >= INSPIRED_ROUTE_MIN_LENGTH) {
-                        this.type = ROUTE_TYPE.INSPIRED;
+    fetchData() {
+        if (this.isVerifiable()) {
+            return helpers
+                .getPathElevations(this.path)
+                .then(elevations => {
+                    logger.debug('Path elevations:', elevations);
+                    this.pathElevation = new PathElevation(elevations, this.length);
+                    // Update route type
+                    if (this.type !== ROUTE_TYPE.NORMAL) {
+                        if (
+                            this.pathElevation.gain > SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN &&
+                            this.length >= SHORT_NORMAL_ROUTE_MIN_LENGTH
+                        ) {
+                            this.type = ROUTE_TYPE.NORMAL;
+                        } else if (this.length >= INSPIRED_ROUTE_MIN_LENGTH) {
+                            this.type = ROUTE_TYPE.INSPIRED;
+                        }
                     }
-                }
-                return this.pathElevation;
-            })
-            .catch(error => {
-                logger.error('Path elevation data fetching error');
-                logger.error(Object.keys(error));
-                logger.error(error.statusMessage);
-                logger.error(error.statusCode);
-                logger.error(error.status);
-                return Promise.reject('Path elevation data fetching error');
-            });
+                    return this.pathElevation;
+                })
+                .catch(error => {
+                    logger.error('Path elevation data fetching error');
+                    logger.error(Object.keys(error));
+                    logger.error(error.statusMessage);
+                    logger.error(error.statusCode);
+                    logger.error(error.status);
+                    return Promise.reject('Path elevation data fetching error');
+                });
+        }
+
+        return Promise.reject('Route is unverifiable');
     }
 
     getLength() {

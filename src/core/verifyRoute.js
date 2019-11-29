@@ -27,24 +27,18 @@ export default function verifyRoute(routeData, verificationOption) {
     const geoJson = helpers.getGeoJSON(routeData.kml);
     const route = new Route(geoJson);
 
-    return new Promise((resolve, reject) => {
-        if (!route.isVerifiable()) {
-            return reject('Route is unverifiable');
-        }
-
-        // Path basic checks
-        verificationOutput.setSinglePath(route.isSinglePath());
-        verificationOutput.setPathLength(true, route.getLength());
-
-        // Station checks
-        verificationOutput.setNumberOfStations(route.areAllStationsPresent());
-        verificationOutput.setStationsOrder(route.isStationOrderCorrect());
-        verificationOutput.setStationsOnPath(route.areStationsOnThePath());
-
-        return resolve();
-    })
-        .then(() => route.fetchPathElevationData())
+    return route
+        .fetchData()
         .then(pathElevation => {
+            // Path basic checks
+            verificationOutput.setSinglePath(route.isSinglePath());
+            verificationOutput.setPathLength(true, route.getLength());
+
+            // Station checks
+            verificationOutput.setNumberOfStations(route.areAllStationsPresent());
+            verificationOutput.setStationsOrder(route.isStationOrderCorrect());
+            verificationOutput.setStationsOnPath(route.areStationsOnThePath());
+
             // Elevations calculation
             verificationOutput.setElevationCharacteristics(pathElevation.getData());
             verificationOutput.setElevationGain(true, pathElevation.gain);
