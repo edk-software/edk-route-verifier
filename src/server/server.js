@@ -11,9 +11,9 @@ export function startServer(config, port = 9102, language = 'en', debug = false)
     const app = express();
 
     app.post('/api/verify', cors(), bodyParser.json(), (req, res) => {
-        const { kmlFile, language: l = language, debug: d = debug } = req.body;
+        const { kml, language: l = language, debug: d = debug } = req.body;
 
-        const routeData = new RouteVerificationInput(kmlFile);
+        const routeData = new RouteVerificationInput(kml);
         const verificationOption = new RouteVerificationOptions(config, l, d);
 
         verifyRoute(routeData, verificationOption)
