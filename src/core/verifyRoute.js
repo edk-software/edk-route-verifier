@@ -27,20 +27,23 @@ export default function verifyRoute(routeData, verificationOption) {
     const geoJson = helpers.getGeoJSON(routeData.kml);
     const route = new Route(geoJson);
 
-    if (!route.isVerifiable()) {
-        return Promise.reject('Route is unverifiable');
-    }
+    return new Promise((resolve, reject) => {
+        if (!route.isVerifiable()) {
+            return reject('Route is unverifiable');
+        }
 
-    // Path basic checks
-    verificationOutput.setSinglePath(route.isSinglePath());
-    verificationOutput.setPathLength(true, route.getLength());
+        // Path basic checks
+        verificationOutput.setSinglePath(route.isSinglePath());
+        verificationOutput.setPathLength(true, route.getLength());
 
-    // Station checks
-    verificationOutput.setNumberOfStations(route.areAllStationsPresent());
-    verificationOutput.setStationsOrder(route.isStationOrderCorrect());
-    verificationOutput.setStationsOnPath(route.areStationsOnThePath());
+        // Station checks
+        verificationOutput.setNumberOfStations(route.areAllStationsPresent());
+        verificationOutput.setStationsOrder(route.isStationOrderCorrect());
+        verificationOutput.setStationsOnPath(route.areStationsOnThePath());
 
-    return route.fetchPathElevationData()
+        return resolve();
+    })
+        .then(() => route.fetchPathElevationData())
         .then(pathElevation => {
             // Elevations calculation
             verificationOutput.setElevationCharacteristics(pathElevation.getData());
@@ -49,7 +52,7 @@ export default function verifyRoute(routeData, verificationOption) {
             verificationOutput.setElevationTotalChange(true, pathElevation.totalChange);
 
             // Route Type calculation
-            verificationOutput.setRouteType(route.isTypeValid());
+            verificationOutput.setRouteType(route.isTypeValid(), route.getType());
 
             // Sending status
             const routeSuccessfullyVerified = verificationOutput.getStatus();

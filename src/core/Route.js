@@ -21,7 +21,7 @@ const INSPIRED_ROUTE_MIN_LENGTH = 20; // kilometers
 const ROUTE_TYPE = {
     NORMAL: 0,
     INSPIRED: 1,
-    UNKNOWN: 2,
+    UNKNOWN: 2
 };
 
 let lang = null;
@@ -29,6 +29,9 @@ let logBuffer = null;
 
 export default class Route {
     constructor(geoJson) {
+        this.type = ROUTE_TYPE.UNKNOWN;
+        this.numberOfPaths = 0;
+        this.length = 0;
         this.geoJson = geoJson;
         this.lineString = helpers.getLineString(this.geoJson);
         this.points = helpers.getPoints(this.geoJson);
@@ -50,13 +53,8 @@ export default class Route {
             this.numberOfPaths = helpers.getNumberOfFeatures('LineString', this.geoJson);
             this.length = turfLength.default(this.path);
 
-            this.type = ROUTE_TYPE.UNKNOWN;
-            if (this.length >= NORMAL_ROUTE_MIN_LENGTH
-                || this.pathElevation.gain > SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN
-                && this.length >= SHORT_NORMAL_ROUTE_MIN_LENGTH) {
+            if (this.length >= NORMAL_ROUTE_MIN_LENGTH) {
                 this.type = ROUTE_TYPE.NORMAL;
-            } else if (this.length >= INSPIRED_ROUTE_MIN_LENGTH) {
-                this.type = ROUTE_TYPE.INSPIRED;
             }
         }
     }
@@ -94,10 +92,22 @@ export default class Route {
     }
 
     fetchPathElevationData() {
-        return helpers.getPathElevations(this.path)
+        return helpers
+            .getPathElevations(this.path)
             .then(elevations => {
                 logger.debug('Path elevations:', elevations);
                 this.pathElevation = new PathElevation(elevations, this.length);
+                // Update route type
+                if (this.type !== ROUTE_TYPE.NORMAL) {
+                    if (
+                        this.pathElevation.gain > SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN &&
+                        this.length >= SHORT_NORMAL_ROUTE_MIN_LENGTH
+                    ) {
+                        this.type = ROUTE_TYPE.NORMAL;
+                    } else if (this.length >= INSPIRED_ROUTE_MIN_LENGTH) {
+                        this.type = ROUTE_TYPE.INSPIRED;
+                    }
+                }
                 return this.pathElevation;
             })
             .catch(error => {

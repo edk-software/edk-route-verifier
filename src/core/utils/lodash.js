@@ -12,16 +12,4 @@ import min from 'lodash/min.js';
 import sortBy from 'lodash/sortBy.js';
 import template from 'lodash/template.js';
 
-export {
-    isEmpty,
-    isEqual,
-    isNull,
-    filter,
-    find,
-    get,
-    forEach,
-    map,
-    min,
-    sortBy,
-    template,
-};
+export { isEmpty, isEqual, isNull, filter, find, get, forEach, map, min, sortBy, template };

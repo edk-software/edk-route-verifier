@@ -38,38 +38,32 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-#
-#      - run:
-#          name: Install test server dependencies
-#          command: |
-#            cd server
-#            npm install
-#
-#      - run:
-#          name: Create test configuration file
-#          command: |
-#            cp server/config.json.template server/config.json
-#            sed -i "s/GOOGLE_MAPS_API_KEY/$GOOGLE_MAPS_API_KEY/i" server/config.json
-#
-#      - run:
-#          name: Start test server
-#          command: npm run start:prod
-#          background: true
-#
-#      - run:
-#          name: Wait for test server to be running
-#          shell: /bin/sh
-#          command: |
-#            wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 http://localhost:$PORT
-#            :
-#
-#      - run:
-#          name: Run tests
-#          command: npm run check:e2e
+
+      - run:
+          name: Create test configuration file
+          command: |
+            cp conf/config.json.template conf/config.json
+            sed -i "s/GOOGLE_MAPS_API_KEY/$GOOGLE_MAPS_API_KEY/i" conf/config.json
+
+      - run:
+          name: Start API server
+          command: npm run server
+          background: true
+
+      - run:
+          name: Wait for test server to be running
+          shell: /bin/sh
+          command: |
+            wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 http://localhost:$PORT
+            :
+
+      - run:
+          name: Run API tests
+          command: npm run apiTest
 
       - run:
           name: Check code style
-          command: npm run check:source
+          command: npm run lint
 
   deploy:
     <<: *defaults
