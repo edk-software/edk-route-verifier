@@ -12,8 +12,5 @@
   "Station found multiple times": "Stacja <%= number %> została znaleziona <%= times %> raz(y).",
   "Station not found": "Stacja <%= number %> nie została znaleziona.",
   "Invalid stations order": "Niewłaściwa kolejność stacji. Stacja <%= currentStationNumber %> jest za stacją <%= previousStationNumber %>.",
-  "Station too far from path": "Stacja <%= number %> jest za daleko od ścieżki. Maksymalny dopuszczalny dystans to <%= maximumDistance %> metrów.",
-  "Route parameter 'ascent' not consistent": "Parametr trasy 'suma wzniesień' niespójny. Oczekiwano: <%= expected %>m. Wyliczono: <%= calculated %>m.",
-  "Route parameter 'length' not consistent": "Parametr trasy 'długość trasy' niespójny. Oczekiwano: <%= expected %>km. Wyliczono: <%= calculated %>km.",
-  "Route parameter 'type' not consistent": "Parametr trasy 'typ trasy' niespójny. Oczekiwano: <%= expected %>. Wyliczono: <%= calculated %>."
+  "Station too far from path": "Stacja <%= number %> jest za daleko od ścieżki. Maksymalny dopuszczalny dystans to <%= maximumDistance %> metrów."
 }

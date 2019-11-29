@@ -12,8 +12,5 @@
   "Station not found": "Station <%= number %> not found.",
   "Station found multiple times": "Station <%= number %> found <%= times %> times.",
   "Invalid stations order": "Detected invalid order of stations. Station <%= currentStationNumber %> is after station <%= previousStationNumber %>.",
-  "Station too far from path": "Station <%= number %> is too far from path. Expected maximum distance from path <%= maximumDistance %> meter(s).",
-  "Route parameter 'ascent' not consistent": "Route parameter 'ascent' not consistent. Expected: <%= expected %>m. Calculated: <%= calculated %>m.",
-  "Route parameter 'length' not consistent": "Route parameter 'length' not consistent. Expected: <%= expected %>km. Calculated: <%= calculated %>km.",
-  "Route parameter 'type' not consistent": "Route parameter 'type' not consistent. Expected: <%= expected %>. Calculated: <%= calculated %>."
+  "Station too far from path": "Station <%= number %> is too far from path. Expected maximum distance from path <%= maximumDistance %> meter(s)."
 }

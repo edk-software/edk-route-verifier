@@ -3,21 +3,18 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 
 import verifyRoute from '../core/verifyRoute.js';
-import RouteVerificationInput from '../data/input/RouteVerificationInput.js';
-import RouteParameters from '../data/input/RouteParameters.js';
-import RouteVerificationOptions from '../data/input/RouteVerificationOptions.js';
+import RouteVerificationInput from '../data/RouteVerificationInput.js';
+import RouteVerificationOptions from '../data/RouteVerificationOptions.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export function startServer(config, port = 9102, language = 'en', debug = false) {
     const app = express();
 
     app.post('/api/verify', cors(), bodyParser.json(), (req, res) => {
-        const {
-            ascent, kmlFile, length, type,
-        } = req.body;
+        const { kmlFile, language: l = language, debug: d = debug } = req.body;
 
-        const routeData = new RouteVerificationInput(kmlFile, new RouteParameters(ascent, length, type));
-        const verificationOption = new RouteVerificationOptions(config, language, debug);
+        const routeData = new RouteVerificationInput(kmlFile);
+        const verificationOption = new RouteVerificationOptions(config, l, d);
 
         verifyRoute(routeData, verificationOption)
             .then(verificationOutput => {
