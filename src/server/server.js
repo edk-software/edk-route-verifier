@@ -1,6 +1,7 @@
-import express from 'express';
-import cors from 'cors';
 import bodyParser from 'body-parser';
+import cors from 'cors';
+import express from 'express';
+import logger from 'loglevel';
 
 import verifyRoute from '../core/verifyRoute.js';
 import RouteVerificationInput from '../data/RouteVerificationInput.js';
@@ -28,6 +29,12 @@ export function startServer(config, port = 9102, language = 'en', debug = false)
 
     // TODO block other endpoints
 
-    console.log(`Starting server at http://localhost:${port}.`);
+    if (debug) {
+        logger.setLevel('debug');
+    } else {
+        logger.setLevel('info');
+    }
+
+    logger.info(`Starting server at http://localhost:${port}.`);
     app.listen(port);
 }

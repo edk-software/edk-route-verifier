@@ -22,6 +22,11 @@ export default function verifyRoute(routeData, verificationOption) {
     const lang = new Lang(verificationOption.language);
     const logBuffer = new LogBuffer();
     logBuffer.cleanLogs();
+    if (verificationOption.debug) {
+        logger.setLevel('debug');
+    } else {
+        logger.setLevel('info');
+    }
 
     const verificationOutput = new RouteVerificationOutput();
     const geoJson = helpers.getGeoJSON(routeData.kml);
@@ -61,10 +66,4 @@ export default function verifyRoute(routeData, verificationOption) {
             verificationOutput.setLogs(logBuffer.getLogs());
             return verificationOutput.getObject();
         });
-}
-
-if (process.env.NODE_ENV === 'production') {
-    logger.setLevel('warn');
-} else {
-    logger.setLevel('info');
 }

@@ -109,35 +109,8 @@ export default class Stations {
             const location = point.properties.nearestOnLine.properties.location;
             logger.debug(`Distance from path: ${dist.toFixed(2)} meter(s).`);
             logger.debug(`Location on path: ${location.toFixed(2)} meter(s).`);
-
-            // this.addDebugInformationToMap(point, nearestPointOnSlicedPath);
         });
     }
-
-    // addDebugInformationToMap(originalPoint, nearestPoint) {
-    //     if (logger.getLevel() <= logger.levels.DEBUG && !!window.map) {
-    //         new google.maps.Marker({
-    //             position: helpers.getGoogleMapsLatLng(nearestPoint.geometry.coordinates),
-    //             map: window.map,
-    //             label: {
-    //                 fontWeight: 'bold',
-    //                 text: `${originalPoint.properties.index}`,
-    //             },
-    //             title: `${originalPoint.properties.index}`,
-    //             icon: 'https://maps.google.com/mapfiles/ms/icons/yellow.png',
-    //         });
-    //         new google.maps.Marker({
-    //             position: helpers.getGoogleMapsLatLng(originalPoint.geometry.coordinates),
-    //             map: window.map,
-    //             label: {
-    //                 fontWeight: 'bold',
-    //                 text: `${originalPoint.properties.index}`,
-    //             },
-    //             title: `${originalPoint.properties.index}`,
-    //             icon: 'https://maps.google.com/mapfiles/ms/icons/blue.png',
-    //         });
-    //     }
-    // }
 
     sortByIndex() {
         const getIndex = point => _.get(point, 'properties.index', Number.MAX_VALUE);
@@ -400,5 +373,42 @@ export default class Stations {
 
         logger.debug('getPathEndingOnLastStation: Returning original path. Last station not found.');
         return this.path;
+    }
+
+    getStations() {
+        const stations = [];
+        _.forEach(this.points, station => {
+            const { index, nearestOnLine } = station.properties;
+
+            if (index >= CONSTS.FIRST_STATION_INDEX && index <= CONSTS.LAST_STATION_INDEX) {
+                const { coordinates } = station.geometry;
+                const latitude = coordinates[1];
+                const longitude = coordinates[0];
+
+                let stationObject = {
+                    index,
+                    latitude,
+                    longitude
+                };
+
+                if (logger.getLevel() <= logger.levels.DEBUG) {
+                    const { coordinates: neareastPointCoordinates } = nearestOnLine.geometry;
+                    const neareastPointLatitude = neareastPointCoordinates[1];
+                    const neareastPointLongitude = neareastPointCoordinates[0];
+
+                    stationObject = {
+                        ...stationObject,
+                        nearestPoint: {
+                            latitude: neareastPointLatitude,
+                            longitude: neareastPointLongitude
+                        }
+                    };
+                }
+
+                stations.push(stationObject);
+            }
+        });
+
+        return _.sortBy(stations, 'index');
     }
 }
