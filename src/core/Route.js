@@ -124,6 +124,10 @@ export default class Route {
         return Promise.reject('Route is unverifiable');
     }
 
+    getStations() {
+        return this.stations.getStations();
+    }
+
     getLength() {
         return this.length;
     }
