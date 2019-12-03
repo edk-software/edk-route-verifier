@@ -57,7 +57,7 @@
         <section class="content-header">
             <h1>Lista tras</h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Lista tras</li>
             </ol>
         </section>
@@ -67,14 +67,18 @@
             <!-- row -->
             <div class="row">
                 <div class="col-md-12">
-                    <ul>
+                    <div>
                         <% for(var i=0; i<resources.length; i++) {%>
-                           <li><a href="/<%= resources[i] %>"><%= resources[i] %></a></li>
+                            <a class="text-black" href="/<%= resources[i] %>">
+                                <button type="button" class="btn btn-default btn-block">
+                                    <%= resources[i] %>
+                                </button>
+                            </a>
                         <% } %>
-                    </ul>
+                    </div>
                 </div>
             </div>
-            
+
         </section>
         <!-- /.content -->
     </div>

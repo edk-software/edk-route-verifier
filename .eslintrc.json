@@ -19,5 +19,16 @@
     },
     "env" : {
         "node" : true
-    }
+    },
+    "overrides": [{
+        "files": [ "src/browser/**" ],
+        "env" : {
+            "browser" : true,
+            "jquery": true
+        },
+        "globals": {
+            "google": true,
+            "geoXML3": true
+        }
+    }]
 }

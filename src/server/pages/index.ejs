@@ -22,7 +22,6 @@
     <script src="https://raw.githack.com/edk-software/rejony-app/master/web/js/base.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 
     <!-- Google Font -->
     <link rel="stylesheet"
@@ -58,6 +57,21 @@
                     </a>
                 <% } %>
             </div>
+
+            <div class="box-body bg-gray">
+                <h4>
+                    Trasy
+                </h4>
+                <div>
+                    <% for(var i=0; i<resources.length; i++) {%>
+                        <a class="<%= routeId === resources[i] ? 'text-gray' : 'text-black' %>" href="/<%= resources[i] %>">
+                            <button type="button" class="btn btn-default btn-block <%= routeId === resources[i] ? 'bg-green' : '' %>">
+                                <%= resources[i] %>
+                            </button>
+                        </a>
+                    <% } %>
+                </div>
+            </div>
         </section>
         <!-- /.sidebar -->
     </aside>
@@ -68,7 +82,7 @@
         <section class="content-header">
             <h1>Trasa</h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Trasa</li>
             </ol>
         </section>
@@ -76,6 +90,31 @@
         <!-- Main content -->
         <section class="content">
             <!-- row -->
+
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-md-12">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-check"></i> Wizualizacja trasy</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="map-canvas"
+                             data-what="http://localhost:<%= serverPort %>/kml/<%= routeId %>"
+                             data-route-params="http://localhost:<%= serverPort %>/route-params/<%= routeId %>"
+                             data-route-approve="http://localhost:<%= serverPort %>/route-approve/<%= routeId %>"
+                             style="height: 400px">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="box box-solid">
@@ -208,18 +247,6 @@
                                 </div>
                                 <!-- /.info-box -->
                             </div>
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div id="dataConsistency" class="info-box">
-                                    <span class="info-box-icon bg-gray-light"><i class="fa fa-warning"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Zgodność danych</span>
-                                        <span class="users-list-date">Długość trasy (±1km), suma podejść (±50m) oraz typ powinny zgadzać się z wyliczonymi wartościami.</span>
-                                    </div>
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
                         </div>
                         <div class="box-footer">
                             <div class="col-md-12">
@@ -231,29 +258,6 @@
                 </div>
             </div>
             <!-- row -->
-            <div class="row">
-                <!-- /.col -->
-                <div class="col-md-12">
-                    <div class="box box-solid">
-                        <div class="box-header with-border">
-                            <h3 class="box-title"><i class="fa fa-check"></i> Wizualizacja trasy</h3>
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div id="map-canvas"
-                             data-what="http://localhost:<%= serverPort %>/kml/<%= routeId %>"
-                             data-route-params="http://localhost:<%= serverPort %>/route-params/<%= routeId %>"
-                             data-route-approve="http://localhost:<%= serverPort %>/route-approve/<%= routeId %>"
-                             style="height: 400px">
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
         </section>
         <!-- /.content -->
     </div>
@@ -273,7 +277,7 @@
                     <h4 class="modal-title">Weryfikacja zakończona sukcesem</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Strona zostanie odświeżona w ciągu 5 sekund...</p>
+                    <p>Nie wykryto błędów podczas weryfikacji.</p>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -303,10 +307,10 @@
 <!-- ./wrapper -->
 
 <script type="text/javascript" src="https://raw.githack.com/geocodezip/geoxml3/master/polys/geoxml3.js"></script>
-<script src="/static/js/loadMap.js"></script>
-<script src="/static/js/<%= jsFilename %>"></script>
+<script src="/browser/loadMap.js"></script>
+<script src="/browser/verifier.js"></script>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= googleMapsApiKey %>&libraries=geometry&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= googleMapsApiKey %>&libraries=geometry&callback=loadMap"></script>
 
 </body>
 </html>
