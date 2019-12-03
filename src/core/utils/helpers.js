@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import xmlDom from 'xmldom';
 import toGeoJSON from '@mapbox/togeojson';
 import flatten from '@turf/flatten';
@@ -11,7 +10,7 @@ export default class Helpers {
         const domParser = new xmlDom.DOMParser();
         const kml = domParser.parseFromString(kmlString);
         const extendedData = kml.getElementsByTagName('ExtendedData');
-        for (let index = extendedData.length - 1; index >= 0; index--) {
+        for (let index = extendedData.length - 1; index >= 0; index -= 1) {
             extendedData[index].parentNode.removeChild(extendedData[index]);
         }
         logger.log('KML (no ExtendedData):', kml);
@@ -29,8 +28,7 @@ export default class Helpers {
     }
 
     static getLineString(geoJson) {
-        const lineString = _.find(geoJson.features, feature => _.isEqual(feature.geometry.type, 'LineString'));
-        return lineString;
+        return _.find(geoJson.features, feature => _.isEqual(feature.geometry.type, 'LineString'));
     }
 
     static getDistanceToNearestPointOnLine(point) {
@@ -48,24 +46,7 @@ export default class Helpers {
     }
 
     static getPoints(geoJson) {
-        const points = _.filter(geoJson.features, feature => _.isEqual(feature.geometry.type, 'Point'));
-        return points;
-    }
-
-    static getRoute(routeUrl) {
-        logger.debug('Fetching route from:', routeUrl);
-        return new Promise((resolve, reject) => {
-            fetch(routeUrl)
-                .then(res => res.text())
-                .then(data => {
-                    logger.debug('Route data:', data);
-                    resolve(data);
-                })
-                .catch(status => {
-                    logger.error(`Route fetching error. Status: ${status}`);
-                    reject('Route fetching error');
-                });
-        });
+        return _.filter(geoJson.features, feature => _.isEqual(feature.geometry.type, 'Point'));
     }
 
     static getGoogleMapsLatLng(coordinates) {
@@ -73,22 +54,10 @@ export default class Helpers {
     }
 
     static getGoogleMapsPath(lineString) {
-        const path = _.map(lineString.geometry.coordinates, element => Helpers.getGoogleMapsLatLng(element));
-        return path;
+        return _.map(lineString.geometry.coordinates, element => Helpers.getGoogleMapsLatLng(element));
     }
 
-    static getPathElevations(lineString, useLocalElevations) {
-        if (useLocalElevations && lineString.geometry.coordinates[0].length === 3) {
-            // Elevation present in line string
-
-            logger.debug('Getting path elevations from line string...');
-            const elevations = _.map(lineString.geometry.coordinates, element => ({ elevation: element[2] }));
-            logger.debug('Elevations:', elevations);
-            return new Promise((resolve, reject) => {
-                resolve(elevations);
-            });
-        }
-        // No elevation in line string
+    static getPathElevations(lineString) {
         let path = this.getGoogleMapsPath(lineString);
 
         // Optimize path array length
