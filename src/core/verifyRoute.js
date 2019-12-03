@@ -18,8 +18,12 @@ export default function verifyRoute(routeData, verificationOption) {
         throw Error('Invalid type of second argument passed to verifyRoute function.');
     }
 
+    // Creating singleton Configuration and Lang instances
+    // eslint-disable-next-line no-unused-vars
     const config = new Configuration(verificationOption.config);
+    // eslint-disable-next-line no-unused-vars
     const lang = new Lang(verificationOption.language);
+
     const logBuffer = new LogBuffer();
     logBuffer.cleanLogs();
     if (verificationOption.debug) {
@@ -59,10 +63,14 @@ export default function verifyRoute(routeData, verificationOption) {
                 logger.info('Route verification succeeded.');
                 return verificationOutput.getObject();
             }
-            return Promise.reject('Route verification failed');
+
+            logger.info('Route verification failed.');
+            verificationOutput.setLogs(logBuffer.getLogs());
+            return verificationOutput.getObject();
         })
         .catch(error => {
-            logBuffer.add(lang.trans(error));
+            logger.error(`Error during verification. ${error}`);
+
             verificationOutput.setLogs(logBuffer.getLogs());
             return verificationOutput.getObject();
         });

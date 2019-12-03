@@ -8,7 +8,7 @@ import RouteVerificationOptions from '../data/RouteVerificationOptions.js';
 import verifyRoute from '../core/verifyRoute.js';
 import { startServer } from '../server/server.js';
 
-const argv = yargs
+const { argv } = yargs
     .scriptName('edk-route-verifier')
     .usage('Usage: $0 <command> -c <config-file> [options]')
     .command('server [options] [-p port]', 'Starts server providing verification API', y =>
@@ -61,7 +61,7 @@ const argv = yargs
     .alias('v', 'version')
     .help('h')
     .alias('h', 'help')
-    .wrap(Math.min(120, yargs.terminalWidth())).argv;
+    .wrap(Math.min(120, yargs.terminalWidth()));
 
 const commands = argv._;
 const { config, language, debug } = argv;

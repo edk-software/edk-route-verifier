@@ -64,9 +64,12 @@ export default class Stations {
         const sampleDistance = stepDistance / 10;
 
         let nearestPointOnSlicedPath = null;
+        const updatedPoints = [];
+
         _.forEach(this.points, point => {
+            const updatedPoint = point;
             // Filter out point if it is too far from path
-            const coordinates = point.geometry.coordinates;
+            const { coordinates } = point.geometry;
             const distanceToPath = turf.pointToLineDistance(coordinates, this.path, turf.options);
             const maximumDistanceFromPath = 200; // meters
             if (distanceToPath > maximumDistanceFromPath) {
@@ -74,7 +77,10 @@ export default class Stations {
                     `Point ${point.properties.name} too far from the path. ` +
                         'Not looking for nearest point on line for it.'
                 );
-                point.properties.nearestOnLine = turf.nearestPointOnLine(this.path, point, turf.options);
+
+                updatedPoint.properties.nearestOnLine = turf.nearestPointOnLine(this.path, point, turf.options);
+                updatedPoints.push(updatedPoint);
+
                 return true;
             }
 
@@ -100,16 +106,21 @@ export default class Stations {
             }
 
             // Save nearest point on line for the specific station
-            point.properties.nearestOnLine = nearestPointOnSlicedPath;
+            updatedPoint.properties.nearestOnLine = nearestPointOnSlicedPath;
 
             // Update location on line (starting from the path beginning)
-            point.properties.nearestOnLine.properties.location += startPointDistance;
+            updatedPoint.properties.nearestOnLine.properties.location += startPointDistance;
 
-            const dist = point.properties.nearestOnLine.properties.dist;
-            const location = point.properties.nearestOnLine.properties.location;
+            const { dist } = updatedPoint.properties.nearestOnLine.properties;
+            const { location } = updatedPoint.properties.nearestOnLine.properties;
             logger.debug(`Distance from path: ${dist.toFixed(2)} meter(s).`);
             logger.debug(`Location on path: ${location.toFixed(2)} meter(s).`);
+
+            updatedPoints.push(updatedPoint);
+            return true;
         });
+
+        this.points = updatedPoints;
     }
 
     sortByIndex() {
@@ -132,7 +143,7 @@ export default class Stations {
             const END_NAMES_REGEX = /^(zakończenie|koniec|podsumowanie)$/gi;
             const ROMAN_NUMBERS_REGEX = /^(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV)$/g;
             const EUROPEAN_NUMBERS_REGEX = /^\d+$/g;
-            const SPLITTER_REGEX = /[ ,\._\-:;]+/;
+            const SPLITTER_REGEX = /[ ,._\-:;]+/;
             const ROMAN_EUROPEAN_MAP = {
                 I: 1,
                 II: 2,
@@ -174,7 +185,7 @@ export default class Stations {
                 // try european numbers
                 matches = part.match(EUROPEAN_NUMBERS_REGEX);
                 if (!_.isNull(matches)) {
-                    const stationNumber = parseInt(matches[0]);
+                    const stationNumber = parseInt(matches[0], 10);
                     if (stationNumber >= CONSTS.FIRST_STATION_INDEX && stationNumber <= CONSTS.LAST_STATION_INDEX) {
                         index = stationNumber;
                         return false;
@@ -195,16 +206,19 @@ export default class Stations {
                     index = CONSTS.END_INDEX;
                     return false;
                 }
+
+                return true;
             });
 
             return index;
         };
 
         this.points = _.map(this.points, point => {
-            const name = point.properties.name;
+            const { name } = point.properties;
+            const updatedPoint = point;
 
-            point.properties.index = getIndex(name);
-            return point;
+            updatedPoint.properties.index = getIndex(name);
+            return updatedPoint;
         });
     }
 
@@ -245,10 +259,10 @@ export default class Stations {
 
     updateCircularity() {
         const maxDistanceBetweenPathEnds = 1000; // meters
-        const distance = turf.distance(this.pathStart, this.pathEnd, turf.options);
+        const distanceBetweenPathEnds = turf.distance(this.pathStart, this.pathEnd, turf.options);
 
-        logger.debug('Distance between path start and end points:', distance.toFixed(2), 'meters.');
-        if (distance <= maxDistanceBetweenPathEnds) {
+        logger.debug('Distance between path start and end points:', distanceBetweenPathEnds.toFixed(2), 'meters.');
+        if (distanceBetweenPathEnds <= maxDistanceBetweenPathEnds) {
             logger.debug('Circular path detected.');
             this.pathCircular = true;
         } else {
@@ -263,7 +277,7 @@ export default class Stations {
         for (
             let stationNumber = CONSTS.FIRST_STATION_INDEX;
             stationNumber <= CONSTS.LAST_STATION_INDEX;
-            stationNumber++
+            stationNumber += 1
         ) {
             let firstStationName = '';
             const stationsOfNumber = _.filter(this.points, station => {
@@ -284,7 +298,7 @@ export default class Stations {
                 logBuffer.add(lang.trans('Station not found', { number: stationNumber }));
             } else {
                 logger.debug(`Station ${stationNumber} found. Station name: ${firstStationName}`);
-                numberOfStations++;
+                numberOfStations += 1;
             }
         }
         return numberOfStations;
@@ -293,7 +307,7 @@ export default class Stations {
     isOrderCorrect() {
         let result = true;
 
-        for (let i = 1; i < this.points.length; i++) {
+        for (let i = 1; i < this.points.length; i += 1) {
             const currentStationNumber = this.points[i].properties.index;
             const previousStationNumber = this.points[i - 1].properties.index;
             logger.debug(`Point ${i - 1}`);
