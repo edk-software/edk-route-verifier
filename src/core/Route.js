@@ -112,16 +112,14 @@ export default class Route {
                     return this.pathElevation;
                 })
                 .catch(error => {
-                    logger.error('Path elevation data fetching error');
-                    logger.error(Object.keys(error));
-                    logger.error(error.statusMessage);
-                    logger.error(error.statusCode);
-                    logger.error(error.status);
-                    return Promise.reject('Path elevation data fetching error');
+                    const { status, statusCode, statusMessage } = error;
+                    logger.error(`Path elevation data fetching error. 
+                    Code: ${statusCode}. Status: ${status}. Message: ${statusMessage}`);
+                    return Promise.reject(new Error('Path elevation data fetching error'));
                 });
         }
 
-        return Promise.reject('Route is unverifiable');
+        return Promise.reject(new Error('Route is unverifiable'));
     }
 
     getStations() {
