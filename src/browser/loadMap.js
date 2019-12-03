@@ -1,4 +1,5 @@
-function initMap() {
+// eslint-disable-next-line no-unused-vars
+function loadMap() {
     const src = document.getElementById('map-canvas').getAttribute('data-what');
 
     window.map = new google.maps.Map(document.getElementById('map-canvas'), {

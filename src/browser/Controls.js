@@ -1,4 +1,5 @@
 import logger from 'loglevel';
+import Chart from 'chart.js';
 
 import * as _ from '../core/utils/lodash.js';
 
@@ -55,11 +56,16 @@ export default class Controls {
         };
     }
 
-    updateRouteType(isNormalRoute) {
+    updateRouteType(isRouteTypeValid, routeType) {
         const normalRouteString = $('input#normalRouteString').attr('value');
         const inspiredRouteString = $('input#inspiredRouteString').attr('value');
-        this.updateControlValue(ROUTE_TYPE_ID, isNormalRoute ? normalRouteString : inspiredRouteString);
-        this.updateControlColor(ROUTE_TYPE_ID, true);
+
+        if (routeType === 0) {
+            this.updateControlValue(ROUTE_TYPE_ID, normalRouteString);
+        } else if (routeType === 1) {
+            this.updateControlValue(ROUTE_TYPE_ID, inspiredRouteString);
+        }
+        this.updateControlColor(ROUTE_TYPE_ID, isRouteTypeValid);
     }
 
     updatePathLength(isLengthValid, length) {
@@ -108,13 +114,14 @@ export default class Controls {
         const Y_AXIS_LABEL_STRING = '[m]';
         const CHART_BACKGROUND_COLOR = 'rgb(32, 77, 116)';
 
-        const labelWidth = parseInt(pathElevation.data.length / X_AXIS_NUMBER_OF_LABELS, 10);
-        const labels = _.map(pathElevation.data, elevation => elevation.distance.toFixed());
-        const data = _.map(pathElevation.data, elevation => elevation.elevation);
+        const labelWidth = parseInt(pathElevation.length / X_AXIS_NUMBER_OF_LABELS, 10);
+        const labels = _.map(pathElevation, elevation => elevation.distance.toFixed());
+        const data = _.map(pathElevation, elevation => elevation.elevation);
 
         logger.debug('Drawing elevation chart. Input:', pathElevation);
 
-        const elevationChart = new Chart($(ELEVATION_CHART_ID), {
+        // eslint-disable-next-line no-unused-vars
+        this.elevationChart = new Chart($(ELEVATION_CHART_ID), {
             type: 'line',
             data: {
                 labels,
@@ -138,9 +145,7 @@ export default class Controls {
                             },
                             ticks: {
                                 callback: (dataLabel, index) =>
-                                    index % labelWidth === 0 || index === pathElevation.data.length - 1
-                                        ? dataLabel
-                                        : null
+                                    index % labelWidth === 0 || index === pathElevation.length - 1 ? dataLabel : null
                             }
                         }
                     ],
@@ -163,22 +168,26 @@ export default class Controls {
         });
     }
 
+    // eslint-disable-next-line class-methods-use-this
     resetElevationChart() {
         const elevationChartParentElement = $(ELEVATION_CHART_ID).parent();
         $(ELEVATION_CHART_ID).remove();
         elevationChartParentElement.append(ELEVATION_CHART_ELEMENT);
     }
 
+    // eslint-disable-next-line class-methods-use-this
     resetFailedVerificationModal() {
         $(FAILED_VERIFICATION_MODAL_BODY)
             .children()
             .remove();
     }
 
+    // eslint-disable-next-line class-methods-use-this
     addLoaderToButton() {
         $(VERIFY_BUTTON_ID).append(LOADER_ELEMENT);
     }
 
+    // eslint-disable-next-line class-methods-use-this
     removeLoaderFromButton() {
         $(`${VERIFY_BUTTON_ID} ${LOADER_ID}`).remove();
     }
@@ -206,14 +215,12 @@ export default class Controls {
         this.resetFailedVerificationModal();
     }
 
-    showVerificationSuccessModal(timeout) {
-        const reloadTimeout = setTimeout(() => {
-            window.location.reload(1);
-        }, timeout);
-        $(SUCCESS_VERIFICATION_MODAL_ID).on('hide.bs.modal', e => clearTimeout(reloadTimeout));
+    // eslint-disable-next-line class-methods-use-this
+    showVerificationSuccessModal() {
         $(SUCCESS_VERIFICATION_MODAL_ID).modal();
     }
 
+    // eslint-disable-next-line class-methods-use-this
     showVerificationFailedModal(errors = []) {
         let errorsListHtml = '';
         errorsListHtml += '<div><ul>';
