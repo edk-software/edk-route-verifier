@@ -25,7 +25,7 @@ const { argv } = yargs
             coerce: kmlFile => readFileSync(kmlFile, 'utf8')
         })
     )
-    // .command('browser', 'Run browser version of the verifer')
+    .command('browser', 'Run browser version of the verifer')
     .demandCommand(
         1,
         1,
@@ -57,7 +57,7 @@ const { argv } = yargs
         '$0 file -c config.json -l pl -d my_route.kml',
         'verifies my_route.kml and provides debug information in Polish language'
     )
-    // .example('$0 browser', 'starts server and browser version')
+    .example('$0 browser', 'starts API and static web content server')
     .alias('v', 'version')
     .help('h')
     .alias('h', 'help')
@@ -68,7 +68,7 @@ const { config, language, debug } = argv;
 
 if (commands.includes('server')) {
     const { port } = argv;
-    startServer(config, port, language, debug);
+    startServer(config, port, language, debug, false);
 } else if (commands.includes('file')) {
     const { kml } = argv;
 
@@ -76,4 +76,8 @@ if (commands.includes('server')) {
     const options = new RouteVerificationOptions(config, language, debug);
 
     verifyRoute(routeInput, options).then(data => console.log(data));
+} else if (commands.includes('browser')) {
+    const { port } = argv;
+
+    startServer(config, port, language, debug, true);
 }

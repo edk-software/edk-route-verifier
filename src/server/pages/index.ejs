@@ -303,8 +303,8 @@
 <!-- ./wrapper -->
 
 <script type="text/javascript" src="https://raw.githack.com/geocodezip/geoxml3/master/polys/geoxml3.js"></script>
-<script src="/static/js/loadMap.js"></script>
-<script src="/static/js/<%= jsFilename %>"></script>
+<script src="/browser/loadMap.js"></script>
+<script async type="module" src="/browser/verifier.js"></script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= googleMapsApiKey %>&libraries=geometry&callback=initMap"></script>
 

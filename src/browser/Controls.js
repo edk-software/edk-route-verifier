@@ -1,7 +1,6 @@
-/*
 import logger from 'loglevel';
 
-import * as _ from './utils/lodash.js';
+import * as _ from '../core/utils/lodash.js';
 
 // Constants
 const ROUTE_TYPE_ID = 'div#routeType';
@@ -23,81 +22,84 @@ const SUCCESS_VERIFICATION_MODAL_ID = 'div#pageReloadModal';
 const FAILED_VERIFICATION_MODAL_ID = 'div#verificationFailedModal';
 const FAILED_VERIFICATION_MODAL_BODY = `${FAILED_VERIFICATION_MODAL_ID} div.modal-body`;
 
-const updateControlColor = (element, isValid) => {
-    const VALID_COLOR_CLASS = 'bg-green';
-    const INVALID_COLOR_CLASS = 'bg-yellow';
-    const INFO_BOX_ICON = 'span.info-box-icon';
-
-    if (_.isNull(isValid)) {
-        $(`${element} ${INFO_BOX_ICON}`).removeClass([INVALID_COLOR_CLASS, VALID_COLOR_CLASS].join(' '));
-    } else {
-        (isValid)
-            ? $(`${element} ${INFO_BOX_ICON}`).removeClass(INVALID_COLOR_CLASS).addClass(VALID_COLOR_CLASS)
-            : $(`${element} ${INFO_BOX_ICON}`).removeClass(VALID_COLOR_CLASS).addClass(INVALID_COLOR_CLASS);
-    }
-};
-
-const updateControlValue = (element, value, unit) => {
-    const INFO_BOX_NUMBER = 'span.info-box-number';
-
-    logger.debug('Updating control element', element, 'with:', value, unit);
-    $(`${element} ${INFO_BOX_NUMBER}`).html(`${value} ${unit ? `<small>${unit}</small>` : ''}`);
-};
-
-const removeControlChildren = element => {
-    $(ELEVATION_CHART_ID).empty();
-};
-
-
 export default class Controls {
     // Constructor
+    constructor() {
+        this.updateControlColor = (element, isValid) => {
+            const VALID_COLOR_CLASS = 'bg-green';
+            const INVALID_COLOR_CLASS = 'bg-yellow';
+            const INFO_BOX_ICON = 'span.info-box-icon';
 
+            if (_.isNull(isValid)) {
+                $(`${element} ${INFO_BOX_ICON}`).removeClass([INVALID_COLOR_CLASS, VALID_COLOR_CLASS].join(' '));
+            } else if (isValid) {
+                $(`${element} ${INFO_BOX_ICON}`)
+                    .removeClass(INVALID_COLOR_CLASS)
+                    .addClass(VALID_COLOR_CLASS);
+            } else {
+                $(`${element} ${INFO_BOX_ICON}`)
+                    .removeClass(VALID_COLOR_CLASS)
+                    .addClass(INVALID_COLOR_CLASS);
+            }
+        };
+
+        this.updateControlValue = (element, value, unit) => {
+            const INFO_BOX_NUMBER = 'span.info-box-number';
+
+            logger.debug('Updating control element', element, 'with:', value, unit);
+            $(`${element} ${INFO_BOX_NUMBER}`).html(`${value} ${unit ? `<small>${unit}</small>` : ''}`);
+        };
+
+        this.removeControlChildren = () => {
+            $(ELEVATION_CHART_ID).empty();
+        };
+    }
 
     updateRouteType(isNormalRoute) {
         const normalRouteString = $('input#normalRouteString').attr('value');
         const inspiredRouteString = $('input#inspiredRouteString').attr('value');
-        updateControlValue(ROUTE_TYPE_ID, isNormalRoute ? normalRouteString : inspiredRouteString);
-        updateControlColor(ROUTE_TYPE_ID, true);
+        this.updateControlValue(ROUTE_TYPE_ID, isNormalRoute ? normalRouteString : inspiredRouteString);
+        this.updateControlColor(ROUTE_TYPE_ID, true);
     }
 
     updatePathLength(isLengthValid, length) {
-        updateControlValue(PATH_LENGTH_ID, length.toFixed(2), 'km');
-        updateControlColor(PATH_LENGTH_ID, isLengthValid);
+        this.updateControlValue(PATH_LENGTH_ID, length.toFixed(2), 'km');
+        this.updateControlColor(PATH_LENGTH_ID, isLengthValid);
     }
 
     updateElevationGain(isElevationGainValid, elevationGain) {
-        updateControlValue(ELEVATION_GAIN_ID, elevationGain.toFixed(2), 'm');
-        updateControlColor(ELEVATION_GAIN_ID, isElevationGainValid);
+        this.updateControlValue(ELEVATION_GAIN_ID, elevationGain.toFixed(2), 'm');
+        this.updateControlColor(ELEVATION_GAIN_ID, isElevationGainValid);
     }
 
     updateElevationLoss(isElevationLossValid, elevationLoss) {
-        updateControlValue(ELEVATION_LOSS_ID, elevationLoss.toFixed(2), 'm');
-        updateControlColor(ELEVATION_LOSS_ID, isElevationLossValid);
+        this.updateControlValue(ELEVATION_LOSS_ID, elevationLoss.toFixed(2), 'm');
+        this.updateControlColor(ELEVATION_LOSS_ID, isElevationLossValid);
     }
 
     updateElevationTotalChange(isElevationTotalChangeValid, elevationTotalChange) {
-        updateControlValue(ELEVATION_TOTAL_CHANGE_ID, elevationTotalChange.toFixed(2), 'm');
-        updateControlColor(ELEVATION_TOTAL_CHANGE_ID, isElevationTotalChangeValid);
+        this.updateControlValue(ELEVATION_TOTAL_CHANGE_ID, elevationTotalChange.toFixed(2), 'm');
+        this.updateControlColor(ELEVATION_TOTAL_CHANGE_ID, isElevationTotalChangeValid);
     }
 
     updateNumberOfStations(areAllStationsPresent) {
-        updateControlColor(NUMBER_OF_STATIONS_ID, areAllStationsPresent);
+        this.updateControlColor(NUMBER_OF_STATIONS_ID, areAllStationsPresent);
     }
 
     updateStationsOrder(isStationOrderCorrect) {
-        updateControlColor(STATIONS_ORDER_ID, isStationOrderCorrect);
+        this.updateControlColor(STATIONS_ORDER_ID, isStationOrderCorrect);
     }
 
     updateStationsOnPath(areAllStationsOnPath) {
-        updateControlColor(STATIONS_ON_PATH_ID, areAllStationsOnPath);
+        this.updateControlColor(STATIONS_ON_PATH_ID, areAllStationsOnPath);
     }
 
     updateSinglePath(isSinglePath) {
-        updateControlColor(SINGLE_PATH_ID, isSinglePath);
+        this.updateControlColor(SINGLE_PATH_ID, isSinglePath);
     }
 
     updateDataConsistency(isDataConsistent) {
-        updateControlColor(DATA_CONSISTENCY_ID, isDataConsistent);
+        this.updateControlColor(DATA_CONSISTENCY_ID, isDataConsistent);
     }
 
     drawElevationChart(pathElevation) {
@@ -106,7 +108,7 @@ export default class Controls {
         const Y_AXIS_LABEL_STRING = '[m]';
         const CHART_BACKGROUND_COLOR = 'rgb(32, 77, 116)';
 
-        const labelWidth = parseInt(pathElevation.data.length / X_AXIS_NUMBER_OF_LABELS);
+        const labelWidth = parseInt(pathElevation.data.length / X_AXIS_NUMBER_OF_LABELS, 10);
         const labels = _.map(pathElevation.data, elevation => elevation.distance.toFixed());
         const data = _.map(pathElevation.data, elevation => elevation.elevation);
 
@@ -116,43 +118,48 @@ export default class Controls {
             type: 'line',
             data: {
                 labels,
-                datasets: [{
-                    label: '',
-                    data,
-                    fill: 'start',
-                    radius: 0,
-                    backgroundColor: CHART_BACKGROUND_COLOR,
-                }],
+                datasets: [
+                    {
+                        label: '',
+                        data,
+                        fill: 'start',
+                        radius: 0,
+                        backgroundColor: CHART_BACKGROUND_COLOR
+                    }
+                ]
             },
             options: {
                 scales: {
-                    xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: X_AXIS_LABEL_STRING,
-                        },
-                        ticks: {
-                            callback: (dataLabel, index) => (index % labelWidth === 0
-                                || (index === pathElevation.data.length - 1)
-                                ? dataLabel
-                                : null)
-                            ,
-                        },
-                    }],
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: Y_AXIS_LABEL_STRING,
-                        },
-                    }],
+                    xAxes: [
+                        {
+                            scaleLabel: {
+                                display: true,
+                                labelString: X_AXIS_LABEL_STRING
+                            },
+                            ticks: {
+                                callback: (dataLabel, index) =>
+                                    index % labelWidth === 0 || index === pathElevation.data.length - 1
+                                        ? dataLabel
+                                        : null
+                            }
+                        }
+                    ],
+                    yAxes: [
+                        {
+                            scaleLabel: {
+                                display: true,
+                                labelString: Y_AXIS_LABEL_STRING
+                            }
+                        }
+                    ]
                 },
                 legend: {
-                    display: false,
+                    display: false
                 },
                 tooltips: {
-                    enabled: false,
-                },
-            },
+                    enabled: false
+                }
+            }
         });
     }
 
@@ -163,7 +170,9 @@ export default class Controls {
     }
 
     resetFailedVerificationModal() {
-        $(FAILED_VERIFICATION_MODAL_BODY).children().remove();
+        $(FAILED_VERIFICATION_MODAL_BODY)
+            .children()
+            .remove();
     }
 
     addLoaderToButton() {
@@ -178,21 +187,21 @@ export default class Controls {
         const text = '';
         const isValid = value === undefined ? null : value;
 
-        updateControlValue(ROUTE_TYPE_ID, text);
-        updateControlColor(ROUTE_TYPE_ID, isValid);
-        updateControlValue(PATH_LENGTH_ID, text);
-        updateControlColor(PATH_LENGTH_ID, isValid);
-        updateControlValue(ELEVATION_GAIN_ID, text);
-        updateControlColor(ELEVATION_GAIN_ID, isValid);
-        updateControlValue(ELEVATION_LOSS_ID, text);
-        updateControlColor(ELEVATION_LOSS_ID, isValid);
-        updateControlValue(ELEVATION_TOTAL_CHANGE_ID, text);
-        updateControlColor(ELEVATION_TOTAL_CHANGE_ID, isValid);
-        updateControlColor(NUMBER_OF_STATIONS_ID, isValid);
-        updateControlColor(STATIONS_ORDER_ID, isValid);
-        updateControlColor(STATIONS_ON_PATH_ID, isValid);
-        updateControlColor(SINGLE_PATH_ID, isValid);
-        updateControlColor(DATA_CONSISTENCY_ID, isValid);
+        this.updateControlValue(ROUTE_TYPE_ID, text);
+        this.updateControlColor(ROUTE_TYPE_ID, isValid);
+        this.updateControlValue(PATH_LENGTH_ID, text);
+        this.updateControlColor(PATH_LENGTH_ID, isValid);
+        this.updateControlValue(ELEVATION_GAIN_ID, text);
+        this.updateControlColor(ELEVATION_GAIN_ID, isValid);
+        this.updateControlValue(ELEVATION_LOSS_ID, text);
+        this.updateControlColor(ELEVATION_LOSS_ID, isValid);
+        this.updateControlValue(ELEVATION_TOTAL_CHANGE_ID, text);
+        this.updateControlColor(ELEVATION_TOTAL_CHANGE_ID, isValid);
+        this.updateControlColor(NUMBER_OF_STATIONS_ID, isValid);
+        this.updateControlColor(STATIONS_ORDER_ID, isValid);
+        this.updateControlColor(STATIONS_ON_PATH_ID, isValid);
+        this.updateControlColor(SINGLE_PATH_ID, isValid);
+        this.updateControlColor(DATA_CONSISTENCY_ID, isValid);
         this.resetElevationChart();
         this.resetFailedVerificationModal();
     }
@@ -208,11 +217,12 @@ export default class Controls {
     showVerificationFailedModal(errors = []) {
         let errorsListHtml = '';
         errorsListHtml += '<div><ul>';
-        errors.forEach(error => { errorsListHtml += `<li>${error}</li>`; });
+        errors.forEach(error => {
+            errorsListHtml += `<li>${error}</li>`;
+        });
         errorsListHtml += '</ul></div>';
 
         $(FAILED_VERIFICATION_MODAL_BODY).append(errorsListHtml);
         $(FAILED_VERIFICATION_MODAL_ID).modal();
     }
 }
-*/
