@@ -7,6 +7,7 @@ import RouteVerificationInput from '../data/RouteVerificationInput.js';
 import RouteVerificationOptions from '../data/RouteVerificationOptions.js';
 import verifyRoute from '../core/verifyRoute.js';
 import { startServer } from '../server/server.js';
+import CLIAdapter from './CLIAdapter.js';
 
 const { argv } = yargs
     .scriptName('edk-route-verifier')
@@ -75,7 +76,7 @@ if (commands.includes('server')) {
     const routeInput = new RouteVerificationInput(kml);
     const options = new RouteVerificationOptions(config, language, debug);
 
-    verifyRoute(routeInput, options).then(data => console.log(data));
+    verifyRoute(routeInput, options, new CLIAdapter()).then(output => output.get());
 } else if (commands.includes('browser')) {
     const { port } = argv;
 
