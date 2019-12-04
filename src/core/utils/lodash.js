@@ -3,6 +3,7 @@
 import isEmpty from 'lodash/isEmpty.js';
 import isEqual from 'lodash/isEqual.js';
 import isNull from 'lodash/isNull.js';
+import isNumber from 'lodash/isNumber.js';
 import filter from 'lodash/filter.js';
 import find from 'lodash/find.js';
 import forEach from 'lodash/forEach.js';
@@ -12,4 +13,4 @@ import min from 'lodash/min.js';
 import sortBy from 'lodash/sortBy.js';
 import template from 'lodash/template.js';
 
-export { isEmpty, isEqual, isNull, filter, find, get, forEach, map, min, sortBy, template };
+export { isEmpty, isEqual, isNull, isNumber, filter, find, get, forEach, map, min, sortBy, template };

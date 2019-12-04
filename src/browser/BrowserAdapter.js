@@ -2,6 +2,7 @@ import logger from 'loglevel';
 import Chart from 'chart.js';
 
 import * as _ from '../core/utils/lodash.js';
+import AbstractOutputAdapter from '../data/AbstractOutputAdapter.js';
 
 // Constants
 const ROUTE_TYPE_ID = 'div#routeType';
@@ -23,9 +24,10 @@ const SUCCESS_VERIFICATION_MODAL_ID = 'div#pageReloadModal';
 const FAILED_VERIFICATION_MODAL_ID = 'div#verificationFailedModal';
 const FAILED_VERIFICATION_MODAL_BODY = `${FAILED_VERIFICATION_MODAL_ID} div.modal-body`;
 
-export default class Controls {
-    // Constructor
+export default class BrowserAdapter extends AbstractOutputAdapter {
     constructor() {
+        super();
+
         this.updateControlColor = (element, isValid) => {
             const VALID_COLOR_CLASS = 'bg-green';
             const INVALID_COLOR_CLASS = 'bg-yellow';
@@ -50,10 +52,6 @@ export default class Controls {
             logger.debug('Updating control element', element, 'with:', value, unit);
             $(`${element} ${INFO_BOX_NUMBER}`).html(`${value} ${unit ? `<small>${unit}</small>` : ''}`);
         };
-
-        this.removeControlChildren = () => {
-            $(ELEVATION_CHART_ID).empty();
-        };
     }
 
     updateRouteType(isRouteTypeValid, routeType) {
@@ -69,22 +67,22 @@ export default class Controls {
     }
 
     updatePathLength(isLengthValid, length) {
-        this.updateControlValue(PATH_LENGTH_ID, length.toFixed(2), 'km');
+        this.updateControlValue(PATH_LENGTH_ID, length, 'km');
         this.updateControlColor(PATH_LENGTH_ID, isLengthValid);
     }
 
     updateElevationGain(isElevationGainValid, elevationGain) {
-        this.updateControlValue(ELEVATION_GAIN_ID, elevationGain.toFixed(2), 'm');
+        this.updateControlValue(ELEVATION_GAIN_ID, elevationGain, 'm');
         this.updateControlColor(ELEVATION_GAIN_ID, isElevationGainValid);
     }
 
     updateElevationLoss(isElevationLossValid, elevationLoss) {
-        this.updateControlValue(ELEVATION_LOSS_ID, elevationLoss.toFixed(2), 'm');
+        this.updateControlValue(ELEVATION_LOSS_ID, elevationLoss, 'm');
         this.updateControlColor(ELEVATION_LOSS_ID, isElevationLossValid);
     }
 
     updateElevationTotalChange(isElevationTotalChangeValid, elevationTotalChange) {
-        this.updateControlValue(ELEVATION_TOTAL_CHANGE_ID, elevationTotalChange.toFixed(2), 'm');
+        this.updateControlValue(ELEVATION_TOTAL_CHANGE_ID, elevationTotalChange, 'm');
         this.updateControlColor(ELEVATION_TOTAL_CHANGE_ID, isElevationTotalChangeValid);
     }
 
@@ -231,5 +229,28 @@ export default class Controls {
 
         $(FAILED_VERIFICATION_MODAL_BODY).append(errorsListHtml);
         $(FAILED_VERIFICATION_MODAL_ID).modal();
+    }
+
+    get() {
+        const { verificationOutput } = this;
+        const logs = verificationOutput.getLogs();
+
+        this.removeLoaderFromButton();
+        this.updateSinglePath(verificationOutput.getSinglePathStatus());
+        this.updatePathLength(true, verificationOutput.getPathLength());
+        this.updateRouteType(verificationOutput.getRouteTypeStatus(), verificationOutput.getRouteType());
+        this.updateNumberOfStations(verificationOutput.getNumberOfStationsStatus());
+        this.updateStationsOrder(verificationOutput.getStationsOrderStatus());
+        this.updateStationsOnPath(verificationOutput.getStationsOnPathStatus());
+        this.updateElevationGain(true, verificationOutput.getElevationGain());
+        this.updateElevationLoss(true, verificationOutput.getElevationLoss());
+        this.updateElevationTotalChange(true, verificationOutput.getElevationTotalChange());
+        this.drawElevationChart(verificationOutput.getElevationCharacteristics());
+
+        if (logs.length === 0) {
+            this.showVerificationSuccessModal();
+        } else {
+            this.showVerificationFailedModal(logs);
+        }
     }
 }

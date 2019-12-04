@@ -1,7 +1,8 @@
 import logger from 'loglevel';
 import fetch from 'node-fetch';
 
-import Controls from './Controls';
+import BrowserAdapter from './BrowserAdapter';
+import RouteVerificationOutput from '../data/RouteVerificationOutput';
 
 // Google Maps API loading and key validation
 window.GOOGLE_MAPS_API_LOADED = true;
@@ -17,12 +18,13 @@ function runVerifier() {
 
     const mapCanvasElement = $('div#map-canvas');
     const routeUrl = mapCanvasElement.attr('data-what');
-    const language = $('html').attr('lang');
 
-    const controls = new Controls();
-    controls.resetAll();
-    controls.addLoaderToButton();
+    const adapter = new BrowserAdapter();
+    adapter.resetAll();
+    adapter.addLoaderToButton();
 
+    // FIXME: We should directly call verifyRoute, but there's problem with
+    // turf.helpers (not properly exposed for importing) and browserify fails on it
     fetch(routeUrl)
         .then(res => res.text())
         .then(kml => {
@@ -30,45 +32,18 @@ function runVerifier() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    kml,
-                    language
+                    kml
                 })
             });
         })
         .then(res => res.json()) // expecting a json response
         .then(json => {
-            const {
-                elevationGain,
-                elevationLoss,
-                elevationTotalChange,
-                logs,
-                numberOfStations,
-                pathLength,
-                routeType,
-                singlePath,
-                stationsOnPath,
-                stationsOrder
-            } = json.verificationStatus;
-            controls.removeLoaderFromButton();
-            controls.updateSinglePath(singlePath.valid);
-            controls.updatePathLength(pathLength.valid, pathLength.value);
-            controls.updateRouteType(routeType.valid, routeType.value);
-            controls.updateNumberOfStations(numberOfStations.valid);
-            controls.updateStationsOrder(stationsOrder.valid);
-            controls.updateStationsOnPath(stationsOnPath.valid);
-            controls.updateElevationGain(elevationGain.valid, elevationGain.value);
-            controls.updateElevationLoss(elevationLoss.valid, elevationLoss.value);
-            controls.updateElevationTotalChange(elevationTotalChange.valid, elevationTotalChange.value);
-            controls.drawElevationChart(json.elevationCharacteristics);
-
-            if (logs.length === 0) {
-                controls.showVerificationSuccessModal();
-            } else {
-                controls.showVerificationFailedModal(logs);
-            }
+            const routeVerificationOutput = new RouteVerificationOutput(json);
+            adapter.init(routeVerificationOutput);
+            return adapter.get();
         })
         .catch(error => {
-            controls.removeLoaderFromButton();
+            adapter.removeLoaderFromButton();
             logger.error(error);
         });
 }
