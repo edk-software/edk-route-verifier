@@ -40,7 +40,7 @@ export default class RouteVerificationOutput {
     }
 
     setSinglePath(valid) {
-        this.singlePath = getResultObject(valid);
+        this.singlePath = valid;
     }
 
     setPathLength(length) {
