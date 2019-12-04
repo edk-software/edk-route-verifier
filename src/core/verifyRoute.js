@@ -10,30 +10,39 @@ import RouteVerificationOptions from '../data/RouteVerificationOptions.js';
 import RouteVerificationInput from '../data/RouteVerificationInput.js';
 import RouteVerificationOutput from '../data/RouteVerificationOutput.js';
 
-export default function verifyRoute(routeData, verificationOption) {
-    if (!(routeData instanceof RouteVerificationInput)) {
+/**
+ * Verifies KML route
+ *
+ * @param input RouteVerificationInput
+ * @param options RouteVerificationOptions
+ * @param adapter AbstractAdapter
+ *
+ * @return Promise
+ */
+export default function verifyRoute(input, options, adapter) {
+    if (!(input instanceof RouteVerificationInput)) {
         throw Error('Invalid type of first argument passed to verifyRoute function.');
     }
-    if (!(verificationOption instanceof RouteVerificationOptions)) {
+    if (!(options instanceof RouteVerificationOptions)) {
         throw Error('Invalid type of second argument passed to verifyRoute function.');
     }
 
     // Creating singleton Configuration and Lang instances
     // eslint-disable-next-line no-unused-vars
-    const config = new Configuration(verificationOption.config);
+    const config = new Configuration(options.config);
     // eslint-disable-next-line no-unused-vars
-    const lang = new Lang(verificationOption.language);
+    const lang = new Lang(options.language);
 
     const logBuffer = new LogBuffer();
     logBuffer.cleanLogs();
-    if (verificationOption.debug) {
+    if (options.debug) {
         logger.setLevel('debug');
     } else {
         logger.setLevel('info');
     }
 
     const verificationOutput = new RouteVerificationOutput();
-    const geoJson = helpers.getGeoJSON(routeData.kml);
+    const geoJson = helpers.getGeoJSON(input.kml);
     const route = new Route(geoJson);
 
     return route
@@ -41,7 +50,7 @@ export default function verifyRoute(routeData, verificationOption) {
         .then(pathElevation => {
             // Path basic checks
             verificationOutput.setSinglePath(route.isSinglePath());
-            verificationOutput.setPathLength(true, route.getLength());
+            verificationOutput.setPathLength(route.getLength());
 
             // Station checks
             verificationOutput.setNumberOfStations(route.areAllStationsPresent());
@@ -50,9 +59,9 @@ export default function verifyRoute(routeData, verificationOption) {
 
             // Elevations calculation
             verificationOutput.setElevationCharacteristics(pathElevation.getData());
-            verificationOutput.setElevationGain(true, pathElevation.gain);
-            verificationOutput.setElevationLoss(true, pathElevation.loss);
-            verificationOutput.setElevationTotalChange(true, pathElevation.totalChange);
+            verificationOutput.setElevationGain(pathElevation.gain);
+            verificationOutput.setElevationLoss(pathElevation.loss);
+            verificationOutput.setElevationTotalChange(pathElevation.totalChange);
 
             // Route Type calculation
             verificationOutput.setRouteType(route.isTypeValid(), route.getType());
@@ -60,18 +69,21 @@ export default function verifyRoute(routeData, verificationOption) {
             // Sending status
             const routeSuccessfullyVerified = verificationOutput.getStatus();
             if (routeSuccessfullyVerified) {
-                logger.info('Route verification succeeded.');
-                return verificationOutput.getObject();
+                logger.debug('Route verification succeeded.');
+                adapter.init(verificationOutput);
+                return adapter;
             }
 
-            logger.info('Route verification failed.');
+            logger.debug('Route verification failed.');
             verificationOutput.setLogs(logBuffer.getLogs());
-            return verificationOutput.getObject();
+            adapter.init(verificationOutput);
+            return adapter;
         })
         .catch(error => {
             logger.error(`Error during verification. ${error}`);
 
             verificationOutput.setLogs(logBuffer.getLogs());
-            return verificationOutput.getObject();
+            adapter.init(verificationOutput);
+            return adapter;
         });
 }

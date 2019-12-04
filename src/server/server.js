@@ -8,6 +8,7 @@ import { secureServer } from './security.js';
 import verifyRoute from '../core/verifyRoute.js';
 import RouteVerificationInput from '../data/RouteVerificationInput.js';
 import RouteVerificationOptions from '../data/RouteVerificationOptions.js';
+import ServerAdapter from './ServerAdapter.js';
 
 function setupLogger(debug) {
     if (debug) {
@@ -33,8 +34,8 @@ export function startServer(config, port = 9102, language = 'en', debug = false,
         const routeData = new RouteVerificationInput(kml);
         const verificationOption = new RouteVerificationOptions(config, language, debug);
 
-        verifyRoute(routeData, verificationOption)
-            .then(verificationOutput => res.send(verificationOutput))
+        verifyRoute(routeData, verificationOption, new ServerAdapter())
+            .then(output => res.send(output.get()))
             .catch(error => {
                 logger.error(error);
 

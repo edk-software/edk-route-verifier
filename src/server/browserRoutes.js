@@ -57,6 +57,10 @@ export function addBrowserRoutes(app, config, port) {
         logger.info(`Sending KML for route ${id}.`);
         res.sendFile(path.resolve(path.join(config.resourcesPath, `${id}.kml`)));
     });
+
+    app.get('/config', cors(), (req, res) => {
+        res.send(config);
+    });
 }
 
 export default addBrowserRoutes;
