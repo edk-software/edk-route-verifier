@@ -1,7 +1,5 @@
 import { isEmpty, isNumber } from '../core/utils/lodash.js';
 
-const getResultObject = valid => ({ valid });
-
 export default class RouteVerificationOutput {
     constructor(json) {
         this.calculateNumeric = value => (isNumber(value) ? parseFloat(value.toFixed(2)) : null);
