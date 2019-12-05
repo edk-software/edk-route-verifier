@@ -6,9 +6,9 @@
 
 **EDK Route Verifier** is a tool which allows user to verify provided KML file with [EDK](https://edk.org.pl) route against predefined set of rules (eg. minimal length) and provide route characteristics (eg. length, elevations).
 
-It is delivered in 3 different flavours: API server, CLI tool and browser (UI) version.
+It is delivered in 3 different flavours: API server, CLI tool and UI version.
 
-[![UI](./docs/browser.png)](docs/BROWSER.md)
+[![UI](./docs/UI.png)](docs/UI.md)
 
 [![CLI](docs/CLI.png)](docs/CLI.md)
 
@@ -49,12 +49,14 @@ edk-route-verifier server -c config.json
 
 **EDK Route Verifier** is delivered in 3 different flavours: 
 
-1. [API server](docs/API.md) - starts HTTP server exposing verification endpoint 
-2. [CLI tool](docs/CLI.md) - allows user to verify EDK route from command line
-3. [Browser version](docs/BROWSER.md) - allows user to verify EDK routes with web UI
+1. [API](docs/API.md) - starts HTTP server exposing verification endpoint 
+2. [CLI](docs/CLI.md) - allows user to verify EDK route from command line
+3. [UI](docs/UI.md) - allows user to verify EDK routes with web UI
 
 
 ### Testing
+
+#### Local
 
 Tests are developed using [Jest](https://jestjs.io/) framework. All test-related code is stored in `test` subdirectory.
 
@@ -65,7 +67,7 @@ npm run start:server
 npm run test
 ```
 
-### Continuous Integration
+#### Continuous Integration
 
 [CircleCI](https://circleci.com/gh/edk-software/edk-route-verifier) web application is used as for CI management. See [.circleci/config.yml](.circleci/config.yml) file for details of the build and test job configuration.
 

@@ -5,7 +5,7 @@ import browserify from 'browserify';
 import cors from 'cors';
 import logger from 'loglevel';
 
-export function addBrowserRoutes(app, config, port) {
+export function addUIRoutes(app, config, port) {
     const resources = [];
     fs.readdirSync(path.resolve(config.resourcesPath)).forEach(file => {
         if (file.search(/\.kml$/i) >= 0) {
@@ -19,10 +19,10 @@ export function addBrowserRoutes(app, config, port) {
     app.use('/pages', express.static('src/server/pages'));
 
     // static files - javascript
-    app.use('/browser/loadMap.js', express.static('src/browser/loadMap.js'));
-    app.get('/browser/verifier.js', (req, res) => {
+    app.use('/ui/loadMap.js', express.static('src/ui/loadMap.js'));
+    app.get('/ui/verifier.js', (req, res) => {
         res.setHeader('Content-Type', 'application/javascript');
-        browserify(path.resolve('src/browser/verifier.js'))
+        browserify(path.resolve('src/ui/verifier.js'))
             .transform('babelify', { presets: ['@babel/preset-env'] })
             .bundle()
             .pipe(res);
@@ -63,4 +63,4 @@ export function addBrowserRoutes(app, config, port) {
     });
 }
 
-export default addBrowserRoutes;
+export default addUIRoutes;

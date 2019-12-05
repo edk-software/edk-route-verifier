@@ -1,4 +1,4 @@
-## API
+## UI
 
 
 ### Configuration
@@ -11,7 +11,7 @@ See: [configuration file template](../conf/config.json.template).
 
 Assuming your configuration file is `config.json` you can start  
 ```shell script
-edk-route-verifer server -c config.json
+edk-route-verifer ui -c config.json
 ```
 
 Server is started on `localhost`. Port is presented to the user. It can be changed using `-p` switch in command.

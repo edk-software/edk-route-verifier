@@ -1,7 +1,7 @@
 import logger from 'loglevel';
 import fetch from 'node-fetch';
 
-import BrowserAdapter from './BrowserAdapter';
+import UIAdapter from './UIAdapter';
 import RouteVerificationOutput from '../data/RouteVerificationOutput';
 
 // Google Maps API loading and key validation
@@ -19,7 +19,7 @@ function runVerifier() {
     const mapCanvasElement = $('div#map-canvas');
     const routeUrl = mapCanvasElement.attr('data-what');
 
-    const adapter = new BrowserAdapter();
+    const adapter = new UIAdapter();
     adapter.resetAll();
     adapter.addLoaderToButton();
 
