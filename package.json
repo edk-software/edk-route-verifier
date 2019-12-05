@@ -18,7 +18,7 @@
     "edk-route-verifier": "./src/cli/cli.js"
   },
   "scripts": {
-    "docs:create": "npm run --silent start:cli -- --help > docs/README.md",
+    "docs:create": "npm run --silent start:cli -- --help > docs/USAGE.md",
     "docs:verify": "npm run docs:create && sh scripts/verify-docs.sh",
     "publish:major": "sh scripts/publish-version.sh major",
     "publish:minor": "sh scripts/publish-version.sh minor",
