@@ -1,3 +1,4 @@
+```
 Usage: edk-route-verifier <command> -c <config-file> [options]
 
 Commands:
@@ -17,3 +18,4 @@ Examples:
   edk-route-verifier file -c config.json my_route.kml           verifies my_route.kml
   edk-route-verifier file -c config.json -l pl -d my_route.kml  verifies my_route.kml and provides debug information in Polish language
   edk-route-verifier browser -c config.json                     starts API and static web content server
+```
