@@ -1,5 +1,6 @@
 ## API
 
+**EDK Route Verifier** in API flavour provides user HTTP server with endpoint to run route verification.
 
 ### Configuration
 

@@ -10,7 +10,7 @@ It is delivered in 3 different flavours: API server, CLI tool and UI version.
 
 [![UI](./docs/UI.png)](docs/UI.md)
 
-[![CLI](docs/CLI.png)](docs/CLI.md)
+[![CLI](./docs/CLI.png)](docs/CLI.md)
 
 ### Usage
 

@@ -28,15 +28,8 @@ export function addUIRoutes(app, config, port) {
             .pipe(res);
     });
 
-    // all resources page
-    app.get('/resources', (req, res) => {
-        res.render('pages/resources', {
-            resources
-        });
-    });
-
     app.get('/', (req, res) => {
-        res.redirect('/resources');
+        res.redirect(`/${resources[0]}`);
     });
 
     // route page
