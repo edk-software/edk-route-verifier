@@ -60,16 +60,17 @@ jobs:
             :
 
       - run:
-          name: Run API tests
-          command: npm run verify:docs
+          name: Analyze code
+          command: npm run test:lint
+
+      - run:
+          name: Verify documentation
+          command: npm run docs:verify
 
       - run:
           name: Run API tests
           command: npm run test:api
 
-      - run:
-          name: Check code style
-          command: npm run test:lint
 
   deploy:
     <<: *defaults

@@ -8,9 +8,9 @@
 
 It is delivered in 3 different flavours: API server, CLI tool and browser (UI) version.
 
-[![browser](./docs/browser.png)](docs/BROWSER.md)
+[![UI](./docs/browser.png)](docs/BROWSER.md)
 
-[![browser](docs/cli.png)](docs/CLI.md)
+[![CLI](docs/CLI.png)](docs/CLI.md)
 
 ### Usage
 

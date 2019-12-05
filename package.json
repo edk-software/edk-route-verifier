@@ -29,7 +29,7 @@
     "start:browser": "npm run start:cli -- browser -c conf/config.json",
     "start:file": "npm run start:cli -- file -c conf/config.json",
     "test:api": "jest",
-    "test:lint": "eslint src test --cache --max-warnings 10",
+    "test:lint": "eslint src/ test/ --ext .js --cache --max-warnings 10",
     "test": "npm run test:lint && npm run docs:verify && npm run test:api"
   },
   "dependencies": {
