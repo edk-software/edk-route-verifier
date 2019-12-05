@@ -58,13 +58,15 @@ edk-route-verifier server -c config.json
 
 Tests are developed using [Jest](https://jestjs.io/) framework. All test-related code is stored in `test` subdirectory.
 
-To run all tests (including static code analysis):
+To run all tests (including static code analysis and documentation check):
 
 ```shell script
+npm run start:server
 npm run test
 ```
 
 ### Continuous Integration
+
 [CircleCI](https://circleci.com/gh/edk-software/edk-route-verifier) web application is used as for CI management. See [.circleci/config.yml](.circleci/config.yml) file for details of the build and test job configuration.
 
 You can create your own branch, push it remote and CI will start automatically. That way you can test your code even if you don't have local environment configured (NodeJS, Google Maps API Key, etc.).
@@ -76,7 +78,7 @@ You can create your own branch, push it remote and CI will start automatically. 
 Follow this step-by-step guide to deploy new version:
 1. Checkout `master` branch
 2. Push all the changes to remote
-3. Start API server: `npm run server` (assuming you have configuration file in `conf/config.json`)
+3. Start API server: `npm run start:server` (assuming you have configuration file in `conf/config.json`)
 4. Execute `npm run publish:[prerelease|patch|minor|major]`
 5. After successful execution, check [CircleCI](https://circleci.com/gh/edk-software/edk-route-verifier)
 5. If everything went fine, then create release in [GitHub releases](https://github.com/edk-software/edk-route-verifier/tags)
