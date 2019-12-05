@@ -37,14 +37,14 @@ Server is started on `localhost`. Port is presented to the user. It can be chang
     verificationStatuses: {
         singlePath: { valid: <boolean> },
         pathLength: { valid: <boolean>, value: <number> },
-        routeType: { valid: <boolean> },
+        routeType: { valid: <boolean>, value: <number> },
         numberOfStations: { valid: <boolean> },
         stationsOrder: { valid: <boolean> },
         stationsOnPath: { valid: <boolean> },
         elevationGain: { valid: <boolean>, value: <number> },
         elevationLoss: { valid: <boolean>, value: <number> },
         elevationTotalChange: { valid: <boolean>, value: <number> },
-        dataConsistency: { valid: <boolean> }
+        logs: <array of strings>
     }
 }
 ```
