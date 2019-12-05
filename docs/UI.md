@@ -14,7 +14,7 @@ See: [configuration file template](../conf/config.json.template).
 
 Assuming your configuration file is `config.json` you can start  
 ```shell script
-edk-route-verifer browser -c config.json
+edk-route-verifer ui -c config.json
 ```
 
 Web server is started on `localhost`. Port is presented to the user.
