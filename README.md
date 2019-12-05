@@ -1,99 +1,82 @@
 # edk-route-verifier
-[![CircleCI](https://circleci.com/gh/cloudify-cosmo/cloudify-stage.svg?style=svg)](https://circleci.com/gh/edk-software/edk-route-verifier)
-[![](https://data.jsdelivr.com/v1/package/gh/edk-software/edk-route-verifier/badge)](https://www.jsdelivr.com/package/gh/edk-software/edk-route-verifier)
+
+[![npm](https://img.shields.io/npm/v/edk-route-verifier.svg?style=flat)](https://www.npmjs.com/package/edk-route-verifier)
+[![CircleCI](https://img.shields.io/circleci/project/github/cloudify-cosmo/cloudify-ui-components.svg?style=svg)](https://circleci.com/gh/cloudify-cosmo/cloudify-ui-components)
+[![jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
+
+**EDK Route Verifier** is a tool which allows user to verify provided KML file with [EDK](https://edk.org.pl) route against predefined set of rules (eg. minimal length) and provide route characteristics (eg. length, elevations).
+
+It is delivered in 3 different flavours: API server, CLI tool and browser (UI) version.
+
+[![browser](./docs/browser.png)](docs/BROWSER.md)
+
+[![browser](docs/cli.png)](docs/CLI.md)
 
 ### Usage
 
-`edk-route-verifier` is deployed using [GitHub Releases](https://github.com/edk-software/edk-route-verifier/releases). Files for specific `version` can be found under: 
-`https://github.com/edk-software/edk-route-verifier/tree/<version>/dist`, eg. [v1.0.1](https://github.com/edk-software/edk-route-verifier/tree/1.0.1/dist). 
-
-You can use a service like [RawGit](https://rawgit.com/), [JsDelivr](https://www.jsdelivr.com/) or [GitCDN](https://gitcdn.xyz/) to produce link to specific version of `edk-route-verifier.js` or `edk-route-verifier.js.min`.
-
-### Setup
 #### Prerequisities
-* [Git](https://git-scm.com)
-* [NodeJS](https://nodejs.org) >= v8.x
-* [Google Maps API Key](https://developers.google.com/maps/documentation/javascript/get-api-key) (necessary only for testing, you need to enable access to the following APIs: Google Maps Elevation API, Google Maps Embed API, Google Maps JavaScript API)
-* [Google Chrome](https://www.google.com/chrome/) (necessary only for testing)
+* [NodeJS](https://nodejs.org) >= v12.x (using ES modules)
+* [Google Maps API Key](https://developers.google.com/maps/documentation/javascript/get-api-key) (using the following APIs: Google Maps Elevation API, Google Maps Embed API, Google Maps JavaScript API)
 
-#### Dependencies
-1. Fetch dependencies for application:
-```
-npm install
-```
-2. Fetch dependencies for test server:
-```
-cd server && npm install
-```
-
-### Bundle
-To create output Javascript bundle file - `edk-route-verifier.js` you need to issue on of the following commands:
-```
-npm run build:prod
-npm run build:dev
-```
-That commands takes all code from `src` directory and with use of `webpack` create `edk-route-verifier.min.js` with
-`edk-route-verifier.js.map` or `edk-route-verifier.js` respectively in `server/static/js` directory.
-
-### Test 
-
-Tests are developed using [NightwatchJS](http://nightwatchjs.org/) framework. All test-related code is stored in `test` subdirectory.
-
-Test server is [ExpressJS](https://expressjs.com/) web server serving pages with KML routes visualization and automatic route  verification sections.
-
-#### Server
-The following steps shall be done to run test server:
-1. Create configuration file `config.json` in [server](server) directory (see [server/config.json.template](server/config.json.template) for details)
-2. Start test server: 
-```
-npm start
-```
-3. Open in browser:
-- `http://localhost:7777/resources`, to show page listing all KML files available in test server. 
-- `http://localhost:7777/<route_id>`, where `<route_id>` is name of KML file without extension. 
-
-**NOTE**: For the page to be displayed correctly `<route_id>.kml` must be present in resources path (defined in configuration file).
-
-**DEBUG**: For debugging you can change log level in browser console: `window.setLogLevel(<log_level>)`, where `<log_level>` is one of the log levels are numbers from 0 (trace) to 5 (silent). See [loglevel](https://github.com/pimterry/loglevel) for details. 
+#### Installation
  
-#### Execution
-1. Start server: 
-```
-npm start
-```
-2. Run tests: 
-```
-npm test
-```
-or if you want to run specific test / test-case:
-```
-npm test -- --test './test/tests/<test-filename.js>' --test-case '<test-case-name>'
+```shell script
+npm install --global edk-route-verifier
 ```
 
-#### Development
+#### Configuration
 
-This section describes how to develop new tests.
+You need to create JSON configuration file containing at least Google Maps API key. 
 
-1. Add resources
-    * Put `<route_id>.kml` (input KML file) in resources directory
-    * Put `<route_id>_route_params.json` (route parameters response JSON) in resources directory
+You can use [config.json.template](conf/config.json.template) file as a base.
 
-2. Create new test in [test/tests](test/tests) directory
-    * For the **automated verification** testing - add new test-case in `verification.js` test file. All the available assertion commands are defined in  [page.js](test/pages/page.js) file
-    * For the **error handling** - add new test-case in `errors.js` test file 
 
-3. Run new test locally (see [Execution](#execution) section) or using CircleCI (see [Continuous Integration](#continuous-integration) section)
+#### Start
+
+Check out usage at in [CLI usage documentation](docs/USAGE.md) or just execute:
+  
+```shell script
+edk-route-verifier --help
+```
+
+To start verifier you will need configuration file created in previous step. To run verifier as API server execute:
+
+```shell script
+edk-route-verifier server -c config.json
+```
+
+### Flavours
+
+**EDK Route Verifier** is delivered in 3 different flavours: 
+
+1. [API server](docs/API.md) - starts HTTP server exposing verification endpoint 
+2. [CLI tool](docs/CLI.md) - allows user to verify EDK route from command line
+3. [Browser version](docs/BROWSER.md) - allows user to verify EDK routes with web UI
+
+
+### Testing
+
+Tests are developed using [Jest](https://jestjs.io/) framework. All test-related code is stored in `test` subdirectory.
+
+To run all tests (including static code analysis):
+
+```shell script
+npm run test
+```
 
 ### Continuous Integration
 [CircleCI](https://circleci.com/gh/edk-software/edk-route-verifier) web application is used as for CI management. See [.circleci/config.yml](.circleci/config.yml) file for details of the build and test job configuration.
 
-You can create your own branch, push it remote and CI will start automatically. That way you can test your code even if you don't have local environment configured (NodeJS, Google Chrome, Google Maps API Key, etc.).
+You can create your own branch, push it remote and CI will start automatically. That way you can test your code even if you don't have local environment configured (NodeJS, Google Maps API Key, etc.).
 
 ### Deployment
 
-`edk-route-verifier.js` and `edk-route-verifier.js.min` are deployed under tags on GitHub. Follow this step-by-step guide to deploy version:
-1. Change `version` in `package.json`
+`edk-route-verifier` is deployed in NPM registry. 
+
+Follow this step-by-step guide to deploy new version:
+1. Checkout `master` branch
 2. Push all the changes to remote
-3. [Start test server](#server)
-4. Execute `npm run deploy:current`
-5. If execution was successful, then check [GitHub releases](https://github.com/edk-software/edk-route-verifier/tags) and create release and update release notes
+3. Start API server: `npm run server` (assuming you have configuration file in `conf/config.json`)
+4. Execute `npm run publish:[prerelease|patch|minor|major]`
+5. After successful execution, check [CircleCI](https://circleci.com/gh/edk-software/edk-route-verifier)
+5. If everything went fine, then create release in [GitHub releases](https://github.com/edk-software/edk-route-verifier/tags)

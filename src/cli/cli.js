@@ -1,4 +1,4 @@
-#!/usr/bin/env node --experimental-modules --experimental-json-modules
+#!/usr/bin/env node --no-warnings --experimental-modules --experimental-json-modules
 
 import { readFileSync } from 'fs';
 import yargs from 'yargs';
