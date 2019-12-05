@@ -9,8 +9,9 @@
   "license": "MIT",
   "author": "Jakub Niezgoda (qooban)",
   "files": [
-    "src",
-    "conf/config.json.template"
+    "conf/config.json.template",
+    "docs",
+    "src"
   ],
   "type": "module",
   "main": "./src/core/verifyRoute.js",
