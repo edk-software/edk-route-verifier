@@ -1,4 +1,4 @@
-#!/usr/bin/env node --experimental-modules --experimental-json-modules
+#!/usr/bin/env node --no-warnings --experimental-modules --experimental-json-modules
 
 import { readFileSync } from 'fs';
 import yargs from 'yargs';
@@ -26,7 +26,7 @@ const { argv } = yargs
             coerce: kmlFile => readFileSync(kmlFile, 'utf8')
         })
     )
-    .command('browser [options]', 'Run browser version of the verifer')
+    .command('ui [options]', 'Run UI version of the verifer')
     .demandCommand(
         1,
         1,
@@ -58,7 +58,7 @@ const { argv } = yargs
         '$0 file -c config.json -l pl -d my_route.kml',
         'verifies my_route.kml and provides debug information in Polish language'
     )
-    .example('$0 browser -c config.json', 'starts API and static web content server')
+    .example('$0 ui -c config.json', 'starts API and static web content server')
     .alias('v', 'version')
     .help('h')
     .alias('h', 'help')
@@ -77,7 +77,7 @@ if (commands.includes('server')) {
     const options = new RouteVerificationOptions(config, language, debug);
 
     verifyRoute(routeInput, options, new CLIAdapter()).then(output => output.get());
-} else if (commands.includes('browser')) {
+} else if (commands.includes('ui')) {
     const { port } = argv;
 
     startServer(config, port, language, debug, true);

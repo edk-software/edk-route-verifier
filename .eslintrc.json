@@ -21,7 +21,7 @@
         "node" : true
     },
     "overrides": [{
-        "files": [ "src/browser/**" ],
+        "files": [ "src/ui/**" ],
         "env" : {
             "browser" : true,
             "jquery": true

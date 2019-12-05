@@ -24,7 +24,7 @@ const SUCCESS_VERIFICATION_MODAL_ID = 'div#pageReloadModal';
 const FAILED_VERIFICATION_MODAL_ID = 'div#verificationFailedModal';
 const FAILED_VERIFICATION_MODAL_BODY = `${FAILED_VERIFICATION_MODAL_ID} div.modal-body`;
 
-export default class BrowserAdapter extends AbstractOutputAdapter {
+export default class UIAdapter extends AbstractOutputAdapter {
     constructor() {
         super();
 

@@ -3,7 +3,7 @@ import cors from 'cors';
 import express from 'express';
 import logger from 'loglevel';
 
-import { addBrowserRoutes } from './browserRoutes.js';
+import { addUIRoutes } from './uiRoutes.js';
 import { secureServer } from './security.js';
 import verifyRoute from '../core/verifyRoute.js';
 import RouteVerificationInput from '../data/RouteVerificationInput.js';
@@ -22,7 +22,7 @@ export function startServer(config, port = 9102, language = 'en', debug = false,
     const app = express();
 
     if (serveWebContent) {
-        addBrowserRoutes(app, config, port);
+        addUIRoutes(app, config, port);
     } else {
         secureServer(app, config);
     }
