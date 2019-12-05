@@ -49,7 +49,7 @@ jobs:
 
       - run:
           name: Start API server
-          command: npm run server
+          command: npm run start:server
           background: true
 
       - run:
@@ -60,12 +60,17 @@ jobs:
             :
 
       - run:
-          name: Run API tests
-          command: npm run apiTest
+          name: Analyze code
+          command: npm run test:lint
 
       - run:
-          name: Check code style
-          command: npm run lint
+          name: Verify documentation
+          command: npm run docs:verify
+
+      - run:
+          name: Run API tests
+          command: npm run test:api
+
 
   deploy:
     <<: *defaults

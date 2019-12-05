@@ -18,16 +18,18 @@
     "edk-route-verifier": "./src/cli/cli.js"
   },
   "scripts": {
-    "apiTest": "jest",
-    "lint": "eslint src/**/*.js --cache --max-warnings 10",
+    "docs:verify": "sh scripts/create-and-verify-docs.sh",
     "publish:major": "sh scripts/publish-version.sh major",
     "publish:minor": "sh scripts/publish-version.sh minor",
     "publish:patch": "sh scripts/publish-version.sh patch",
     "publish:prerelease": "sh scripts/publish-version.sh prerelease",
-    "server": "node --experimental-modules --experimental-json-modules src/cli/cli.js server -c conf/config.json",
-    "browser": "node --experimental-modules --experimental-json-modules src/cli/cli.js browser -c conf/config.json",
-    "file": "node --experimental-modules --experimental-json-modules src/cli/cli.js file -c conf/config.json",
-    "test": "npm run lint && npm run apiTest"
+    "start:cli": "node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js",
+    "start:server": "npm run start:cli -- server -c conf/config.json",
+    "start:ui": "npm run start:cli -- ui -c conf/config.json",
+    "start:file": "npm run start:cli -- file -c conf/config.json",
+    "test:api": "jest",
+    "test:lint": "eslint src/ test/ --ext .js --cache --max-warnings 10",
+    "test": "npm run test:lint && npm run docs:verify && npm run test:api"
   },
   "dependencies": {
     "@google/maps": "^1.0.1",
