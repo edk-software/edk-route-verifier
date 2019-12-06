@@ -47,14 +47,14 @@ export default class CLIAdapter extends AbstractOutputAdapter {
         logger.error(lang.trans('Route verification cannot be completed'));
 
         let message = 'Unexpected internal server error';
-        if (error instanceof GoogleMapsApiError) {
-            message = 'Error fetching data from Google Maps API';
-        }
         if (error instanceof KMLError) {
             message = 'Provided KML string input is invalid';
         }
         if (error instanceof NoPathInRouteError) {
             message = 'No path is defined in provided KML string';
+        }
+        if (error instanceof GoogleMapsApiError) {
+            message = 'Error fetching data from Google Maps API';
         }
         if (error instanceof InvalidInputError) {
             message = 'Provided verification inputs are invalid';
