@@ -7,6 +7,8 @@ import PathElevation from './PathElevation.js';
 import Stations from './Stations.js';
 import Lang from './lang/Lang.js';
 import LogBuffer from './utils/LogBuffer.js';
+import GoogleMapsApiError from './errors/GoogleMapsApiError.js';
+import NoPathInRouteError from './errors/NoPathInRouteError.js';
 
 // Constants
 const EXPECTED_NUMBER_OF_PATHS = 1;
@@ -35,19 +37,21 @@ export default class Route {
         this.geoJson = geoJson;
         this.lineString = helpers.getLineString(this.geoJson);
         this.points = helpers.getPoints(this.geoJson);
-        this.isRouteVerifiable = true;
 
         lang = Lang.getInstance();
         logBuffer = LogBuffer.getInstance();
 
+        this.hasPath = true;
         if (_.isEmpty(this.lineString)) {
             logBuffer.add(lang.trans('No path in route'));
-            this.isRouteVerifiable = false;
+            this.hasPath = false;
         }
+
         if (_.isEmpty(this.points)) {
             logBuffer.add(lang.trans('No points in route'));
         }
-        if (this.isRouteVerifiable) {
+
+        if (this.hasPath) {
             this.stations = new Stations(this.points, this.lineString);
             this.path = this.stations.getUpdatedPath();
             this.numberOfPaths = helpers.getNumberOfFeatures('LineString', this.geoJson);
@@ -57,10 +61,6 @@ export default class Route {
                 this.type = ROUTE_TYPE.NORMAL;
             }
         }
-    }
-
-    isVerifiable() {
-        return this.isRouteVerifiable;
     }
 
     isSinglePath() {
@@ -92,7 +92,7 @@ export default class Route {
     }
 
     fetchData() {
-        if (this.isVerifiable()) {
+        if (this.hasPath) {
             return helpers
                 .getPathElevations(this.path)
                 .then(elevations => {
@@ -112,14 +112,17 @@ export default class Route {
                     return this.pathElevation;
                 })
                 .catch(error => {
-                    const { status, statusCode, statusMessage } = error;
-                    logger.error(`Path elevation data fetching error. 
-                    Code: ${statusCode}. Status: ${status}. Message: ${statusMessage}`);
-                    return Promise.reject(new Error('Path elevation data fetching error'));
+                    logger.error('Path elevation data fetching error.');
+                    logger.error(error);
+                    const errorMessage = _.get(error, 'json.error_message', '');
+                    const status = _.get(error, 'json.status', '');
+                    return Promise.reject(
+                        new GoogleMapsApiError('Path elevation data fetching error', status, errorMessage)
+                    );
                 });
         }
 
-        return Promise.reject(new Error('Route is unverifiable'));
+        return Promise.reject(new NoPathInRouteError());
     }
 
     getStations() {

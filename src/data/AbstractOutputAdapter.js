@@ -29,4 +29,11 @@ export default class AbstractOutputAdapter {
 
         throw new Error('Output adapter not implemented.');
     }
+
+    /**
+     * handle verification errors
+     */
+    static handleError() {
+        throw new Error('Error handler not implemented.');
+    }
 }

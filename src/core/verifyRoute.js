@@ -1,14 +1,14 @@
 import logger from 'loglevel';
 
-import Configuration from './Configuration.js';
 import LogBuffer from './utils/LogBuffer.js';
-import Lang from './lang/Lang.js';
 import helpers from './utils/helpers.js';
 import Route from './Route.js';
 
 import RouteVerificationOptions from '../data/RouteVerificationOptions.js';
 import RouteVerificationInput from '../data/RouteVerificationInput.js';
 import RouteVerificationOutput from '../data/RouteVerificationOutput.js';
+import InvalidInputError from './errors/InvalidInputError.js';
+import KMLError from './errors/KMLError.js';
 
 /**
  * Verifies KML route
@@ -20,19 +20,6 @@ import RouteVerificationOutput from '../data/RouteVerificationOutput.js';
  * @return Promise
  */
 export default function verifyRoute(input, options, adapter) {
-    if (!(input instanceof RouteVerificationInput)) {
-        throw Error('Invalid type of first argument passed to verifyRoute function.');
-    }
-    if (!(options instanceof RouteVerificationOptions)) {
-        throw Error('Invalid type of second argument passed to verifyRoute function.');
-    }
-
-    // Creating singleton Configuration and Lang instances
-    // eslint-disable-next-line no-unused-vars
-    const config = new Configuration(options.config);
-    // eslint-disable-next-line no-unused-vars
-    const lang = new Lang(options.language);
-
     const logBuffer = new LogBuffer();
     logBuffer.cleanLogs();
     if (options.debug) {
@@ -42,11 +29,33 @@ export default function verifyRoute(input, options, adapter) {
     }
 
     const verificationOutput = new RouteVerificationOutput();
-    const geoJson = helpers.getGeoJSON(input.kml);
-    const route = new Route(geoJson);
+    let route = null;
 
-    return route
-        .fetchData()
+    return new Promise((resolve, reject) => {
+        if (!(input instanceof RouteVerificationInput)) {
+            return reject(
+                new InvalidInputError("Invalid type of 'input' argument passed to verifyRoute function.", input)
+            );
+        }
+        if (!(options instanceof RouteVerificationOptions)) {
+            return reject(
+                new InvalidInputError("Invalid type of 'options' argument passed to verifyRoute function.", options)
+            );
+        }
+
+        let geoJson = null;
+        try {
+            geoJson = helpers.getGeoJSON(input.kml);
+        } catch (error) {
+            if (error instanceof KMLError) {
+                return reject(error);
+            }
+            return reject(new Error('Cannot parse KML to GeoJSON'));
+        }
+        route = new Route(geoJson);
+
+        return resolve(route.fetchData());
+    })
         .then(pathElevation => {
             // Path basic checks
             verificationOutput.setSinglePath(route.isSinglePath());
@@ -80,10 +89,6 @@ export default function verifyRoute(input, options, adapter) {
             return adapter;
         })
         .catch(error => {
-            logger.error(`Error during verification. ${error}`);
-
-            verificationOutput.setLogs(logBuffer.getLogs());
-            adapter.init(verificationOutput);
-            return adapter;
+            return Promise.reject(error);
         });
 }

@@ -8,17 +8,21 @@ import RouteVerificationOptions from '../data/RouteVerificationOptions.js';
 import verifyRoute from '../core/verifyRoute.js';
 import { startServer } from '../server/server.js';
 import CLIAdapter from './CLIAdapter.js';
+import Configuration from '../core/Configuration.js';
+import Lang from '../core/lang/Lang.js';
+
+const addPortOption = y =>
+    y.option('port', {
+        alias: 'p',
+        default: 9102,
+        describe: 'API server port',
+        type: 'number'
+    });
 
 const { argv } = yargs
     .scriptName('edk-route-verifier')
     .usage('Usage: $0 <command> -c <config-file> [options]')
-    .command('server [options] [-p port]', 'Starts server providing verification API', y =>
-        y.option('port', {
-            alias: 'p',
-            describe: 'API server port',
-            type: 'number'
-        })
-    )
+    .command('server [options] [-p port]', 'Starts server providing verification API', addPortOption)
     .command('file [options] <kml>', 'Verify provided KML file', y =>
         y.positional('kml', {
             describe: 'KML file path',
@@ -26,7 +30,7 @@ const { argv } = yargs
             coerce: kmlFile => readFileSync(kmlFile, 'utf8')
         })
     )
-    .command('ui [options]', 'Run UI version of the verifer')
+    .command('ui [options]', 'Run UI version of the verifer', addPortOption)
     .demandCommand(
         1,
         1,
@@ -67,18 +71,26 @@ const { argv } = yargs
 const commands = argv._;
 const { config, language, debug } = argv;
 
+// eslint-disable-next-line no-unused-vars
+const configuration = new Configuration(config);
+// eslint-disable-next-line no-unused-vars
+const lang = new Lang(language);
+
 if (commands.includes('server')) {
     const { port } = argv;
-    startServer(config, port, language, debug, false);
+
+    startServer(port, debug, false);
 } else if (commands.includes('file')) {
     const { kml } = argv;
 
     const routeInput = new RouteVerificationInput(kml);
-    const options = new RouteVerificationOptions(config, language, debug);
+    const options = new RouteVerificationOptions(debug);
 
-    verifyRoute(routeInput, options, new CLIAdapter()).then(output => output.get());
+    verifyRoute(routeInput, options, new CLIAdapter())
+        .then(output => output.get())
+        .catch(error => CLIAdapter.handleError(error));
 } else if (commands.includes('ui')) {
     const { port } = argv;
 
-    startServer(config, port, language, debug, true);
+    startServer(port, debug, true);
 }
