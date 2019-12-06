@@ -53,25 +53,30 @@ export default class ServerAdapter extends AbstractOutputAdapter {
 
         if (error instanceof GoogleMapsApiError) {
             return res.status(406).send({
+                error: error.name,
                 message: lang.trans('Error fetching data from Google Maps API')
             });
         }
         if (error instanceof KMLError) {
             return res.status(400).send({
+                error: error.name,
                 message: lang.trans('Provided KML string input is invalid')
             });
         }
         if (error instanceof NoPathInRouteError) {
             return res.status(400).send({
+                error: error.name,
                 message: lang.trans('No path is defined in provided KML string')
             });
         }
         if (error instanceof InvalidInputError) {
             return res.status(500).send({
+                error: error.name,
                 message: lang.trans('Provided verification inputs are invalid')
             });
         }
         return res.status(500).send({
+            error: error.name,
             message: lang.trans('Unexpected internal server error')
         });
     }

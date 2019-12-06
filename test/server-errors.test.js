@@ -6,6 +6,7 @@ describe('Server - Errors', () => {
             callVerifyApi(undefined).catch(statusCodeError => {
                 expect(statusCodeError.statusCode).toEqual(400);
                 expect(statusCodeError.error.message).toEqual('Provided KML string input is invalid.');
+                expect(statusCodeError.error.error).toEqual('KMLError');
                 done();
             })
         ));
@@ -22,6 +23,7 @@ describe('Server - Errors', () => {
             ).catch(statusCodeError => {
                 expect(statusCodeError.statusCode).toEqual(400);
                 expect(statusCodeError.error.message).toEqual('No path is defined in provided KML string.');
+                expect(statusCodeError.error.error).toEqual('NoPathInRouteError');
                 done();
             })
         ));
@@ -31,6 +33,7 @@ describe('Server - Errors', () => {
             callVerifyApi('').catch(statusCodeError => {
                 expect(statusCodeError.statusCode).toEqual(400);
                 expect(statusCodeError.error.message).toEqual('Provided KML string input is invalid.');
+                expect(statusCodeError.error.error).toEqual('KMLError');
                 done();
             })
         ));
@@ -40,6 +43,7 @@ describe('Server - Errors', () => {
             callVerifyApi(readKmlFile('15_no_path')).catch(statusCodeError => {
                 expect(statusCodeError.statusCode).toEqual(400);
                 expect(statusCodeError.error.message).toEqual('No path is defined in provided KML string.');
+                expect(statusCodeError.error.error).toEqual('NoPathInRouteError');
                 done();
             })
         ));
