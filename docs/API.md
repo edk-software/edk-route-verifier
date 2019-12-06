@@ -31,6 +31,7 @@ Server is started on `localhost`. Port is presented to the user. It can be chang
 
 ##### Response
 
+###### Success
 ```shell script
 {
     elevationCharacteristics: <array of { elevation: <number>, distance: <number> }>
@@ -48,3 +49,13 @@ Server is started on `localhost`. Port is presented to the user. It can be chang
     }
 }
 ```
+
+###### Error
+```shell script
+{
+    error: <string>
+    message: <string>
+}
+```
+* error - error code
+* message - error message
