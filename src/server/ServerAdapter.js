@@ -51,12 +51,6 @@ export default class ServerAdapter extends AbstractOutputAdapter {
     static handleError(error, res) {
         const lang = Lang.getInstance();
 
-        if (error instanceof GoogleMapsApiError) {
-            return res.status(406).send({
-                error: error.name,
-                message: lang.trans('Error fetching data from Google Maps API')
-            });
-        }
         if (error instanceof KMLError) {
             return res.status(400).send({
                 error: error.name,
@@ -67,6 +61,12 @@ export default class ServerAdapter extends AbstractOutputAdapter {
             return res.status(400).send({
                 error: error.name,
                 message: lang.trans('No path is defined in provided KML string')
+            });
+        }
+        if (error instanceof GoogleMapsApiError) {
+            return res.status(500).send({
+                error: error.name,
+                message: lang.trans('Error fetching data from Google Maps API')
             });
         }
         if (error instanceof InvalidInputError) {
