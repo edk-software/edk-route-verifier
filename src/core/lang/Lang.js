@@ -3,6 +3,7 @@ import * as _ from '../utils/lodash.js';
 
 import pl from './pl.json';
 import en from './en.json';
+import InternalObjectInitializationError from '../errors/InternalObjectInitializationError.js';
 
 const translations = { pl, en };
 
@@ -26,11 +27,17 @@ export default class Lang {
     }
 
     trans(literal, properties) {
+        logger.debug('Translating literal:', literal);
         const translatedLiteral = this.translation[literal];
 
         let result = literal;
         if (translatedLiteral) {
-            result = _.isEmpty(properties) ? translatedLiteral : _.template(translatedLiteral)(properties);
+            try {
+                result = _.isEmpty(properties) ? translatedLiteral : _.template(translatedLiteral)(properties);
+            } catch (error) {
+                logger.error('Error translating literal: "', literal, '" with properties: "', properties, '"');
+                return literal;
+            }
         } else {
             logger.warn(`No translation found for '${literal}'.`);
         }
@@ -39,6 +46,10 @@ export default class Lang {
     }
 
     static getInstance() {
+        if (!instance) {
+            throw new InternalObjectInitializationError('Internal language not initialized.');
+        }
+
         return instance;
     }
 }

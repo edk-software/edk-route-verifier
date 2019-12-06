@@ -1,7 +1,5 @@
 export default class RouteVerificationOptions {
-    constructor(config, language, debug) {
-        this.config = config;
-        this.language = language;
+    constructor(debug) {
         this.debug = debug;
     }
 }

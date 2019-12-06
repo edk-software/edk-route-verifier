@@ -4,11 +4,26 @@ import flatten from '@turf/flatten';
 import logger from 'loglevel';
 import { getClient } from './googleMaps.js';
 import * as _ from './lodash.js';
+import KMLError from '../errors/KMLError.js';
 
 export default class Helpers {
     static getGeoJSON(kmlString) {
-        const domParser = new xmlDom.DOMParser();
-        const kml = domParser.parseFromString(kmlString);
+        const domParser = new xmlDom.DOMParser({
+            errorHandler: {
+                warning(w) {
+                    logger.warn(`KML parsing warning: ${w}`);
+                },
+                error: error => {
+                    logger.error(`KML parsing error: ${error}`);
+                    throw new KMLError(kmlString);
+                },
+                fatalError: error => {
+                    logger.error(`KML parsing fatal error: ${error}`);
+                    throw new KMLError(kmlString);
+                }
+            }
+        });
+        const kml = domParser.parseFromString(kmlString, 'text/xml');
         const extendedData = kml.getElementsByTagName('ExtendedData');
         for (let index = extendedData.length - 1; index >= 0; index -= 1) {
             extendedData[index].parentNode.removeChild(extendedData[index]);

@@ -36,16 +36,13 @@ function runVerifier() {
                 })
             });
         })
-        .then(res => res.json()) // expecting a json response
+        .then(res => res.json().then(json => (res.ok ? json : Promise.reject(json))))
         .then(json => {
             const routeVerificationOutput = new RouteVerificationOutput(json);
             adapter.init(routeVerificationOutput);
             return adapter.get();
         })
-        .catch(error => {
-            adapter.removeLoaderFromButton();
-            logger.error(error);
-        });
+        .catch(error => adapter.handleError(error));
 }
 
 $('button#verifyRoute').bind('click', runVerifier);

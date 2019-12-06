@@ -1,3 +1,5 @@
+import InternalObjectInitializationError from './errors/InternalObjectInitializationError.js';
+
 let instance = null;
 
 export default class Configuration {
@@ -12,7 +14,7 @@ export default class Configuration {
 
     static getConfig() {
         if (!instance) {
-            throw new Error('Internal configuration not initialized.');
+            throw new InternalObjectInitializationError('Internal configuration not initialized.');
         }
 
         return instance.config;
