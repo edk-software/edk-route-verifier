@@ -5,7 +5,10 @@ import browserify from 'browserify';
 import cors from 'cors';
 import logger from 'loglevel';
 
-export function addUIRoutes(app, config, port) {
+import Configuration from '../core/Configuration.js';
+
+export function addUIRoutes(app, port) {
+    const config = Configuration.getConfig();
     const resources = [];
     fs.readdirSync(path.resolve(config.resourcesPath)).forEach(file => {
         if (file.search(/\.kml$/i) >= 0) {

@@ -18,13 +18,13 @@ function setupLogger(debug) {
     }
 }
 
-export function startServer(config, port = 9102, language = 'en', debug = false, serveWebContent = false) {
+export function startServer(port, debug, serveWebContent) {
     const app = express();
 
     if (serveWebContent) {
-        addUIRoutes(app, config, port);
+        addUIRoutes(app, port);
     } else {
-        secureServer(app, config);
+        secureServer(app);
     }
     setupLogger(debug);
 
@@ -32,16 +32,13 @@ export function startServer(config, port = 9102, language = 'en', debug = false,
         const { kml } = req.body;
 
         const routeData = new RouteVerificationInput(kml);
-        const verificationOption = new RouteVerificationOptions(config, language, debug);
+        const verificationOption = new RouteVerificationOptions(debug);
 
         verifyRoute(routeData, verificationOption, new ServerAdapter())
             .then(output => res.send(output.get()))
             .catch(error => {
                 logger.error(error);
-
-                return res.status(500).send({
-                    message: 'Unexpected internal server error. Check logs.'
-                });
+                ServerAdapter.handleError(error, res);
             });
     });
 

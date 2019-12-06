@@ -253,4 +253,11 @@ export default class UIAdapter extends AbstractOutputAdapter {
             this.showVerificationFailedModal(logs);
         }
     }
+
+    handleError(error) {
+        const { message } = error;
+        this.removeLoaderFromButton();
+        this.showVerificationFailedModal([message]);
+        logger.error(message);
+    }
 }
