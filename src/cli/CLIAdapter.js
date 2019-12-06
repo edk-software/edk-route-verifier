@@ -10,7 +10,7 @@ export default class CLIAdapter extends AbstractOutputAdapter {
     get() {
         const lang = Lang.getInstance();
         const output = this.verificationOutput;
-        const getStatusString = status => (status ? 'OK' : 'Failed');
+        const getStatusString = status => lang.trans(status ? 'OK' : 'Failed');
         const getRouteTypeString = type => {
             let stringType = 'Unknown';
             if (type === 0) {
@@ -36,7 +36,7 @@ export default class CLIAdapter extends AbstractOutputAdapter {
         logger.info(lang.trans('Stations On Path', { status: getStatusString(output.getStationsOnPathStatus()) }));
 
         if (!output.getStatus()) {
-            logger.info(`\nLogs:`);
+            logger.info(lang.trans('Errors'));
             logger.info(output.getLogs().join('\n'));
         }
     }

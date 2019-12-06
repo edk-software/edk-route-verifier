@@ -26,6 +26,7 @@
   "Number Of Stations": "- Number Of Stations: <%= status %>",
   "Stations Order": "- Stations Order: <%= status %>",
   "Stations On Path": "- Stations On Path: <%= status %>",
+  "Errors": "Errors:",
   "OK": "OK",
   "Failed": "Failed",
   "Unknown": "Unknown",
