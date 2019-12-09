@@ -48,18 +48,6 @@ jobs:
             sed -i "s/API_PASSWORD/test/i" conf/config.json
 
       - run:
-          name: Start API server
-          command: npm run start:server
-          background: true
-
-      - run:
-          name: Wait for test server to be running
-          shell: /bin/sh
-          command: |
-            wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 http://localhost:$PORT
-            :
-
-      - run:
           name: Analyze code
           command: npm run test:lint
 
