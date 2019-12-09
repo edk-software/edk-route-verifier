@@ -5,6 +5,7 @@ import logger from 'loglevel';
 import { getClient } from './googleMaps.js';
 import * as _ from './lodash.js';
 import KMLError from '../errors/KMLError.js';
+import GoogleMapsApiError from '../errors/GoogleMapsApiError.js';
 
 export default class Helpers {
     static getGeoJSON(kmlString) {
@@ -92,9 +93,13 @@ export default class Helpers {
             logger.debug('Number of LatLng objects after optimization:', path.length);
         }
 
-        return getClient()
-            .elevationAlongPath({ path, samples: MAXIMUM_NUMBER_OF_SAMPLES })
-            .asPromise()
-            .then(response => response.json.results);
+        try {
+            return getClient()
+                .elevationAlongPath({ path, samples: MAXIMUM_NUMBER_OF_SAMPLES })
+                .asPromise()
+                .then(response => response.json.results);
+        } catch (error) {
+            throw new GoogleMapsApiError('Cannot get Google Maps API client.');
+        }
     }
 }

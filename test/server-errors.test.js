@@ -1,6 +1,20 @@
-import { callVerifyApi, readKmlFile } from './server-common';
+import { callVerifyApi, initializeVerificationEnvironment, readKmlFile, startAPIServer, stopAPIServer } from './common';
+import Configuration from '../src/core/Configuration';
 
 describe('Server - Errors', () => {
+    beforeAll(
+        () =>
+            new Promise(done => {
+                initializeVerificationEnvironment();
+                stopAPIServer()
+                    .catch(() => {})
+                    .then(() => {
+                        startAPIServer();
+                        done();
+                    });
+            })
+    );
+
     test('Invalid input - KML - undefined', () =>
         new Promise(done =>
             callVerifyApi(undefined).catch(statusCodeError => {
@@ -47,4 +61,28 @@ describe('Server - Errors', () => {
                 done();
             })
         ));
+
+    test('Unauthorized access', () =>
+        new Promise(done =>
+            callVerifyApi('', { apiUser: '', apiPass: '' }).catch(statusCodeError => {
+                expect(statusCodeError.statusCode).toEqual(401);
+                done();
+            })
+        ));
+
+    test('Google Maps API error', () => {
+        const config = Configuration.getConfig();
+        Configuration.destroy();
+        // eslint-disable-next-line no-unused-vars
+        const newConfiguration = new Configuration({ ...config, googleMapsApiKey: '' });
+
+        return new Promise(done =>
+            callVerifyApi(readKmlFile('01-regular')).catch(statusCodeError => {
+                expect(statusCodeError.statusCode).toEqual(500);
+                expect(statusCodeError.error.message).toEqual('Error fetching data from Google Maps API.');
+                expect(statusCodeError.error.error).toEqual('GoogleMapsApiError');
+                done();
+            })
+        );
+    });
 });
