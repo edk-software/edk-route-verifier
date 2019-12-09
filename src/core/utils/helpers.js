@@ -1,7 +1,7 @@
 import xmlDom from 'xmldom';
 import toGeoJSON from '@mapbox/togeojson';
-import flatten from '@turf/flatten';
 import logger from 'loglevel';
+import { flatten } from './turf.js';
 import { getClient } from './googleMaps.js';
 import * as _ from './lodash.js';
 import KMLError from '../errors/KMLError.js';
