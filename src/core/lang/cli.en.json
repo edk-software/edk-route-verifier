@@ -1,0 +1,21 @@
+{
+  "Route verification cannot be completed": "Route verification cannot be completed.",
+  "Route Characteristics": "Route Characteristics:",
+  "Path Length": "- Path Length: <%= length %>km",
+  "Route Type": "- Route Type: <%= type %>",
+  "Elevation Gain": "- Elevation Gain: <%= gain %>m",
+  "Elevation Loss": "- Elevation Loss: <%= loss %>m",
+  "Elevation Total Change": "- Elevation Total Change: <%= change %>m",
+  "Verification Status": "Verification Status",
+  "Single Path": "- Single Path: <%= status %>",
+  "Route Type Status": "- Route Type: <%= status %>",
+  "Number Of Stations": "- Number Of Stations: <%= status %>",
+  "Stations Order": "- Stations Order: <%= status %>",
+  "Stations On Path": "- Stations On Path: <%= status %>",
+  "Errors": "Errors:",
+  "OK": "OK",
+  "Failed": "Failed",
+  "Unknown": "Unknown",
+  "Inspired": "Inspired",
+  "Normal": "Normal"
+}

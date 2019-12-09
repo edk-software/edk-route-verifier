@@ -1,0 +1,7 @@
+{
+  "Error fetching data from Google Maps API": "Error fetching data from Google Maps API.",
+  "Provided KML string input is invalid": "Provided KML string input is invalid.",
+  "No path is defined in provided KML string": "No path is defined in provided KML string.",
+  "Provided verification inputs are invalid": "Provided verification inputs are invalid.",
+  "Unexpected internal server error": "Unexpected internal server error."
+}

@@ -26,7 +26,7 @@
     "publish:prerelease": "sh scripts/publish-version.sh prerelease",
     "start:cli": "node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js",
     "start:server": "npm run start:cli -- server -c conf/config.json",
-    "start:ui": "npm run start:cli -- ui -c conf/config.json -l pl",
+    "start:ui": "npm run start:cli -- ui -c conf/config.json",
     "start:file": "npm run start:cli -- file -c conf/config.json",
     "test:api": "jest",
     "test:lint": "eslint src/ test/ --ext .js --cache --max-warnings 10",
