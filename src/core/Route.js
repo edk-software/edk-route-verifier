@@ -1,6 +1,6 @@
 import logger from 'loglevel';
-import turfLength from '@turf/length';
 
+import { length } from './utils/turf.js';
 import * as _ from './utils/lodash.js';
 import helpers from './utils/helpers.js';
 import PathElevation from './PathElevation.js';
@@ -55,7 +55,7 @@ export default class Route {
             this.stations = new Stations(this.points, this.lineString);
             this.path = this.stations.getUpdatedPath();
             this.numberOfPaths = helpers.getNumberOfFeatures('LineString', this.geoJson);
-            this.length = turfLength.default(this.path);
+            this.length = length(this.path);
 
             if (this.length >= NORMAL_ROUTE_MIN_LENGTH) {
                 this.type = ROUTE_TYPE.NORMAL;

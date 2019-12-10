@@ -19,4 +19,8 @@ export default class Configuration {
 
         return instance.config;
     }
+
+    static destroy() {
+        instance = null;
+    }
 }
