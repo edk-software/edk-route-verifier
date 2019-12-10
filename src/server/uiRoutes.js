@@ -6,9 +6,11 @@ import cors from 'cors';
 import logger from 'loglevel';
 
 import Configuration from '../core/Configuration.js';
+import Lang from '../core/lang/Lang.js';
 
 export function addUIRoutes(app, port) {
     const config = Configuration.getConfig();
+    const language = Lang.getInstance();
     const resources = [];
     fs.readdirSync(path.resolve(config.resourcesPath)).forEach(file => {
         if (file.search(/\.kml$/i) >= 0) {
@@ -44,7 +46,8 @@ export function addUIRoutes(app, port) {
             googleMapsApiKey,
             routeId,
             serverPort: port,
-            resources
+            resources,
+            t: language.getTranslations()
         });
     });
 

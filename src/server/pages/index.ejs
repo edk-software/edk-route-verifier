@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Trasa - <%= routeId %></title>
+    <title><%= t['Route'] %> - <%= routeId %></title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -47,7 +47,7 @@
         <section class="sidebar">
             <div class="box-body bg-gray">
                 <h4>
-                    Trasy
+                    <%= t['Routes'] %>
                 </h4>
                 <div>
                     <% for(var i=0; i<resources.length; i++) {%>
@@ -67,10 +67,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Trasa</h1>
+            <h1><%= t['Route'] %></h1>
             <ol class="breadcrumb">
-                <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Trasa</li>
+                <li><a href="/"><i class="fa fa-dashboard"></i> <%= t['Home'] %></a></li>
+                <li class="active"><%= t['Route'] %></li>
             </ol>
         </section>
 
@@ -83,7 +83,7 @@
                 <div class="col-md-12">
                     <div class="box box-solid">
                         <div class="box-header with-border">
-                            <h3 class="box-title"><i class="fa fa-check"></i> Wizualizacja trasy</h3>
+                            <h3 class="box-title"><i class="fa fa-map-signs"></i> <%= t['Route on map'] %></h3>
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                 </button>
@@ -92,8 +92,6 @@
 
                         <div id="map-canvas"
                              data-what="http://localhost:<%= serverPort %>/kml/<%= routeId %>"
-                             data-route-params="http://localhost:<%= serverPort %>/route-params/<%= routeId %>"
-                             data-route-approve="http://localhost:<%= serverPort %>/route-approve/<%= routeId %>"
                              style="height: 400px">
                         </div>
                     </div>
@@ -106,7 +104,7 @@
                 <div class="col-md-12">
                     <div class="box box-solid">
                         <div class="box-header with-border">
-                            <h3 class="box-title"><i class="fa fa-check"></i> Automatyczna weryfikacja trasy</h3>
+                            <h3 class="box-title"><i class="fa fa-check"></i> <%= t['Route verification'] %></h3>
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                 </button>
@@ -116,7 +114,7 @@
                         <div class="box-body">
                             <div class="col-md-12 margin-bottom">
                                 <button id="verifyRoute" type="button" class="btn btn-primary btn-block">
-                                    <i class="fa fa-gears"></i> Zweryfikuj poprawność śladu trasy
+                                    <i class="fa fa-gears"></i> <%= t['Verify'] %>
                                 </button>
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-12">
@@ -124,8 +122,8 @@
                                     <span class="info-box-icon bg-gray-light"><i class="fa fa-circle-o"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Jedna nitka</span>
-                                        <span class="users-list-date">Ślad trasy zawierać powinien jedną nitkę - ścieżkę.</span>
+                                        <span class="info-box-text"><%= t['Single path'] %></span>
+                                        <span class="users-list-date"><%= t['SinglePathDescription'] %></span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -136,9 +134,9 @@
                                     <span class="info-box-icon bg-gray-light"><i class="fa fa-map-signs"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Długość</span>
+                                        <span class="info-box-text"><%= t['Length'] %></span>
                                         <span class="info-box-number"></span>
-                                        <span class="users-list-date">Długość wyliczona na podstawie dołączonego śladu trasy.</span>
+                                        <span class="users-list-date"><%= t['RouteLengthDescription'] %></span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -150,7 +148,7 @@
                                     <input id="normalRouteString" value="Trasa EDK" type="hidden">
                                     <input id="inspiredRouteString" value="Droga na wzór EDK" type="hidden">
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Typ trasy</span>
+                                        <span class="info-box-text"><%= t['Route type'] %></span>
                                         <span class="info-box-number"></span>
                                     </div>
                                     <!-- /.info-box-content -->
@@ -162,9 +160,9 @@
                                     <span class="info-box-icon bg-gray-light"><i class="fa fa-map-marker"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Liczba i nazewnictwo stacji</span>
+                                        <span class="info-box-text"><%= t['Stations number and naming'] %></span>
                                         <span class="info-box-number"></span>
-                                        <span class="users-list-date">Trasa powinna liczyć 14 ponumerowanych stacji.</span>
+                                        <span class="users-list-date"><%= t['NumberOfStationsDescription'] %></span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -176,8 +174,8 @@
                                     <span class="info-box-icon bg-gray-light"><i class="fa fa-sort-numeric-asc"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Kolejność stacji</span>
-                                        <span class="users-list-date">Stacje powinny być umieszczone na trasie w kolejności rosnącej.</span>
+                                        <span class="info-box-text"><%= t['Stations order'] %></span>
+                                        <span class="users-list-date"><%= t['StationsOrderDescription'] %></span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -188,8 +186,8 @@
                                     <span class="info-box-icon bg-gray-light"><i class="fa fa-map-pin"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Rozmieszczenie stacji</span>
-                                        <span class="users-list-date">Stacje powinny być w maksymalnej odlegości 50m od śladu trasy.</span>
+                                        <span class="info-box-text"><%= t['Stations location'] %></span>
+                                        <span class="users-list-date"><%= t['StationsOnPathDescription'] %></span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -200,9 +198,9 @@
                                     <span class="info-box-icon bg-gray-light"><i class="fa fa-arrow-up"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Suma podejść</span>
+                                        <span class="info-box-text"><%= t['Total ascent'] %></span>
                                         <span class="info-box-number"></span>
-                                        <span class="users-list-date">Suma podejść wyliczona na podstawie śladu trasy.</span>
+                                        <span class="users-list-date"><%= t['TotalAscentDescription'] %></span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -213,9 +211,9 @@
                                     <span class="info-box-icon bg-gray-light"><i class="fa fa-arrow-down"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Suma zejść</span>
+                                        <span class="info-box-text"><%= t['Total descent'] %></span>
                                         <span class="info-box-number"></span>
-                                        <span class="users-list-date">Suma zejść wyliczona na podstawie śladu trasy.</span>
+                                        <span class="users-list-date"><%= t['TotalDescentDescription'] %></span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -226,9 +224,9 @@
                                     <span class="info-box-icon bg-gray-light"><i class="fa fa-arrows-v"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Suma przewyższeń</span>
+                                        <span class="info-box-text"><%= t['Total elevation change'] %></span>
                                         <span class="info-box-number"></span>
-                                        <span class="users-list-date">Suma przewyższeń wyliczona na podstawie śladu trasy.</span>
+                                        <span class="users-list-date"><%= t['TotalElevationChangeDescription'] %></span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -237,7 +235,7 @@
                         </div>
                         <div class="box-footer">
                             <div class="col-md-12">
-                                <div id="profilTrasy">Profil trasy</div>
+                                <div id="profilTrasy"><%= t['Elevation chart'] %></div>
                                 <canvas id="elevationChart" style="height: 150px; width: 100%"></canvas>
                             </div>
                         </div>
@@ -261,10 +259,10 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Weryfikacja zakończona sukcesem</h4>
+                    <h4 class="modal-title"><%= t['Verification successful'] %></h4>
                 </div>
                 <div class="modal-body">
-                    <p>Nie wykryto błędów podczas weryfikacji.</p>
+                    <p><%= t['VerificationSuccessfulDescription'] %></p>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -279,7 +277,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Weryfikacja zakończona błędem</h4>
+                    <h4 class="modal-title"><%= t['Verification failed'] %></h4>
                 </div>
                 <div class="modal-body">
 

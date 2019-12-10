@@ -1,0 +1,7 @@
+{
+  "Error fetching data from Google Maps API": "Błąd podczas pobierania danych z API Google Maps.",
+  "Provided KML string input is invalid": "Przesłany KML jest niepoprawny.",
+  "No path is defined in provided KML string": "Brak ścieżki w przesłanym KML.",
+  "Provided verification inputs are invalid": "Przesłane dane wejściowe do weryfikatora są niepoprawne.",
+  "Unexpected internal server error": "Nieoczekiwany błąd serwera."
+}

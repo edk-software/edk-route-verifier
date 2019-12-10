@@ -1,10 +1,20 @@
 import logger from 'loglevel';
 import * as _ from '../utils/lodash.js';
 
-import pl from './pl.json';
-import en from './en.json';
+import enCommon from './common.en.json';
+import enAPI from './api.en.json';
+import enCLI from './cli.en.json';
+import enUI from './ui.en.json';
+
+import plCommon from './common.pl.json';
+import plAPI from './api.pl.json';
+import plCLI from './cli.pl.json';
+import plUI from './ui.pl.json';
+
 import InternalObjectInitializationError from '../errors/InternalObjectInitializationError.js';
 
+const pl = { ...plCommon, ...plAPI, ...plCLI, ...plUI };
+const en = { ...enCommon, ...enAPI, ...enCLI, ...enUI };
 const translations = { pl, en };
 
 let instance = null;
@@ -15,11 +25,11 @@ export default class Lang {
             instance = this;
 
             this.language = language;
-            this.translation = translations[this.language];
+            this.translations = translations[this.language];
 
             // Fallback to en if selected language not present
-            if (!this.translation) {
-                this.translation = translations.en;
+            if (!this.translations) {
+                this.translations = translations.en;
             }
         }
 
@@ -28,7 +38,7 @@ export default class Lang {
 
     trans(literal, properties) {
         logger.debug('Translating literal:', literal);
-        const translatedLiteral = this.translation[literal];
+        const translatedLiteral = this.translations[literal];
 
         let result = literal;
         if (translatedLiteral) {
@@ -43,6 +53,10 @@ export default class Lang {
         }
 
         return result;
+    }
+
+    getTranslations() {
+        return this.translations;
     }
 
     static getInstance() {

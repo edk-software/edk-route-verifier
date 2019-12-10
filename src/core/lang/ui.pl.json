@@ -1,0 +1,32 @@
+{
+    "Home": "Start",
+    "Route": "Trasa",
+    "Routes": "Trasy",
+    "Route on map": "Trasa na mapie",
+
+    "Route verification": "Automatyczna weryfikacja trasy",
+    "Verify": "Zweryfikuj trasę",
+    "Route type": "Typ trasy",
+    "Length": "Długość",
+    "RouteLengthDescription": "Długość wyliczona na podstawie dołączonego śladu trasy.",
+    "Total ascent": "Suma podejść",
+    "TotalAscentDescription": "Suma podejść wyliczona na podstawie śladu trasy.",
+    "Total descent": "Suma zejść",
+    "TotalDescentDescription": "Suma zejść wyliczona na podstawie śladu trasy.",
+    "Total elevation change": "Suma przewyższeń",
+    "TotalElevationChangeDescription": "Suma przewyższeń wyliczona na podstawie śladu trasy.",
+    "Stations number and naming": "Liczba i nazewnictwo stacji",
+    "NumberOfStationsDescription": "Trasa powinna liczyć 14 ponumerowanych stacji.",
+    "Stations order": "Kolejność stacji",
+    "StationsOrderDescription": "Stacje powinny być umieszczone na trasie w kolejności rosnącej.",
+    "Stations location": "Rozmieszczenie stacji",
+    "StationsOnPathDescription": "Stacje powinny być w maksymalnej odlegości 50m od śladu trasy.",
+    "Single path": "Jedna nitka",
+    "SinglePathDescription": "Ślad trasy zawierać powinien jedną nitkę - ścieżkę.",
+
+    "Elevation chart": "Profil trasy",
+
+    "Verification successful": "Weryfikacja zakończona sukcesem",
+    "VerificationSuccessfulDescription": "Nie wykryto błędów podczas weryfikacji",
+    "Verification failed": "Weryfikacja zakończona błędem"
+}
