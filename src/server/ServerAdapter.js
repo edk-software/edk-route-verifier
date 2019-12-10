@@ -9,7 +9,9 @@ export default class ServerAdapter extends AbstractOutputAdapter {
     get() {
         const output = this.verificationOutput;
         return {
-            elevationCharacteristics: output.getElevationCharacteristics(),
+            routeCharacteristics: {
+                elevationCharacteristics: output.getElevationCharacteristics()
+            },
             verificationStatus: {
                 singlePath: {
                     valid: output.getSinglePathStatus()
