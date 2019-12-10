@@ -18,8 +18,8 @@ export default class RouteVerificationOutput {
             this.elevationTotalChange = 0.0;
             this.logs = [];
         } else {
-            const { elevationCharacteristics, verificationStatus } = json;
-            this.setElevationCharacteristics(elevationCharacteristics);
+            const { routeCharacteristics, verificationStatus } = json;
+            this.setElevationCharacteristics(routeCharacteristics.elevationCharacteristics);
             this.setSinglePath(verificationStatus.singlePath.valid);
             this.setPathLength(verificationStatus.pathLength.value);
             this.setRouteType(verificationStatus.routeType.valid, verificationStatus.routeType.value);

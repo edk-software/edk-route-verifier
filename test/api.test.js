@@ -1,14 +1,16 @@
 import { callVerifyApi, initializeVerificationEnvironment, readKmlFile, startAPIServer, stopAPIServer } from './common';
 
 describe('API', () => {
-    const elevationCharacteristics = expect.arrayContaining([
-        expect.objectContaining({
-            distance: expect.any(Number),
-            elevation: expect.any(Number)
-        })
-    ]);
-    const expectedElevationCharacteristics = expect.objectContaining({
-        elevationCharacteristics
+    const routeCharacteristics = expect.objectContaining({
+        elevationCharacteristics: expect.arrayContaining([
+            expect.objectContaining({
+                distance: expect.any(Number),
+                elevation: expect.any(Number)
+            })
+        ])
+    });
+    const expectedRouteCharacteristics = expect.objectContaining({
+        routeCharacteristics
     });
     const verificationStatusSuccessful = {
         elevationGain: {
@@ -73,11 +75,11 @@ describe('API', () => {
         const verificationOutput = await callVerifyApi(readKmlFile('01-regular'));
 
         const expected = expect.objectContaining({
-            elevationCharacteristics,
+            routeCharacteristics,
             verificationStatus: verificationStatusSuccessful
         });
 
-        expect(verificationOutput).toEqual(expectedElevationCharacteristics);
+        expect(verificationOutput).toEqual(expectedRouteCharacteristics);
         expect(verificationOutput).toEqual(expectedVerificationStatusSuccessful);
         expect(verificationOutput).toStrictEqual(expected);
     });
@@ -86,11 +88,11 @@ describe('API', () => {
         const verificationOutput = await callVerifyApi(readKmlFile('21-two_path'));
 
         const expected = expect.objectContaining({
-            elevationCharacteristics,
+            routeCharacteristics,
             verificationStatus: verificationStatusFailed
         });
 
-        expect(verificationOutput).toEqual(expectedElevationCharacteristics);
+        expect(verificationOutput).toEqual(expectedRouteCharacteristics);
         expect(verificationOutput).toEqual(expectedVerificationStatusFailed);
         expect(verificationOutput).toStrictEqual(expected);
     });
