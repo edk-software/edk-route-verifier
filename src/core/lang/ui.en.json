@@ -1,0 +1,34 @@
+{
+    "Home": "Home",
+    "Route": "Route",
+    "Routes": "Routes",
+    "Route on map": "Route on map",
+
+    "Route verification": "Route verification",
+    "Verify": "Verify route",
+    "Route type": "Route type",
+    "Length": "Length",
+    "RouteLengthDescription": "Route length calculated from GPS trace file.",
+    "Total ascent": "Total ascent",
+    "TotalAscentDescription": "Total ascent calculated from GPS trace file.",
+    "Total descent": "Total descent",
+    "TotalDescentDescription": "Total descent calculated from GPS trace file.",
+    "Total elevation change": "Total elevation change",
+    "TotalElevationChangeDescription": "Total elevation change calculated from GPS trace file.",
+    "Stations number and naming": "Stations number and naming",
+    "NumberOfStationsDescription": "Route shall contain 14 stations.",
+    "Stations order": "Stations order",
+    "StationsOrderDescription": "Stations shall be numbered and appear on the route in ascending order.",
+    "Stations location": "Stations location",
+    "StationsOnPathDescription": "Stations shall be not further than 50m from GPS trace.",
+    "Single path": "Single path",
+    "SinglePathDescription": "GPS trace shall contain only one path.",
+    "Data consistency": "Data consistency",
+    "DataConsistencyDescription": "Route length (±1km), total ascent (±50m) and route type shall be consistent with calculated from GPS trace file.",
+
+    "Elevation chart": "Elevation chart",
+
+    "Verification successful": "Verification successful",
+    "VerificationSuccessfulDescription": "No errors detected during verification",
+    "Verification failed": "Verification failed"
+}
