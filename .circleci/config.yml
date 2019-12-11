@@ -31,7 +31,7 @@ jobs:
           name: Create test configuration file
           command: |
             cp conf/config.json.template conf/config.json
-            sed -i "s/GOOGLE_MAPS_API_KEY/$GOOGLE_MAPS_API_KEY/i" conf/config.json
+            sed -i "s/GOOGLE_MAPS_API_KEY/$GM_API_KEY/i" conf/config.json
             sed -i "s/API_USER/test/i" conf/config.json
             sed -i "s/API_PASSWORD/test/i" conf/config.json
 
