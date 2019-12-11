@@ -6,7 +6,7 @@ defaults: &defaults
   working_directory: ~/repo
 
 jobs:
-  build:
+  test:
     <<: *defaults
 
     steps:
@@ -27,23 +27,11 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - repo
-
-  test:
-    <<: *defaults
-
-    steps:
-      - attach_workspace:
-          at: ~/
-
       - run:
           name: Create test configuration file
           command: |
             cp conf/config.json.template conf/config.json
-            sed -i "s/GOOGLE_MAPS_API_KEY/$GOOGLE_MAPS_API_KEY/i" conf/config.json
+            sed -i "s/GOOGLE_MAPS_API_KEY/$GM_API_KEY/i" conf/config.json
             sed -i "s/API_USER/test/i" conf/config.json
             sed -i "s/API_PASSWORD/test/i" conf/config.json
 
@@ -52,13 +40,13 @@ jobs:
           command: npm run test:lint
 
       - run:
-          name: Verify documentation
-          command: npm run docs:verify
+          name: Run jest tests
+          command: npm run test:jest
 
-      - run:
-          name: Run API tests
-          command: npm run test:api
-
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - repo
 
   deploy:
     <<: *defaults
@@ -97,13 +85,9 @@ workflows:
   version: 2
   build-test-deploy:
     jobs:
-      - build
-      - test:
-          requires:
-            - build
+      - test
       - deploy:
           requires:
-            - build
             - test
           filters:
             branches:

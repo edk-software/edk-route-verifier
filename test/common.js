@@ -1,4 +1,3 @@
-import request from 'request-promise-native';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import RouteVerificationInput from '../src/data/RouteVerificationInput';
@@ -7,9 +6,6 @@ import verifyRoute from '../src/core/verifyRoute';
 import ServerAdapter from '../src/server/ServerAdapter';
 import Configuration from '../src/core/Configuration';
 import Lang from '../src/core/lang/Lang';
-import { startServer } from '../src/server/server';
-
-const testServerPort = 9103;
 
 export function readFile(name) {
     return readFileSync(name, 'utf8');
@@ -25,28 +21,11 @@ export function readKmlFile(name) {
     return readFile(join(kmlFilesPath, `${name}${kmlFilesExtension}`), 'utf8');
 }
 
-export function stopAPIServer() {
-    return request.post({
-        method: 'POST',
-        uri: `http://localhost:${testServerPort}/stop`
-    });
-}
-
-export function startAPIServer() {
-    return startServer(testServerPort, false, false, true);
-}
-
-export function callVerifyApi(kml, { apiUser, apiPass } = readJsonFile('./conf/config.json')) {
-    return request.post({
-        method: 'POST',
-        uri: `http://localhost:${testServerPort}/api/verify`,
-        body: { kml },
-        auth: {
-            user: apiUser,
-            pass: apiPass
-        },
-        json: true
-    });
+export function initializeVerificationEnvironment(config = readJsonFile('./conf/config.json'), language = 'en') {
+    // eslint-disable-next-line no-unused-vars
+    const configuration = new Configuration(config);
+    // eslint-disable-next-line no-unused-vars
+    const lang = new Lang(language);
 }
 
 export async function getVerificationOutputFor(filename) {
@@ -57,13 +36,6 @@ export async function getVerificationOutputFor(filename) {
     const verificationOutput = await verifyRoute(routeInput, options, new ServerAdapter());
 
     return verificationOutput.get();
-}
-
-export function initializeVerificationEnvironment(config = readJsonFile('./conf/config.json'), language = 'en') {
-    // eslint-disable-next-line no-unused-vars
-    const configuration = new Configuration(config);
-    // eslint-disable-next-line no-unused-vars
-    const lang = new Lang(language);
 }
 
 expect.extend({
