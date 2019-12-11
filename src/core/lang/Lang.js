@@ -1,36 +1,24 @@
 import logger from 'loglevel';
 import * as _ from '../utils/lodash.js';
-
-import enCommon from './common.en.json';
-import enAPI from './api.en.json';
-import enCLI from './cli.en.json';
-import enUI from './ui.en.json';
-
-import plCommon from './common.pl.json';
-import plAPI from './api.pl.json';
-import plCLI from './cli.pl.json';
-import plUI from './ui.pl.json';
-
 import InternalObjectInitializationError from '../errors/InternalObjectInitializationError.js';
 
-const pl = { ...plCommon, ...plAPI, ...plCLI, ...plUI };
-const en = { ...enCommon, ...enAPI, ...enCLI, ...enUI };
+import en from './en/index.js';
+import pl from './pl/index.js';
+
 const translations = { pl, en };
 
 let instance = null;
 
 export default class Lang {
     constructor(language) {
-        if (!instance) {
-            instance = this;
+        instance = this;
 
-            this.language = language;
-            this.translations = translations[this.language];
+        this.language = language;
+        this.translations = translations[this.language];
 
-            // Fallback to en if selected language not present
-            if (!this.translations) {
-                this.translations = translations.en;
-            }
+        // Fallback to en if selected language not present
+        if (!this.translations) {
+            this.translations = translations.en;
         }
 
         return instance;
