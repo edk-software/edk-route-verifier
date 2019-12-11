@@ -170,8 +170,8 @@ describe('API', () => {
     });
 
     test('Google Maps API error', async () => {
-        const app = createAPIServer({ ...readJsonFile('./conf/config.json'), googleMapsApiKey: '' });
-        const response = await callVerifyApi(app, readKmlFile('01-regular'));
+        const app = createAPIServer({ apiUser: '', apiPass: '', googleMapsApiKey: '' });
+        const response = await callVerifyApi(app, readKmlFile('01-regular'), { apiUser: '', apiPass: '' });
 
         const { status, body: error } = response;
 
