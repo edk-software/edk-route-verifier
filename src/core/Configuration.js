@@ -4,10 +4,8 @@ let instance = null;
 
 export default class Configuration {
     constructor(config) {
-        if (!instance) {
-            this.config = config;
-            instance = this;
-        }
+        this.config = config;
+        instance = this;
 
         return instance;
     }
@@ -18,9 +16,5 @@ export default class Configuration {
         }
 
         return instance.config;
-    }
-
-    static destroy() {
-        instance = null;
     }
 }
