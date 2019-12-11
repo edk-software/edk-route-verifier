@@ -14,8 +14,10 @@ Assuming your configuration file is `config.json` you can start
 ```shell script
 edk-route-verifer server -c config.json
 ```
+See [server command usage](../docs/USAGE_SERVER.md) for details.
 
 Server is started on `localhost`. Port is presented to the user. It can be changed using `-p` switch in command.
+
 
 ### Endpoints
 
