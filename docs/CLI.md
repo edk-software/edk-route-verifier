@@ -14,5 +14,6 @@ Assuming your configuration file is `config.json` and your KML file is `route.km
 ```shell script
 edk-route-verifer file -c config.json route.kml
 ```
+See [file command usage](../docs/USAGE_FILE.md) for details.
 
 Verification output is presented in user friendly format on standard output.
