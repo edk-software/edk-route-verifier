@@ -16,5 +16,6 @@ Assuming your configuration file is `config.json` you can start
 ```shell script
 edk-route-verifer ui -c config.json
 ```
+See [ui command usage](../docs/USAGE_UI.md) for details.
 
 Web server is started on `localhost`. Port is presented to the user.
