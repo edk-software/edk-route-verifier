@@ -18,7 +18,7 @@ function setupLogger(debug) {
     }
 }
 
-export function startServer(port, debug, serveWebContent, addStopEndpoint = false) {
+export function createServer(port, debug, serveWebContent) {
     const app = express();
 
     if (serveWebContent) {
@@ -27,10 +27,6 @@ export function startServer(port, debug, serveWebContent, addStopEndpoint = fals
         secureServer(app);
     }
     setupLogger(debug);
-
-    if (addStopEndpoint) {
-        app.post('/stop', (req, res) => app.close().then(() => res.send()));
-    }
 
     app.post('/api/verify', cors(), bodyParser.json(), (req, res) => {
         const { kml } = req.body;
@@ -46,6 +42,12 @@ export function startServer(port, debug, serveWebContent, addStopEndpoint = fals
             });
     });
 
+    return app;
+}
+
+export function startServer(port, debug, serveWebContent) {
+    const app = createServer(port, debug, serveWebContent);
+
     logger.info(`Starting Verify API server...`);
 
     return app.listen(port, () => {
@@ -54,5 +56,3 @@ export function startServer(port, debug, serveWebContent, addStopEndpoint = fals
         );
     });
 }
-
-export default startServer;
