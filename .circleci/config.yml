@@ -6,7 +6,7 @@ defaults: &defaults
   working_directory: ~/repo
 
 jobs:
-  build:
+  test:
     <<: *defaults
 
     steps:
@@ -27,18 +27,6 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - repo
-
-  test:
-    <<: *defaults
-
-    steps:
-      - attach_workspace:
-          at: ~/
-
       - run:
           name: Create test configuration file
           command: |
@@ -55,6 +43,10 @@ jobs:
           name: Run jest tests
           command: npm run test:jest
 
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - repo
 
   deploy:
     <<: *defaults
@@ -93,13 +85,9 @@ workflows:
   version: 2
   build-test-deploy:
     jobs:
-      - build
-      - test:
-          requires:
-            - build
+      - test
       - deploy:
           requires:
-            - build
             - test
           filters:
             branches:
