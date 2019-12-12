@@ -20,7 +20,7 @@ const VERIFY_BUTTON_ID = 'button#verifyRoute';
 const LOADER_ID = 'div#loader';
 const LOADER_ELEMENT = '<div id="loader" class="overlay"><i class="fa fa-refresh fa-spin"></i></div>';
 const ELEVATION_CHART_ELEMENT = '<canvas id="elevationChart"></canvas>';
-const SUCCESS_VERIFICATION_MODAL_ID = 'div#pageReloadModal';
+const SUCCESS_VERIFICATION_MODAL_ID = 'div#verificationSuccessfulModal';
 const FAILED_VERIFICATION_MODAL_ID = 'div#verificationFailedModal';
 const FAILED_VERIFICATION_MODAL_BODY = `${FAILED_VERIFICATION_MODAL_ID} div.modal-body`;
 

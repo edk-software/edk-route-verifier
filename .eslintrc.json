@@ -6,11 +6,9 @@
     "parser": "babel-eslint",
     "extends": [
         "airbnb-base",
-        "prettier",
-        "plugin:jest/recommended"
+        "prettier"
     ],
     "plugins": [
-        "jest",
         "prettier"
     ],
     "rules" : {
@@ -30,5 +28,28 @@
             "google": true,
             "geoXML3": true
         }
+    },
+    {
+        "files": [ "test/cypress/**" ],
+        "extends": [
+          "airbnb-base",
+          "prettier",
+          "plugin:cypress/recommended"
+        ],
+        "plugins": [
+          "prettier"
+        ]
+    },
+    {
+        "files": [ "test/jest/**" ],
+        "extends": [
+          "airbnb-base",
+          "prettier",
+          "plugin:jest/recommended"
+        ],
+        "plugins": [
+          "jest",
+          "prettier"
+        ]
     }]
 }

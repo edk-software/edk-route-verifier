@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { createServer } from '../src/server/server';
+import { createServer } from '../../src/server/server';
 import { readKmlFile, readJsonFile, initializeVerificationEnvironment } from './common';
 
 function createAPIServer(config = readJsonFile('./conf/config.json'), language = 'en') {
