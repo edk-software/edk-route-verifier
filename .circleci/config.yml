@@ -34,6 +34,7 @@ jobs:
             sed -i "s/GOOGLE_MAPS_API_KEY/$GM_API_KEY/i" conf/config.json
             sed -i "s/API_USER/test/i" conf/config.json
             sed -i "s/API_PASSWORD/test/i" conf/config.json
+            sed -i "s/PATH_TO_KML_FILES_DIRECTORY/test\/resources/i" conf/config.json
 
       - run:
           name: Analyze code
