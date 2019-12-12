@@ -2,7 +2,7 @@ version: 2.1
 
 defaults: &defaults
   docker:
-    - image: circleci/node:12-stretch
+    - image: cypress/base:12.13.0
   working_directory: ~/repo
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
             - v1-dependencies-
       - run:
           name: Install application dependencies
-          command: npm install
+          command: npm ci
 
       - save_cache:
           paths:
@@ -34,6 +34,7 @@ jobs:
             sed -i "s/GOOGLE_MAPS_API_KEY/$GM_API_KEY/i" conf/config.json
             sed -i "s/API_USER/test/i" conf/config.json
             sed -i "s/API_PASSWORD/test/i" conf/config.json
+            sed -i "s/PATH_TO_KML_FILES_DIRECTORY/test\/resources/i" conf/config.json
 
       - run:
           name: Analyze code
@@ -42,6 +43,10 @@ jobs:
       - run:
           name: Run jest tests
           command: npm run test:jest
+
+      - run:
+          name: Run cypress tests
+          command: npm run test:ui
 
       - persist_to_workspace:
           root: ~/
