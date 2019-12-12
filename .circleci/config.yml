@@ -43,6 +43,10 @@ jobs:
           name: Run jest tests
           command: npm run test:jest
 
+      - run:
+          name: Run cypress tests
+          command: npm run test:ui
+
       - persist_to_workspace:
           root: ~/
           paths:

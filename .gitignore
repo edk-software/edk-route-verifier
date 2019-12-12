@@ -9,7 +9,5 @@ node_modules/
 .eslintcache
 
 # Tests
-/test/screenshots/
-/test/reports/
-selenium-debug.log
-selenium-server.log
+/test/cypress/screenshots/
+/test/cypress/videos/

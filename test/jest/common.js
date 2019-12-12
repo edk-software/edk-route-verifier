@@ -1,11 +1,11 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import RouteVerificationInput from '../src/data/RouteVerificationInput';
-import RouteVerificationOptions from '../src/data/RouteVerificationOptions';
-import verifyRoute from '../src/core/verifyRoute';
-import ServerAdapter from '../src/server/ServerAdapter';
-import Configuration from '../src/core/Configuration';
-import Lang from '../src/core/lang/Lang';
+import RouteVerificationInput from '../../src/data/RouteVerificationInput';
+import RouteVerificationOptions from '../../src/data/RouteVerificationOptions';
+import verifyRoute from '../../src/core/verifyRoute';
+import ServerAdapter from '../../src/server/ServerAdapter';
+import Configuration from '../../src/core/Configuration';
+import Lang from '../../src/core/lang/Lang';
 
 export function readFile(name) {
     return readFileSync(name, 'utf8');
