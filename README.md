@@ -1,8 +1,9 @@
-# edk-route-verifier
+# EDK Route Verifier
 
-[![npm](https://img.shields.io/npm/v/edk-route-verifier.svg?style=flat)](https://www.npmjs.com/package/edk-route-verifier)
 [![CircleCI](https://img.shields.io/circleci/project/github/cloudify-cosmo/cloudify-ui-components.svg?style=svg)](https://circleci.com/gh/cloudify-cosmo/cloudify-ui-components)
 [![jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
+[![Cypress.io tests](https://img.shields.io/badge/cypress.io-tests-green.svg?style=flat-square)](https://cypress.io)
+[![npm](https://img.shields.io/npm/v/edk-route-verifier.svg?style=flat)](https://www.npmjs.com/package/edk-route-verifier)
 
 **EDK Route Verifier** is a tool which allows user to verify provided KML file with [EDK](https://edk.org.pl) route against predefined set of rules (eg. minimal length) and provide route characteristics (eg. length, elevations).
 
@@ -70,7 +71,7 @@ npm run test
 
 [CircleCI](https://circleci.com/gh/edk-software/edk-route-verifier) web application is used as for CI management. See [.circleci/config.yml](.circleci/config.yml) file for details of the build and test job configuration.
 
-You can create your own branch, push it remote and CI will start automatically. That way you can test your code even if you don't have local environment configured (NodeJS, Google Maps API Key, etc.).
+You can create your own branch, push it to remote and CI will start automatically. That way you can test your code even if you don't have local environment configured (NodeJS, Google Maps API Key, etc.).
 
 ### Deployment
 
