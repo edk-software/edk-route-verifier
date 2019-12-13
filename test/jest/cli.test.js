@@ -68,7 +68,7 @@ describe('CLI', () => {
                     '- Elevation Gain: [0-9.]*m\n' +
                     '- Elevation Loss: [0-9.]*m\n' +
                     '- Elevation Total Change: [0-9.]*m\n' +
-                    'Verification Status\n' +
+                    'Verification Status:\n' +
                     '- Single Path: OK\n' +
                     '- Route Type: OK\n' +
                     '- Number Of Stations: OK\n' +
@@ -92,7 +92,7 @@ describe('CLI', () => {
                     '- Elevation Gain: [0-9.]*m\n' +
                     '- Elevation Loss: [0-9.]*m\n' +
                     '- Elevation Total Change: [0-9.]*m\n' +
-                    'Verification Status\n' +
+                    'Verification Status:\n' +
                     '- Single Path: Failed\n' +
                     '- Route Type: OK\n' +
                     '- Number Of Stations: OK\n' +

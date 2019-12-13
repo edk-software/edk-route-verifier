@@ -8,9 +8,9 @@
 
 It is delivered in 3 different flavours: API server, CLI tool and UI version.
 
-[![UI](./docs/UI.png)](docs/UI.md)
+[![UI](./docs/UI.gif)](docs/UI.md)
 
-[![CLI](./docs/CLI.png)](docs/CLI.md)
+[![CLI](./docs/CLI.gif)](docs/CLI.md)
 
 ### Usage
 
@@ -58,12 +58,11 @@ edk-route-verifier server -c config.json
 
 #### Local
 
-Tests are developed using [Jest](https://jestjs.io/) framework. All test-related code is stored in `test` subdirectory.
+Tests are developed using [Jest](https://jestjs.io/) and [Cypress](https://www.cypress.io/) frameworks. All test-related code is stored in `test` subdirectory.
 
-To run all tests (including static code analysis and documentation check):
+To run all tests (UI, API, CLI + static code analysis):
 
 ```shell script
-npm run start:server
 npm run test
 ```
 
@@ -75,12 +74,11 @@ You can create your own branch, push it remote and CI will start automatically. 
 
 ### Deployment
 
-`edk-route-verifier` is deployed in NPM registry. 
+`edk-route-verifier` is published in NPM registry. 
 
-Follow this step-by-step guide to deploy new version:
-1. Checkout `master` branch
-2. Push all the changes to remote
-3. Start API server: `npm run start:server` (assuming you have configuration file in `conf/config.json`)
-4. Execute `npm run publish:[prerelease|patch|minor|major]`
-5. After successful execution, check [CircleCI](https://circleci.com/gh/edk-software/edk-route-verifier)
+Follow this step-by-step guide to publish new version:
+1. Create configuration file `conf/config.json`
+2. Checkout `master` branch
+3. Execute `npm run publish:[prerelease|patch|minor|major]`
+4. After successful execution, check [CircleCI](https://circleci.com/gh/edk-software/edk-route-verifier)
 5. If everything went fine, then create release in [GitHub releases](https://github.com/edk-software/edk-route-verifier/tags)

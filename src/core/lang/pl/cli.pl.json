@@ -6,7 +6,7 @@
   "Elevation Gain": "- Suma Podejść: <%= gain %>m",
   "Elevation Loss": "- Suma Zejść: <%= loss %>m",
   "Elevation Total Change": "- Suma Przewyższeń: <%= change %>m",
-  "Verification Status": "Status Weryfikacji",
+  "Verification Status": "Status Weryfikacji:",
   "Single Path": "- Jedna Nitka: <%= status %>",
   "Route Type Status": "- Typ Trasy: <%= status %>",
   "Number Of Stations": "- Liczba Stacji: <%= status %>",
