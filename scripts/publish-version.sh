@@ -6,7 +6,7 @@ log() {
     echo -e $LOG_PREFIX $@
 }
 
-MAIN_BRANCH=${MAIN_BRANCH:-next}
+MAIN_BRANCH=${MAIN_BRANCH:-master}
 log "Switching to main branch (${MAIN_BRANCH}) and checking if its up-to-date...";
 git checkout ${MAIN_BRANCH}
 git fetch
