@@ -6,7 +6,7 @@
   "Elevation Gain": "- Elevation Gain: <%= gain %>m",
   "Elevation Loss": "- Elevation Loss: <%= loss %>m",
   "Elevation Total Change": "- Elevation Total Change: <%= change %>m",
-  "Verification Status": "Verification Status",
+  "Verification Status": "Verification Status:",
   "Single Path": "- Single Path: <%= status %>",
   "Route Type Status": "- Route Type: <%= status %>",
   "Number Of Stations": "- Number Of Stations: <%= status %>",
