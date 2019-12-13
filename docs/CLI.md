@@ -2,7 +2,7 @@
 
 **EDK Route Verifier** in CLI flavour provides user command-line tool to run route verification on provided KML file.
 
-![CLI](CLI.png)
+![CLI](CLI.gif)
 
 ### Configuration
 

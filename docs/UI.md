@@ -2,7 +2,7 @@
 
 **EDK Route Verifier** in UI flavour provides web page listing all KML files in configured folder and verification pane.
 
-![UI](./UI.png)
+![UI](./UI.gif)
 
 ### Configuration
 
