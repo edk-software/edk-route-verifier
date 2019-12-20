@@ -53,7 +53,7 @@ export default class Route {
 
         if (this.hasPath) {
             this.stations = new Stations(this.points, this.lineString);
-            this.path = this.stations.getUpdatedPath();
+            this.path = this.stations.getPathEndingOnLastStation();
             this.numberOfPaths = helpers.getNumberOfFeatures('LineString', this.geoJson);
             this.length = length(this.path);
 
@@ -123,6 +123,14 @@ export default class Route {
         }
 
         return Promise.reject(new NoPathInRouteError());
+    }
+
+    getPathStart() {
+        return this.stations.getPathStart();
+    }
+
+    getPathEnd() {
+        return this.stations.getPathEnd();
     }
 
     getStations() {

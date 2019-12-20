@@ -1,5 +1,5 @@
 import logger from 'loglevel';
-import * as _ from '../utils/lodash.js';
+import { isEmpty, template } from '../utils/lodash.js';
 import InternalObjectInitializationError from '../errors/InternalObjectInitializationError.js';
 
 import en from './en/index.js';
@@ -31,7 +31,7 @@ export default class Lang {
         let result = literal;
         if (translatedLiteral) {
             try {
-                result = _.isEmpty(properties) ? translatedLiteral : _.template(translatedLiteral)(properties);
+                result = isEmpty(properties) ? translatedLiteral : template(translatedLiteral)(properties);
             } catch (error) {
                 logger.error('Error translating literal: "', literal, '" with properties: "', properties, '"');
                 return literal;

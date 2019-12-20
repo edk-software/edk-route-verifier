@@ -6,6 +6,9 @@ export default class RouteVerificationOutput {
 
         if (isEmpty(json)) {
             this.elevationCharacteristics = [];
+            this.pathStart = {};
+            this.pathEnd = {};
+            this.stations = [];
             this.singlePath = false;
             this.pathLength = 0.0;
             this.routeType = 2;
@@ -20,6 +23,9 @@ export default class RouteVerificationOutput {
         } else {
             const { routeCharacteristics, verificationStatus } = json;
             this.setElevationCharacteristics(routeCharacteristics.elevationCharacteristics);
+            this.setPathStart(routeCharacteristics.pathStart);
+            this.setPathEnd(routeCharacteristics.pathEnd);
+            this.setStations(routeCharacteristics.stations);
             this.setSinglePath(verificationStatus.singlePath.valid);
             this.setPathLength(verificationStatus.pathLength.value);
             this.setRouteType(verificationStatus.routeType.valid, verificationStatus.routeType.value);
@@ -35,6 +41,18 @@ export default class RouteVerificationOutput {
 
     setElevationCharacteristics(data) {
         this.elevationCharacteristics = data;
+    }
+
+    setPathStart(pathStart) {
+        this.pathStart = pathStart;
+    }
+
+    setPathEnd(pathEnd) {
+        this.pathEnd = pathEnd;
+    }
+
+    setStations(stations) {
+        this.stations = stations;
     }
 
     setSinglePath(valid) {
@@ -90,6 +108,18 @@ export default class RouteVerificationOutput {
 
     getElevationCharacteristics() {
         return this.elevationCharacteristics;
+    }
+
+    getPathStart() {
+        return this.pathStart;
+    }
+
+    getPathEnd() {
+        return this.pathEnd;
+    }
+
+    getStations() {
+        return this.stations;
     }
 
     getSinglePathStatus() {

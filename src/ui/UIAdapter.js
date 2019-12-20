@@ -1,6 +1,7 @@
 import logger from 'loglevel';
 import Chart from 'chart.js';
 
+import Lang from '../core/lang/Lang.js';
 import * as _ from '../core/utils/lodash.js';
 import AbstractOutputAdapter from '../data/AbstractOutputAdapter.js';
 
@@ -231,9 +232,25 @@ export default class UIAdapter extends AbstractOutputAdapter {
         $(FAILED_VERIFICATION_MODAL_ID).modal();
     }
 
+    // eslint-disable-next-line class-methods-use-this
+    addPointToMap({ latitude, longitude }, label, title) {
+        const { Marker, LatLng } = google.maps;
+        return new Marker({
+            position: new LatLng(latitude, longitude),
+            map: window.map,
+            label: {
+                fontWeight: 'bold',
+                text: label
+            },
+            title,
+            icon: 'https://maps.google.com/mapfiles/ms/icons/blue.png'
+        });
+    }
+
     get() {
         const { verificationOutput } = this;
         const logs = verificationOutput.getLogs();
+        const lang = new Lang($('html').attr('lang'));
 
         this.removeLoaderFromButton();
         this.updateSinglePath(verificationOutput.getSinglePathStatus());
@@ -246,6 +263,9 @@ export default class UIAdapter extends AbstractOutputAdapter {
         this.updateElevationLoss(true, verificationOutput.getElevationLoss());
         this.updateElevationTotalChange(true, verificationOutput.getElevationTotalChange());
         this.drawElevationChart(verificationOutput.getElevationCharacteristics());
+
+        this.addPointToMap(verificationOutput.getPathStart(), lang.trans('Path Start'), lang.trans('Path Start'));
+        this.addPointToMap(verificationOutput.getPathEnd(), lang.trans('Path End'), lang.trans('Path End'));
 
         if (logs.length === 0) {
             this.showVerificationSuccessModal();

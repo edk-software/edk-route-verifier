@@ -25,6 +25,15 @@ const CONSTS = {
 let lang = null;
 let logBuffer = null;
 
+const getPointCoordinates = geoJsonPoint => {
+    const { coordinates } = geoJsonPoint.geometry;
+
+    return {
+        latitude: coordinates[1],
+        longitude: coordinates[0]
+    };
+};
+
 export default class Stations {
     constructor(points, lineString) {
         this.points = points;
@@ -247,6 +256,9 @@ export default class Stations {
         if (this.pathReversed) {
             logger.debug('Reversing points.');
             this.path = helpers.reverseLineString(this.path);
+            const { coordinates } = this.path.geometry;
+            this.pathStart = point(coordinates[0]);
+            this.pathEnd = point(coordinates[coordinates.length - 1]);
         }
     }
 
@@ -364,22 +376,31 @@ export default class Stations {
         return result;
     }
 
-    getUpdatedPath() {
+    getLastStationLocationOnPath() {
         const lastStationPoint = _.find(this.points, p => p.properties.index === CONSTS.LAST_STATION_INDEX);
+        return helpers.getLocationOfNearestPointOnLine(lastStationPoint);
+    }
 
-        if (lastStationPoint !== null) {
-            const lastStationLocation = helpers.getLocationOfNearestPointOnLine(lastStationPoint);
-            if (lastStationLocation > 0) {
-                logger.debug(
-                    'getPathEndingOnLastStation: Returning sliced path. ' +
-                        `Last station location: ${lastStationLocation.toFixed(2)}`
-                );
-                return lineSliceAlong(this.path, 0, lastStationLocation, options);
-            }
+    getPathEndingOnLastStation() {
+        const lastStationLocation = this.getLastStationLocationOnPath();
+        if (lastStationLocation > 0) {
+            logger.debug(
+                'getPathEndingOnLastStation: Returning sliced path. ' +
+                    `Last station location: ${lastStationLocation.toFixed(2)}`
+            );
+            return lineSliceAlong(this.path, 0, lastStationLocation, options);
         }
 
         logger.debug('getPathEndingOnLastStation: Returning original path. Last station not found.');
         return this.path;
+    }
+
+    getPathStart() {
+        return getPointCoordinates(this.pathStart);
+    }
+
+    getPathEnd() {
+        return getPointCoordinates(this.pathEnd);
     }
 
     getStations() {
@@ -388,27 +409,19 @@ export default class Stations {
             const { index, nearestOnLine } = station.properties;
 
             if (index >= CONSTS.FIRST_STATION_INDEX && index <= CONSTS.LAST_STATION_INDEX) {
-                const { coordinates } = station.geometry;
-                const latitude = coordinates[1];
-                const longitude = coordinates[0];
+                const stationCoordinates = getPointCoordinates(station);
 
                 let stationObject = {
                     index,
-                    latitude,
-                    longitude
+                    ...stationCoordinates
                 };
 
                 if (logger.getLevel() <= logger.levels.DEBUG) {
-                    const { coordinates: neareastPointCoordinates } = nearestOnLine.geometry;
-                    const neareastPointLatitude = neareastPointCoordinates[1];
-                    const neareastPointLongitude = neareastPointCoordinates[0];
+                    const neareastPointCoordinates = getPointCoordinates(nearestOnLine);
 
                     stationObject = {
                         ...stationObject,
-                        nearestPoint: {
-                            latitude: neareastPointLatitude,
-                            longitude: neareastPointLongitude
-                        }
+                        nearestPoint: neareastPointCoordinates
                     };
                 }
 
