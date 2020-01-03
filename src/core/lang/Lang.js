@@ -43,6 +43,10 @@ export default class Lang {
         return result;
     }
 
+    getLanguage() {
+        return this.language;
+    }
+
     getTranslations() {
         return this.translations;
     }

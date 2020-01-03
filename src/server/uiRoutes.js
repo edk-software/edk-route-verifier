@@ -10,7 +10,7 @@ import Lang from '../core/lang/Lang.js';
 
 export function addUIRoutes(app, port) {
     const config = Configuration.getConfig();
-    const language = Lang.getInstance();
+    const lang = Lang.getInstance();
     const resources = [];
     fs.readdirSync(path.resolve(config.resourcesPath)).forEach(file => {
         if (file.search(/\.kml$/i) >= 0) {
@@ -44,10 +44,11 @@ export function addUIRoutes(app, port) {
 
         res.render('pages/index', {
             googleMapsApiKey,
+            language: lang.getLanguage(),
             routeId,
             serverPort: port,
             resources,
-            t: language.getTranslations()
+            t: lang.getTranslations()
         });
     });
 
