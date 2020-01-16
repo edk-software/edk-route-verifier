@@ -2,7 +2,7 @@ import logger from 'loglevel';
 import Chart from 'chart.js';
 
 import Lang from '../core/lang/Lang.js';
-import * as _ from '../core/utils/lodash.js';
+import { map, isNull, forEach } from '../core/utils/lodash.js';
 import AbstractOutputAdapter from '../data/AbstractOutputAdapter.js';
 
 // Constants
@@ -24,17 +24,34 @@ const ELEVATION_CHART_ELEMENT = '<canvas id="elevationChart"></canvas>';
 const SUCCESS_VERIFICATION_MODAL_ID = 'div#verificationSuccessfulModal';
 const FAILED_VERIFICATION_MODAL_ID = 'div#verificationFailedModal';
 const FAILED_VERIFICATION_MODAL_BODY = `${FAILED_VERIFICATION_MODAL_ID} div.modal-body`;
+const POINTS = {
+    start: {
+        name: 'Path Start',
+        icon: 'https://maps.google.com/mapfiles/kml/paddle/go.png'
+    },
+    end: {
+        name: 'Path End',
+        icon: 'https://maps.google.com/mapfiles/kml/paddle/stop.png'
+    },
+    station: {
+        name: 'Station',
+        icon: 'https://maps.google.com/mapfiles/kml/paddle/blu-circle.png'
+    }
+};
 
 export default class UIAdapter extends AbstractOutputAdapter {
     constructor() {
         super();
+
+        this.lang = new Lang($('html').attr('lang'));
+        this.points = [];
 
         this.updateControlColor = (element, isValid) => {
             const VALID_COLOR_CLASS = 'bg-green';
             const INVALID_COLOR_CLASS = 'bg-yellow';
             const INFO_BOX_ICON = 'span.info-box-icon';
 
-            if (_.isNull(isValid)) {
+            if (isNull(isValid)) {
                 $(`${element} ${INFO_BOX_ICON}`).removeClass([INVALID_COLOR_CLASS, VALID_COLOR_CLASS].join(' '));
             } else if (isValid) {
                 $(`${element} ${INFO_BOX_ICON}`)
@@ -114,8 +131,8 @@ export default class UIAdapter extends AbstractOutputAdapter {
         const CHART_BACKGROUND_COLOR = 'rgb(32, 77, 116)';
 
         const labelWidth = parseInt(pathElevation.length / X_AXIS_NUMBER_OF_LABELS, 10);
-        const labels = _.map(pathElevation, elevation => elevation.distance.toFixed());
-        const data = _.map(pathElevation, elevation => elevation.elevation);
+        const labels = map(pathElevation, elevation => elevation.distance.toFixed());
+        const data = map(pathElevation, elevation => elevation.elevation);
 
         logger.debug('Drawing elevation chart. Input:', pathElevation);
 
@@ -181,6 +198,14 @@ export default class UIAdapter extends AbstractOutputAdapter {
             .remove();
     }
 
+    resetMap() {
+        this.removeLegendFromMap();
+        forEach(this.points, point => {
+            this.removePointFromMap(point);
+        });
+        this.points = [];
+    }
+
     // eslint-disable-next-line class-methods-use-this
     addLoaderToButton() {
         $(VERIFY_BUTTON_ID).append(LOADER_ELEMENT);
@@ -212,6 +237,7 @@ export default class UIAdapter extends AbstractOutputAdapter {
         this.updateControlColor(DATA_CONSISTENCY_ID, isValid);
         this.resetElevationChart();
         this.resetFailedVerificationModal();
+        this.resetMap();
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -232,27 +258,54 @@ export default class UIAdapter extends AbstractOutputAdapter {
         $(FAILED_VERIFICATION_MODAL_ID).modal();
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    addPointToMap({ latitude, longitude }, label, title) {
-        const { Marker, LatLng } = google.maps;
-        return new Marker({
+    addPointToMap({ latitude, longitude }, title, icon) {
+        const { Marker, LatLng, InfoWindow } = google.maps;
+        const infoWindow = new InfoWindow({
+            content: `<span style="font-size: 18px; margin: 10px">${title}</span>`
+        });
+        const marker = new Marker({
             position: new LatLng(latitude, longitude),
             map: window.map,
-            label: {
-                fontWeight: 'bold',
-                text: label
-            },
             title,
-            icon: 'https://maps.google.com/mapfiles/ms/icons/blue.png'
+            icon
         });
+
+        marker.addListener('click', () => {
+            infoWindow.open(map, marker);
+        });
+
+        this.points.push(marker);
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    removePointFromMap(marker) {
+        marker.setMap(null);
+        // eslint-disable-next-line no-param-reassign
+        marker = null;
+    }
+
+    addLegendToMap() {
+        const legend = document.createElement('div');
+        legend.style = 'background: #fff; padding: 10px; margin: 10px; border: 1px solid #000;';
+        for (const key in POINTS) {
+            const { name, icon } = POINTS[key];
+            const div = document.createElement('div');
+            div.style = 'font-size: 18px; margin: 10px;';
+            div.innerHTML = `<img src="${icon}"> ${this.lang.trans(name)}`;
+            legend.appendChild(div);
+        }
+
+        window.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
+    }
+
+    removeLegendFromMap() {
+        window.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].clear();
     }
 
     get() {
         const { verificationOutput } = this;
         const logs = verificationOutput.getLogs();
-        const lang = new Lang($('html').attr('lang'));
 
-        this.removeLoaderFromButton();
         this.updateSinglePath(verificationOutput.getSinglePathStatus());
         this.updatePathLength(true, verificationOutput.getPathLength());
         this.updateRouteType(verificationOutput.getRouteTypeStatus(), verificationOutput.getRouteType());
@@ -264,8 +317,18 @@ export default class UIAdapter extends AbstractOutputAdapter {
         this.updateElevationTotalChange(true, verificationOutput.getElevationTotalChange());
         this.drawElevationChart(verificationOutput.getElevationCharacteristics());
 
-        this.addPointToMap(verificationOutput.getPathStart(), lang.trans('Path Start'), lang.trans('Path Start'));
-        this.addPointToMap(verificationOutput.getPathEnd(), lang.trans('Path End'), lang.trans('Path End'));
+        this.addLegendToMap();
+        this.addPointToMap(verificationOutput.getPathStart(), this.lang.trans(POINTS.start.name), POINTS.start.icon);
+        this.addPointToMap(verificationOutput.getPathEnd(), this.lang.trans(POINTS.end.name), POINTS.end.icon);
+
+        const stations = verificationOutput.getStations();
+        forEach(stations, station => {
+            this.addPointToMap(
+                station,
+                `${this.lang.trans(POINTS.station.name)} ${station.index}`,
+                POINTS.station.icon
+            );
+        });
 
         if (logs.length === 0) {
             this.showVerificationSuccessModal();
@@ -276,7 +339,6 @@ export default class UIAdapter extends AbstractOutputAdapter {
 
     handleError(error) {
         const { message } = error;
-        this.removeLoaderFromButton();
         this.showVerificationFailedModal([message]);
         logger.error(message);
     }
