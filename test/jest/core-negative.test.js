@@ -9,7 +9,7 @@ describe('Route verification - negative', () => {
         const { verificationStatus } = await getVerificationOutputFor('10-duplicated_station_point');
         expect(verificationStatus.singlePath.valid).toEqual(true);
         expect(verificationStatus.pathLength.value).toBeWithinRange(29, 0.5);
-        expect(verificationStatus.routeType.valid).toEqual(true);
+        expect(verificationStatus.routeType.valid).toEqual(false);
         expect(verificationStatus.routeType.value).toEqual(1);
         expect(verificationStatus.numberOfStations.valid).toEqual(false);
         expect(verificationStatus.stationsOrder.valid).toEqual(false);
@@ -65,7 +65,7 @@ describe('Route verification - negative', () => {
         const { verificationStatus } = await getVerificationOutputFor('21-two_path');
         expect(verificationStatus.singlePath.valid).toEqual(false);
         expect(verificationStatus.pathLength.value).toBeWithinRange(24, 1);
-        expect(verificationStatus.routeType.valid).toEqual(true);
+        expect(verificationStatus.routeType.valid).toEqual(false);
         expect(verificationStatus.routeType.value).toEqual(1);
         expect(verificationStatus.numberOfStations.valid).toEqual(true);
         expect(verificationStatus.stationsOrder.valid).toEqual(true);

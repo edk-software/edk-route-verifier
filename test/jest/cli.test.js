@@ -88,13 +88,13 @@ describe('CLI', () => {
             new RegExp(
                 'Route Characteristics:\n' +
                     '- Path Length: [0-9.]*km\n' +
-                    '- Route Type: Inspired\n' +
+                    '- Route Type: Unknown\n' +
                     '- Elevation Gain: [0-9.]*m\n' +
                     '- Elevation Loss: [0-9.]*m\n' +
                     '- Elevation Total Change: [0-9.]*m\n' +
                     'Verification Status:\n' +
                     '- Single Path: Failed\n' +
-                    '- Route Type: OK\n' +
+                    '- Route Type: Failed\n' +
                     '- Number Of Stations: OK\n' +
                     '- Stations Order: OK\n' +
                     '- Stations On Path: Failed\n' +
