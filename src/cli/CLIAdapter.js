@@ -15,8 +15,6 @@ export default class CLIAdapter extends AbstractOutputAdapter {
             let stringType = 'Unknown';
             if (type === 0) {
                 stringType = 'Normal';
-            } else if (type === 1) {
-                stringType = 'Inspired';
             }
             return lang.trans(stringType);
         };

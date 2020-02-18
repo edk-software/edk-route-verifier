@@ -61,6 +61,9 @@ export default function verifyRoute(input, options, adapter) {
             verificationOutput.setSinglePath(route.isSinglePath());
             verificationOutput.setPathLength(route.getLength());
 
+            // Route Type calculation
+            verificationOutput.setRouteType(route.isTypeValid(), route.getType());
+
             // Station checks
             verificationOutput.setNumberOfStations(route.areAllStationsPresent());
             verificationOutput.setStationsOrder(route.isStationOrderCorrect());
@@ -71,9 +74,6 @@ export default function verifyRoute(input, options, adapter) {
             verificationOutput.setElevationGain(pathElevation.gain);
             verificationOutput.setElevationLoss(pathElevation.loss);
             verificationOutput.setElevationTotalChange(pathElevation.totalChange);
-
-            // Route Type calculation
-            verificationOutput.setRouteType(route.isTypeValid(), route.getType());
 
             // Sending status
             const routeSuccessfullyVerified = verificationOutput.getStatus();
