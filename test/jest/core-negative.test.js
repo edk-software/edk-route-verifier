@@ -88,4 +88,18 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(314, 50);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(627, 50);
     });
+
+    test('two paths (big file test)', async () => {
+        const { verificationStatus } = await getVerificationOutputFor('26-big_file');
+        expect(verificationStatus.singlePath.valid).toEqual(false);
+        expect(verificationStatus.pathLength.value).toBeWithinRange(38.5, 1);
+        expect(verificationStatus.routeType.valid).toEqual(true);
+        expect(verificationStatus.routeType.value).toEqual(0);
+        expect(verificationStatus.numberOfStations.valid).toEqual(true);
+        expect(verificationStatus.stationsOrder.valid).toEqual(true);
+        expect(verificationStatus.stationsOnPath.valid).toEqual(true);
+        expect(verificationStatus.elevationGain.value).toBeWithinRange(965, 50);
+        expect(verificationStatus.elevationLoss.value).toBeWithinRange(626, 50);
+        expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(1592, 50);
+    });
 });

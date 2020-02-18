@@ -28,7 +28,7 @@ export function createServer(port, debug, serveWebContent) {
     }
     setupLogger(debug);
 
-    app.post('/api/verify', cors(), bodyParser.json(), (req, res) => {
+    app.post('/api/verify', cors(), bodyParser.json({ limit: '5mb' }), (req, res) => {
         const { kml } = req.body;
 
         const routeData = new RouteVerificationInput(kml);
