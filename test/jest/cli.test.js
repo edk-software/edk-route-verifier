@@ -56,7 +56,7 @@ describe('CLI', () => {
     });
 
     test('Verification successful', async () => {
-        const cmd = `${cliCmd} file -c ./conf/config.json ./test/resources/01-regular.kml`;
+        const cmd = `${cliCmd} file -c ./conf/config.json ./test/resources/regular.kml`;
 
         const { stdout, stderr } = await exec(cmd);
 
@@ -80,7 +80,7 @@ describe('CLI', () => {
     });
 
     test('Verification failed', async () => {
-        const cmd = `${cliCmd} file -c ./conf/config.json ./test/resources/21-two_path.kml`;
+        const cmd = `${cliCmd} file -c ./conf/config.json ./test/resources/two_paths.kml`;
 
         const { stdout, stderr } = await exec(cmd);
 

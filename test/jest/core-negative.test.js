@@ -6,7 +6,7 @@ describe('Route verification - negative', () => {
     });
 
     test('Duplicated station point', async () => {
-        const { verificationStatus } = await getVerificationOutputFor('10-duplicated_station_point');
+        const { verificationStatus } = await getVerificationOutputFor('duplicated_station_point');
         expect(verificationStatus.singlePath.valid).toEqual(true);
         expect(verificationStatus.pathLength.value).toBeWithinRange(29, 0.5);
         expect(verificationStatus.routeType.valid).toEqual(false);
@@ -20,7 +20,7 @@ describe('Route verification - negative', () => {
     });
 
     test('Station out of path', async () => {
-        const { verificationStatus } = await getVerificationOutputFor('11-station_out_of_path');
+        const { verificationStatus } = await getVerificationOutputFor('station_out_of_path');
         expect(verificationStatus.singlePath.valid).toEqual(true);
         expect(verificationStatus.pathLength.value).toBeWithinRange(44, 1);
         expect(verificationStatus.routeType.valid).toEqual(true);
@@ -34,7 +34,7 @@ describe('Route verification - negative', () => {
     });
 
     test('One path and no stations', async () => {
-        const { verificationStatus } = await getVerificationOutputFor('14-one_path_no_stations');
+        const { verificationStatus } = await getVerificationOutputFor('one_path_no_stations');
         expect(verificationStatus.singlePath.valid).toEqual(true);
         expect(verificationStatus.pathLength.value).toBeWithinRange(44, 1);
         expect(verificationStatus.routeType.valid).toEqual(true);
@@ -48,7 +48,7 @@ describe('Route verification - negative', () => {
     });
 
     test('Duplicated path', async () => {
-        const { verificationStatus } = await getVerificationOutputFor('20-duplicated_path');
+        const { verificationStatus } = await getVerificationOutputFor('duplicated_path');
         expect(verificationStatus.singlePath.valid).toEqual(false);
         expect(verificationStatus.pathLength.value).toBeWithinRange(52, 1);
         expect(verificationStatus.routeType.valid).toEqual(true);
@@ -62,7 +62,7 @@ describe('Route verification - negative', () => {
     });
 
     test('Two paths', async () => {
-        const { verificationStatus } = await getVerificationOutputFor('21-two_path');
+        const { verificationStatus } = await getVerificationOutputFor('two_paths');
         expect(verificationStatus.singlePath.valid).toEqual(false);
         expect(verificationStatus.pathLength.value).toBeWithinRange(24, 1);
         expect(verificationStatus.routeType.valid).toEqual(false);
@@ -76,7 +76,7 @@ describe('Route verification - negative', () => {
     });
 
     test('13 stations', async () => {
-        const { verificationStatus } = await getVerificationOutputFor('23-13_stations');
+        const { verificationStatus } = await getVerificationOutputFor('13_stations');
         expect(verificationStatus.singlePath.valid).toEqual(true);
         expect(verificationStatus.pathLength.value).toBeWithinRange(40, 1);
         expect(verificationStatus.routeType.valid).toEqual(true);
@@ -89,8 +89,8 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(627, 50);
     });
 
-    test('two paths (big file test)', async () => {
-        const { verificationStatus } = await getVerificationOutputFor('26-big_file');
+    test('Two paths + big file test', async () => {
+        const { verificationStatus } = await getVerificationOutputFor('big_file');
         expect(verificationStatus.singlePath.valid).toEqual(false);
         expect(verificationStatus.pathLength.value).toBeWithinRange(38.5, 1);
         expect(verificationStatus.routeType.valid).toEqual(true);
@@ -101,5 +101,47 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.elevationGain.value).toBeWithinRange(965, 50);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(626, 50);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(1592, 50);
+    });
+
+    test('Route with shared parts #1 (currently not supported)', async () => {
+        const { verificationStatus } = await getVerificationOutputFor('shared_parts_1');
+        expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.value).toBeWithinRange(49, 0.5);
+        expect(verificationStatus.routeType.valid).toEqual(true);
+        expect(verificationStatus.routeType.value).toEqual(0);
+        expect(verificationStatus.numberOfStations.valid).toEqual(true);
+        expect(verificationStatus.stationsOrder.valid).toEqual(false);
+        expect(verificationStatus.stationsOnPath.valid).toEqual(true);
+        expect(verificationStatus.elevationGain.value).toBeWithinRange(390, 100);
+        expect(verificationStatus.elevationLoss.value).toBeWithinRange(395, 100);
+        expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(785, 100);
+    });
+
+    test('Route with shared parts #2 (currently not supported)', async () => {
+        const { verificationStatus } = await getVerificationOutputFor('shared_parts_2');
+        expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.value).toBeWithinRange(53, 0.5);
+        expect(verificationStatus.routeType.valid).toEqual(true);
+        expect(verificationStatus.routeType.value).toEqual(0);
+        expect(verificationStatus.numberOfStations.valid).toEqual(true);
+        expect(verificationStatus.stationsOrder.valid).toEqual(false);
+        expect(verificationStatus.stationsOnPath.valid).toEqual(true);
+        expect(verificationStatus.elevationGain.value).toBeWithinRange(410, 100);
+        expect(verificationStatus.elevationLoss.value).toBeWithinRange(410, 100);
+        expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(820, 100);
+    });
+
+    test('Path too short', async () => {
+        const { verificationStatus } = await getVerificationOutputFor('path_too_short');
+        expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.value).toBeWithinRange(16.1, 0.5);
+        expect(verificationStatus.routeType.valid).toEqual(false);
+        expect(verificationStatus.routeType.value).toEqual(1);
+        expect(verificationStatus.numberOfStations.valid).toEqual(true);
+        expect(verificationStatus.stationsOrder.valid).toEqual(true);
+        expect(verificationStatus.stationsOnPath.valid).toEqual(true);
+        expect(verificationStatus.elevationGain.value).toBeWithinRange(120, 50);
+        expect(verificationStatus.elevationLoss.value).toBeWithinRange(150, 50);
+        expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(275, 50);
     });
 });
