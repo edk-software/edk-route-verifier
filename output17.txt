@@ -1,0 +1,1851 @@
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1700.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1700.kml"
+
+Route Characteristics:
+- Path Length: 43.31km
+- Route Type: Normal
+- Elevation Gain: 313.72m
+- Elevation Loss: 312.8m
+- Elevation Total Change: 626.52m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1702.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1702.kml"
+
+Route Characteristics:
+- Path Length: 43.14km
+- Route Type: Normal
+- Elevation Gain: 826.91m
+- Elevation Loss: 891.11m
+- Elevation Total Change: 1718.02m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1703.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1703.kml"
+
+Route Characteristics:
+- Path Length: 42.15km
+- Route Type: Normal
+- Elevation Gain: 287.49m
+- Elevation Loss: 301.31m
+- Elevation Total Change: 588.79m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1704.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1704.kml"
+
+Route Characteristics:
+- Path Length: 50.85km
+- Route Type: Normal
+- Elevation Gain: 187.44m
+- Elevation Loss: 157.25m
+- Elevation Total Change: 344.69m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: Failed
+- Stations Order: Failed
+- Stations On Path: OK
+Errors:
+Station 5 found 3 times.
+Detected invalid order of stations. Station 1 is after station 5.
+Detected invalid order of stations. Station 5 is after station 14.
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1705.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1705.kml"
+
+Route Characteristics:
+- Path Length: 33.21km
+- Route Type: Normal
+- Elevation Gain: 136.53m
+- Elevation Loss: 144.31m
+- Elevation Total Change: 280.84m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1706.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1706.kml"
+
+Route Characteristics:
+- Path Length: 41.24km
+- Route Type: Normal
+- Elevation Gain: 185.05m
+- Elevation Loss: 147.49m
+- Elevation Total Change: 332.54m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1707.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1707.kml"
+
+Route Characteristics:
+- Path Length: 44.9km
+- Route Type: Normal
+- Elevation Gain: 372.63m
+- Elevation Loss: 370.86m
+- Elevation Total Change: 743.49m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1708.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1708.kml"
+
+Route Characteristics:
+- Path Length: 40.3km
+- Route Type: Normal
+- Elevation Gain: 256.8m
+- Elevation Loss: 262.28m
+- Elevation Total Change: 519.09m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: Failed
+Errors:
+Station 12 is too far from path. Expected maximum distance from path 50 meter(s).
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1709.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1709.kml"
+
+Route Characteristics:
+- Path Length: 28.29km
+- Route Type: Unknown
+- Elevation Gain: 169.65m
+- Elevation Loss: 208.39m
+- Elevation Total Change: 378.03m
+Verification Status:
+- Single Path: OK
+- Route Type: Failed
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+Errors:
+Route does not meet minimum length requirements.
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1710.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1710.kml"
+
+Route Characteristics:
+- Path Length: 41.65km
+- Route Type: Normal
+- Elevation Gain: 594.2m
+- Elevation Loss: 595.67m
+- Elevation Total Change: 1189.87m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1711.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1711.kml"
+
+Route Characteristics:
+- Path Length: 70.73km
+- Route Type: Normal
+- Elevation Gain: 349.05m
+- Elevation Loss: 270.64m
+- Elevation Total Change: 619.69m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1712.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1712.kml"
+
+Route Characteristics:
+- Path Length: 44.33km
+- Route Type: Normal
+- Elevation Gain: 332.57m
+- Elevation Loss: 269.08m
+- Elevation Total Change: 601.66m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1713.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1713.kml"
+
+Route Characteristics:
+- Path Length: 31.32km
+- Route Type: Normal
+- Elevation Gain: 133.2m
+- Elevation Loss: 129.36m
+- Elevation Total Change: 262.56m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1715.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1715.kml"
+
+Route Characteristics:
+- Path Length: 41.74km
+- Route Type: Normal
+- Elevation Gain: 450.78m
+- Elevation Loss: 431.78m
+- Elevation Total Change: 882.55m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1716.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1716.kml"
+
+Route Characteristics:
+- Path Length: 44.21km
+- Route Type: Normal
+- Elevation Gain: 383.13m
+- Elevation Loss: 322.22m
+- Elevation Total Change: 705.35m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1717.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1717.kml"
+
+Route Characteristics:
+- Path Length: 39.3km
+- Route Type: Normal
+- Elevation Gain: 242.41m
+- Elevation Loss: 236.78m
+- Elevation Total Change: 479.19m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1722.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1722.kml"
+
+Route Characteristics:
+- Path Length: 40.43km
+- Route Type: Normal
+- Elevation Gain: 693.61m
+- Elevation Loss: 695.68m
+- Elevation Total Change: 1389.3m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1723.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1723.kml"
+
+Route Characteristics:
+- Path Length: 25.31km
+- Route Type: Unknown
+- Elevation Gain: 425.88m
+- Elevation Loss: 427.19m
+- Elevation Total Change: 853.07m
+Verification Status:
+- Single Path: OK
+- Route Type: Failed
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+Errors:
+Route does not meet minimum length requirements.
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1724.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1724.kml"
+
+Route Characteristics:
+- Path Length: 50.93km
+- Route Type: Normal
+- Elevation Gain: 551.76m
+- Elevation Loss: 590.42m
+- Elevation Total Change: 1142.17m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1725.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1725.kml"
+
+Route Characteristics:
+- Path Length: 26.78km
+- Route Type: Unknown
+- Elevation Gain: 333.53m
+- Elevation Loss: 332.42m
+- Elevation Total Change: 665.95m
+Verification Status:
+- Single Path: OK
+- Route Type: Failed
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+Errors:
+Route does not meet minimum length requirements.
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1726.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1726.kml"
+
+Route Characteristics:
+- Path Length: 44.1km
+- Route Type: Normal
+- Elevation Gain: 327.97m
+- Elevation Loss: 268.04m
+- Elevation Total Change: 596.02m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1727.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1727.kml"
+
+Route Characteristics:
+- Path Length: 44.99km
+- Route Type: Normal
+- Elevation Gain: 340.31m
+- Elevation Loss: 352.68m
+- Elevation Total Change: 692.99m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1728.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1728.kml"
+
+Route Characteristics:
+- Path Length: 41.06km
+- Route Type: Normal
+- Elevation Gain: 241.32m
+- Elevation Loss: 227.3m
+- Elevation Total Change: 468.62m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1729.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1729.kml"
+
+Route Characteristics:
+- Path Length: 24.21km
+- Route Type: Unknown
+- Elevation Gain: 86.81m
+- Elevation Loss: 86.35m
+- Elevation Total Change: 173.16m
+Verification Status:
+- Single Path: OK
+- Route Type: Failed
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: Failed
+Errors:
+Route does not meet minimum length requirements.
+Station 6 is too far from path. Expected maximum distance from path 50 meter(s).
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1730.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1730.kml"
+
+Route Characteristics:
+- Path Length: 15.17km
+- Route Type: Unknown
+- Elevation Gain: 68.17m
+- Elevation Loss: 67.7m
+- Elevation Total Change: 135.87m
+Verification Status:
+- Single Path: OK
+- Route Type: Failed
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+Errors:
+Route does not meet minimum length requirements.
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1731.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1731.kml"
+
+Route Characteristics:
+- Path Length: 55.37km
+- Route Type: Normal
+- Elevation Gain: 485.19m
+- Elevation Loss: 470.63m
+- Elevation Total Change: 955.82m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1732.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1732.kml"
+
+Route Characteristics:
+- Path Length: 40.12km
+- Route Type: Normal
+- Elevation Gain: 424.17m
+- Elevation Loss: 409.19m
+- Elevation Total Change: 833.36m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1733.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1733.kml"
+
+Route Characteristics:
+- Path Length: 48.23km
+- Route Type: Normal
+- Elevation Gain: 271.34m
+- Elevation Loss: 296.7m
+- Elevation Total Change: 568.04m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1734.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1734.kml"
+
+Route Characteristics:
+- Path Length: 32.67km
+- Route Type: Normal
+- Elevation Gain: 1120.47m
+- Elevation Loss: 1125.71m
+- Elevation Total Change: 2246.18m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1735.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1735.kml"
+
+Route Characteristics:
+- Path Length: 43.73km
+- Route Type: Normal
+- Elevation Gain: 1647.21m
+- Elevation Loss: 1649.31m
+- Elevation Total Change: 3296.52m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1736.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1736.kml"
+
+Route Characteristics:
+- Path Length: 42.77km
+- Route Type: Normal
+- Elevation Gain: 1702.21m
+- Elevation Loss: 1658.4m
+- Elevation Total Change: 3360.62m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1737.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1737.kml"
+
+Route Characteristics:
+- Path Length: 102.12km
+- Route Type: Normal
+- Elevation Gain: 326.38m
+- Elevation Loss: 324.66m
+- Elevation Total Change: 651.04m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: Failed
+Errors:
+Station 13 is too far from path. Expected maximum distance from path 50 meter(s).
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1738.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1738.kml"
+
+Route Characteristics:
+- Path Length: 87.88km
+- Route Type: Normal
+- Elevation Gain: 393.83m
+- Elevation Loss: 392.19m
+- Elevation Total Change: 786.03m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1739.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1739.kml"
+
+Route Characteristics:
+- Path Length: 45.06km
+- Route Type: Normal
+- Elevation Gain: 420.37m
+- Elevation Loss: 351.08m
+- Elevation Total Change: 771.44m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1740.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1740.kml"
+
+Route Characteristics:
+- Path Length: 45.05km
+- Route Type: Normal
+- Elevation Gain: 309.54m
+- Elevation Loss: 240.98m
+- Elevation Total Change: 550.51m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1741.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1741.kml"
+
+Route Characteristics:
+- Path Length: 45.5km
+- Route Type: Normal
+- Elevation Gain: 393.22m
+- Elevation Loss: 324.25m
+- Elevation Total Change: 717.47m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1742.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1742.kml"
+
+Route Characteristics:
+- Path Length: 41.61km
+- Route Type: Normal
+- Elevation Gain: 149.27m
+- Elevation Loss: 151.44m
+- Elevation Total Change: 300.71m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: Failed
+- Stations On Path: OK
+Errors:
+Detected invalid order of stations. Station 13 is after station 14.
+Detected invalid order of stations. Station 12 is after station 13.
+Detected invalid order of stations. Station 11 is after station 12.
+Detected invalid order of stations. Station 10 is after station 11.
+Detected invalid order of stations. Station 9 is after station 10.
+Detected invalid order of stations. Station 8 is after station 9.
+Detected invalid order of stations. Station 7 is after station 8.
+Detected invalid order of stations. Station 6 is after station 7.
+Detected invalid order of stations. Station 5 is after station 6.
+Detected invalid order of stations. Station 4 is after station 5.
+Detected invalid order of stations. Station 3 is after station 4.
+Detected invalid order of stations. Station 2 is after station 3.
+Detected invalid order of stations. Station 1 is after station 2.
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1745.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1745.kml"
+
+Route Characteristics:
+- Path Length: 42.78km
+- Route Type: Normal
+- Elevation Gain: 225.2m
+- Elevation Loss: 242.12m
+- Elevation Total Change: 467.33m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: Failed
+Errors:
+Station 6 is too far from path. Expected maximum distance from path 50 meter(s).
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1746.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1746.kml"
+
+Route Characteristics:
+- Path Length: 36.77km
+- Route Type: Normal
+- Elevation Gain: 172.73m
+- Elevation Loss: 189.92m
+- Elevation Total Change: 362.64m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1747.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1747.kml"
+
+Route Characteristics:
+- Path Length: 45.93km
+- Route Type: Normal
+- Elevation Gain: 270.32m
+- Elevation Loss: 246.79m
+- Elevation Total Change: 517.11m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: Failed
+- Stations Order: OK
+- Stations On Path: OK
+Errors:
+Station 1 not found.
+Station 2 not found.
+Station 3 not found.
+Station 4 not found.
+Station 5 not found.
+Station 6 not found.
+Station 7 not found.
+Station 8 not found.
+Station 9 not found.
+Station 10 not found.
+Station 11 not found.
+Station 12 not found.
+Station 13 not found.
+Station 14 not found.
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1748.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1748.kml"
+
+Route Characteristics:
+- Path Length: 31.93km
+- Route Type: Normal
+- Elevation Gain: 631.37m
+- Elevation Loss: 351.23m
+- Elevation Total Change: 982.6m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1749.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1749.kml"
+
+Route Characteristics:
+- Path Length: 41.73km
+- Route Type: Normal
+- Elevation Gain: 1014.65m
+- Elevation Loss: 681.5m
+- Elevation Total Change: 1696.14m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1750.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1750.kml"
+
+Route Characteristics:
+- Path Length: 38.1km
+- Route Type: Normal
+- Elevation Gain: 812.27m
+- Elevation Loss: 513.8m
+- Elevation Total Change: 1326.07m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1751.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1751.kml"
+
+Route Characteristics:
+- Path Length: 41.23km
+- Route Type: Normal
+- Elevation Gain: 294.67m
+- Elevation Loss: 319.71m
+- Elevation Total Change: 614.38m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1752.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1752.kml"
+
+Route Characteristics:
+- Path Length: 46.37km
+- Route Type: Normal
+- Elevation Gain: 223.84m
+- Elevation Loss: 223.37m
+- Elevation Total Change: 447.21m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1753.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1753.kml"
+
+Route Characteristics:
+- Path Length: 40.37km
+- Route Type: Normal
+- Elevation Gain: 285.97m
+- Elevation Loss: 360.7m
+- Elevation Total Change: 646.67m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1754.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1754.kml"
+
+Route Characteristics:
+- Path Length: 40.06km
+- Route Type: Normal
+- Elevation Gain: 353.49m
+- Elevation Loss: 353.59m
+- Elevation Total Change: 707.08m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1755.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1755.kml"
+
+Route Characteristics:
+- Path Length: 49.56km
+- Route Type: Normal
+- Elevation Gain: 389.72m
+- Elevation Loss: 390.69m
+- Elevation Total Change: 780.41m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1756.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1756.kml"
+
+Route Characteristics:
+- Path Length: 40.14km
+- Route Type: Normal
+- Elevation Gain: 175.4m
+- Elevation Loss: 165.04m
+- Elevation Total Change: 340.44m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1757.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1757.kml"
+
+Route Characteristics:
+- Path Length: 41.33km
+- Route Type: Normal
+- Elevation Gain: 220.15m
+- Elevation Loss: 234.1m
+- Elevation Total Change: 454.25m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1759.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1759.kml"
+
+Route Characteristics:
+- Path Length: 40.5km
+- Route Type: Normal
+- Elevation Gain: 170.98m
+- Elevation Loss: 178.59m
+- Elevation Total Change: 349.57m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1760.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1760.kml"
+
+Route Characteristics:
+- Path Length: 45.54km
+- Route Type: Normal
+- Elevation Gain: 323.13m
+- Elevation Loss: 356.49m
+- Elevation Total Change: 679.61m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1761.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1761.kml"
+
+Route Characteristics:
+- Path Length: 28.49km
+- Route Type: Unknown
+- Elevation Gain: 282.28m
+- Elevation Loss: 281.37m
+- Elevation Total Change: 563.65m
+Verification Status:
+- Single Path: OK
+- Route Type: Failed
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+Errors:
+Route does not meet minimum length requirements.
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1762.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1762.kml"
+
+Route Characteristics:
+- Path Length: 43.37km
+- Route Type: Normal
+- Elevation Gain: 333.44m
+- Elevation Loss: 367.77m
+- Elevation Total Change: 701.21m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1763.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1763.kml"
+
+Route Characteristics:
+- Path Length: 32.95km
+- Route Type: Normal
+- Elevation Gain: 239.47m
+- Elevation Loss: 301.62m
+- Elevation Total Change: 541.09m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1764.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1764.kml"
+
+Route Characteristics:
+- Path Length: 40.48km
+- Route Type: Normal
+- Elevation Gain: 391.65m
+- Elevation Loss: 425.89m
+- Elevation Total Change: 817.54m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1765.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1765.kml"
+
+Route Characteristics:
+- Path Length: 49.96km
+- Route Type: Normal
+- Elevation Gain: 336.23m
+- Elevation Loss: 369.55m
+- Elevation Total Change: 705.79m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1766.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1766.kml"
+
+Route Characteristics:
+- Path Length: 40.15km
+- Route Type: Normal
+- Elevation Gain: 341.47m
+- Elevation Loss: 380m
+- Elevation Total Change: 721.47m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1767.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1767.kml"
+
+Route Characteristics:
+- Path Length: 34.09km
+- Route Type: Normal
+- Elevation Gain: 280.43m
+- Elevation Loss: 318.72m
+- Elevation Total Change: 599.16m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1769.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1769.kml"
+
+Route Characteristics:
+- Path Length: 33.14km
+- Route Type: Normal
+- Elevation Gain: 783.16m
+- Elevation Loss: 626.31m
+- Elevation Total Change: 1409.47m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1770.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1770.kml"
+
+Route Characteristics:
+- Path Length: 45.86km
+- Route Type: Normal
+- Elevation Gain: 352.88m
+- Elevation Loss: 404.1m
+- Elevation Total Change: 756.98m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1771.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1771.kml"
+
+Route Characteristics:
+- Path Length: 45.75km
+- Route Type: Normal
+- Elevation Gain: 950.15m
+- Elevation Loss: 909.35m
+- Elevation Total Change: 1859.5m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1772.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1772.kml"
+
+Route Characteristics:
+- Path Length: 24.83km
+- Route Type: Unknown
+- Elevation Gain: 274.16m
+- Elevation Loss: 320.37m
+- Elevation Total Change: 594.53m
+Verification Status:
+- Single Path: OK
+- Route Type: Failed
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+Errors:
+Route does not meet minimum length requirements.
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1773.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1773.kml"
+
+Route Characteristics:
+- Path Length: 25.75km
+- Route Type: Unknown
+- Elevation Gain: 430.07m
+- Elevation Loss: 429.49m
+- Elevation Total Change: 859.56m
+Verification Status:
+- Single Path: OK
+- Route Type: Failed
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+Errors:
+Route does not meet minimum length requirements.
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1774.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1774.kml"
+
+Route Characteristics:
+- Path Length: 26.57km
+- Route Type: Unknown
+- Elevation Gain: 678.79m
+- Elevation Loss: 677.91m
+- Elevation Total Change: 1356.7m
+Verification Status:
+- Single Path: OK
+- Route Type: Failed
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+Errors:
+Route does not meet minimum length requirements.
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1775.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1775.kml"
+
+Route Characteristics:
+- Path Length: 37.77km
+- Route Type: Normal
+- Elevation Gain: 894.49m
+- Elevation Loss: 894.15m
+- Elevation Total Change: 1788.64m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1777.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1777.kml"
+
+Route Characteristics:
+- Path Length: 41.12km
+- Route Type: Normal
+- Elevation Gain: 897.13m
+- Elevation Loss: 895.91m
+- Elevation Total Change: 1793.04m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1778.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1778.kml"
+
+Route Characteristics:
+- Path Length: 51.34km
+- Route Type: Normal
+- Elevation Gain: 1901.8m
+- Elevation Loss: 1901.67m
+- Elevation Total Change: 3803.47m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1779.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1779.kml"
+
+Route Characteristics:
+- Path Length: 57.28km
+- Route Type: Normal
+- Elevation Gain: 278.99m
+- Elevation Loss: 369.9m
+- Elevation Total Change: 648.89m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1780.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1780.kml"
+
+Route Characteristics:
+- Path Length: 45.15km
+- Route Type: Normal
+- Elevation Gain: 451.36m
+- Elevation Loss: 513.6m
+- Elevation Total Change: 964.96m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1781.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1781.kml"
+
+Route Characteristics:
+- Path Length: 46.27km
+- Route Type: Normal
+- Elevation Gain: 487.91m
+- Elevation Loss: 524.76m
+- Elevation Total Change: 1012.67m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1782.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1782.kml"
+
+Route Characteristics:
+- Path Length: 22.89km
+- Route Type: Unknown
+- Elevation Gain: 265.33m
+- Elevation Loss: 266.4m
+- Elevation Total Change: 531.74m
+Verification Status:
+- Single Path: OK
+- Route Type: Failed
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+Errors:
+Route does not meet minimum length requirements.
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1783.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1783.kml"
+
+Route Characteristics:
+- Path Length: 80.51km
+- Route Type: Normal
+- Elevation Gain: 630.5m
+- Elevation Loss: 621.37m
+- Elevation Total Change: 1251.87m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1784.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1784.kml"
+
+Route Characteristics:
+- Path Length: 41.54km
+- Route Type: Normal
+- Elevation Gain: 517.74m
+- Elevation Loss: 522.97m
+- Elevation Total Change: 1040.7m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1785.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1785.kml"
+
+Route Characteristics:
+- Path Length: 25.48km
+- Route Type: Unknown
+- Elevation Gain: 369.92m
+- Elevation Loss: 367.39m
+- Elevation Total Change: 737.31m
+Verification Status:
+- Single Path: OK
+- Route Type: Failed
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+Errors:
+Route does not meet minimum length requirements.
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1786.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1786.kml"
+
+Route Characteristics:
+- Path Length: 56.79km
+- Route Type: Normal
+- Elevation Gain: 622.53m
+- Elevation Loss: 611.35m
+- Elevation Total Change: 1233.87m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1787.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1787.kml"
+
+Route Characteristics:
+- Path Length: 32.06km
+- Route Type: Normal
+- Elevation Gain: 334.95m
+- Elevation Loss: 368.41m
+- Elevation Total Change: 703.36m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1788.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1788.kml"
+
+Route Characteristics:
+- Path Length: 43.48km
+- Route Type: Normal
+- Elevation Gain: 496.82m
+- Elevation Loss: 531.84m
+- Elevation Total Change: 1028.66m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1789.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1789.kml"
+
+Route Characteristics:
+- Path Length: 41.62km
+- Route Type: Normal
+- Elevation Gain: 506.34m
+- Elevation Loss: 533.49m
+- Elevation Total Change: 1039.84m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1790.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1790.kml"
+
+Route Characteristics:
+- Path Length: 38.48km
+- Route Type: Normal
+- Elevation Gain: 965.86m
+- Elevation Loss: 626.38m
+- Elevation Total Change: 1592.25m
+Verification Status:
+- Single Path: Failed
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+Errors:
+No single path defined.
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1791.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1791.kml"
+
+Route Characteristics:
+- Path Length: 47.58km
+- Route Type: Normal
+- Elevation Gain: 1020.23m
+- Elevation Loss: 651.87m
+- Elevation Total Change: 1672.1m
+Verification Status:
+- Single Path: Failed
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: Failed
+Errors:
+No single path defined.
+Station 4 is too far from path. Expected maximum distance from path 50 meter(s).
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1792.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1792.kml"
+
+Route Characteristics:
+- Path Length: 42.5km
+- Route Type: Normal
+- Elevation Gain: 280.23m
+- Elevation Loss: 278.42m
+- Elevation Total Change: 558.65m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1793.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1793.kml"
+
+Route Characteristics:
+- Path Length: 29.73km
+- Route Type: Unknown
+- Elevation Gain: 193.69m
+- Elevation Loss: 191.95m
+- Elevation Total Change: 385.64m
+Verification Status:
+- Single Path: OK
+- Route Type: Failed
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+Errors:
+Route does not meet minimum length requirements.
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1794.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1794.kml"
+
+Route Characteristics:
+- Path Length: 41.33km
+- Route Type: Normal
+- Elevation Gain: 296.38m
+- Elevation Loss: 278.3m
+- Elevation Total Change: 574.69m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1795.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1795.kml"
+
+Route Characteristics:
+- Path Length: 56.44km
+- Route Type: Normal
+- Elevation Gain: 357.64m
+- Elevation Loss: 342.27m
+- Elevation Total Change: 699.91m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1796.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1796.kml"
+
+Route Characteristics:
+- Path Length: 44.73km
+- Route Type: Normal
+- Elevation Gain: 224.33m
+- Elevation Loss: 228.01m
+- Elevation Total Change: 452.34m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1797.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1797.kml"
+
+Route Characteristics:
+- Path Length: 42.22km
+- Route Type: Normal
+- Elevation Gain: 203.92m
+- Elevation Loss: 202.06m
+- Elevation Total Change: 405.99m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1798.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1798.kml"
+
+Route Characteristics:
+- Path Length: 40.75km
+- Route Type: Normal
+- Elevation Gain: 452.05m
+- Elevation Loss: 434.38m
+- Elevation Total Change: 886.43m
+Verification Status:
+- Single Path: OK
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+
+> edk-route-verifier@2.1.1 start:file /home/qooban/WebstormProjects/edk-route-verifier
+> npm run start:cli -- file -c conf/config.json "./test/resources/2019/edk-gps-route-1799.kml"
+
+
+> edk-route-verifier@2.1.1 start:cli /home/qooban/WebstormProjects/edk-route-verifier
+> node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js "file" "-c" "conf/config.json" "./test/resources/2019/edk-gps-route-1799.kml"
+
+Route Characteristics:
+- Path Length: 43.68km
+- Route Type: Normal
+- Elevation Gain: 348.39m
+- Elevation Loss: 347.26m
+- Elevation Total Change: 695.65m
+Verification Status:
+- Single Path: Failed
+- Route Type: OK
+- Number Of Stations: OK
+- Stations Order: OK
+- Stations On Path: OK
+Errors:
+No single path defined.
