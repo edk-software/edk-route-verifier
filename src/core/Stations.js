@@ -37,17 +37,19 @@ export default class Stations {
         this.updateCircularity();
 
         // Path reverse check
-        this.updateDirection();
+        if (!this.pathCircular) {
+            this.updateDirection();
+        }
 
         // Stations to path mapping
-        this.findNearestPointsOnPath();
+        this.updatePointsWithNearestOnLine();
         this.sortByLocationOnPath();
 
         lang = Lang.getInstance();
         logBuffer = LogBuffer.getInstance();
     }
 
-    findNearestPointsOnPath() {
+    updatePointsWithNearestOnLine() {
         this.points = _.map(this.points, p => {
             const updatedPoint = p;
             const nearestPoint = nearestPointOnLine(this.path, p, options);
@@ -314,7 +316,7 @@ export default class Stations {
     getUpdatedPath() {
         const lastStationPoint = _.find(this.points, p => p.properties.index === CONSTS.LAST_STATION_INDEX);
 
-        if (lastStationPoint !== null) {
+        if (lastStationPoint !== null && !this.pathCircular) {
             const lastStationLocation = helpers.getLocationOfNearestPointOnLine(lastStationPoint);
             if (lastStationLocation > 0) {
                 logger.debug(

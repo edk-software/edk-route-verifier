@@ -131,17 +131,17 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(820, 100);
     });
 
-    test('Path too short', async () => {
-        const { verificationStatus } = await getVerificationOutputFor('path_too_short');
+    test('Stations in reversed order comparing to path direction', async () => {
+        const { verificationStatus } = await getVerificationOutputFor('reversed_path');
         expect(verificationStatus.singlePath.valid).toEqual(true);
-        expect(verificationStatus.pathLength.value).toBeWithinRange(16.1, 0.5);
-        expect(verificationStatus.routeType.valid).toEqual(false);
-        expect(verificationStatus.routeType.value).toEqual(2);
+        expect(verificationStatus.pathLength.value).toBeWithinRange(44, 0.5);
+        expect(verificationStatus.routeType.valid).toEqual(true);
+        expect(verificationStatus.routeType.value).toEqual(0);
         expect(verificationStatus.numberOfStations.valid).toEqual(true);
-        expect(verificationStatus.stationsOrder.valid).toEqual(true);
+        expect(verificationStatus.stationsOrder.valid).toEqual(false);
         expect(verificationStatus.stationsOnPath.valid).toEqual(true);
-        expect(verificationStatus.elevationGain.value).toBeWithinRange(120, 50);
-        expect(verificationStatus.elevationLoss.value).toBeWithinRange(150, 50);
-        expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(275, 50);
+        expect(verificationStatus.elevationGain.value).toBeWithinRange(920, 100);
+        expect(verificationStatus.elevationLoss.value).toBeWithinRange(880, 100);
+        expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(1800, 100);
     });
 });
