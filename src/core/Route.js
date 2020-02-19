@@ -13,7 +13,6 @@ import NoPathInRouteError from './errors/NoPathInRouteError.js';
 // Constants
 const EXPECTED_NUMBER_OF_PATHS = 1;
 const EXPECTED_NUMBER_OF_STATIONS = 14;
-const MAXIMUM_DISTANCE_FROM_STATION_TO_PATH = 50; // meters
 
 const NORMAL_ROUTE_MIN_LENGTH = 30; // kilometers
 
@@ -76,7 +75,7 @@ export default class Route {
     }
 
     areStationsOnThePath() {
-        const result = this.stations.areAllOnThePath(MAXIMUM_DISTANCE_FROM_STATION_TO_PATH);
+        const result = this.stations.areAllOnThePath();
         logger.debug('areStationsOnThePath:', result);
         return result;
     }
