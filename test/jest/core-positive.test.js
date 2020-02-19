@@ -20,20 +20,6 @@ describe('Route verification - positive', () => {
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(750, 50);
     });
 
-    test('Circular route', async () => {
-        const { verificationStatus } = await getVerificationOutputFor('circular');
-        expect(verificationStatus.singlePath.valid).toEqual(true);
-        expect(verificationStatus.pathLength.value).toBeWithinRange(37, 0.5);
-        expect(verificationStatus.routeType.valid).toEqual(true);
-        expect(verificationStatus.routeType.value).toEqual(0);
-        expect(verificationStatus.numberOfStations.valid).toEqual(true);
-        expect(verificationStatus.stationsOrder.valid).toEqual(true);
-        expect(verificationStatus.stationsOnPath.valid).toEqual(true);
-        expect(verificationStatus.elevationGain.value).toBeWithinRange(1580, 50);
-        expect(verificationStatus.elevationLoss.value).toBeWithinRange(1580, 50);
-        expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(3160, 50);
-    });
-
     // FIXME: Change to negative or update position
     test('Zero-leading station numbers', async () => {
         const { verificationStatus } = await getVerificationOutputFor('zero_leading');
@@ -49,22 +35,8 @@ describe('Route verification - positive', () => {
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(3000, 100);
     });
 
-    test('Stations in reversed order comparing to path direction', async () => {
-        const { verificationStatus } = await getVerificationOutputFor('reversed_path');
-        expect(verificationStatus.singlePath.valid).toEqual(true);
-        expect(verificationStatus.pathLength.value).toBeWithinRange(44, 0.5);
-        expect(verificationStatus.routeType.valid).toEqual(true);
-        expect(verificationStatus.routeType.value).toEqual(0);
-        expect(verificationStatus.numberOfStations.valid).toEqual(true);
-        expect(verificationStatus.stationsOrder.valid).toEqual(true);
-        expect(verificationStatus.stationsOnPath.valid).toEqual(true);
-        expect(verificationStatus.elevationGain.value).toBeWithinRange(920, 100);
-        expect(verificationStatus.elevationLoss.value).toBeWithinRange(880, 100);
-        expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(1800, 100);
-    });
-
-    test('Circular path', async () => {
-        const { verificationStatus } = await getVerificationOutputFor('circular_path');
+    test('Circular path #1', async () => {
+        const { verificationStatus } = await getVerificationOutputFor('circular_path_1');
         expect(verificationStatus.singlePath.valid).toEqual(true);
         expect(verificationStatus.pathLength.value).toBeWithinRange(37, 0.5);
         expect(verificationStatus.routeType.valid).toEqual(true);
@@ -75,6 +47,34 @@ describe('Route verification - positive', () => {
         expect(verificationStatus.elevationGain.value).toBeWithinRange(1600, 100);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(1600, 100);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(3200, 100);
+    });
+
+    test('Circular path #2', async () => {
+        const { verificationStatus } = await getVerificationOutputFor('circular_path_2');
+        expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.value).toBeWithinRange(37, 0.5);
+        expect(verificationStatus.routeType.valid).toEqual(true);
+        expect(verificationStatus.routeType.value).toEqual(0);
+        expect(verificationStatus.numberOfStations.valid).toEqual(true);
+        expect(verificationStatus.stationsOrder.valid).toEqual(true);
+        expect(verificationStatus.stationsOnPath.valid).toEqual(true);
+        expect(verificationStatus.elevationGain.value).toBeWithinRange(1580, 50);
+        expect(verificationStatus.elevationLoss.value).toBeWithinRange(1580, 50);
+        expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(3160, 50);
+    });
+
+    test('Circular path #3', async () => {
+        const { verificationStatus } = await getVerificationOutputFor('circular_path_3');
+        expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.value).toBeWithinRange(42, 0.5);
+        expect(verificationStatus.routeType.valid).toEqual(true);
+        expect(verificationStatus.routeType.value).toEqual(0);
+        expect(verificationStatus.numberOfStations.valid).toEqual(true);
+        expect(verificationStatus.stationsOrder.valid).toEqual(true);
+        expect(verificationStatus.stationsOnPath.valid).toEqual(true);
+        expect(verificationStatus.elevationGain.value).toBeWithinRange(300, 50);
+        expect(verificationStatus.elevationLoss.value).toBeWithinRange(300, 50);
+        expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(600, 50);
     });
 
     // FIXME: Currently it is positive, unrecognized points are not counted as stations
