@@ -2,7 +2,7 @@ describe('UI', () => {
     before(() => {});
 
     it('Verification successful', () => {
-        cy.visit('/');
+        cy.visit('/regular');
 
         cy.get('#verifyRoute').click();
 
@@ -46,7 +46,7 @@ describe('UI', () => {
     });
 
     it('Verification failed', () => {
-        cy.visit('/23-13_stations');
+        cy.visit('/13_stations');
 
         cy.get('#verifyRoute').click();
 

@@ -76,7 +76,7 @@ describe('API', () => {
 
     test('Verification successful', async () => {
         const app = createAPIServer();
-        const response = await callVerifyApi(app, readKmlFile('01-regular'));
+        const response = await callVerifyApi(app, readKmlFile('regular'));
         const { status, body: verificationOutput } = response;
 
         expect(status).toEqual(200);
@@ -92,7 +92,7 @@ describe('API', () => {
 
     test('Verification failed', async () => {
         const app = createAPIServer();
-        const response = await callVerifyApi(app, readKmlFile('21-two_path'));
+        const response = await callVerifyApi(app, readKmlFile('two_paths'));
         const { status, body: verificationOutput } = response;
 
         expect(status).toEqual(200);
@@ -150,7 +150,7 @@ describe('API', () => {
 
     test('Invalid input - KML - no path', async () => {
         const app = createAPIServer();
-        const response = await callVerifyApi(app, readKmlFile('15_no_path'));
+        const response = await callVerifyApi(app, readKmlFile('no_path'));
 
         const { status, body: error } = response;
 
@@ -171,7 +171,7 @@ describe('API', () => {
 
     test('Google Maps API error', async () => {
         const app = createAPIServer({ apiUser: '', apiPass: '', googleMapsApiKey: '' });
-        const response = await callVerifyApi(app, readKmlFile('01-regular'), { apiUser: '', apiPass: '' });
+        const response = await callVerifyApi(app, readKmlFile('regular'), { apiUser: '', apiPass: '' });
 
         const { status, body: error } = response;
 
