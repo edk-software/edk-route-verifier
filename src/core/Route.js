@@ -18,7 +18,8 @@ const NORMAL_ROUTE_MIN_LENGTH = 30; // kilometers
 
 const ROUTE_TYPE = {
     NORMAL: 0,
-    UNKNOWN: 1
+    // INSPIRED: 1, (deprecated)
+    UNKNOWN: 2
 };
 
 let lang = null;

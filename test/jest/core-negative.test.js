@@ -10,7 +10,7 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.singlePath.valid).toEqual(true);
         expect(verificationStatus.pathLength.value).toBeWithinRange(29, 0.5);
         expect(verificationStatus.routeType.valid).toEqual(false);
-        expect(verificationStatus.routeType.value).toEqual(1);
+        expect(verificationStatus.routeType.value).toEqual(2);
         expect(verificationStatus.numberOfStations.valid).toEqual(false);
         expect(verificationStatus.stationsOrder.valid).toEqual(false);
         expect(verificationStatus.stationsOnPath.valid).toEqual(true);
@@ -66,7 +66,7 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.singlePath.valid).toEqual(false);
         expect(verificationStatus.pathLength.value).toBeWithinRange(24, 1);
         expect(verificationStatus.routeType.valid).toEqual(false);
-        expect(verificationStatus.routeType.value).toEqual(1);
+        expect(verificationStatus.routeType.value).toEqual(2);
         expect(verificationStatus.numberOfStations.valid).toEqual(true);
         expect(verificationStatus.stationsOrder.valid).toEqual(true);
         expect(verificationStatus.stationsOnPath.valid).toEqual(false);
@@ -136,7 +136,7 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.singlePath.valid).toEqual(true);
         expect(verificationStatus.pathLength.value).toBeWithinRange(16.1, 0.5);
         expect(verificationStatus.routeType.valid).toEqual(false);
-        expect(verificationStatus.routeType.value).toEqual(1);
+        expect(verificationStatus.routeType.value).toEqual(2);
         expect(verificationStatus.numberOfStations.valid).toEqual(true);
         expect(verificationStatus.stationsOrder.valid).toEqual(true);
         expect(verificationStatus.stationsOnPath.valid).toEqual(true);
