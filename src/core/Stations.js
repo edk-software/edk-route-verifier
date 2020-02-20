@@ -20,15 +20,6 @@ let logBuffer = null;
 
 const trim = str => String(str).trim();
 
-const getPointCoordinates = geoJsonPoint => {
-    const { coordinates } = geoJsonPoint.geometry;
-
-    return {
-        latitude: coordinates[1],
-        longitude: coordinates[0]
-    };
-};
-
 export default class Stations {
     constructor(points, lineString) {
         this.points = points;
@@ -345,11 +336,11 @@ export default class Stations {
     }
 
     getPathStart() {
-        return getPointCoordinates(this.pathStart);
+        return helpers.getPointCoordinates(this.pathStart);
     }
 
     getPathEnd() {
-        return getPointCoordinates(this.pathEnd);
+        return helpers.getPointCoordinates(this.pathEnd);
     }
 
     getStations() {
@@ -358,7 +349,7 @@ export default class Stations {
             const { index, nearestOnLine } = station.properties;
 
             if (index >= CONSTS.FIRST_STATION_INDEX && index <= CONSTS.LAST_STATION_INDEX) {
-                const stationCoordinates = getPointCoordinates(station);
+                const stationCoordinates = helpers.getPointCoordinates(station);
 
                 let stationObject = {
                     index,
@@ -366,7 +357,7 @@ export default class Stations {
                 };
 
                 if (logger.getLevel() <= logger.levels.DEBUG) {
-                    const neareastPointCoordinates = getPointCoordinates(nearestOnLine);
+                    const neareastPointCoordinates = helpers.getPointCoordinates(nearestOnLine);
 
                     stationObject = {
                         ...stationObject,

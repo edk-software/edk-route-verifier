@@ -37,7 +37,11 @@ Server is started on `localhost`. Port is presented to the user. It can be chang
 ```shell script
 {
     routeCharacteristics: {
-        elevationCharacteristics: <array of { elevation: <number>, distance: <number> }>    
+        elevationCharacteristics: <array of { elevation: <number>, distance: <number> }>,
+        pathStart: { latitude: <number>, longitude: <number> },
+        pathEnd: { latitude: <number>, longitude: <number> },
+        pathCoordinates: <array of { latitude: <number>, longitude: <number> }>
+        stations: <array of { index: <number>, latitude: <number>, longitude: <number> }>
     },
     verificationStatuses: {
         singlePath: { valid: <boolean> },

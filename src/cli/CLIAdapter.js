@@ -27,14 +27,14 @@ export default class CLIAdapter extends AbstractOutputAdapter {
         };
         logger.info(`${lang.trans('Route Characteristics')}:`);
         logger.info(`- ${lang.trans('Path Length', { length: output.getPathLength() })}`);
-        logger.info(`- ${lang.trans('Path Start')}`);
+        logger.info(`- ${lang.trans('Path Start')}:`);
         getCoordinates(output.getPathStart());
-        logger.info(`- ${lang.trans('Path End')}`);
+        logger.info(`- ${lang.trans('Path End')}:`);
         getCoordinates(output.getPathEnd());
         logger.info(`- ${lang.trans('Stations')}:`);
         const stations = output.getStations();
         forEach(stations, station => {
-            logger.info(`  - ${lang.trans('Station')} ${station.index}`);
+            logger.info(`  - ${lang.trans('Station')} ${station.index}:`);
             getCoordinates(station, 4);
         });
         logger.info(`- ${lang.trans('Route Type', { type: getRouteTypeString(output.getRouteType()) })}`);

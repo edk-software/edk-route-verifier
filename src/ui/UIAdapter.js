@@ -279,8 +279,9 @@ export default class UIAdapter extends AbstractOutputAdapter {
     addLegendToMap() {
         const legend = document.createElement('div');
         legend.style = 'background: #fff; padding: 10px; margin: 10px; border: 1px solid #000;';
-        for (const key in POINTS) {
-            const { name, icon } = POINTS[key];
+
+        // eslint-disable-next-line no-restricted-syntax
+        for (const [, { name, icon }] of Object.entries(POINTS)) {
             const div = document.createElement('div');
             div.style = 'font-size: 18px; margin: 10px;';
             div.innerHTML = `<img src="${icon}"> ${this.lang.trans(name)}`;
@@ -290,6 +291,7 @@ export default class UIAdapter extends AbstractOutputAdapter {
         window.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
     }
 
+    // eslint-disable-next-line class-methods-use-this
     removeLegendFromMap() {
         window.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].clear();
     }

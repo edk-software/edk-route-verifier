@@ -65,6 +65,19 @@ export default class Helpers {
         return _.filter(geoJson.features, feature => _.isEqual(feature.geometry.type, 'Point'));
     }
 
+    static getPointCoordinates(geoJsonPoint) {
+        const { coordinates } = geoJsonPoint.geometry;
+
+        return Helpers.createCoordinatesObject(coordinates[1], coordinates[0]);
+    }
+
+    static createCoordinatesObject(latitude, longitude) {
+        return {
+            latitude,
+            longitude
+        };
+    }
+
     static getGoogleMapsLatLng(coordinates) {
         return [coordinates[1], coordinates[0]];
     }

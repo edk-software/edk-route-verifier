@@ -78,6 +78,7 @@ export default function verifyRoute(input, options, adapter) {
             verificationOutput.setElevationCharacteristics(pathElevation.getData());
             verificationOutput.setPathStart(route.getPathStart());
             verificationOutput.setPathEnd(route.getPathEnd());
+            verificationOutput.setPathCoordinates(route.getPathCoordinates());
             verificationOutput.setStations(route.getStations());
 
             // Sending status

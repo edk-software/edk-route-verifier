@@ -8,6 +8,7 @@ export default class RouteVerificationOutput {
             this.elevationCharacteristics = [];
             this.pathStart = {};
             this.pathEnd = {};
+            this.pathCoordinates = [];
             this.stations = [];
             this.singlePath = false;
             this.pathLength = 0.0;
@@ -25,6 +26,7 @@ export default class RouteVerificationOutput {
             this.setElevationCharacteristics(routeCharacteristics.elevationCharacteristics);
             this.setPathStart(routeCharacteristics.pathStart);
             this.setPathEnd(routeCharacteristics.pathEnd);
+            this.setPathCoordinates(routeCharacteristics.pathCoordinates);
             this.setStations(routeCharacteristics.stations);
             this.setSinglePath(verificationStatus.singlePath.valid);
             this.setPathLength(verificationStatus.pathLength.value);
@@ -49,6 +51,10 @@ export default class RouteVerificationOutput {
 
     setPathEnd(pathEnd) {
         this.pathEnd = pathEnd;
+    }
+
+    setPathCoordinates(pathCoordinates) {
+        this.pathCoordinates = pathCoordinates;
     }
 
     setStations(stations) {
@@ -116,6 +122,10 @@ export default class RouteVerificationOutput {
 
     getPathEnd() {
         return this.pathEnd;
+    }
+
+    getPathCoordinates() {
+        return this.pathCoordinates;
     }
 
     getStations() {

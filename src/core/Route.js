@@ -119,6 +119,12 @@ export default class Route {
         return this.stations.getPathEnd();
     }
 
+    getPathCoordinates() {
+        return _.map(_.get(this.path, 'geometry.coordinates', []), coords =>
+            helpers.createCoordinatesObject(coords[1], coords[0])
+        );
+    }
+
     getStations() {
         return this.stations.getStations();
     }

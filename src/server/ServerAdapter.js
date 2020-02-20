@@ -13,6 +13,7 @@ export default class ServerAdapter extends AbstractOutputAdapter {
                 elevationCharacteristics: output.getElevationCharacteristics(),
                 pathStart: output.getPathStart(),
                 pathEnd: output.getPathEnd(),
+                pathCoordinates: output.getPathCoordinates(),
                 stations: output.getStations()
             },
             verificationStatus: {
