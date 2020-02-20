@@ -29,11 +29,11 @@ export default class Helpers {
         for (let index = extendedData.length - 1; index >= 0; index -= 1) {
             extendedData[index].parentNode.removeChild(extendedData[index]);
         }
-        logger.log('KML (no ExtendedData):', kml);
+        logger.debug('KML (no ExtendedData):', kml);
 
         let geoJson = toGeoJSON.kml(kml);
         geoJson = flatten(geoJson);
-        logger.log('GeoJSON (flatten): ', geoJson);
+        logger.debug('GeoJSON (flatten): ', geoJson);
 
         return geoJson;
     }

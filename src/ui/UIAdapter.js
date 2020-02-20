@@ -72,15 +72,7 @@ export default class UIAdapter extends AbstractOutputAdapter {
         };
     }
 
-    updateRouteType(isRouteTypeValid, routeType) {
-        const normalRouteString = $('input#normalRouteString').attr('value');
-        const inspiredRouteString = $('input#inspiredRouteString').attr('value');
-
-        if (routeType === 0) {
-            this.updateControlValue(ROUTE_TYPE_ID, normalRouteString);
-        } else if (routeType === 1) {
-            this.updateControlValue(ROUTE_TYPE_ID, inspiredRouteString);
-        }
+    updateRouteType(isRouteTypeValid) {
         this.updateControlColor(ROUTE_TYPE_ID, isRouteTypeValid);
     }
 
@@ -308,7 +300,7 @@ export default class UIAdapter extends AbstractOutputAdapter {
 
         this.updateSinglePath(verificationOutput.getSinglePathStatus());
         this.updatePathLength(true, verificationOutput.getPathLength());
-        this.updateRouteType(verificationOutput.getRouteTypeStatus(), verificationOutput.getRouteType());
+        this.updateRouteType(verificationOutput.getRouteTypeStatus());
         this.updateNumberOfStations(verificationOutput.getNumberOfStationsStatus());
         this.updateStationsOrder(verificationOutput.getStationsOrderStatus());
         this.updateStationsOnPath(verificationOutput.getStationsOnPathStatus());

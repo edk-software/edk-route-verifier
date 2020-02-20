@@ -56,7 +56,7 @@ describe('CLI', () => {
     });
 
     test('Verification successful', async () => {
-        const cmd = `${cliCmd} file -c ./conf/config.json ./test/resources/01-regular.kml`;
+        const cmd = `${cliCmd} file -c ./conf/config.json ./test/resources/regular.kml`;
 
         const { stdout, stderr } = await exec(cmd);
 
@@ -80,7 +80,7 @@ describe('CLI', () => {
     });
 
     test('Verification failed', async () => {
-        const cmd = `${cliCmd} file -c ./conf/config.json ./test/resources/21-two_path.kml`;
+        const cmd = `${cliCmd} file -c ./conf/config.json ./test/resources/two_paths.kml`;
 
         const { stdout, stderr } = await exec(cmd);
 
@@ -88,13 +88,13 @@ describe('CLI', () => {
             new RegExp(
                 'Route Characteristics:\n' +
                     '- Path Length: [0-9.]*km\n' +
-                    '- Route Type: Inspired\n' +
+                    '- Route Type: Unknown\n' +
                     '- Elevation Gain: [0-9.]*m\n' +
                     '- Elevation Loss: [0-9.]*m\n' +
                     '- Elevation Total Change: [0-9.]*m\n' +
                     'Verification Status:\n' +
                     '- Single Path: Failed\n' +
-                    '- Route Type: OK\n' +
+                    '- Route Type: Failed\n' +
                     '- Number Of Stations: OK\n' +
                     '- Stations Order: OK\n' +
                     '- Stations On Path: Failed\n' +

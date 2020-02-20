@@ -13,16 +13,12 @@ import NoPathInRouteError from './errors/NoPathInRouteError.js';
 // Constants
 const EXPECTED_NUMBER_OF_PATHS = 1;
 const EXPECTED_NUMBER_OF_STATIONS = 14;
-const MAXIMUM_DISTANCE_FROM_STATION_TO_PATH = 50; // meters
 
-const NORMAL_ROUTE_MIN_LENGTH = 40; // kilometers
-const SHORT_NORMAL_ROUTE_MIN_LENGTH = 30; // kilometers
-const SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN = 500; // meters
-const INSPIRED_ROUTE_MIN_LENGTH = 20; // kilometers
+const NORMAL_ROUTE_MIN_LENGTH = 30; // kilometers
 
 const ROUTE_TYPE = {
     NORMAL: 0,
-    INSPIRED: 1,
+    // INSPIRED: 1, (deprecated)
     UNKNOWN: 2
 };
 
@@ -80,7 +76,7 @@ export default class Route {
     }
 
     areStationsOnThePath() {
-        const result = this.stations.areAllOnThePath(MAXIMUM_DISTANCE_FROM_STATION_TO_PATH);
+        const result = this.stations.areAllOnThePath();
         logger.debug('areStationsOnThePath:', result);
         return result;
     }
@@ -98,17 +94,7 @@ export default class Route {
                 .then(elevations => {
                     logger.debug('Path elevations:', elevations);
                     this.pathElevation = new PathElevation(elevations, this.length);
-                    // Update route type
-                    if (this.type !== ROUTE_TYPE.NORMAL) {
-                        if (
-                            this.pathElevation.gain > SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN &&
-                            this.length >= SHORT_NORMAL_ROUTE_MIN_LENGTH
-                        ) {
-                            this.type = ROUTE_TYPE.NORMAL;
-                        } else if (this.length >= INSPIRED_ROUTE_MIN_LENGTH) {
-                            this.type = ROUTE_TYPE.INSPIRED;
-                        }
-                    }
+
                     return this.pathElevation;
                 })
                 .catch(error => {
@@ -146,6 +132,11 @@ export default class Route {
     }
 
     isTypeValid() {
-        return this.type === ROUTE_TYPE.NORMAL || this.type === ROUTE_TYPE.INSPIRED;
+        const isValid = this.type === ROUTE_TYPE.NORMAL;
+        if (!isValid) {
+            logBuffer.add(lang.trans('Route does not meet minimum length requirements'));
+        }
+        logger.debug('isTypeValid:', isValid);
+        return isValid;
     }
 }
