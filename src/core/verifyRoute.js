@@ -70,10 +70,16 @@ export default function verifyRoute(input, options, adapter) {
             verificationOutput.setStationsOnPath(route.areStationsOnThePath());
 
             // Elevations calculation
-            verificationOutput.setElevationCharacteristics(pathElevation.getData());
             verificationOutput.setElevationGain(pathElevation.gain);
             verificationOutput.setElevationLoss(pathElevation.loss);
             verificationOutput.setElevationTotalChange(pathElevation.totalChange);
+
+            // Route characteristics
+            verificationOutput.setElevationCharacteristics(pathElevation.getData());
+            verificationOutput.setPathStart(route.getPathStart());
+            verificationOutput.setPathEnd(route.getPathEnd());
+            verificationOutput.setPathCoordinates(route.getPathCoordinates());
+            verificationOutput.setStations(route.getStations());
 
             // Sending status
             const routeSuccessfullyVerified = verificationOutput.getStatus();

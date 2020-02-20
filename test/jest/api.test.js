@@ -23,6 +23,27 @@ describe('API', () => {
                 distance: expect.any(Number),
                 elevation: expect.any(Number)
             })
+        ]),
+        pathStart: {
+            latitude: expect.any(Number),
+            longitude: expect.any(Number)
+        },
+        pathEnd: {
+            latitude: expect.any(Number),
+            longitude: expect.any(Number)
+        },
+        pathCoordinates: expect.arrayContaining([
+            expect.objectContaining({
+                latitude: expect.any(Number),
+                longitude: expect.any(Number)
+            })
+        ]),
+        stations: expect.arrayContaining([
+            expect.objectContaining({
+                index: expect.any(Number),
+                latitude: expect.any(Number),
+                longitude: expect.any(Number)
+            })
         ])
     });
     const expectedRouteCharacteristics = expect.objectContaining({

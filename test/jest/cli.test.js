@@ -64,6 +64,55 @@ describe('CLI', () => {
             new RegExp(
                 'Route Characteristics:\n' +
                     '- Path Length: [0-9.]*km\n' +
+                    '- Path Start:\n' +
+                    '  - Latitude: [0-9.]*\n' +
+                    '  - Longitude: [0-9.]*\n' +
+                    '- Path End:\n' +
+                    '  - Latitude: [0-9.]*\n' +
+                    '  - Longitude: [0-9.]*\n' +
+                    '- Stations:\n' +
+                    '  - Station 1:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 2:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 3:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 4:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 5:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 6:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 7:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 8:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 9:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 10:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 11:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 12:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 13:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 14:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
                     '- Route Type: Normal\n' +
                     '- Elevation Gain: [0-9.]*m\n' +
                     '- Elevation Loss: [0-9.]*m\n' +
@@ -88,6 +137,55 @@ describe('CLI', () => {
             new RegExp(
                 'Route Characteristics:\n' +
                     '- Path Length: [0-9.]*km\n' +
+                    '- Path Start:\n' +
+                    '  - Latitude: [0-9.]*\n' +
+                    '  - Longitude: [0-9.]*\n' +
+                    '- Path End:\n' +
+                    '  - Latitude: [0-9.]*\n' +
+                    '  - Longitude: [0-9.]*\n' +
+                    '- Stations:\n' +
+                    '  - Station 1:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 2:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 3:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 4:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 5:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 6:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 7:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 8:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 9:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 10:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 11:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 12:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 13:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
+                    '  - Station 14:\n' +
+                    '    - Latitude: [0-9.]*\n' +
+                    '    - Longitude: [0-9.]*\n' +
                     '- Route Type: Unknown\n' +
                     '- Elevation Gain: [0-9.]*m\n' +
                     '- Elevation Loss: [0-9.]*m\n' +

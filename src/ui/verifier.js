@@ -40,9 +40,13 @@ function runVerifier() {
         .then(json => {
             const routeVerificationOutput = new RouteVerificationOutput(json);
             adapter.init(routeVerificationOutput);
+            adapter.removeLoaderFromButton();
             return adapter.get();
         })
-        .catch(error => adapter.handleError(error));
+        .catch(error => {
+            adapter.removeLoaderFromButton();
+            return adapter.handleError(error);
+        });
 }
 
 $('button#verifyRoute').bind('click', runVerifier);
