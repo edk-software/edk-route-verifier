@@ -9,6 +9,7 @@ describe('Route verification - positive', () => {
         const { verificationStatus } = await getVerificationOutputFor('regular');
 
         expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.valid).toEqual(true);
         expect(verificationStatus.pathLength.value).toBeWithinRange(52, 0.5);
         expect(verificationStatus.routeType.valid).toEqual(true);
         expect(verificationStatus.routeType.value).toEqual(0);
@@ -24,6 +25,7 @@ describe('Route verification - positive', () => {
     test('Zero-leading station numbers', async () => {
         const { verificationStatus } = await getVerificationOutputFor('zero_leading');
         expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.valid).toEqual(true);
         expect(verificationStatus.pathLength.value).toBeWithinRange(76, 0.5);
         expect(verificationStatus.routeType.valid).toEqual(true);
         expect(verificationStatus.routeType.value).toEqual(0);
@@ -38,6 +40,7 @@ describe('Route verification - positive', () => {
     test('Circular path #1', async () => {
         const { verificationStatus } = await getVerificationOutputFor('circular_path_1');
         expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.valid).toEqual(true);
         expect(verificationStatus.pathLength.value).toBeWithinRange(37, 0.5);
         expect(verificationStatus.routeType.valid).toEqual(true);
         expect(verificationStatus.routeType.value).toEqual(0);
@@ -52,6 +55,7 @@ describe('Route verification - positive', () => {
     test('Circular path #2', async () => {
         const { verificationStatus } = await getVerificationOutputFor('circular_path_2');
         expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.valid).toEqual(true);
         expect(verificationStatus.pathLength.value).toBeWithinRange(37, 0.5);
         expect(verificationStatus.routeType.valid).toEqual(true);
         expect(verificationStatus.routeType.value).toEqual(0);
@@ -66,6 +70,7 @@ describe('Route verification - positive', () => {
     test('Circular path #3', async () => {
         const { verificationStatus } = await getVerificationOutputFor('circular_path_3');
         expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.valid).toEqual(true);
         expect(verificationStatus.pathLength.value).toBeWithinRange(42, 0.5);
         expect(verificationStatus.routeType.valid).toEqual(true);
         expect(verificationStatus.routeType.value).toEqual(0);
@@ -81,6 +86,7 @@ describe('Route verification - positive', () => {
     test('15 stations', async () => {
         const { verificationStatus } = await getVerificationOutputFor('15_stations');
         expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.valid).toEqual(true);
         expect(verificationStatus.pathLength.value).toBeWithinRange(40, 1);
         expect(verificationStatus.routeType.valid).toEqual(true);
         expect(verificationStatus.routeType.value).toEqual(0);
@@ -95,6 +101,7 @@ describe('Route verification - positive', () => {
     test('Short distance between station 1 and 14', async () => {
         const { verificationStatus } = await getVerificationOutputFor('short_distance_between_1_14');
         expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.valid).toEqual(true);
         expect(verificationStatus.pathLength.value).toBeWithinRange(40, 1);
         expect(verificationStatus.routeType.valid).toEqual(true);
         expect(verificationStatus.routeType.value).toEqual(0);
@@ -109,6 +116,7 @@ describe('Route verification - positive', () => {
     test('Eight-shaped route', async () => {
         const { verificationStatus } = await getVerificationOutputFor('eight_shaped_route');
         expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.valid).toEqual(true);
         expect(verificationStatus.pathLength.value).toBeWithinRange(52, 1);
         expect(verificationStatus.routeType.valid).toEqual(true);
         expect(verificationStatus.routeType.value).toEqual(0);

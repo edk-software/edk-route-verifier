@@ -3,6 +3,7 @@ import logger from 'loglevel';
 import { length } from './utils/turf.js';
 import * as _ from './utils/lodash.js';
 import helpers from './utils/helpers.js';
+import { ROUTE_TYPE } from './Consts.js';
 import PathElevation from './PathElevation.js';
 import Stations from './Stations.js';
 import Lang from './lang/Lang.js';
@@ -15,12 +16,6 @@ const EXPECTED_NUMBER_OF_PATHS = 1;
 const EXPECTED_NUMBER_OF_STATIONS = 14;
 
 const NORMAL_ROUTE_MIN_LENGTH = 30; // kilometers
-
-const ROUTE_TYPE = {
-    NORMAL: 0,
-    // INSPIRED: 1, (deprecated)
-    UNKNOWN: 2
-};
 
 let lang = null;
 let logBuffer = null;
@@ -131,6 +126,10 @@ export default class Route {
 
     getLength() {
         return this.length;
+    }
+
+    isLengthValid() {
+        return this.length >= NORMAL_ROUTE_MIN_LENGTH;
     }
 
     getType() {

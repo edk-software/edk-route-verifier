@@ -21,7 +21,7 @@ export default class ServerAdapter extends AbstractOutputAdapter {
                     valid: output.getSinglePathStatus()
                 },
                 pathLength: {
-                    valid: true,
+                    valid: output.getPathLengthStatus(),
                     value: output.getPathLength()
                 },
                 routeType: {

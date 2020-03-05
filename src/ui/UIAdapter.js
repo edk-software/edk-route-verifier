@@ -3,6 +3,7 @@ import Chart from 'chart.js';
 
 import Lang from '../core/lang/Lang.js';
 import { map, isNull, forEach } from '../core/utils/lodash.js';
+import { ROUTE_TYPE } from '../core/Consts.js';
 import AbstractOutputAdapter from '../data/AbstractOutputAdapter.js';
 
 // Constants
@@ -15,7 +16,6 @@ const ELEVATION_TOTAL_CHANGE_ID = 'div#elevationTotalChange';
 const NUMBER_OF_STATIONS_ID = 'div#numberOfStations';
 const STATIONS_ORDER_ID = 'div#stationsOrder';
 const STATIONS_ON_PATH_ID = 'div#stationsOnPath';
-const DATA_CONSISTENCY_ID = 'div#dataConsistency';
 const ELEVATION_CHART_ID = 'canvas#elevationChart';
 const VERIFY_BUTTON_ID = 'button#verifyRoute';
 const LOADER_ID = 'div#loader';
@@ -72,7 +72,13 @@ export default class UIAdapter extends AbstractOutputAdapter {
         };
     }
 
-    updateRouteType(isRouteTypeValid) {
+    updateRouteType(isRouteTypeValid, type) {
+        let typeString = 'Unknown';
+        if (type === ROUTE_TYPE.NORMAL) {
+            typeString = 'Normal';
+        }
+
+        this.updateControlValue(ROUTE_TYPE_ID, this.lang.trans(typeString));
         this.updateControlColor(ROUTE_TYPE_ID, isRouteTypeValid);
     }
 
@@ -110,10 +116,6 @@ export default class UIAdapter extends AbstractOutputAdapter {
 
     updateSinglePath(isSinglePath) {
         this.updateControlColor(SINGLE_PATH_ID, isSinglePath);
-    }
-
-    updateDataConsistency(isDataConsistent) {
-        this.updateControlColor(DATA_CONSISTENCY_ID, isDataConsistent);
     }
 
     drawElevationChart(pathElevation) {
@@ -226,7 +228,6 @@ export default class UIAdapter extends AbstractOutputAdapter {
         this.updateControlColor(STATIONS_ORDER_ID, isValid);
         this.updateControlColor(STATIONS_ON_PATH_ID, isValid);
         this.updateControlColor(SINGLE_PATH_ID, isValid);
-        this.updateControlColor(DATA_CONSISTENCY_ID, isValid);
         this.resetElevationChart();
         this.resetFailedVerificationModal();
         this.resetMap();
@@ -301,8 +302,8 @@ export default class UIAdapter extends AbstractOutputAdapter {
         const logs = verificationOutput.getLogs();
 
         this.updateSinglePath(verificationOutput.getSinglePathStatus());
-        this.updatePathLength(true, verificationOutput.getPathLength());
-        this.updateRouteType(verificationOutput.getRouteTypeStatus());
+        this.updatePathLength(verificationOutput.getPathLengthStatus(), verificationOutput.getPathLength());
+        this.updateRouteType(verificationOutput.getRouteTypeStatus(), verificationOutput.getRouteType());
         this.updateNumberOfStations(verificationOutput.getNumberOfStationsStatus());
         this.updateStationsOrder(verificationOutput.getStationsOrderStatus());
         this.updateStationsOnPath(verificationOutput.getStationsOnPathStatus());

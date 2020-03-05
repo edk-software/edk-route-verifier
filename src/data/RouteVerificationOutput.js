@@ -12,6 +12,7 @@ export default class RouteVerificationOutput {
             this.stations = [];
             this.singlePath = false;
             this.pathLength = 0.0;
+            this.pathLengthStatus = false;
             this.routeType = 2;
             this.routeTypeStatus = false;
             this.numberOfStations = false;
@@ -29,7 +30,7 @@ export default class RouteVerificationOutput {
             this.setPathCoordinates(routeCharacteristics.pathCoordinates);
             this.setStations(routeCharacteristics.stations);
             this.setSinglePath(verificationStatus.singlePath.valid);
-            this.setPathLength(verificationStatus.pathLength.value);
+            this.setPathLength(verificationStatus.pathLength.valid, verificationStatus.pathLength.value);
             this.setRouteType(verificationStatus.routeType.valid, verificationStatus.routeType.value);
             this.setNumberOfStations(verificationStatus.numberOfStations.valid);
             this.setStationsOrder(verificationStatus.stationsOrder.valid);
@@ -65,8 +66,9 @@ export default class RouteVerificationOutput {
         this.singlePath = valid;
     }
 
-    setPathLength(length) {
+    setPathLength(valid, length) {
         this.pathLength = length;
+        this.pathLengthStatus = valid;
     }
 
     setRouteType(valid, type) {
@@ -138,6 +140,10 @@ export default class RouteVerificationOutput {
 
     getPathLength() {
         return this.calculateNumeric(this.pathLength);
+    }
+
+    getPathLengthStatus() {
+        return this.pathLengthStatus;
     }
 
     getRouteType() {
