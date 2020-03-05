@@ -1,4 +1,5 @@
 import AbstractOutputAdapter from '../data/AbstractOutputAdapter.js';
+import FileError from '../core/errors/FileError.js';
 import GoogleMapsApiError from '../core/errors/GoogleMapsApiError.js';
 import KMLError from '../core/errors/KMLError.js';
 import NoPathInRouteError from '../core/errors/NoPathInRouteError.js';
@@ -61,6 +62,12 @@ export default class ServerAdapter extends AbstractOutputAdapter {
             return res.status(400).send({
                 error: error.name,
                 message: lang.trans('Provided KML string input is invalid')
+            });
+        }
+        if (error instanceof FileError) {
+            return res.status(400).send({
+                error: error.name,
+                message: lang.trans(error.message, { file: error.filename })
             });
         }
         if (error instanceof NoPathInRouteError) {

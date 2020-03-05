@@ -25,11 +25,22 @@ Server is started on `localhost`. Port is presented to the user. It can be chang
 
 ##### Request
 
+The following request body is accepted:
+
+###### with KML content
 ```
 {
-    kml: <string>
+    kml: <string - KML file content>
 }
 ```
+###### with KML file path
+```
+{
+    file: <string - KML file path, relative to resourcePath from configuration file>
+}
+```
+
+If both (`kml` and `file`) parameters are provided as non-empty strings, then KML data will be taken from `kml` parameter. 
 
 ##### Response
 

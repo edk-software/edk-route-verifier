@@ -1,6 +1,12 @@
 {
   "Error fetching data from Google Maps API": "Błąd podczas pobierania danych z API Google Maps.",
   "Provided KML string input is invalid": "Przesłany KML jest niepoprawny.",
+
+  "No access to files outside of resources path": "Dostęp do plików spoza katalogu jest zabroniony.",
+  "File does not exist in resources path": "Plik '<%= file %>' nie istnieje w katalogu zasobów",
+  "Error during accessing file": "Błąd podczas próby odczytania pliku '<%= file %>'",
+  "Request parameters not provided": "Żaden z parameterów ('kml', 'file') nie został podany poprawnie w żądaniu",
+
   "No path is defined in provided KML string": "Brak ścieżki w przesłanym KML.",
   "Provided verification inputs are invalid": "Przesłane dane wejściowe do weryfikatora są niepoprawne.",
   "Unexpected internal server error": "Nieoczekiwany błąd serwera."
