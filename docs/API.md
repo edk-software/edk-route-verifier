@@ -36,7 +36,7 @@ The following request body is accepted:
 ###### with KML file path
 ```
 {
-    file: <string - KML file path, relative to resourcePath from configuration file>
+    file: <string - KML file path, relative to resourcesPath from configuration file>
 }
 ```
 

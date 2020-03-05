@@ -74,7 +74,7 @@ export function createServer(port, debug, serveWebContent) {
             kmlString = getKmlString(kml, file);
         } catch (error) {
             logger.error(error);
-            return ServerAdapter.handleError(error, res);
+            ServerAdapter.handleError(error, res);
         }
 
         const routeData = new RouteVerificationInput(kmlString);
