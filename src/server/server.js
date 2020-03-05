@@ -68,24 +68,24 @@ export function createServer(port, debug, serveWebContent) {
 
     app.post('/api/verify', cors(), bodyParser.json({ limit: '10mb' }), (req, res) => {
         const { kml, file } = req.body;
+        const handleError = error => {
+            logger.error(error);
+            ServerAdapter.handleError(error, res);
+        };
 
         let kmlString = null;
         try {
             kmlString = getKmlString(kml, file);
+
+            const routeData = new RouteVerificationInput(kmlString);
+            const verificationOption = new RouteVerificationOptions(debug);
+
+            verifyRoute(routeData, verificationOption, new ServerAdapter())
+                .then(output => res.send(output.get()))
+                .catch(error => handleError(error));
         } catch (error) {
-            logger.error(error);
-            ServerAdapter.handleError(error, res);
+            handleError(error);
         }
-
-        const routeData = new RouteVerificationInput(kmlString);
-        const verificationOption = new RouteVerificationOptions(debug);
-
-        verifyRoute(routeData, verificationOption, new ServerAdapter())
-            .then(output => res.send(output.get()))
-            .catch(error => {
-                logger.error(error);
-                return ServerAdapter.handleError(error, res);
-            });
     });
 
     return app;
