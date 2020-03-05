@@ -24,7 +24,6 @@ export default class Stations {
     constructor(points, lineString) {
         this.points = points;
         this.path = lineString;
-        this.pathReversed = false;
         this.pathCircular = false;
 
         // Map points to stations and sort
@@ -35,11 +34,6 @@ export default class Stations {
         this.pathStart = point(this.path.geometry.coordinates[0]);
         this.pathEnd = point(this.path.geometry.coordinates[this.path.geometry.coordinates.length - 1]);
         this.updateCircularity();
-
-        // Path reverse check
-        if (!this.pathCircular) {
-            this.updateDirection();
-        }
 
         // Stations to path mapping
         this.updatePointsWithNearestOnLine();
@@ -162,44 +156,6 @@ export default class Stations {
             updatedPoint.properties.index = getIndex(name);
             return updatedPoint;
         });
-    }
-
-    updateDirection() {
-        const isIndexEqual = (p, index) => p.properties.index === index;
-        const startPoint = _.filter(
-            this.points,
-            p => isIndexEqual(p, CONSTS.START_INDEX) || isIndexEqual(p, CONSTS.FIRST_STATION_INDEX)
-        );
-        const endPoint = _.filter(
-            this.points,
-            p => isIndexEqual(p, CONSTS.END_INDEX) || isIndexEqual(p, CONSTS.LAST_STATION_INDEX)
-        );
-
-        if (!_.isEmpty(startPoint)) {
-            logger.debug('Start point detected. Checking if it is closer to path start or path end...');
-            const startPointToPathStartDistance = distance(this.pathStart, startPoint[0], options);
-            const startPointToPathEndDistance = distance(this.pathEnd, startPoint[0], options);
-            if (startPointToPathStartDistance > startPointToPathEndDistance) {
-                logger.debug('Reversed path detected. Start point is closer to path end.');
-                this.pathReversed = true;
-            }
-        } else if (!_.isEmpty(endPoint)) {
-            logger.debug('End point detected. Checking if it is closer to path start or path end...');
-            const endPointToPathStartDistance = distance(this.pathStart, endPoint[0], options);
-            const endPointToPathEndDistance = distance(this.pathEnd, endPoint[0], options);
-            if (endPointToPathEndDistance > endPointToPathStartDistance) {
-                logger.debug('Reversed path detected. Start point is closer to path end.');
-                this.pathReversed = true;
-            }
-        }
-
-        if (this.pathReversed) {
-            logger.debug('Reversing points.');
-            this.path = helpers.reverseLineString(this.path);
-            const { coordinates } = this.path.geometry;
-            this.pathStart = point(coordinates[0]);
-            this.pathEnd = point(coordinates[coordinates.length - 1]);
-        }
     }
 
     updateCircularity() {
