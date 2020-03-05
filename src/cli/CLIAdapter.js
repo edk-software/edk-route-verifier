@@ -2,6 +2,7 @@ import logger from 'loglevel';
 import { forEach } from '../core/utils/lodash.js';
 import AbstractOutputAdapter from '../data/AbstractOutputAdapter.js';
 import Lang from '../core/lang/Lang.js';
+import { ROUTE_TYPE } from '../core/Consts.js';
 import GoogleMapsApiError from '../core/errors/GoogleMapsApiError.js';
 import KMLError from '../core/errors/KMLError.js';
 import NoPathInRouteError from '../core/errors/NoPathInRouteError.js';
@@ -14,7 +15,7 @@ export default class CLIAdapter extends AbstractOutputAdapter {
         const getStatusString = status => lang.trans(status ? 'OK' : 'Failed');
         const getRouteTypeString = type => {
             let stringType = 'Unknown';
-            if (type === 0) {
+            if (type === ROUTE_TYPE.NORMAL) {
                 stringType = 'Normal';
             }
             return lang.trans(stringType);

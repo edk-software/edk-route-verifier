@@ -59,7 +59,7 @@ export default function verifyRoute(input, options, adapter) {
         .then(pathElevation => {
             // Path basic checks
             verificationOutput.setSinglePath(route.isSinglePath());
-            verificationOutput.setPathLength(route.getLength());
+            verificationOutput.setPathLength(route.isLengthValid(), route.getLength());
 
             // Route Type calculation
             verificationOutput.setRouteType(route.isTypeValid(), route.getType());
