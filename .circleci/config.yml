@@ -88,7 +88,7 @@ jobs:
 
 workflows:
   version: 2
-  build-test-deploy:
+  test-deploy:
     jobs:
       - test
       - deploy:
