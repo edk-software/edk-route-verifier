@@ -56,7 +56,7 @@ describe('CLI', () => {
     });
 
     test('Verification successful', async () => {
-        const cmd = `${cliCmd} file -c ./conf/config.json ./test/resources/regular.kml`;
+        const cmd = `${cliCmd} file -c ./conf/config.json regular.kml`;
 
         const { stdout, stderr } = await exec(cmd);
 
