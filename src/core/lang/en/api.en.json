@@ -1,6 +1,12 @@
 {
   "Error fetching data from Google Maps API": "Error fetching data from Google Maps API.",
   "Provided KML string input is invalid": "Provided KML string input is invalid.",
+
+  "No access to files outside of resources path": "Access to files outside of configured resources path is forbidden.",
+  "File does not exist in resources path": "File '<%= file %>' does not exist in resources path.",
+  "Error during accessing file": "Error during accessing file '<%= file %>'.",
+  "Request parameters not provided": "None of the following parameters ('kml', 'file') properly provided in the request.",
+
   "No path is defined in provided KML string": "No path is defined in provided KML string.",
   "Provided verification inputs are invalid": "Provided verification inputs are invalid.",
   "Unexpected internal server error": "Unexpected internal server error."

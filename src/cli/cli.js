@@ -1,10 +1,13 @@
 #!/usr/bin/env node --no-warnings --experimental-modules --experimental-json-modules
 
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
+import { resolve } from 'path';
+
 import yargs from 'yargs';
 
 import RouteVerificationInput from '../data/RouteVerificationInput.js';
 import RouteVerificationOptions from '../data/RouteVerificationOptions.js';
+import FileError from '../core/errors/FileError.js';
 import verifyRoute from '../core/verifyRoute.js';
 import { startServer } from '../server/server.js';
 import CLIAdapter from './CLIAdapter.js';
@@ -25,9 +28,8 @@ const { argv } = yargs
     .command('server [options] [-p port]', 'Starts server providing verification API', addPortOption)
     .command('file [options] <kml>', 'Verify provided KML file', y =>
         y.positional('kml', {
-            describe: 'KML file path',
-            type: 'string',
-            coerce: kmlFile => readFileSync(kmlFile, 'utf8')
+            describe: 'KML file path (can be relative to resourcesPath from configuration file)',
+            type: 'string'
         })
     )
     .command('ui [options]', 'Run UI version of the verifer', addPortOption)
@@ -76,19 +78,40 @@ const configuration = new Configuration(config);
 // eslint-disable-next-line no-unused-vars
 const lang = new Lang(language);
 
+const getKmlString = kml => {
+    const configInstance = Configuration.getConfig();
+    const resourcesPath = resolve(configInstance.resourcesPath);
+    const kmlFileFromResourcesPath = resolve(resourcesPath, kml);
+    const kmlFileWithoutBaseDir = resolve(kml);
+    let kmlString = null;
+
+    if (existsSync(kmlFileFromResourcesPath)) {
+        kmlString = readFileSync(kmlFileFromResourcesPath, 'utf8');
+    } else if (existsSync(kmlFileWithoutBaseDir)) {
+        kmlString = readFileSync(kmlFileWithoutBaseDir, 'utf8');
+    }
+
+    return kmlString;
+};
+
 if (commands.includes('server')) {
     const { port } = argv;
 
     startServer(port, debug, false);
 } else if (commands.includes('file')) {
     const { kml } = argv;
+    const kmlString = getKmlString(kml);
 
-    const routeInput = new RouteVerificationInput(kml);
-    const options = new RouteVerificationOptions(debug);
+    if (kmlString !== null) {
+        const routeInput = new RouteVerificationInput(kmlString);
+        const options = new RouteVerificationOptions(debug);
 
-    verifyRoute(routeInput, options, new CLIAdapter())
-        .then(output => output.get())
-        .catch(error => CLIAdapter.handleError(error));
+        verifyRoute(routeInput, options, new CLIAdapter())
+            .then(output => output.get())
+            .catch(error => CLIAdapter.handleError(error));
+    } else {
+        CLIAdapter.handleError(new FileError('kml', 'TODO'));
+    }
 } else if (commands.includes('ui')) {
     const { port } = argv;
 

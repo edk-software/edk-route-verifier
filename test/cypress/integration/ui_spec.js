@@ -22,6 +22,7 @@ describe('UI', () => {
                 expect(t).match(/[+-]?([0-9]*[.])?[0-9]+ km/);
             });
         cy.get('#routeType > .info-box-icon').should('have.class', 'bg-green');
+        cy.get('#routeType > .info-box-content > .info-box-number').should('have.text', 'Normal');
         cy.get('#numberOfStations > .info-box-icon').should('have.class', 'bg-green');
         cy.get('#stationsOrder > .info-box-icon').should('have.class', 'bg-green');
         cy.get('#stationsOnPath > .info-box-icon').should('have.class', 'bg-green');
@@ -66,6 +67,7 @@ describe('UI', () => {
                 expect(t).match(/[+-]?([0-9]*[.])?[0-9]+ km/);
             });
         cy.get('#routeType > .info-box-icon').should('have.class', 'bg-green');
+        cy.get('#routeType > .info-box-content > .info-box-number').should('have.text', 'Normal');
         cy.get('#numberOfStations > .info-box-icon').should('have.class', 'bg-yellow');
         cy.get('#stationsOrder > .info-box-icon').should('have.class', 'bg-green');
         cy.get('#stationsOnPath > .info-box-icon').should('have.class', 'bg-green');

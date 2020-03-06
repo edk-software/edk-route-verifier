@@ -1,8 +1,10 @@
 import logger from 'loglevel';
+
 import { forEach } from '../core/utils/lodash.js';
 import AbstractOutputAdapter from '../data/AbstractOutputAdapter.js';
 import Lang from '../core/lang/Lang.js';
 import { ROUTE_TYPE } from '../core/Consts.js';
+import FileError from '../core/errors/FileError.js';
 import GoogleMapsApiError from '../core/errors/GoogleMapsApiError.js';
 import KMLError from '../core/errors/KMLError.js';
 import NoPathInRouteError from '../core/errors/NoPathInRouteError.js';
@@ -68,6 +70,9 @@ export default class CLIAdapter extends AbstractOutputAdapter {
         let message = 'Unexpected internal server error';
         if (error instanceof KMLError) {
             message = 'Provided KML string input is invalid';
+        }
+        if (error instanceof FileError) {
+            message = 'File does not exist';
         }
         if (error instanceof NoPathInRouteError) {
             message = 'No path is defined in provided KML string';

@@ -4,7 +4,7 @@ edk-route-verifier file [options] <kml>
 Verify provided KML file
 
 Positionals:
-  kml  KML file path  [string] [required]
+  kml  KML file path (can be relative to resourcesPath from configuration file)  [string] [required]
 
 Options:
   -c, --config    Configuration JSON file path (should contain googleMapsApiKey)  [string] [required]

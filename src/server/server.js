@@ -1,7 +1,12 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
+import fs from 'fs';
 import logger from 'loglevel';
+import path from 'path';
+import { isEmpty } from '../core/utils/lodash.js';
+import Configuration from '../core/Configuration.js';
+import FileError from '../core/errors/FileError.js';
 
 import { addUIRoutes } from './uiRoutes.js';
 import { secureServer } from './security.js';
@@ -18,6 +23,39 @@ function setupLogger(debug) {
     }
 }
 
+function getKmlString(kml, file) {
+    let kmlString = null;
+
+    if (!isEmpty(kml)) {
+        logger.debug('Getting KML string directly from request.');
+        kmlString = kml;
+    } else if (!isEmpty(file)) {
+        logger.debug('Getting KML string from file.');
+        const config = Configuration.getConfig();
+        const resourcesPath = path.resolve(config.resourcesPath);
+        const kmlFilePath = path.resolve(resourcesPath, file);
+
+        if (!kmlFilePath.startsWith(resourcesPath)) {
+            throw new FileError(file, 'No access to files outside of resources path');
+        }
+
+        if (!fs.existsSync(kmlFilePath)) {
+            throw new FileError(file, 'File does not exist in resources path');
+        }
+
+        try {
+            logger.debug(`Getting KML string from file: ${file}`);
+            kmlString = fs.readFileSync(kmlFilePath, 'utf8');
+        } catch (error) {
+            throw new FileError(file, 'Error during accessing file');
+        }
+    } else {
+        throw new FileError(file, 'Request parameters not provided');
+    }
+
+    return kmlString;
+}
+
 export function createServer(port, debug, serveWebContent) {
     const app = express();
 
@@ -29,17 +67,25 @@ export function createServer(port, debug, serveWebContent) {
     setupLogger(debug);
 
     app.post('/api/verify', cors(), bodyParser.json({ limit: '10mb' }), (req, res) => {
-        const { kml } = req.body;
+        const { kml, file } = req.body;
+        const handleError = error => {
+            logger.error(error);
+            ServerAdapter.handleError(error, res);
+        };
 
-        const routeData = new RouteVerificationInput(kml);
-        const verificationOption = new RouteVerificationOptions(debug);
+        let kmlString = null;
+        try {
+            kmlString = getKmlString(kml, file);
 
-        verifyRoute(routeData, verificationOption, new ServerAdapter())
-            .then(output => res.send(output.get()))
-            .catch(error => {
-                logger.error(error);
-                return ServerAdapter.handleError(error, res);
-            });
+            const routeData = new RouteVerificationInput(kmlString);
+            const verificationOption = new RouteVerificationOptions(debug);
+
+            verifyRoute(routeData, verificationOption, new ServerAdapter())
+                .then(output => res.send(output.get()))
+                .catch(error => handleError(error));
+        } catch (error) {
+            handleError(error);
+        }
     });
 
     return app;

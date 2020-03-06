@@ -68,7 +68,7 @@ export default class UIAdapter extends AbstractOutputAdapter {
             const INFO_BOX_NUMBER = 'span.info-box-number';
 
             logger.debug('Updating control element', element, 'with:', value, unit);
-            $(`${element} ${INFO_BOX_NUMBER}`).html(`${value} ${unit ? `<small>${unit}</small>` : ''}`);
+            $(`${element} ${INFO_BOX_NUMBER}`).html(`${value}${unit ? ` <small>${unit}</small>` : ''}`);
         };
     }
 

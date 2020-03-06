@@ -1,5 +1,6 @@
 {
   "Route verification cannot be completed": "Weryfikacja trasy nie może być przeprowadzona.",
+  "File does not exist": "Podany plik nie istnieje.",
   "Route Characteristics": "Charakterystyka Trasy",
   "Path Start": "Początek Trasy",
   "Path End": "Koniec Trasy",
