@@ -28,7 +28,7 @@
     "start:ui": "npm run start:cli -- ui -c conf/config.json",
     "start:file": "npm run start:cli -- file -c conf/config.json",
     "test:cypress": "cypress run",
-    "test:jest": "jest",
+    "test:jest": "jest --config ./jest.config.json",
     "test:lint": "eslint src/ test/ --ext .js --cache --max-warnings 10",
     "test:ui": "npm-run-all --parallel --race start:ui test:cypress",
     "test": "npm-run-all test:lint test:jest test:ui"
@@ -71,7 +71,7 @@
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jest": "^23.8.2",
     "eslint-plugin-prettier": "^3.1.2",
-    "jest": "^25.2.7",
+    "jest": "^24.9.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
     "supertest": "^4.0.2"
