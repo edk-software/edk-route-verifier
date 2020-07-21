@@ -46,7 +46,7 @@
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
     "helmet": "^3.22.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "loglevel": "^1.6.7",
     "node-fetch": "^2.6.0",
     "xmldom": "^0.3.0",
