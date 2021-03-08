@@ -16,6 +16,7 @@
   "Verification Status": "Status Weryfikacji",
   "Single Path": "Jedna Nitka: <%= status %>",
   "Route Type Status": "Typ Trasy: <%= status %>",
+  "Elevation Gain Status": "Suma Podejść: <%= status %>",
   "Number Of Stations": "Liczba Stacji: <%= status %>",
   "Stations Order": "Kolejność Stacji: <%= status %>",
   "Stations On Path": "Rozmieszczenie Stacji: <%= status %>",

@@ -78,6 +78,7 @@ describe('Route verification - positive', () => {
         expect(verificationStatus.stationsOrder.valid).toEqual(true);
         expect(verificationStatus.stationsOnPath.valid).toEqual(true);
         expect(verificationStatus.elevationGain.value).toBeWithinRange(300, 50);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(300, 50);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(600, 50);
     });
@@ -94,6 +95,7 @@ describe('Route verification - positive', () => {
         expect(verificationStatus.stationsOrder.valid).toEqual(true);
         expect(verificationStatus.stationsOnPath.valid).toEqual(true);
         expect(verificationStatus.elevationGain.value).toBeWithinRange(313, 50);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(314, 50);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(627, 50);
     });
@@ -109,6 +111,7 @@ describe('Route verification - positive', () => {
         expect(verificationStatus.stationsOrder.valid).toEqual(true);
         expect(verificationStatus.stationsOnPath.valid).toEqual(true);
         expect(verificationStatus.elevationGain.value).toBeWithinRange(327, 50);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(328, 50);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(650, 50);
     });
@@ -124,7 +127,40 @@ describe('Route verification - positive', () => {
         expect(verificationStatus.stationsOrder.valid).toEqual(true);
         expect(verificationStatus.stationsOnPath.valid).toEqual(true);
         expect(verificationStatus.elevationGain.value).toBeWithinRange(385, 50);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(385, 50);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(750, 50);
+    });
+
+    test('Short route (30-40km) with elevation gain above 500m #1', async () => {
+        const { verificationStatus } = await getVerificationOutputFor('short_route_gain_ok_1');
+        expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.valid).toEqual(true);
+        expect(verificationStatus.pathLength.value).toBeWithinRange(36.6, 0.5);
+        expect(verificationStatus.routeType.valid).toEqual(true);
+        expect(verificationStatus.routeType.value).toEqual(0);
+        expect(verificationStatus.numberOfStations.valid).toEqual(true);
+        expect(verificationStatus.stationsOrder.valid).toEqual(true);
+        expect(verificationStatus.stationsOnPath.valid).toEqual(true);
+        expect(verificationStatus.elevationGain.value).toBeWithinRange(1150, 50);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
+        expect(verificationStatus.elevationLoss.value).toBeWithinRange(1050, 50);
+        expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(2200, 50);
+    });
+
+    test('Short route (30-40km) with elevation gain above 500m #2', async () => {
+        const { verificationStatus } = await getVerificationOutputFor('short_route_gain_ok_2');
+        expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.valid).toEqual(true);
+        expect(verificationStatus.pathLength.value).toBeWithinRange(30.5, 0.5);
+        expect(verificationStatus.routeType.valid).toEqual(true);
+        expect(verificationStatus.routeType.value).toEqual(0);
+        expect(verificationStatus.numberOfStations.valid).toEqual(true);
+        expect(verificationStatus.stationsOrder.valid).toEqual(true);
+        expect(verificationStatus.stationsOnPath.valid).toEqual(true);
+        expect(verificationStatus.elevationGain.value).toBeWithinRange(1250, 50);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
+        expect(verificationStatus.elevationLoss.value).toBeWithinRange(1350, 50);
+        expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(2600, 50);
     });
 });
