@@ -285,7 +285,7 @@ export default class UIAdapter extends AbstractOutputAdapter {
         for (const [, { name, icon }] of Object.entries(POINTS)) {
             const div = document.createElement('div');
             div.style = 'font-size: 18px; margin: 10px;';
-            div.innerHTML = `<img src="${icon}"> ${this.lang.trans(name)}`;
+            div.innerHTML = `<img alt="${name} icon" src="${icon}"> ${this.lang.trans(name)}`;
             legend.appendChild(div);
         }
 
@@ -307,7 +307,7 @@ export default class UIAdapter extends AbstractOutputAdapter {
         this.updateNumberOfStations(verificationOutput.getNumberOfStationsStatus());
         this.updateStationsOrder(verificationOutput.getStationsOrderStatus());
         this.updateStationsOnPath(verificationOutput.getStationsOnPathStatus());
-        this.updateElevationGain(true, verificationOutput.getElevationGain());
+        this.updateElevationGain(verificationOutput.getElevationGainStatus(), verificationOutput.getElevationGain());
         this.updateElevationLoss(true, verificationOutput.getElevationLoss());
         this.updateElevationTotalChange(true, verificationOutput.getElevationTotalChange());
         this.drawElevationChart(verificationOutput.getElevationCharacteristics());

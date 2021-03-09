@@ -39,7 +39,7 @@ export default class ServerAdapter extends AbstractOutputAdapter {
                     valid: output.getStationsOnPathStatus()
                 },
                 elevationGain: {
-                    valid: true,
+                    valid: output.getElevationGainStatus(),
                     value: output.getElevationGain()
                 },
                 elevationLoss: {

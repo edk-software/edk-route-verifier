@@ -16,6 +16,7 @@
   "Verification Status": "Verification Status",
   "Single Path": "Single Path: <%= status %>",
   "Route Type Status": "Route Type: <%= status %>",
+  "Elevation Gain Status": "Elevation Gain: <%= status %>",
   "Number Of Stations": "Number Of Stations: <%= status %>",
   "Stations Order": "Stations Order: <%= status %>",
   "Stations On Path": "Stations On Path: <%= status %>",

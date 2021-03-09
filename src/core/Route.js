@@ -16,6 +16,8 @@ const EXPECTED_NUMBER_OF_PATHS = 1;
 const EXPECTED_NUMBER_OF_STATIONS = 14;
 
 const NORMAL_ROUTE_MIN_LENGTH = 30; // kilometers
+const MAX_ROUTE_LENGTH_FOR_SHORT_ROUTES = 40; // kilometers
+const MIN_ELEVATION_GAIN_FOR_SHORT_ROUTES = 500; // meters
 
 let lang = null;
 let logBuffer = null;
@@ -28,6 +30,7 @@ export default class Route {
         this.geoJson = geoJson;
         this.lineString = helpers.getLineString(this.geoJson);
         this.points = helpers.getPoints(this.geoJson);
+        this.pathElevation = null;
 
         lang = Lang.getInstance();
         logBuffer = LogBuffer.getInstance();
@@ -142,6 +145,23 @@ export default class Route {
             logBuffer.add(lang.trans('Route does not meet minimum length requirements'));
         }
         logger.debug('isTypeValid:', isValid);
+        return isValid;
+    }
+
+    isElevationGainValid() {
+        let isValid = false;
+        if (this.pathElevation && this.pathElevation.gain) {
+            isValid =
+                this.length >= NORMAL_ROUTE_MIN_LENGTH && this.length < MAX_ROUTE_LENGTH_FOR_SHORT_ROUTES
+                    ? this.pathElevation.gain >= MIN_ELEVATION_GAIN_FOR_SHORT_ROUTES
+                    : true;
+            logger.debug('isElevationGainValid:', isValid);
+        } else {
+            logger.error('isElevationGainValid cannot be calculated properly without path elevations.');
+        }
+        if (!isValid) {
+            logBuffer.add(lang.trans('Elevation gain does not meet minimum requirements'));
+        }
         return isValid;
     }
 }

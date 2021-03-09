@@ -16,6 +16,7 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.stationsOrder.valid).toEqual(false);
         expect(verificationStatus.stationsOnPath.valid).toEqual(true);
         expect(verificationStatus.elevationGain.value).toBeWithinRange(190, 50);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(145, 50);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(335, 50);
     });
@@ -31,6 +32,7 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.stationsOrder.valid).toEqual(true);
         expect(verificationStatus.stationsOnPath.valid).toEqual(false);
         expect(verificationStatus.elevationGain.value).toBeWithinRange(320, 50);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(380, 50);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(700, 50);
     });
@@ -46,6 +48,7 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.stationsOrder.valid).toEqual(true);
         expect(verificationStatus.stationsOnPath.valid).toEqual(true);
         expect(verificationStatus.elevationGain.value).toBeWithinRange(220, 50);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(200, 50);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(420, 50);
     });
@@ -61,6 +64,7 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.stationsOrder.valid).toEqual(true);
         expect(verificationStatus.stationsOnPath.valid).toEqual(true);
         expect(verificationStatus.elevationGain.value).toBeWithinRange(350, 50);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(390, 50);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(740, 50);
     });
@@ -76,6 +80,7 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.stationsOrder.valid).toEqual(true);
         expect(verificationStatus.stationsOnPath.valid).toEqual(false);
         expect(verificationStatus.elevationGain.value).toBeWithinRange(250, 50);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(260, 50);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(520, 50);
     });
@@ -91,6 +96,7 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.stationsOrder.valid).toEqual(true);
         expect(verificationStatus.stationsOnPath.valid).toEqual(true);
         expect(verificationStatus.elevationGain.value).toBeWithinRange(313, 50);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(314, 50);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(627, 50);
     });
@@ -106,6 +112,7 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.stationsOrder.valid).toEqual(true);
         expect(verificationStatus.stationsOnPath.valid).toEqual(true);
         expect(verificationStatus.elevationGain.value).toBeWithinRange(965, 50);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(626, 50);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(1592, 50);
     });
@@ -121,6 +128,7 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.stationsOrder.valid).toEqual(false);
         expect(verificationStatus.stationsOnPath.valid).toEqual(true);
         expect(verificationStatus.elevationGain.value).toBeWithinRange(390, 100);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(395, 100);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(785, 100);
     });
@@ -136,6 +144,7 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.stationsOrder.valid).toEqual(false);
         expect(verificationStatus.stationsOnPath.valid).toEqual(true);
         expect(verificationStatus.elevationGain.value).toBeWithinRange(410, 100);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(410, 100);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(820, 100);
     });
@@ -151,6 +160,7 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.stationsOrder.valid).toEqual(false);
         expect(verificationStatus.stationsOnPath.valid).toEqual(true);
         expect(verificationStatus.elevationGain.value).toBeWithinRange(920, 100);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(880, 100);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(1800, 100);
     });
@@ -166,7 +176,40 @@ describe('Route verification - negative', () => {
         expect(verificationStatus.stationsOrder.valid).toEqual(true);
         expect(verificationStatus.stationsOnPath.valid).toEqual(true);
         expect(verificationStatus.elevationGain.value).toBeWithinRange(425, 100);
+        expect(verificationStatus.elevationGain.valid).toEqual(true);
         expect(verificationStatus.elevationLoss.value).toBeWithinRange(427, 100);
         expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(850, 100);
+    });
+
+    test('Short route (30-40km) with elevation gain below 500m #1', async () => {
+        const { verificationStatus } = await getVerificationOutputFor('short_route_gain_too_small_1');
+        expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.valid).toEqual(true);
+        expect(verificationStatus.pathLength.value).toBeWithinRange(35.5, 0.5);
+        expect(verificationStatus.routeType.valid).toEqual(true);
+        expect(verificationStatus.routeType.value).toEqual(0);
+        expect(verificationStatus.numberOfStations.valid).toEqual(true);
+        expect(verificationStatus.stationsOrder.valid).toEqual(true);
+        expect(verificationStatus.stationsOnPath.valid).toEqual(true);
+        expect(verificationStatus.elevationGain.value).toBeWithinRange(475, 20);
+        expect(verificationStatus.elevationGain.valid).toEqual(false);
+        expect(verificationStatus.elevationLoss.value).toBeWithinRange(475, 20);
+        expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(950, 50);
+    });
+
+    test('Short route (30-40km) with elevation gain below 500m #2', async () => {
+        const { verificationStatus } = await getVerificationOutputFor('short_route_gain_too_small_2');
+        expect(verificationStatus.singlePath.valid).toEqual(true);
+        expect(verificationStatus.pathLength.valid).toEqual(true);
+        expect(verificationStatus.pathLength.value).toBeWithinRange(30, 0.5);
+        expect(verificationStatus.routeType.valid).toEqual(true);
+        expect(verificationStatus.routeType.value).toEqual(0);
+        expect(verificationStatus.numberOfStations.valid).toEqual(true);
+        expect(verificationStatus.stationsOrder.valid).toEqual(true);
+        expect(verificationStatus.stationsOnPath.valid).toEqual(true);
+        expect(verificationStatus.elevationGain.value).toBeWithinRange(275, 20);
+        expect(verificationStatus.elevationGain.valid).toEqual(false);
+        expect(verificationStatus.elevationLoss.value).toBeWithinRange(275, 20);
+        expect(verificationStatus.elevationTotalChange.value).toBeWithinRange(550, 50);
     });
 });
