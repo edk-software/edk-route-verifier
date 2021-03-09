@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>św. Leon z Katanii</name>
+    <description/>
+    <Style id="icon-1899-0288D1-normal">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1899-0288D1-highlight">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1899-0288D1">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-0288D1-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-0288D1-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-000000-2000-normal">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>2</width>
+      </LineStyle>
+    </Style>
+    <Style id="line-000000-2000-highlight">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>3</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="line-000000-2000">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-000000-2000-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-000000-2000-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>20.kml</name>
+      <Placemark>
+        <name>Stacja I</name>
+        <description><![CDATA[description: description: <br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width:<br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="description">
+            <value>description: 
+styleUrl: #icon-503-DB4436-nodesc
+styleHash: 6adf9d43
+styleMapHash: [object Object]
+stroke: 
+stroke-opacity: 
+stroke-width:</value>
+          </Data>
+          <Data name="styleUrl">
+            <value>#icon-503-DB4436-nodesc</value>
+          </Data>
+          <Data name="styleHash">
+            <value>6adf9d43</value>
+          </Data>
+          <Data name="styleMapHash">
+            <value>[object Object]</value>
+          </Data>
+          <Data name="stroke">
+            <value/>
+          </Data>
+          <Data name="stroke-opacity">
+            <value/>
+          </Data>
+          <Data name="stroke-width">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            19.849339,49.440998,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Stacja II</name>
+        <description><![CDATA[description: description: <br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width:<br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="description">
+            <value>description: 
+styleUrl: #icon-503-DB4436-nodesc
+styleHash: 6adf9d43
+styleMapHash: [object Object]
+stroke: 
+stroke-opacity: 
+stroke-width:</value>
+          </Data>
+          <Data name="styleUrl">
+            <value>#icon-503-DB4436-nodesc</value>
+          </Data>
+          <Data name="styleHash">
+            <value>6adf9d43</value>
+          </Data>
+          <Data name="styleMapHash">
+            <value>[object Object]</value>
+          </Data>
+          <Data name="stroke">
+            <value/>
+          </Data>
+          <Data name="stroke-opacity">
+            <value/>
+          </Data>
+          <Data name="stroke-width">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            19.830843,49.432968,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Stacja III</name>
+        <description><![CDATA[description: description: <br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width:<br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="description">
+            <value>description: 
+styleUrl: #icon-503-DB4436-nodesc
+styleHash: 6adf9d43
+styleMapHash: [object Object]
+stroke: 
+stroke-opacity: 
+stroke-width:</value>
+          </Data>
+          <Data name="styleUrl">
+            <value>#icon-503-DB4436-nodesc</value>
+          </Data>
+          <Data name="styleHash">
+            <value>6adf9d43</value>
+          </Data>
+          <Data name="styleMapHash">
+            <value>[object Object]</value>
+          </Data>
+          <Data name="stroke">
+            <value/>
+          </Data>
+          <Data name="stroke-opacity">
+            <value/>
+          </Data>
+          <Data name="stroke-width">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            19.826117,49.419475,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Stacja IV</name>
+        <description><![CDATA[description: description: <br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width:<br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="description">
+            <value>description: 
+styleUrl: #icon-503-DB4436-nodesc
+styleHash: 6adf9d43
+styleMapHash: [object Object]
+stroke: 
+stroke-opacity: 
+stroke-width:</value>
+          </Data>
+          <Data name="styleUrl">
+            <value>#icon-503-DB4436-nodesc</value>
+          </Data>
+          <Data name="styleHash">
+            <value>6adf9d43</value>
+          </Data>
+          <Data name="styleMapHash">
+            <value>[object Object]</value>
+          </Data>
+          <Data name="stroke">
+            <value/>
+          </Data>
+          <Data name="stroke-opacity">
+            <value/>
+          </Data>
+          <Data name="stroke-width">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            19.823252,49.406925,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Stacja V</name>
+        <description><![CDATA[description: description: <br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width:<br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="description">
+            <value>description: 
+styleUrl: #icon-503-DB4436-nodesc
+styleHash: 6adf9d43
+styleMapHash: [object Object]
+stroke: 
+stroke-opacity: 
+stroke-width:</value>
+          </Data>
+          <Data name="styleUrl">
+            <value>#icon-503-DB4436-nodesc</value>
+          </Data>
+          <Data name="styleHash">
+            <value>6adf9d43</value>
+          </Data>
+          <Data name="styleMapHash">
+            <value>[object Object]</value>
+          </Data>
+          <Data name="stroke">
+            <value/>
+          </Data>
+          <Data name="stroke-opacity">
+            <value/>
+          </Data>
+          <Data name="stroke-width">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            19.800432,49.397513,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Stacja VI</name>
+        <description><![CDATA[description: description: <br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width:<br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="description">
+            <value>description: 
+styleUrl: #icon-503-DB4436-nodesc
+styleHash: 6adf9d43
+styleMapHash: [object Object]
+stroke: 
+stroke-opacity: 
+stroke-width:</value>
+          </Data>
+          <Data name="styleUrl">
+            <value>#icon-503-DB4436-nodesc</value>
+          </Data>
+          <Data name="styleHash">
+            <value>6adf9d43</value>
+          </Data>
+          <Data name="styleMapHash">
+            <value>[object Object]</value>
+          </Data>
+          <Data name="stroke">
+            <value/>
+          </Data>
+          <Data name="stroke-opacity">
+            <value/>
+          </Data>
+          <Data name="stroke-width">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            19.795947,49.3887426,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Stacja VII</name>
+        <description><![CDATA[description: description: <br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width:<br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="description">
+            <value>description: 
+styleUrl: #icon-503-DB4436-nodesc
+styleHash: 6adf9d43
+styleMapHash: [object Object]
+stroke: 
+stroke-opacity: 
+stroke-width:</value>
+          </Data>
+          <Data name="styleUrl">
+            <value>#icon-503-DB4436-nodesc</value>
+          </Data>
+          <Data name="styleHash">
+            <value>6adf9d43</value>
+          </Data>
+          <Data name="styleMapHash">
+            <value>[object Object]</value>
+          </Data>
+          <Data name="stroke">
+            <value/>
+          </Data>
+          <Data name="stroke-opacity">
+            <value/>
+          </Data>
+          <Data name="stroke-width">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            19.8189656,49.3717408,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Stacja VIII</name>
+        <description><![CDATA[description: description: <br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width:<br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="description">
+            <value>description: 
+styleUrl: #icon-503-DB4436-nodesc
+styleHash: 6adf9d43
+styleMapHash: [object Object]
+stroke: 
+stroke-opacity: 
+stroke-width:</value>
+          </Data>
+          <Data name="styleUrl">
+            <value>#icon-503-DB4436-nodesc</value>
+          </Data>
+          <Data name="styleHash">
+            <value>6adf9d43</value>
+          </Data>
+          <Data name="styleMapHash">
+            <value>[object Object]</value>
+          </Data>
+          <Data name="stroke">
+            <value/>
+          </Data>
+          <Data name="stroke-opacity">
+            <value/>
+          </Data>
+          <Data name="stroke-width">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            19.8313519,49.3789928,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Stacja IX</name>
+        <description><![CDATA[description: description: <br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width:<br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="description">
+            <value>description: 
+styleUrl: #icon-503-DB4436-nodesc
+styleHash: 6adf9d43
+styleMapHash: [object Object]
+stroke: 
+stroke-opacity: 
+stroke-width:</value>
+          </Data>
+          <Data name="styleUrl">
+            <value>#icon-503-DB4436-nodesc</value>
+          </Data>
+          <Data name="styleHash">
+            <value>6adf9d43</value>
+          </Data>
+          <Data name="styleMapHash">
+            <value>[object Object]</value>
+          </Data>
+          <Data name="stroke">
+            <value/>
+          </Data>
+          <Data name="stroke-opacity">
+            <value/>
+          </Data>
+          <Data name="stroke-width">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            19.8466728,49.3887992,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Stacja X</name>
+        <description><![CDATA[description: description: <br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width:<br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="description">
+            <value>description: 
+styleUrl: #icon-503-DB4436-nodesc
+styleHash: 6adf9d43
+styleMapHash: [object Object]
+stroke: 
+stroke-opacity: 
+stroke-width:</value>
+          </Data>
+          <Data name="styleUrl">
+            <value>#icon-503-DB4436-nodesc</value>
+          </Data>
+          <Data name="styleHash">
+            <value>6adf9d43</value>
+          </Data>
+          <Data name="styleMapHash">
+            <value>[object Object]</value>
+          </Data>
+          <Data name="stroke">
+            <value/>
+          </Data>
+          <Data name="stroke-opacity">
+            <value/>
+          </Data>
+          <Data name="stroke-width">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            19.8631954,49.4070921,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Stacja XI</name>
+        <description><![CDATA[description: description: <br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width:<br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="description">
+            <value>description: 
+styleUrl: #icon-503-DB4436-nodesc
+styleHash: 6adf9d43
+styleMapHash: [object Object]
+stroke: 
+stroke-opacity: 
+stroke-width:</value>
+          </Data>
+          <Data name="styleUrl">
+            <value>#icon-503-DB4436-nodesc</value>
+          </Data>
+          <Data name="styleHash">
+            <value>6adf9d43</value>
+          </Data>
+          <Data name="styleMapHash">
+            <value>[object Object]</value>
+          </Data>
+          <Data name="stroke">
+            <value/>
+          </Data>
+          <Data name="stroke-opacity">
+            <value/>
+          </Data>
+          <Data name="stroke-width">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            19.8938375,49.4223375,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Stacja XII</name>
+        <description><![CDATA[description: description: <br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width:<br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="description">
+            <value>description: 
+styleUrl: #icon-503-DB4436-nodesc
+styleHash: 6adf9d43
+styleMapHash: [object Object]
+stroke: 
+stroke-opacity: 
+stroke-width:</value>
+          </Data>
+          <Data name="styleUrl">
+            <value>#icon-503-DB4436-nodesc</value>
+          </Data>
+          <Data name="styleHash">
+            <value>6adf9d43</value>
+          </Data>
+          <Data name="styleMapHash">
+            <value>[object Object]</value>
+          </Data>
+          <Data name="stroke">
+            <value/>
+          </Data>
+          <Data name="stroke-opacity">
+            <value/>
+          </Data>
+          <Data name="stroke-width">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            19.9146082,49.4417194,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Stacja XIII</name>
+        <description><![CDATA[description: description: <br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width:<br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="description">
+            <value>description: 
+styleUrl: #icon-503-DB4436-nodesc
+styleHash: 6adf9d43
+styleMapHash: [object Object]
+stroke: 
+stroke-opacity: 
+stroke-width:</value>
+          </Data>
+          <Data name="styleUrl">
+            <value>#icon-503-DB4436-nodesc</value>
+          </Data>
+          <Data name="styleHash">
+            <value>6adf9d43</value>
+          </Data>
+          <Data name="styleMapHash">
+            <value>[object Object]</value>
+          </Data>
+          <Data name="stroke">
+            <value/>
+          </Data>
+          <Data name="stroke-opacity">
+            <value/>
+          </Data>
+          <Data name="stroke-width">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            19.8679916,49.4395724,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Stacja XIV</name>
+        <description><![CDATA[description: description: <br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width:<br>styleUrl: #icon-503-DB4436-nodesc<br>styleHash: 6adf9d43<br>styleMapHash: [object Object]<br>stroke: <br>stroke-opacity: <br>stroke-width: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="description">
+            <value>description: 
+styleUrl: #icon-503-DB4436-nodesc
+styleHash: 6adf9d43
+styleMapHash: [object Object]
+stroke: 
+stroke-opacity: 
+stroke-width:</value>
+          </Data>
+          <Data name="styleUrl">
+            <value>#icon-503-DB4436-nodesc</value>
+          </Data>
+          <Data name="styleHash">
+            <value>6adf9d43</value>
+          </Data>
+          <Data name="styleMapHash">
+            <value>[object Object]</value>
+          </Data>
+          <Data name="stroke">
+            <value/>
+          </Data>
+          <Data name="stroke-opacity">
+            <value/>
+          </Data>
+          <Data name="stroke-width">
+            <value/>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            19.8571228,49.4329155,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Trasa</name>
+        <description><![CDATA[description: description: <br>styleUrl: #line-000000-1-nodesc<br>styleHash: -11bd577b<br>styleMapHash: [object Object]<br>stroke: #000000<br>stroke-opacity: 1<br>stroke-width: 1<br>styleUrl: #line-000000-1-nodesc<br>styleHash: -11bd577b<br>styleMapHash: [object Object]<br>stroke: #000000<br>stroke-opacity: 1<br>stroke-width: 1]]></description>
+        <styleUrl>#line-000000-2000</styleUrl>
+        <ExtendedData>
+          <Data name="description">
+            <value>description: 
+styleUrl: #line-000000-1-nodesc
+styleHash: -11bd577b
+styleMapHash: [object Object]
+stroke: #000000
+stroke-opacity: 1
+stroke-width: 1</value>
+          </Data>
+          <Data name="styleUrl">
+            <value>#line-000000-1-nodesc</value>
+          </Data>
+          <Data name="styleHash">
+            <value>-11bd577b</value>
+          </Data>
+          <Data name="styleMapHash">
+            <value>[object Object]</value>
+          </Data>
+          <Data name="stroke">
+            <value>#000000</value>
+          </Data>
+          <Data name="stroke-opacity">
+            <value>1</value>
+          </Data>
+          <Data name="stroke-width">
+            <value>1</value>
+          </Data>
+        </ExtendedData>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            19.8536462,49.4403729,0
+            19.852446,49.438915,0
+            19.8497622,49.4406459,0
+            19.849396,49.440933,0
+            19.849126,49.440338,0
+            19.848739,49.439742,0
+            19.84712,49.439392,0
+            19.845812,49.438966,0
+            19.845062,49.438512,0
+            19.842916,49.436942,0
+            19.841576,49.43608,0
+            19.840508,49.435681,0
+            19.839513,49.435381,0
+            19.838261,49.435108,0
+            19.836287,49.434747,0
+            19.834468,49.434315,0
+            19.833722,49.434022,0
+            19.830816,49.433027,0
+            19.831888,49.432245,0
+            19.831449,49.431282,0
+            19.830918,49.429272,0
+            19.830878,49.428903,0
+            19.830364,49.428104,0
+            19.830418,49.427662,0
+            19.830172,49.427277,0
+            19.829486,49.426565,0
+            19.82852,49.426202,0
+            19.8256974,49.4255954,0
+            19.827167,49.424695,0
+            19.8289053,49.4245696,0
+            19.826782,49.421841,0
+            19.826396,49.421344,0
+            19.82588,49.420944,0
+            19.826117,49.419475,0
+            19.828058,49.418616,0
+            19.827484,49.416491,0
+            19.826489,49.415247,0
+            19.825837,49.414017,0
+            19.825773,49.413486,0
+            19.826213,49.411783,0
+            19.8250518,49.4100799,0
+            19.824234,49.408684,0
+            19.820816,49.402554,0
+            19.820135,49.402023,0
+            19.819454,49.401702,0
+            19.818408,49.401269,0
+            19.817579,49.401032,0
+            19.816707,49.400962,0
+            19.810624,49.401172,0
+            19.809337,49.400886,0
+            19.808371,49.400362,0
+            19.806182,49.398477,0
+            19.804841,49.398142,0
+            19.802304,49.398114,0
+            19.800667,49.397681,0
+            19.799745,49.396738,0
+            19.799401,49.395628,0
+            19.799187,49.393847,0
+            19.79908,49.392908,0
+            19.798715,49.392052,0
+            19.796161,49.390041,0
+            19.795968,49.388966,0
+            19.799686,49.386378,0
+            19.802801,49.383814,0
+            19.803794,49.383358,0
+            19.804851,49.382943,0
+            19.805554,49.382368,0
+            19.807137,49.381556,0
+            19.8074,49.380358,0
+            19.808349,49.378657,0
+            19.809208,49.377965,0
+            19.810066,49.377008,0
+            19.809927,49.37654,0
+            19.81049,49.3755971,0
+            19.8111603,49.374724,0
+            19.811461,49.37318,0
+            19.811461,49.372349,0
+            19.811868,49.371783,0
+            19.814347,49.371902,0
+            19.815983,49.372024,0
+            19.8166107,49.3715176,0
+            19.817871,49.371434,0
+            19.8192071,49.3713642,0
+            19.81998,49.372196,0
+            19.820623,49.372496,0
+            19.823869,49.374148,0
+            19.825805,49.375381,0
+            19.826819,49.375866,0
+            19.827175,49.376302,0
+            19.827792,49.376604,0
+            19.828195,49.376948,0
+            19.828347,49.377754,0
+            19.829002,49.378045,0
+            19.829335,49.378336,0
+            19.831416,49.378832,0
+            19.832597,49.379605,0
+            19.833412,49.380337,0
+            19.834271,49.38081,0
+            19.834958,49.381339,0
+            19.836481,49.381866,0
+            19.8375,49.382212,0
+            19.83832,49.382698,0
+            19.838645,49.383052,0
+            19.839184,49.383295,0
+            19.840096,49.383756,0
+            19.841105,49.384252,0
+            19.842628,49.384839,0
+            19.8439019,49.385471,0
+            19.845947,49.3847882,0
+            19.8455781,49.3839937,0
+            19.845983,49.3847898,0
+            19.84399,49.385544,0
+            19.845493,49.387297,0
+            19.8459,49.387943,0
+            19.84678,49.388631,0
+            19.846791,49.388959,0
+            19.846598,49.389573,0
+            19.8470973,49.3902052,0
+            19.84588,49.390558,0
+            19.84463,49.391979,0
+            19.843508,49.3934,0
+            19.842953,49.394289,0
+            19.842848,49.395205,0
+            19.842583,49.395808,0
+            19.842375,49.396091,0
+            19.842339,49.396361,0
+            19.842349,49.396993,0
+            19.842574,49.397625,0
+            19.844216,49.398448,0
+            19.845578,49.399328,0
+            19.848706,49.400473,0
+            19.84968,49.400802,0
+            19.850289,49.401172,0
+            19.852058,49.4024,0
+            19.853319,49.402662,0
+            19.855589,49.403371,0
+            19.85657,49.404059,0
+            19.85689,49.404458,0
+            19.857918,49.404847,0
+            19.8598973,49.4047558,0
+            19.8616191,49.4043992,0
+            19.8614956,49.4047475,0
+            19.8625067,49.405138,0
+            19.86296,49.4055285,0
+            19.8633618,49.406031,0
+            19.8635061,49.4065613,0
+            19.863216,49.407427,0
+            19.8678111,49.4096398,0
+            19.871246,49.4109415,0
+            19.8724924,49.4117686,0
+            19.875491,49.4124943,0
+            19.8777601,49.413555,0
+            19.8799006,49.4147971,0
+            19.8812686,49.4158438,0
+            19.8832723,49.4162348,0
+            19.8843319,49.4167375,0
+            19.8850869,49.4173866,0
+            19.8880308,49.4189012,0
+            19.8899447,49.4199272,0
+            19.890142,49.4202274,0
+            19.891384,49.4213098,0
+            19.8925099,49.4219014,0
+            19.894537,49.4226047,0
+            19.8965744,49.4239274,0
+            19.8985041,49.4261926,0
+            19.8997479,49.428972,0
+            19.9006489,49.4299779,0
+            19.9007773,49.4307885,0
+            19.9013541,49.4317983,0
+            19.9028338,49.4326439,0
+            19.9051719,49.4336011,0
+            19.9061638,49.4351852,0
+            19.9073678,49.4362704,0
+            19.9079699,49.437092,0
+            19.9088724,49.4378299,0
+            19.9107149,49.4387894,0
+            19.9122142,49.4398605,0
+            19.9137993,49.441392,0
+            19.9146355,49.4417121,0
+            19.9154288,49.4418927,0
+            19.9147838,49.4419469,0
+            19.9128675,49.4415362,0
+            19.9089342,49.4410139,0
+            19.9054134,49.4405697,0
+            19.9018497,49.4403765,0
+            19.8840364,49.4400308,0
+            19.8758596,49.4401712,0
+            19.8720072,49.4403807,0
+            19.8693565,49.4401716,0
+            19.8675849,49.439404,0
+            19.8662449,49.4380715,0
+            19.8636176,49.4354552,0
+            19.8585117,49.4299988,0
+            19.8570747,49.4330061,0
+            19.8564959,49.4334735,0
+            19.85153,49.4366409,0
+            19.851772,49.4377641,0
+            19.8527651,49.4390129,0
+            19.8534115,49.4403382,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

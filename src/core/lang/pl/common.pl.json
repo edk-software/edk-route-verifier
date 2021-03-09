@@ -6,5 +6,6 @@
   "Station not found": "Stacja <%= number %> nie została znaleziona.",
   "Invalid stations order": "Niewłaściwa kolejność stacji. Stacja <%= currentStationNumber %> jest za stacją <%= previousStationNumber %>.",
   "Station too far from path": "Stacja <%= number %> jest za daleko od ścieżki. Maksymalny dopuszczalny dystans to <%= maximumDistance %> metrów.",
-  "Route does not meet minimum length requirements": "Trasa nie spełnia wymagania dotyczącego minimalnej długości."
+  "Route does not meet minimum length requirements": "Trasa nie spełnia wymagania dotyczącego minimalnej długości.",
+  "Elevation gain does not meet minimum requirements": "Suma podejść nie spełnia minimalnych wymagań. Krótsze trasy (30-40km) muszą mieć sumę podejść co najmniej 500m."
 }

@@ -120,6 +120,7 @@ describe('CLI', () => {
                     'Verification Status:\n' +
                     '- Single Path: OK\n' +
                     '- Route Type: OK\n' +
+                    '- Elevation Gain: OK\n' +
                     '- Number Of Stations: OK\n' +
                     '- Stations Order: OK\n' +
                     '- Stations On Path: OK\n'
@@ -193,6 +194,7 @@ describe('CLI', () => {
                     'Verification Status:\n' +
                     '- Single Path: Failed\n' +
                     '- Route Type: Failed\n' +
+                    '- Elevation Gain: OK\n' +
                     '- Number Of Stations: OK\n' +
                     '- Stations Order: OK\n' +
                     '- Stations On Path: Failed\n' +

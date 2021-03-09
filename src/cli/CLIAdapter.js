@@ -49,6 +49,9 @@ export default class CLIAdapter extends AbstractOutputAdapter {
         logger.info(`- ${lang.trans('Single Path', { status: getStatusString(output.getSinglePathStatus()) })}`);
         logger.info(`- ${lang.trans('Route Type Status', { status: getStatusString(output.getRouteTypeStatus()) })}`);
         logger.info(
+            `- ${lang.trans('Elevation Gain Status', { status: getStatusString(output.getElevationGainStatus()) })}`
+        );
+        logger.info(
             `- ${lang.trans('Number Of Stations', { status: getStatusString(output.getNumberOfStationsStatus()) })}`
         );
         logger.info(`- ${lang.trans('Stations Order', { status: getStatusString(output.getStationsOrderStatus()) })}`);

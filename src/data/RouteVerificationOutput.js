@@ -19,6 +19,7 @@ export default class RouteVerificationOutput {
             this.stationsOrder = false;
             this.stationsOnPath = false;
             this.elevationGain = 0.0;
+            this.elevationGainStatus = false;
             this.elevationLoss = 0.0;
             this.elevationTotalChange = 0.0;
             this.logs = [];
@@ -35,7 +36,7 @@ export default class RouteVerificationOutput {
             this.setNumberOfStations(verificationStatus.numberOfStations.valid);
             this.setStationsOrder(verificationStatus.stationsOrder.valid);
             this.setStationsOnPath(verificationStatus.stationsOnPath.valid);
-            this.setElevationGain(verificationStatus.elevationGain.value);
+            this.setElevationGain(verificationStatus.elevationGain.valid, verificationStatus.elevationGain.value);
             this.setElevationLoss(verificationStatus.elevationLoss.value);
             this.setElevationTotalChange(verificationStatus.elevationTotalChange.value);
             this.setLogs(verificationStatus.logs);
@@ -88,8 +89,9 @@ export default class RouteVerificationOutput {
         this.stationsOnPath = valid;
     }
 
-    setElevationGain(value) {
+    setElevationGain(valid, value) {
         this.elevationGain = value;
+        this.elevationGainStatus = valid;
     }
 
     setElevationLoss(value) {
@@ -108,6 +110,7 @@ export default class RouteVerificationOutput {
         return (
             this.singlePath &&
             this.routeTypeStatus &&
+            this.elevationGainStatus &&
             this.numberOfStations &&
             this.stationsOrder &&
             this.stationsOnPath
@@ -168,6 +171,10 @@ export default class RouteVerificationOutput {
 
     getElevationGain() {
         return this.calculateNumeric(this.elevationGain);
+    }
+
+    getElevationGainStatus() {
+        return this.elevationGainStatus;
     }
 
     getElevationLoss() {

@@ -70,7 +70,7 @@ export default function verifyRoute(input, options, adapter) {
             verificationOutput.setStationsOnPath(route.areStationsOnThePath());
 
             // Elevations calculation
-            verificationOutput.setElevationGain(pathElevation.gain);
+            verificationOutput.setElevationGain(route.isElevationGainValid(), pathElevation.gain);
             verificationOutput.setElevationLoss(pathElevation.loss);
             verificationOutput.setElevationTotalChange(pathElevation.totalChange);
 
