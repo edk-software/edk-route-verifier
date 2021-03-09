@@ -19,10 +19,10 @@
     "edk-route-verifier": "./src/cli/cli.js"
   },
   "scripts": {
-    "publish:major": "sh scripts/publish-version.sh major",
-    "publish:minor": "sh scripts/publish-version.sh minor",
-    "publish:patch": "sh scripts/publish-version.sh patch",
-    "publish:prerelease": "sh scripts/publish-version.sh prerelease",
+    "publish:major": "bash scripts/publish-version.sh major",
+    "publish:minor": "bash scripts/publish-version.sh minor",
+    "publish:patch": "bash scripts/publish-version.sh patch",
+    "publish:prerelease": "bash scripts/publish-version.sh prerelease",
     "start:cli": "node --no-warnings --experimental-modules --experimental-json-modules src/cli/cli.js",
     "start:server": "npm run start:cli -- server -c conf/config.json",
     "start:ui": "npm run start:cli -- ui -c conf/config.json",
